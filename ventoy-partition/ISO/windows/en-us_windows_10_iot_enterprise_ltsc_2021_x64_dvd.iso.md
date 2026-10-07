@@ -1,23 +1,23 @@
-# WinPE_11_Sergei_Strelec_x64.iso
+# en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso
 
-> **Это заглушка.** Образ `WinPE_11_Sergei_Strelec_x64.iso` в git не хранится.
-> Скачайте его по ссылке ниже и положите в `/winpe/` на разделе VENTOY флешки.
+> **Это заглушка.** Образ `en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso` в git не хранится.
+> Скачайте его по ссылке ниже и положите в `/windows/` на разделе VENTOY флешки.
 
 | Поле | Значение |
 |------|----------|
-| Имя файла | `WinPE_11_Sergei_Strelec_x64.iso` |
-| Категория | `ISO/winpe` |
-| Версия | 2026.01 |
+| Имя файла | `en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso` |
+| Категория | `ISO/windows` |
+| Версия | IoT LTSC 21H2 |
 | Размер | 0 байт |
 | SHA256 | `PENDING` |
-| Источник | https://example.com, с запятой |
+| Источник | https://www.microsoft.com/ |
 | Лицензия | — |
 | Добавлено | 2026-10-07 |
 | Статус | planned |
 
 ## Назначение
 
-Аварийная среда
+Вторая равноправная целевая ОС: старый парк и случаи, где Win11 не проходит по требованиям.
 
 ## Способ загрузки
 
@@ -31,13 +31,13 @@
 Windows (PowerShell):
 
 ```powershell
-Get-FileHash -Algorithm SHA256 "E:\ISO\winpe\WinPE_11_Sergei_Strelec_x64.iso"
+Get-FileHash -Algorithm SHA256 "E:\ISO\windows\en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso"
 ```
 
 Linux:
 
 ```bash
-sha256sum "/mnt/ventoy/ISO/winpe/WinPE_11_Sergei_Strelec_x64.iso"
+sha256sum "/mnt/ventoy/ISO/windows/en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso"
 ```
 
 Ожидаемое значение: `PENDING`

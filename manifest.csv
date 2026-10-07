@@ -1,5 +1,10 @@
 type,category,name,file,url,sha256,size_bytes,version,added,status
 tool,diagnostics/disk,Victoria,,,PENDING,0,PENDING,2026-10-07,planned
 tool,network/speed,iperf3,,,PENDING,0,PENDING,2026-10-07,planned
-iso,ISO/windows,Win11_24H2_x64_RU,Win11_24H2_x64_RU.iso,https://www.microsoft.com/ru-ru/software-download,PENDING,0,24H2,2026-10-07,planned
-iso,ISO/winpe,WinPE_11_Sergei_Strelec_x64,WinPE_11_Sergei_Strelec_x64.iso,"https://example.com, с запятой",PENDING,0,2026.01,2026-10-07,planned
+iso,ISO/windows,en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814,en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso,https://www.microsoft.com/,PENDING,0,IoT LTSC 2024,2026-10-07,planned
+iso,ISO/windows,en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd,en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso,https://www.microsoft.com/,PENDING,0,IoT LTSC 21H2,2026-10-07,planned
+iso,ISO/windows,ru-ru_windows_11_pro_x64,ru-ru_windows_11_pro_x64.iso,https://www.microsoft.com/ru-ru/software-download/windows11,PENDING,0,24H2,2026-10-07,planned
+iso,ISO/windows,ru-ru_windows_10_pro_x64,ru-ru_windows_10_pro_x64.iso,https://www.microsoft.com/ru-ru/software-download/windows10,PENDING,0,22H2,2026-10-07,planned
+iso,ISO/winpe,WinPE_11-10_Sergei_Strelec_x86_x64_RU,WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso,https://sergeistrelec.name/,PENDING,0,2026.09.08,2026-10-07,planned
+iso,ISO/linux,linuxmint-22.3-cinnamon-64bit,linuxmint-22.3-cinnamon-64bit.iso,https://mirrors.edge.kernel.org/linuxmint/stable/22.3/,a081ab202cfda17f6924128dbd2de8b63518ac0531bcfe3f1a1b88097c459bd4,0,22.3,2026-10-07,planned
+iso,ISO/backup,clonezilla-live-3.3.3-37-amd64,clonezilla-live-3.3.3-37-amd64.iso,https://sourceforge.net/projects/clonezilla/files/clonezilla_live_stable/3.3.3-37/,PENDING,0,3.3.3-37,2026-10-07,planned

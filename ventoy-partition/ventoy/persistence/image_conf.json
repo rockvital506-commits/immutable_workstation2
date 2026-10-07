@@ -1,0 +1,10 @@
+{
+    "persistence": [
+        {
+            "image": "/ISO/linux/linuxmint-22.3-cinnamon-64bit.iso",
+            "backend": "/ventoy/persistence/linuxmint-22.3-cinnamon_casper-rw_16GB.dat",
+            "autosel": 1,
+            "timeout": 10
+        }
+    ]
+}

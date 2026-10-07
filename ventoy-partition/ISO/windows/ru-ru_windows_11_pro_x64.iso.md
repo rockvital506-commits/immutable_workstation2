@@ -1,23 +1,23 @@
-# Win11_24H2_x64_RU.iso
+# ru-ru_windows_11_pro_x64.iso
 
-> **Это заглушка.** Образ `Win11_24H2_x64_RU.iso` в git не хранится.
+> **Это заглушка.** Образ `ru-ru_windows_11_pro_x64.iso` в git не хранится.
 > Скачайте его по ссылке ниже и положите в `/windows/` на разделе VENTOY флешки.
 
 | Поле | Значение |
 |------|----------|
-| Имя файла | `Win11_24H2_x64_RU.iso` |
+| Имя файла | `ru-ru_windows_11_pro_x64.iso` |
 | Категория | `ISO/windows` |
 | Версия | 24H2 |
 | Размер | 0 байт |
 | SHA256 | `PENDING` |
-| Источник | https://www.microsoft.com/ru-ru/software-download |
+| Источник | https://www.microsoft.com/ru-ru/software-download/windows11 |
 | Лицензия | — |
 | Добавлено | 2026-10-07 |
 | Статус | planned |
 
 ## Назначение
 
-Основной образ для установки Windows 11
+Для заказчиков без IoT-лицензии. RU-редакция Pro.
 
 ## Способ загрузки
 
@@ -31,13 +31,13 @@
 Windows (PowerShell):
 
 ```powershell
-Get-FileHash -Algorithm SHA256 "E:\ISO\windows\Win11_24H2_x64_RU.iso"
+Get-FileHash -Algorithm SHA256 "E:\ISO\windows\ru-ru_windows_11_pro_x64.iso"
 ```
 
 Linux:
 
 ```bash
-sha256sum "/mnt/ventoy/ISO/windows/Win11_24H2_x64_RU.iso"
+sha256sum "/mnt/ventoy/ISO/windows/ru-ru_windows_11_pro_x64.iso"
 ```
 
 Ожидаемое значение: `PENDING`

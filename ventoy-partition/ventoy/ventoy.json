@@ -19,14 +19,30 @@
     ],
 
     "menu_alias": [
-        { "dir": "/ISO/windows",    "alias": "[- Установка Windows -]" },
-        { "dir": "/ISO/linux",      "alias": "[- Установка Linux -]" },
-        { "dir": "/ISO/winpe",      "alias": "[- WinPE и восстановление -]" },
-        { "dir": "/ISO/diagnostics","alias": "[- Диагностика -]" },
-        { "dir": "/ISO/security",   "alias": "[- Безопасность и антивирусы -]" },
-        { "dir": "/ISO/network",    "alias": "[- Сетевые системы -]" },
-        { "dir": "/ISO/backup",     "alias": "[- Резервное копирование и клонирование -]" },
-        { "dir": "/ISO/firmware",   "alias": "[- Прошивка и BIOS/UEFI -]" },
-        { "dir": "/ISO/dos",        "alias": "[- DOS и низкоуровневые утилиты -]" }
+        { "dir": "/ISO/windows",     "alias": "[- Установка Windows -]" },
+        { "dir": "/ISO/linux",       "alias": "[- Linux Live -]" },
+        { "dir": "/ISO/winpe",       "alias": "[- WinPE и восстановление -]" },
+        { "dir": "/ISO/diagnostics", "alias": "[- Диагностика -]" },
+        { "dir": "/ISO/security",    "alias": "[- Безопасность и антивирусы -]" },
+        { "dir": "/ISO/network",     "alias": "[- Сетевые системы -]" },
+        { "dir": "/ISO/backup",      "alias": "[- Резервное копирование и клонирование -]" },
+        { "dir": "/ISO/firmware",    "alias": "[- Прошивка и BIOS/UEFI -]" },
+        { "dir": "/ISO/dos",         "alias": "[- DOS и низкоуровневые утилиты -]" }
+    ],
+
+    "persistence": [
+        {
+            "image": "/ISO/linux/linuxmint-22.3-cinnamon-64bit.iso",
+            "backend": "/ventoy/persistence/linuxmint-22.3-cinnamon_casper-rw_16GB.dat",
+            "autosel": 1,
+            "timeout": 10
+        }
+    ],
+
+    "auto_install": [
+        {
+            "parent": "/ISO/windows",
+            "template": "/ventoy/autoinstall/autounattend.xml"
+        }
     ]
 }

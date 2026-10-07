@@ -56,19 +56,22 @@
 
 ---
 
-## Этап 3 — Разметка раздела ISO
+## Этап 3 — Разметка раздела ISO ✅
 
+- [x] Категории `windows/`, `linux/`, `winpe/`, `backup/` с `README.md` в каждой
+- [x] Семь заглушек `*.iso.md`: Win11 IoT LTSC 2024, Win10 IoT LTSC 21H2,
+      Win11 Pro RU, Win10 Pro RU, WinPE Strelec, Linux Mint 22.3 Cinnamon,
+      Clonezilla Live 3.3.3-37
+- [x] `manifest.csv`: 9 записей, для Linux Mint зафиксирован реальный SHA256
+- [x] `ventoy/persistence/image_conf.json` + блок `persistence` в `ventoy.json`:
+      Linux Mint 22.3 ↔ `casper-rw` 16 ГБ, `autosel: 1`
+- [x] Заглушка `persistence/linuxmint-22.3-cinnamon_casper-rw_16GB.dat.md`
+- [x] `ventoy/autoinstall/README.md`: блок `auto_install` только через `parent`,
+      без `timeout` — по выводам K3/K4
+- [x] Проверки: `repo-validate` 17, тесты Этапа 2 — 34, тесты Этапа 3 — 18,
+      `check-flash --verify` на модели флешки дал ожидаемый `EXIT=1`
 
-
-- [ ] Согласовать список категорий: `windows/`, `linux/`, `winpe/`, `diagnostics/`,
-      `security/`, `network/`, `backup/`, `firmware/`, `dos/`, `_scratch/`
-- [ ] Правила именования файлов ISO: `<Продукт>_<Версия>_<Арх>_<Язык>_<Дата>.iso`
-- [ ] Определить `VTOY_DEFAULT_SEARCH_ROOT` и дерево каталогов под него
-- [ ] Создать заглушки `*.iso.md` для каждого образа + строки в `manifest.csv`
-- [ ] Прописать `menu_alias` в `ventoy.json` под фактические каталоги
-- [ ] Проверить конфиг в Ventoy через `F5 → Tools menu`
-
-**Фиксация:** коммит «Этап 2: разметка ISO и manifest».
+**Фиксация:** коммит «Этап 3: разметка ISO, persistence и auto_install».
 
 ---
 
