@@ -208,6 +208,49 @@ if (Test-Path -LiteralPath $VJson -PathType Leaf) {
 
 # ------------------------------------------------------------
 Write-Host ""
+# 9. algorithm.md обязателен для каждой станционной сборки
+$builds = Join-Path $ROOT 'ventoy-partition/builds'
+if (Test-Path $builds) {
+    $stations = @(Get-ChildItem $builds -Directory | Where-Object { $_.Name -ne '_templates' })
+    foreach ($st in $stations) {
+        $algo = Join-Path $st.FullName 'algorithm.md'
+        if (-not (Test-Path $algo -PathType Leaf)) {
+            $script:Errors++
+            Write-Host ("  FAIL builds/{0}: нет algorithm.md (обязателен, CONVENTIONS.md раздел 6)" -f $st.Name) -ForegroundColor Red
+            continue
+        }
+        $text = [IO.File]::ReadAllText($algo)
+        foreach ($req in @('Порядок шагов', 'Валидация развернутой системы', 'Рекомендации по дальнейшей эксплуатации', 'Не проверено на месте')) {
+            $probe = $req -replace 'е$', 'ё'
+            $asHeading = '(?m)^## .*' + [regex]::Escape($req)
+            $asProbe   = '(?m)^## .*' + [regex]::Escape($probe)
+            if ($text -notmatch $asHeading -and $text -notmatch $asProbe) {
+                $script:Errors++
+                Write-Host ("  FAIL builds/{0}/algorithm.md: нет раздела-заголовка «{1}»" -f $st.Name, $req) -ForegroundColor Red
+            }
+        }
+        $inSteps = $false
+        $tbl = ''
+        foreach ($l in ($text -split "`n")) {
+            if ($l -match '^## .*Порядок шагов') { $inSteps = $true; continue }
+            if ($inSteps -and $l -match '^## ') { break }
+            if ($inSteps -and $l.StartsWith('|')) { $tbl += $l + "`n" }
+        }
+        if ($tbl -notmatch '\|\s*Сеть\s*\|') {
+            $script:Errors++
+            Write-Host ("  FAIL builds/{0}/algorithm.md: в таблице шагов нет колонки «Сеть»" -f $st.Name) -ForegroundColor Red
+        }
+        if ($tbl -notmatch 'online|offline') {
+            $script:Errors++
+            Write-Host ("  FAIL builds/{0}/algorithm.md: в таблице шагов нет статусов сети" -f $st.Name) -ForegroundColor Red
+        }
+    }
+    if ($stations.Count -gt 0) {
+        $script:Checks++
+        Write-Host ("  OK   algorithm.md: проверено станций - {0}" -f $stations.Count) -ForegroundColor Green
+    }
+}
+
 Write-Host "Итог: проверок — $($script:Checks), предупреждений — $($script:Warnings), ошибок — $($script:Errors)" -ForegroundColor White
 if ($script:Errors -gt 0) {
     Write-Host 'Репозиторий не соответствует CONVENTIONS.md — коммитить нельзя.' -ForegroundColor Red

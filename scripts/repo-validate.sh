@@ -212,6 +212,46 @@ PY
 fi
 
 # ------------------------------------------------------------
+# 9. algorithm.md обязателен для каждой станционной сборки
+BUILDS_DIR="$REPO_ROOT/ventoy-partition/builds"
+if [ -d "$BUILDS_DIR" ]; then
+    STATIONS=0
+    while IFS= read -r sd; do
+        [ -d "$sd" ] || continue
+        sname="$(basename "$sd")"
+        [ "$sname" = "_templates" ] && continue
+        STATIONS=$((STATIONS + 1))
+        ALGO="$sd/algorithm.md"
+        if [ ! -f "$ALGO" ]; then
+            err "builds/$sname: нет algorithm.md (обязателен, CONVENTIONS.md раздел 6)"
+            continue
+        fi
+        # раздел обязан быть заголовком уровня ## — подзаголовок шага (###)
+        # или строка таблицы разделом не считаются
+        for req in 'Порядок шагов' 'Валидация развёрнутой системы' \
+                   'Рекомендации по дальнейшей эксплуатации' 'Не проверено на месте'; do
+            if ! grep -Eq "^## .*${req}" "$ALGO"; then
+                err "builds/$sname/algorithm.md: нет раздела-заголовка «${req}»"
+            fi
+        done
+        # таблица шагов обязана нести колонку «Сеть» и хотя бы один статус
+        # только строки таблицы внутри раздела, без пояснительного текста
+        TBL="$(sed -n '/^## .*Порядок шагов/,/^## /p' "$ALGO" | grep '^|')"
+        if ! grep -q '| *Сеть *|' <<< "$TBL"; then
+            err "builds/$sname/algorithm.md: в таблице шагов нет колонки «Сеть»"
+        fi
+        if ! grep -Eq 'online|offline' <<< "$TBL"; then
+            err "builds/$sname/algorithm.md: в таблице шагов нет статусов сети (online/offline)"
+        fi
+    done <<EOFBUILDS
+$(find "$BUILDS_DIR" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort)
+EOFBUILDS
+    if [ "$STATIONS" -gt 0 ]; then
+        ok "algorithm.md: проверено станций — $STATIONS"
+    fi
+fi
+
+
 printf '\n\033[1mИтог:\033[0m проверок — %d, предупреждений — %d, ошибок — %d\n' \
        "$CHECKS" "$WARNINGS" "$ERRORS"
 if [ "$ERRORS" -gt 0 ]; then
