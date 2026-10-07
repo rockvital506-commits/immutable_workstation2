@@ -1,11 +1,9 @@
 type,category,name,file,url,sha256,size_bytes,version,added,status
-tool,diagnostics/disk,Victoria,,,PENDING,0,PENDING,2026-10-07,planned
-tool,network/speed,iperf3,,,PENDING,0,PENDING,2026-10-07,planned
 iso,ISO/windows,en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814,en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso,https://www.microsoft.com/,PENDING,0,IoT LTSC 2024,2026-10-07,planned
 iso,ISO/windows,en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd,en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso,https://www.microsoft.com/,PENDING,0,IoT LTSC 21H2,2026-10-07,planned
 iso,ISO/windows,ru-ru_windows_11_pro_x64,ru-ru_windows_11_pro_x64.iso,https://www.microsoft.com/ru-ru/software-download/windows11,PENDING,0,24H2,2026-10-07,planned
 iso,ISO/windows,ru-ru_windows_10_pro_x64,ru-ru_windows_10_pro_x64.iso,https://www.microsoft.com/ru-ru/software-download/windows10,PENDING,0,22H2,2026-10-07,planned
-iso,ISO/winpe,WinPE_11-10_Sergei_Strelec_x86_x64_RU,WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso,https://sergeistrelec.name/,PENDING,0,2026.09.08,2026-10-07,planned
+iso,ISO/winpe,WinPE_11-10_Sergei_Strelec_x86_x64_RU,WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso,https://sergeistrelec.name/,PENDING,0,2026.02.05,2026-10-07,planned
 iso,ISO/linux,linuxmint-22.3-cinnamon-64bit,linuxmint-22.3-cinnamon-64bit.iso,https://mirrors.edge.kernel.org/linuxmint/stable/22.3/,a081ab202cfda17f6924128dbd2de8b63518ac0531bcfe3f1a1b88097c459bd4,0,22.3,2026-10-07,planned
 iso,ISO/backup,clonezilla-live-3.3.3-37-amd64,clonezilla-live-3.3.3-37-amd64.iso,https://sourceforge.net/projects/clonezilla/files/clonezilla_live_stable/3.3.3-37/,PENDING,0,3.3.3-37,2026-10-07,planned
 module,backup/disk_image,disk_image,,,0fc1926dc2802013c143e8780dcacf0c2540f00528539c9c242342bff4cfb5f1,4866,1.0,2026-10-07,present
@@ -15,3 +13,8 @@ script,backup/initial_backup,backup-vscode,,,93a139f0cfaaf464ca7bb359c4ac71b8229
 script,backup/initial_backup,export-drivers,,,77f4ee701889740556a7deb3e25b541eefa1f57f72e7d1d3d7e4cdad0eb205ef,8116,1.0,2026-10-07,present
 script,backup/initial_backup,verify-backup,,,a35ccee217a594ad5bdf35b7bf2bf94a2497e7ddc84d919d09034c4472f4fec7,5339,1.0,2026-10-07,present
 script,backup/disk_image,disk-image,,,0fc1926dc2802013c143e8780dcacf0c2540f00528539c9c242342bff4cfb5f1,4866,1.0,2026-10-07,present
+tool,diagnostics/disk,smartmontools,smartmontools-7.5.win32-setup.exe,https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe,PENDING,0,7.5,2026-10-07,planned
+tool,diagnostics/disk,CrystalDiskInfo,CrystalDiskInfo9_9_2.zip,https://sourceforge.net/projects/crystaldiskinfo/files/9.9.2/,PENDING,0,9.9.2,2026-10-07,planned
+tool,diagnostics/memory,MemTest86Plus,mt86plus_8.10.iso,https://www.memtest.org/,PENDING,0,8.10,2026-10-07,planned
+tool,diagnostics/cpu,Prime95,p95v3106.win64.zip,https://www.mersenne.org/download/,PENDING,0,31.06,2026-10-07,planned
+tool,diagnostics/cpu,stress-ng,stress-ng-0.22.01.tar.gz,https://github.com/ColinIanKing/stress-ng/releases,PENDING,0,0.22.01,2026-10-07,planned

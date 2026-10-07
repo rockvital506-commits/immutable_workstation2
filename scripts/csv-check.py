@@ -65,6 +65,13 @@ def self_hash(name: str, root: str) -> tuple[str, int] | None:
 
 def check(path: str, root: str | None = None) -> list[str]:
     problems: list[str] = []
+
+    raw = open(path, "rb").read()
+    if b"\r\n" in raw:
+        problems.append(
+            "файл в CRLF: после правки через csv.writer нормализовать в LF "
+            "(репозиторий хранит manifest.csv с LF)"
+        )
     if root is None:
         root = os.getcwd()
     with open(path, encoding="utf-8", newline="") as fh:
@@ -125,9 +132,10 @@ def main(argv: list[str]) -> int:
     if len(argv) != 2:
         print("Использование: csv-check.py <manifest.csv>", file=sys.stderr)
         return 2
-    for line in check(argv[1]):
+    problems = check(argv[1])
+    for line in problems:
         print(line)
-    return 0
+    return 1 if problems else 0
 
 
 if __name__ == "__main__":
