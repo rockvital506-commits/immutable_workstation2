@@ -1,0 +1,121 @@
+# ============================================================
+# immutable_workstation2 — флешка сисадмина на Ventoy
+#
+# В git НЕ попадают бинарные и крупные файлы.
+# Вместо них в репозитории лежат заглушки вида "<имя>.<расширение>.md".
+# Правило описано в CONVENTIONS.md, раздел 2.
+#
+# ВАЖНО: шаблон "*.exe.md" НЕ игнорируется — заглушки должны попадать в git.
+# ============================================================
+
+# --- Образы и контейнеры ---
+*.iso
+*.wim
+*.esd
+*.swm
+*.vhd
+*.vhdx
+*.vhd.zip
+*.img
+*.vtoy
+*.efi
+*.rom
+*.bin
+*.dat
+
+# --- Исполняемые файлы и библиотеки ---
+*.exe
+*.msi
+*.msu
+*.dll
+*.sys
+*.com
+*.scr
+*.apk
+*.deb
+*.rpm
+*.AppImage
+
+# --- Архивы ---
+*.zip
+*.7z
+*.rar
+*.gz
+*.xz
+*.bz2
+*.zst
+*.tar
+*.cab
+*.pak
+
+# --- Шрифты и графика (кроме текстовых конфигов тем GRUB) ---
+*.pf2
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.ico
+*.ttf
+*.otf
+*.woff
+*.woff2
+
+# --- Медиа и офисные документы ---
+*.mp3
+*.mp4
+*.mkv
+*.avi
+*.wav
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+
+# --- Служебное ---
+Thumbs.db
+desktop.ini
+.DS_Store
+._*
+*.log
+*.tmp
+*.bak
+*.swp
+
+# --- Локальные черновики (на флешке есть, в git не идут) ---
+ventoy-partition/ISO/_scratch/*
+tools/_scratch/*
+!ventoy-partition/ISO/_scratch/.keep
+!tools/_scratch/.keep
+
+# ============================================================
+# Разрешаем заглушки: любые "<имя>.<расширение>.md" остаются в git
+# ============================================================
+!*.iso.md
+!*.wim.md
+!*.esd.md
+!*.vhd.md
+!*.vhdx.md
+!*.img.md
+!*.vtoy.md
+!*.efi.md
+!*.rom.md
+!*.bin.md
+!*.dat.md
+!*.exe.md
+!*.msi.md
+!*.msu.md
+!*.dll.md
+!*.sys.md
+!*.zip.md
+!*.7z.md
+!*.rar.md
+!*.gz.md
+!*.xz.md
+!*.tar.md
+!*.cab.md
+!*.pf2.md
+!*.png.md
+!*.jpg.md
+!*.pdf.md

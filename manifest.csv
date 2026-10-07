@@ -1,0 +1,5 @@
+type,category,name,file,url,sha256,size_bytes,version,added,status
+tool,diagnostics/disk,Victoria,,,PENDING,0,PENDING,2026-10-07,planned
+tool,network/speed,iperf3,,,PENDING,0,PENDING,2026-10-07,planned
+iso,ISO/windows,Win11_24H2_x64_RU,Win11_24H2_x64_RU.iso,https://www.microsoft.com/ru-ru/software-download,PENDING,0,24H2,2026-10-07,planned
+iso,ISO/winpe,WinPE_11_Sergei_Strelec_x64,WinPE_11_Sergei_Strelec_x64.iso,"https://example.com, с запятой",PENDING,0,2026.01,2026-10-07,planned

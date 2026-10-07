@@ -1,0 +1,32 @@
+{
+    "control": [
+        { "VTOY_MENU_LANGUAGE": "ru_RU" },
+        { "VTOY_DEFAULT_MENU_MODE": "1" },
+        { "VTOY_TREE_VIEW_MENU_STYLE": "1" },
+        { "VTOY_FILT_DOT_UNDERSCORE_FILE": "1" },
+        { "VTOY_SORT_CASE_SENSITIVE": "0" },
+        { "VTOY_MAX_SEARCH_LEVEL": "max" },
+        { "VTOY_DEFAULT_SEARCH_ROOT": "/ISO" },
+        { "VTOY_MENU_TIMEOUT": "0" },
+        { "VTOY_SECONDARY_BOOT_MENU": "1" },
+        { "VTOY_SECONDARY_TIMEOUT": "15" },
+        { "VTOY_WIN11_BYPASS_CHECK": "1" },
+        { "VTOY_WIN11_BYPASS_NRO": "1" },
+        { "VTOY_WIN_UEFI_RES_LOCK": "3" },
+        { "VTOY_SECURE_BOOT_POLICY": "0" },
+        { "VTOY_DEFAULT_KBD_LAYOUT": "QWERTY_USA" },
+        { "VTOY_SHOW_PASSWORD_ASTERISK": "1" }
+    ],
+
+    "menu_alias": [
+        { "dir": "/ISO/windows",    "alias": "[- Установка Windows -]" },
+        { "dir": "/ISO/linux",      "alias": "[- Установка Linux -]" },
+        { "dir": "/ISO/winpe",      "alias": "[- WinPE и восстановление -]" },
+        { "dir": "/ISO/diagnostics","alias": "[- Диагностика -]" },
+        { "dir": "/ISO/security",   "alias": "[- Безопасность и антивирусы -]" },
+        { "dir": "/ISO/network",    "alias": "[- Сетевые системы -]" },
+        { "dir": "/ISO/backup",     "alias": "[- Резервное копирование и клонирование -]" },
+        { "dir": "/ISO/firmware",   "alias": "[- Прошивка и BIOS/UEFI -]" },
+        { "dir": "/ISO/dos",        "alias": "[- DOS и низкоуровневые утилиты -]" }
+    ]
+}
