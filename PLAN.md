@@ -36,7 +36,29 @@
 
 ---
 
-## Этап 2 — Разметка раздела ISO
+## Этап 2 — Исследовательская база ✅
+
+- [x] 40 поисковых запросов, сгруппированных в 16 кластеров (`research/01-research-index.md`)
+- [x] Результаты с источниками (`research/02-findings.md`), включая раздел
+      «Конфликты интерпретации»
+- [x] Паттерны и методологии P1–P12 + анти-паттерны (`research/03-patterns.md`)
+- [x] Реестр софта: обязательный против заменяемого (`research/04-software-inventory.md`)
+- [x] Векторы инициализации мусора V1–V10 (`research/05-garbage-vectors.md`)
+- [x] Приоритизированный перечень служб и процессов P0–P3, T
+      (`research/06-services-blocklist.md`)
+- [x] Механизмы блокировки M1–M12 с матрицей выбора (`research/07-blocking-mechanisms.md`)
+- [x] Каталог станции `ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/`
+      с паспортом и подкаталогами `drivers/ answer/ config/ scripts/ backup/ reports/`
+- [x] Корневой `README.md` приведён к фактической схеме из трёх разделов
+- [x] Прогнаны `repo-validate` (17 проверок) и набор логических тестов этапа (34 проверки)
+
+**Фиксация:** коммит «Этап 2: исследовательская база и каталог станции».
+
+---
+
+## Этап 3 — Разметка раздела ISO
+
+
 
 - [ ] Согласовать список категорий: `windows/`, `linux/`, `winpe/`, `diagnostics/`,
       `security/`, `network/`, `backup/`, `firmware/`, `dos/`, `_scratch/`
@@ -50,7 +72,7 @@
 
 ---
 
-## Этап 3 — Дерево раздела TOOLS
+## Этап 3b — Дерево раздела TOOLS
 
 - [ ] Утвердить группы: `os/`, `rescue/`, `diagnostics/`, `security/`, `network/`,
       `drivers/`, `backup/`, `deployment/`, `scripts/`, `docs-offline/`, `_scratch/`
