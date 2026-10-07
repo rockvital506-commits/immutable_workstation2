@@ -113,6 +113,23 @@ type,category,name,file,url,sha256,size_bytes,version,added,status
 Строки со `status=planned` допускают `sha256=PENDING` и `size_bytes=0`.
 Для `present`/`verified` оба поля обязательны.
 
+### Правило SELF-HASH для наших сущностей
+
+Для строк `type=module` и `type=script` со `status=present` значение `sha256`
+обязано совпадать с хэшем **реальных файлов репозитория**. Хэш считается по
+конкатенации файлов сущности в порядке сортировки путей:
+
+```python
+digest = hashlib.sha256()
+for rel in sorted(files):          # например .ps1 и .sh одной задачи
+    digest.update(open(rel, 'rb').read())
+```
+
+Состав файлов каждой сущности объявлен в `scripts/csv-check.py`, словарь
+`SELF_ENTITIES`. Правило проверяется автоматически: правка скрипта без
+обновления хэша в `manifest.csv` — ошибка валидации. Это исключает дрейф
+между документацией и кодом.
+
 ## 5. Скрипты
 
 - Каждая задача автоматизации реализуется **двумя** файлами: `.ps1` (Windows) и `.sh` (Linux).
