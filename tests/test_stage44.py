@@ -137,6 +137,50 @@ t('Npcap' in c, 'в capture/ объяснена роль Npcap')
 t('портативная' in c.lower(), 'в capture/ объяснён выбор портативной сборки')
 t('tcp.analysis.retransmission' in c, 'в capture/ есть фильтр повторных передач')
 
+print('\n[7b] Правки после первого прогона (регрессия на найденные дефекты)')
+# Д1: в групповом индексе было «четыре из шести сверены» и тут же перечислены
+#     четыре несверенные — фраза противоречила сама себе.
+g = io.open(f'{NET}/README.md', encoding='utf-8').read()
+line = [l for l in g.splitlines() if 'из шести' in l]
+t(len(line) == 1, 'в индексе группы ровно одна строка о доле сверенных версий')
+if line:
+    t('две из шести' in line[0], 'строка о доле сверенных версий корректна')
+    t('четыре' not in line[0].lower(), 'в строке нет противоречащего числа')
+
+
+def verified(name):
+    """Сверена ли версия с первоисточником. Регистронезависимо, оба глагола:
+    в MyPublicWifi статус написан и как «не проверена», и как «НЕ сверена»."""
+    txt = io.open(f'{NET}/{UTILS[name][0]}/{name}/README.md', encoding='utf-8').read()
+    low = txt.lower()
+    neg = ('не сверена с первоисточником' in low
+           or 'не проверена с первоисточником' in low)
+    return 'сверена с первоисточником' in low and not neg
+
+
+n_verified = sum(1 for n in UTILS if verified(n))
+t(n_verified == 2, f'по факту с первоисточником сверено 2 утилиты (факт {n_verified})')
+
+# Д2: диапазон портов 0-65535 — это 65536 значений, а не 65535.
+nm = io.open(f'{NET}/scan/Nmap/README.md', encoding='utf-8').read()
+t('65535 портов' not in nm, 'в Nmap нет неверного «65535 портов»')
+t('65536 портов диапазона 0-65535' in nm, 'в Nmap корректно описан диапазон портов')
+
+# Д3: порядок диагностики обрывался на шаге 6, индекс группы и PLAN говорят о 8.
+steps = re.findall(r'^(\d)\. \*\*', d, re.M)
+t(steps == ['1', '2', '3', '4', '5', '6', '7', '8'],
+  'в diagnostics/ восемь шагов порядка' + (f' (факт {steps})' if len(steps) != 8 else ''))
+for link in ['../speed/', '../scan/', '../wifi/', '../capture/']:
+    t(f'[`{link}`]({link})' in d, f'шаги diagnostics/ ссылаются на {link}')
+grp_steps = re.findall(r'^\d+\. ', grp, re.M)
+t(len(grp_steps) >= 8, f'порядок в групповом индексе не короче diagnostics/ (факт {len(grp_steps)})')
+
+# Д4: утверждение про Npcap в WinPE звучало безоговорочно, хотя вопрос открыт.
+t('Работает из-под WinPE: **не проверено**' in nm,
+  'в Nmap режим WinPE помечен непроверенным, а не утверждается')
+t('TCP-connect может работать и без драйвера' in sc,
+  'в scan/ тот же вопрос помечен в «Не проверено на месте»')
+
 print('\n[8] Скрипты на этом этапе не пишутся')
 stray = []
 for root, dirs, files in os.walk(NET):
