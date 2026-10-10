@@ -15,7 +15,7 @@
 | Категория | Образ | Назначение |
 |-----------|-------|-----------|
 | `windows/` | `en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso` | Основная целевая ОС |
-| `windows/` | `en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso` | Вторая целевая ОС |
+| `windows/` | `en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd.iso` | Образ в проекте; установка и настройка сейчас не рассматриваются |
 | `windows/` | `ru-ru_windows_11_pro_x64.iso` | Pro без IoT-лицензии |
 | `windows/` | `ru-ru_windows_10_pro_x64.iso` | Pro, старое железо |
 | `winpe/` | `WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso` | Аварийная среда |
