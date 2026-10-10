@@ -57,7 +57,8 @@ raw = open('manifest.csv','rb').read()
 t(b'\r\n' not in raw, 'manifest.csv в LF, без CRLF')
 rows = list(csv.reader(io.open('manifest.csv', encoding='utf-8')))
 head, body = rows[0], rows[1:]
-t(len(rows) - 1 == 21, f'21 строка данных (факт {len(rows)-1})')
+# Этап 4.3 добавил 3 утилиты группы os/windows: было 21, стало 24
+t(len(rows) - 1 == 24, f'24 строки данных (факт {len(rows)-1})')
 names = [r[2] for r in body]
 t(len(names) == len(set(names)), 'нет дублей имён')
 t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')

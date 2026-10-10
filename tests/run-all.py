@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-TESTS = ['test_repo.py', 'test_stage42.py']
+TESTS = ['test_repo.py', 'test_stage42.py', 'test_stage43.py']
 
 
 def main() -> int:

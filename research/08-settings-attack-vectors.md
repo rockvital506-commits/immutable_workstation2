@@ -1,6 +1,7 @@
 # 08. Векторы атаки на применённые настройки
 
-Дата исследования: 2026-10-07. Контекст: Windows 11 IoT Enterprise LTSC 2024
+Дата исследования: 2026-10-07, сверка с первоисточниками 2026-10-10.
+Контекст: Windows 11 IoT Enterprise LTSC 2024
 на станции MSI Modern 15 B12M-211RU. Цель — понять, что именно отменяет наши
 правки после того, как они применены, и чем это закрывать.
 
@@ -98,8 +99,13 @@ Start-Service wuauserv
 provisioned-пакета. Нужны **оба** действия:
 `DISM /Remove-ProvisionedAppxPackage` и `Remove-AppxPackage`.
 
-Обратный риск: снятие пакета, который установлен пользователю, но не
-provisioned, ломает Sysprep с ошибкой `0x80073cf2`.
+Обратный риск — не снятие, а **наличие** пакета, который установлен
+пользователю, но не provisioned для всех: `sysprep /generalize` требует, чтобы
+все приложения были provisioned. Официальное сообщение в журнале Sysprep
+(`%WINDIR%\System32\Sysprep\Panther`): `... was installed for a user, but not
+provisioned for all users. This package will not function properly in the
+sysprep image.` Код `0x80073cf2`, который встречался в сторонних источниках, с
+первоисточником не сверен.
 
 ### A7. Профиль пользователя
 
@@ -117,18 +123,27 @@ WU ставит драйверы автоматически и может **по
 
 Каналы отключения:
 
-| Метод | Ключ / путь |
-|-------|-------------|
-| GPO «Do not include drivers with Windows Updates» | `Computer Configuration → Administrative Templates → Windows Components → Windows Update → Manage updates offered from Windows Update` |
-| Реестр, политика | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate` → `ExcludeWUDriversInQualityUpdate = 1` |
-| Реестр, поиск при подключении устройства | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching` → `SearchOrderConfig = 0` |
-| Реестр, состояние политики | `HKLM\SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState` → `ExcludeWUDrivers = 1` |
-| Точечно по устройству | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\Settings` → `PreventDeviceDriverUpdate = 1` |
-| Скрыть конкретное обновление | `wushowhide.diagcab` (Show or Hide Updates) |
+| Метод | Ключ / путь | Статус проверки |
+|-------|-------------|-----------------|
+| GPO «Do not include drivers with Windows Updates» | `Computer Configuration → Administrative Templates → Windows Components → Windows Update → Manage updates offered from Windows Update` | **Подтверждено** Policy CSP — Update |
+| Реестр, политика | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate` → `ExcludeWUDriversInQualityUpdate = 1` | **Подтверждено** Policy CSP — Update: редакции Pro, Enterprise, Education, **IoT Enterprise / IoT Enterprise LTSC**; Windows 10 1607 и новее; ADMX `WindowsUpdate.admx` |
+| Реестр, поиск при подключении устройства | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching` → `SearchOrderConfig = 0` | **Ключ сообщества**, не документирован Microsoft. В источниках расхождение: встречаются значения 0, 1 и 3 |
+| Реестр, состояние политики | `HKLM\SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState` → `ExcludeWUDrivers = 1` | **Ключ состояния**, а не политики. Система может переписать его сама |
+| Реестр, поиск драйверов | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching` → `DontSearchWindowsUpdate = 1`, `DontPromptForWindowsUpdate = 1`, `DriverUpdateWizardWuSearchEnabled = 0` | **Проверено по коду** WinUtil 26.10.07, режим `Updates → security` |
+| Реестр, метаданные устройств | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Device Metadata` → `PreventDeviceMetadataFromNetwork = 1` | **Проверено по коду** WinUtil 26.10.07 |
+| Точечно по устройству | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\Settings` → `PreventDeviceDriverUpdate = 1` | Не сверено с первоисточником |
+| Скрыть конкретное обновление | `wushowhide.diagcab` (Show or Hide Updates) | Упоминается Microsoft Q&A, с официальной страницы не сверено |
 
-Опыт сообщества: надёжнее всего работает комбинация первых трёх ключей, а для
-конфликтного устройства — блокировка по Hardware ID. Одного
-`ExcludeWUDriversInQualityUpdate` бывает недостаточно.
+Опыт сообщества: надёжнее всего работает комбинация политики и ключей
+`SearchOrderConfig` / `ExcludeWUDrivers`, а для конфликтного устройства —
+блокировка по Hardware ID. Одной политики `ExcludeWUDriversInQualityUpdate`
+бывает недостаточно, хотя именно она единственная документирована.
+
+Из Policy CSP — Update также следуют механизмы, нужные для сужения канала:
+`TargetReleaseVersion`, `ProductVersion`, `PauseFeatureUpdates`,
+`PauseQualityUpdates`, `PauseFeatureUpdatesStartTime`,
+`PauseQualityUpdatesStartTime`, `ManagePreviewBuilds`. Имена параметров
+реестра для них с официальной страницей групповых политик **не сверены**.
 
 **Важно:** отключение драйверов из WU не отключает обновления безопасности —
 это разные классы обновлений.
@@ -160,7 +175,8 @@ Control и Memory Integrity. Проявляется не сразу и диаг�
 
 ## B. Инструменты: что реально есть на рынке
 
-Проверено на дату 2026-10-07.
+Проверено 2026-10-07, версии и состав сверены с первоисточником 2026-10-10
+через API GitHub и исходники соответствующих тегов.
 
 ### B1. Win11Debloat (Raphire)
 
@@ -175,6 +191,13 @@ Control и Memory Integrity. Проявляется не сразу и диаг�
 | Тесты | Есть собственный набор тестов |
 | GUI | Добавлен в 2026.02.01-R2, старый CLI доступен через `-CLI` |
 
+Проверено по исходникам тега `2026.08.24`, скачанным через `codeload.github.com`:
+точка входа `Win11Debloat.ps1` — 28155 байт, **102 параметра**, 93 файла `.reg`
+в `Regfiles\` и 65 в `Regfiles\Undo\`, три конфигурации в `Config\`,
+40 файлов тестов Pester, лицензия MIT. Ассет релиза — **не утилита**, а
+загрузчик `Get.ps1` (9071 байт), который тянет архив репозитория через API
+GitHub. Файлы `.reg` сохранены в UTF-16LE.
+
 Что важно для нас:
 - С 2026.06.24 **сам отключает задачи телеметрии** в `Microsoft\Windows`.
 - Безопасен к повторному запуску: после крупных обновлений часть приложений
@@ -188,15 +211,27 @@ Control и Memory Integrity. Проявляется не сразу и диаг�
 
 | Поле | Значение |
 |------|----------|
-| Запуск | `irm christitus.com/win \| iex` |
-| Лицензия | MIT, открытый код |
-| Масштаб | 30+ млн запусков, 200+ участников |
-| Разделы | Install (winget), Tweaks, Config, Updates, Win11 Creator |
+| Релиз | **26.10.07** от 2026-10-07, нумерация по датам |
+| Ассет | единственный, `winutil.ps1`, 927798 байт |
+| Запуск | `irm christitus.com/win \| iex` либо локальный файл |
+| Лицензия | MIT |
+| Разделы | Install (winget), Tweaks, Config, Updates |
 
-Что важно для нас:
-- **Обнаружение отката твиков** — при запуске проверяет, не сбросила ли система
-  применённые ранее правки. Это ровно функция «watchdog» из
-  `07-blocking-mechanisms.md`, M9, и она уже реализована.
+Проверено по исходникам тега `26.10.07`:
+- **Функция `Get-WinUtilTweaksStateReport`** — группирует записи
+  `config\tweaks.json` по категориям и определяет фактическое состояние
+  системы. Это ровно механизм M9 из `07-blocking-mechanisms.md`, готовый.
+- В `config\tweaks.json` — **67 записей**: Essential Tweaks 18,
+  Customize Preferences 25, Advanced Tweaks 22, Performance Plans 2.
+  Из них 50 описаны через реестр, 2 через службы.
+- Режимов Центра обновления три: `Invoke-WPFUpdatesdefault.ps1`,
+  `Invoke-WPFUpdatessecurity.ps1`, `Invoke-WPFUpdatesdisable.ps1`.
+- Режим `security` закрывает почти весь объём R3 и перечислен по ключам в
+  `tools/os/windows/updates/`.
+
+Утверждения «30+ млн запусков» и «200+ участников» взяты из сторонних обзоров и
+**не подтверждены** — в API GitHub у репозитория 63935 звёзд, число запусков
+не публикуется.
 - Экспорт и импорт конфигурации в JSON — перенос между станциями.
 - Вкладка Updates: ограничение только обновлениями безопасности, задержка,
   отключение.
@@ -214,7 +249,8 @@ Control и Memory Integrity. Проявляется не сразу и диаг�
 | Поле | Значение |
 |------|----------|
 | Репозиторий | `github.com/farag2/Sophia-Script-for-Windows` |
-| Функций | 150+, у каждой есть парная функция возврата |
+| Релиз | **7.3.0** от 2026-09-05; ассет `Sophia.Script.for.Windows.11.LTSC.2024.v7.3.0.zip`, 465087 байт |
+| Функций | **110** в модуле `Sophia.psm1` (275642 байта); в заголовке пресета заявлено, что у каждой правки есть функция возврата |
 | Методы | Только официально документированные Microsoft |
 | **Поддержка LTSC 2024** | **Подтверждена таблицей в официальном README** |
 | Варианты | Отдельные пакеты под Win11 / Win11 LTSC 2024 / Win10 / LTSC 2021 / LTSC 2019, под PowerShell 5.1 и 7 |
@@ -230,8 +266,12 @@ Windows 11 25H2+. Официальный README проекта содержит 
 для Windows 11. На LTSC отсутствуют потребительские компоненты (Widgets,
 Xbox, Teams), поэтому значительная часть твиков Sophia просто неприменима.
 
-Версия: источники расходятся (7.1.4 и 7.3.0). Точную брать из релизов GitHub
-в момент скачивания и закреплять.
+Версия **сверена с первоисточником 2026-10-10**: API GitHub даёт тег `7.3.0`,
+релиз от 2026-09-05; то же число и дата стоят в заголовке `Sophia.ps1` внутри
+исходников тега. Расхождение сторонних источников (7.1.4 против 7.3.0) закрыто
+в пользу 7.3.0. Поддержка LTSC 2024 видна и в структуре репозитория:
+`src/Sophia_Script_for_Windows_11_LTSC_2024/`, сборки
+`Scripts/Building/Windows_11_LTSC_2024.ps1` и `..._PS7.ps1`.
 
 ### B4. GTweak (Greedeks)
 
@@ -269,17 +309,43 @@ Audit mode нужен для создания **эталонного образ�
 
 Цена, которую он добавляет при работе с одной станцией:
 
-| Ограничение | Следствие |
-|-------------|-----------|
-| Sysprep можно выполнить ограниченное число раз | Порядка четырёх перезапусков, дальше нужен `/skiprearm` |
-| `CopyProfile` — legacy, не рекомендован | Часть настроек не переносится |
-| Настройки Default Apps шифруются хэшем пользователя | `CopyProfile` их не переносит, Windows сбрасывает их при первом входе |
-| `CopyProfile` работает только если нет других профилей | Любая учётка, созданная установщиком, ломает механизм |
-| В audit mode недоступен Windows Update из Settings | Обновления надо ставить модулем `PSWindowsUpdate` |
-| Снятие appx, установленного, но не provisioned | Sysprep падает с `0x80073cf2` |
+| Ограничение | Следствие | Источник |
+|-------------|-----------|----------|
+| **Не предназначен для тестирования и валидации** | Проверять работу ОС можно только после завершения OOBE — а наш сценарий «настроить и проверить» упирается ровно в это | `learn.microsoft.com`, Audit mode overview |
+| Настройки прохода `oobeSystem` не применяются | Часть файла ответов в audit mode просто не отработает | там же |
+| Вход под встроенным администратором, который сразу отключается | Заставка с паролем может заблокировать вход обратно | там же |
+| Установка и обновление приложений из Store ломает `sysprep` | Приложение, «установленное для пользователя, но не подготовленное для всех», не работает в образе | `learn.microsoft.com`, Sysprep (Generalize) |
+| `CopyProfile` — legacy, не рекомендован | Часть настроек не переносится | `learn.microsoft.com` |
+| Настройки Default Apps шифруются хэшем пользователя | `CopyProfile` их не переносит, Windows сбрасывает их при первом входе | там же |
+| `CopyProfile` работает только если нет других профилей | Любая учётка, созданная установщиком, ломает механизм | там же |
 
 При этом наша схема уже обходит OOBE через `autounattend.xml` — то есть
 главную выгоду audit mode мы получаем без него.
+
+### C1a. Две правки этого раздела, 2026-10-10
+
+Проверка по официальным страницам `learn.microsoft.com` показала, что две
+записи выше были неверны.
+
+**Первое — лимит запусков sysprep.** Было записано «порядка четырёх
+перезапусков, дальше нужен `/skiprearm`». На самом деле по таблице Microsoft
+лимит — **1001 запуск** для Windows 8.1, Server 2012 и новее, то есть и для
+Windows 11. Лимит «3 запуска» относится к Windows 7, Server 2008 R2 и
+Server 2008. Там же указано, что `SkipRearm` имел смысл в прежних версиях, а
+при ключа корпоративного лицензирования или розничном ключе Windows
+активируется автоматически.
+
+**Второе — направление проблемы с приложениями.** Было записано, что sysprep
+ломает «снятие appx, установленного, но не provisioned». Официальная
+формулировка обратная: `sysprep /generalize` требует, чтобы все приложения
+были provisioned для всех пользователей, а ошибка возникает, когда приложение
+**установлено для пользователя, но не подготовлено для всех** — типичное следствие
+установки или обновления из Store. Сообщение в журнале:
+`... was installed for a user, but not provisioned for all users`. То есть
+риск создаёт добавление приложений из Store, а не их снятие.
+
+Обе правки усиливают, а не ослабляют вывод C1: audit mode для одной станции
+не нужен, а для проверки настроек Microsoft прямо рекомендует другую среду.
 
 Профиль по умолчанию настраивается надёжнее без `CopyProfile`, прямой правкой
 куста:
@@ -380,7 +446,8 @@ GTweak не рекомендовать до проверки лицензии, �
 
 | Пункт | Почему | Как проверить |
 |-------|--------|---------------|
-| Точная версия Sophia Script на дату выезда | Источники дают 7.1.4 и 7.3.0 | Релизы GitHub |
+| ~~Точная версия Sophia Script~~ | **Закрыто 2026-10-10**: 7.3.0, подтверждено API GitHub и заголовком пресета | — |
+| SHA256 всех трёх утилит | Ассеты релизов GitHub отдаются через `release-assets.githubusercontent.com`, который недоступен из рабочей среды | `Get-FileHash` при скачивании на флешку |
 | Лицензия GTweak | Не найдена в выдаче | Страница репозитория |
 | Наличие отката у каждой правки GTweak | Не найдено | Исходники |
 | Поведение Win11Debloat именно на IoT Enterprise LTSC 2024 | Редакция редкая | Прогон на станции, сначала `-WhatIf` |
