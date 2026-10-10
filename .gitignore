@@ -119,3 +119,7 @@ tools/_scratch/*
 !*.png.md
 !*.jpg.md
 !*.pdf.md
+
+# Python
+__pycache__/
+*.pyc

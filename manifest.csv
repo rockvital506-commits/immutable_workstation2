@@ -18,3 +18,5 @@ tool,diagnostics/disk,CrystalDiskInfo,CrystalDiskInfo9_9_2.zip,https://sourcefor
 tool,diagnostics/memory,MemTest86Plus,mt86plus_8.10.iso,https://www.memtest.org/,PENDING,0,8.10,2026-10-07,planned
 tool,diagnostics/cpu,Prime95,p95v3106.win64.zip,https://www.mersenne.org/download/,PENDING,0,31.06,2026-10-07,planned
 tool,diagnostics/cpu,stress-ng,stress-ng-0.22.01.tar.gz,https://github.com/ColinIanKing/stress-ng/releases,PENDING,0,0.22.01,2026-10-07,planned
+tool,rescue/data_recovery,DMDE,dmde-4-4-4-842-win64-gui.zip,https://dmde.com/download.html,PENDING,0,4.4.4.842,2026-10-07,planned
+tool,rescue/password,NTPWEdit,ntpwed07.zip,http://cdslow.org.ru/en/ntpwedit/,PENDING,0,0.7,2026-10-07,planned
