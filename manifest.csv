@@ -23,3 +23,9 @@ tool,rescue/password,NTPWEdit,ntpwed07.zip,http://cdslow.org.ru/en/ntpwedit/,PEN
 tool,os/windows/tweaks,WinUtil,winutil.ps1,https://github.com/ChrisTitusTech/winutil/releases/download/26.10.07/winutil.ps1,PENDING,0,26.10.07,2026-10-10,planned
 tool,os/windows/debloat,Win11Debloat,Win11Debloat.ps1,https://github.com/Raphire/Win11Debloat/releases/download/2026.08.24/Get.ps1,PENDING,0,2026.08.24,2026-10-10,planned
 tool,os/windows/gpo_lock,Sophia_Script,Sophia.ps1,https://github.com/farag2/Sophia-Script-for-Windows/releases/download/7.3.0/Sophia.Script.for.Windows.11.LTSC.2024.v7.3.0.zip,PENDING,0,7.3.0,2026-10-10,planned
+tool,network/remote,RustDesk,rustdesk-1.5.0-x86_64.exe,https://github.com/rustdesk/rustdesk/releases/download/1.5.0/rustdesk-1.5.0-x86_64.exe,PENDING,0,1.5.0,2026-10-10,planned
+tool,network/speed,iperf3,iperf-3.22-win64.zip,https://github.com/ar51an/iperf3-win-builds/releases/download/3.22/iperf-3.22-win64.zip,PENDING,0,3.22,2026-10-10,planned
+tool,network/scan,Nmap,nmap-7.991-setup.exe,https://nmap.org/download.html,PENDING,0,7.991,2026-10-10,planned
+tool,network/capture,Wireshark,WiresharkPortable64_4.6.9.paf.exe,https://www.wireshark.org/download.html,PENDING,0,4.6.9,2026-10-10,planned
+tool,network/wifi,WifiInfoView,wifiinfoview-x64.zip,https://www.nirsoft.net/utils/wifi_information_view.html,PENDING,0,3.00,2026-10-10,planned
+tool,network/wifi,MyPublicWifi,MyPublicWiFi.exe,https://www.mypublicwifi.com/,PENDING,0,31.3,2026-10-10,planned
