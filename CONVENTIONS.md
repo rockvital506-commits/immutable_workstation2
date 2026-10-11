@@ -102,7 +102,7 @@ type,category,name,file,url,sha256,size_bytes,version,added,status
 | `type` | `iso` \| `tool` \| `script` \| `module` |
 | `category` | Путь категории от корня раздела, напр. `ISO/windows` или `diagnostics/disk` |
 | `name` | Человекочитаемое имя |
-| `file` | Имя файла на флешке |
+| `file` | Имя файла на флешке. **Пустое** для `type=module` и `type=script`: это не один файл, а каталог или группа скриптов, поэтому состав задаёт таблица `SELF_ENTITIES` в `scripts/csv-check.py` |
 | `url` | Официальный источник (пусто для наших наработок) |
 | `sha256` | Хэш или `PENDING` |
 | `size_bytes` | Размер в байтах или `0` |

@@ -33,7 +33,10 @@ SELF_ENTITIES = {
         "tools/backup/initial_backup/scripts/backup-chrome.ps1",
         "tools/backup/initial_backup/scripts/backup-chrome.sh",
     ],
-    "backup-vscode":  ["tools/backup/initial_backup/scripts/backup-vscode.ps1"],
+    "backup-vscode":  [
+        "tools/backup/initial_backup/scripts/backup-vscode.ps1",
+        "tools/backup/initial_backup/scripts/backup-vscode.sh",
+    ],
     "export-drivers": [
         "tools/backup/initial_backup/scripts/export-drivers.ps1",
         "tools/backup/initial_backup/scripts/export-drivers.sh",

@@ -9,7 +9,7 @@ iso,ISO/backup,clonezilla-live-3.3.3-37-amd64,clonezilla-live-3.3.3-37-amd64.iso
 module,backup/disk_image,disk_image,,,0fc1926dc2802013c143e8780dcacf0c2540f00528539c9c242342bff4cfb5f1,4866,1.0,2026-10-07,present
 module,backup/initial_backup,initial_backup,,,d171725a0898b64a5bfc0a0dd20d241d79f73e1552d36ba1d18a4193b52ba4e7,4104,1.0,2026-10-07,present
 script,backup/initial_backup,backup-chrome,,,559005b007486434288f5b3bd58b1610925caf775c08471c38079ca7df6749cf,8030,1.0,2026-10-07,present
-script,backup/initial_backup,backup-vscode,,,93a139f0cfaaf464ca7bb359c4ac71b8229e1c4f3013525f8bfbce2e7b19cb4e,3475,1.0,2026-10-07,present
+script,backup/initial_backup,backup-vscode,,,11de82d4459acc1ada147c2615b3bc77bddadf84323c2788324194ccb587e103,9639,1.0,2026-10-07,present
 script,backup/initial_backup,export-drivers,,,77f4ee701889740556a7deb3e25b541eefa1f57f72e7d1d3d7e4cdad0eb205ef,8116,1.0,2026-10-07,present
 script,backup/initial_backup,verify-backup,,,a35ccee217a594ad5bdf35b7bf2bf94a2497e7ddc84d919d09034c4472f4fec7,5339,1.0,2026-10-07,present
 script,backup/disk_image,disk-image,,,0fc1926dc2802013c143e8780dcacf0c2540f00528539c9c242342bff4cfb5f1,4866,1.0,2026-10-07,present

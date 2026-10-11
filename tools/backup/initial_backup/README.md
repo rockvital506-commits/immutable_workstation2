@@ -22,6 +22,7 @@ initial_backup/
     ├── backup-chrome.ps1         копия профиля Chrome + манифест
     ├── backup-chrome.sh          то же из Live-Linux по примонтированному разделу
     ├── backup-vscode.ps1         настройки и расширения VS Code
+    ├── backup-vscode.sh          то же из Live-Linux или по примонтированному разделу
     └── verify-backup.ps1 / .sh   сверка копии с манифестом
 ```
 
@@ -77,6 +78,10 @@ initial_backup/
 Live, то есть в Linux. Замену PowerShell-ом делать нечем, поэтому модуль
 сознательно односторонний — отклонение зафиксировано здесь, а не замолчано.
 
+Это **единственное** исключение в репозитории: остальные задачи
+автоматизации закрыты парами `.ps1` + `.sh`, включая `backup-vscode`.
+Парность проверяется тестом `tests/test_rules.py`.
+
 ## Проверка модуля
 
 ```bash
@@ -84,6 +89,7 @@ Live, то есть в Linux. Замену PowerShell-ом делать нече
 bash ../disk_image/scripts/disk-image.sh -d /dev/nvme0n1 -D /tmp/img -n test --dry-run
 bash export-drivers.sh --device /dev/nvme0n1p3 --destination /tmp/drv --dry-run
 bash backup-chrome.sh --source <профиль> --destination /tmp/prof --dry-run
+bash backup-vscode.sh --user-dir <профиль> --extensions-dir <каталог> -d /tmp/vsc --dry-run
 
 # реальная проверка целостности
 bash verify-backup.sh --path <каталог копии>
