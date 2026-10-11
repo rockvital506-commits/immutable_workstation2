@@ -15,7 +15,7 @@
 
 ## Как получить
 
-Официальный адрес загрузки Sysinternals. В архиве `procexp.exe` (x86), `procexp64.exe` (x64) и `procexp64a.exe` (ARM64); на обычной станции нужен `procexp64.exe`.
+Официальный адрес загрузки Sysinternals. По сторонним данным в архиве `procexp.exe` (x86), `procexp64.exe` (x64) и `procexp64a.exe` (ARM64), на обычной станции нужен `procexp64.exe`. **Состав не проверен** — `download.sysinternals.com` недоступен, имена уточнить после распаковки.
 
 ## Проверка подлинности
 

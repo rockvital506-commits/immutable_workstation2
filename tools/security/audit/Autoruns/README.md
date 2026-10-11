@@ -22,7 +22,7 @@ Winsock, кодеки, уведомления Winlogon. Дальше обычн�
 
 | Файл | Что это | В git |
 |------|---------|-------|
-| `Autoruns.zip` | Архив Sysinternals: `Autoruns.exe`, `Autoruns64.exe`, `Autorunsc.exe`, `Autorunsc64.exe`, `Eula.txt` | заглушка `Autoruns.zip.md` |
+| `Autoruns.zip` | Архив Sysinternals: графическая утилита и `Autorunsc.exe` для командной строки, по разрядностям. **Точный состав не проверен** — `download.sysinternals.com` недоступен | заглушка `Autoruns.zip.md` |
 | `README.md` | Этот файл | как есть |
 
 Распаковать — и можно работать. Установки не требует, в реестр не пишет.

@@ -10,17 +10,37 @@
 вместе с Windows. Отдельного разрешения вендора не требует, ничего везти не
 нужно, следов в системе не оставляет.
 
+`MpCmdRun.exe` лежит в двух местах, и это важно:
+
+- `%ProgramFiles%\Windows Defender` — есть всегда, но там может быть **устаревшая**
+  копия;
+- `%ProgramData%\Microsoft\Windows Defender\Platform\<версия платформы>` —
+  здесь всегда **свежая**, именно её рекомендует документация Microsoft.
+
+Папки нет в `PATH`, поэтому сначала переход в каталог со свежей версией, и
+только потом команды. Переход одной строкой, с откатом на `%ProgramFiles%`,
+если каталога платформы нет:
+
+```cmd
+(set "_done=" & if exist "%ProgramData%\Microsoft\Windows Defender\Platform\" (for /f "delims=" %d in ('dir "%ProgramData%\Microsoft\Windows Defender\Platform" /ad /b /o:-n 2^>nul') do if not defined _done (cd /d "%ProgramData%\Microsoft\Windows Defender\Platform\%d" & set _done=1)) else (cd /d "%ProgramFiles%\Windows Defender")) >nul 2>&1
+```
+
 | Задача | Команда |
 |--------|---------|
-| Быстрая проверка | `"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1` |
-| Полная проверка | `"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 2` |
+| Быстрая проверка | `MpCmdRun.exe -Scan -ScanType 1` |
+| Полная проверка | `MpCmdRun.exe -Scan -ScanType 2` |
 | Проверка конкретной папки | `MpCmdRun.exe -Scan -ScanType 3 -File "C:\путь"` |
 | Обновить базы перед проверкой | `MpCmdRun.exe -SignatureUpdate` |
+| Сбросить базы и скачать заново | `MpCmdRun.exe -RemoveDefinitions -All`, затем `-SignatureUpdate` |
+| То же самое средствами PowerShell | `Start-MpScan -ScanType QuickScan` / `FullScan` / `CustomScan -ScanPath "C:\путь"` |
 | Состояние и версия баз | `Get-MpComputerStatus` |
 | Что найдено | `Get-MpThreatDetection`, `Get-MpThreat` |
 | Журнал | `Get-WinEvent -LogName "Microsoft-Windows-Windows Defender/Operational"` |
-| Проверка до загрузки ОС | `Start-MpWDOScan` (Microsoft Defender Offline, нужна перезагрузка) |
+| Проверка до загрузки ОС | `Start-MpWDOScan` — встроен в Windows 10 1607+ и Windows 11; команда **сразу перезагружает** станцию в изолированную среду. Альтернатива без PowerShell — класс WMI `MSFT_MpWDOScan`, метод `Start` |
 | Проверка через интерфейс | Безопасность Windows → Защита от вирусов и угроз |
+
+Команды `MpCmdRun.exe` в таблице рассчитаны на то, что переход в каталог уже
+сделан. Без перехода они не найдутся — это самая частая ошибка.
 
 Порядок: обновить базы → быстрая проверка → если чисто, а симптомы остались →
 полная → если и она чиста, смотреть [`../audit/`](../audit/).
@@ -87,6 +107,7 @@
 
 | Пункт | Что нужно |
 |-------|-----------|
+| Наличие каталога `%ProgramData%\Microsoft\Windows Defender\Platform` на IoT Enterprise LTSC 2024 | Если его нет, переход откатится на `%ProgramFiles%\Windows Defender`, а там копия может быть устаревшей |
 | Ключи `MpCmdRun.exe` на IoT Enterprise LTSC 2024 | Прогон на станции: состав компонентов в LTSC отличается |
 | Наличие `Start-MpWDOScan` в LTSC-редакции | Проверить на месте |
 | Состав `SSTR/MInst/Portable/Antivirus` в Strelec | Нужен сам носитель |
