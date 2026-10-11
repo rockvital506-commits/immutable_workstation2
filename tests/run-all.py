@@ -12,7 +12,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TESTS = ['test_repo.py', 'test_rules.py', 'test_stage42.py',
-         'test_stage43.py', 'test_stage44.py']
+         'test_stage43.py', 'test_stage44.py', 'test_stage45.py']
 
 
 def main() -> int:

@@ -15,7 +15,7 @@
 | `os/` | `windows/` → `installation/`, `activation/`, `updates/`, `tweaks/`, `debloat/`, `gpo_lock/` | Установка, активация, Центр обновления, настройка, удаление предустановленного мусора, закрепление политиками. Только под Win11 IoT LTSC 2024 | ✅ Этап 4.3 |
 | `rescue/` | `password/`, `data_recovery/`, `partition/`, `registry/`, `boot/` | Снятие паролей, восстановление данных, редакторы разделов, офлайн-правка реестра, восстановление загрузчика | ✅ Этап 4.2 |
 | `diagnostics/` | `disk/`, `memory/`, `cpu/` | Проверка железа: диски, память, нагрузки | ✅ Этап 4.1 |
-| `security/` | `antivirus/`, `audit/`, `crypto/`, `firmware-scan/` | Сканеры, аудит, шифрование, проверка прошивок | ⬜ Этап 4.5 |
+| `security/` | `scanner/`, `audit/`, `encryption/` | Defender средствами ОС, Sysinternals для аудита, VeraCrypt и BitLocker | ✅ Этап 4.5 |
 | `network/` | `diagnostics/`, `speed/`, `scan/`, `wifi/`, `remote/`, `capture/` | Диагностика средствами ОС, iperf3, Nmap, Wi-Fi и точка доступа, RustDesk, Wireshark | ✅ Этап 4.4 |
 | `drivers/` | `windows/`, `linux/`, `chipset/`, `network/`, `storage/` | Драйвер-паки и точечные драйверы по вендорам | ⬜ Этап 7 |
 | `backup/` | `disk_image/`, `drivers/`, `profiles/`, `initial_backup/` | Образы дисков, экспорт драйверов, перенос профилей | ✅ Этап 3c |

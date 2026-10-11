@@ -29,3 +29,7 @@ tool,network/scan,Nmap,nmap-7.991-setup.exe,https://nmap.org/download.html,PENDI
 tool,network/capture,Wireshark,WiresharkPortable64_4.6.9.paf.exe,https://www.wireshark.org/download.html,PENDING,0,4.6.9,2026-10-10,planned
 tool,network/wifi,WifiInfoView,wifiinfoview-x64.zip,https://www.nirsoft.net/utils/wifi_information_view.html,PENDING,0,3.00,2026-10-10,planned
 tool,network/wifi,MyPublicWifi,MyPublicWiFi.exe,https://www.mypublicwifi.com/,PENDING,0,31.3,2026-10-10,planned
+tool,security/audit,Autoruns,Autoruns.zip,https://download.sysinternals.com/files/Autoruns.zip,PENDING,0,unversioned,2026-10-11,planned
+tool,security/audit,ProcessExplorer,ProcessExplorer.zip,https://download.sysinternals.com/files/ProcessExplorer.zip,PENDING,0,unversioned,2026-10-11,planned
+tool,security/audit,TCPView,TCPView.zip,https://download.sysinternals.com/files/TCPView.zip,PENDING,0,4.19,2026-10-11,planned
+tool,security/encryption,VeraCrypt,VeraCrypt_Setup_x64_1.26.29.msi,https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.29/VeraCrypt_Setup_x64_1.26.29.msi,PENDING,0,1.26.29,2026-10-11,planned
