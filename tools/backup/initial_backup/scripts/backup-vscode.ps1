@@ -25,6 +25,19 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+
+# Лог в файл (CONVENTIONS.md, раздел 5). Register-EngineEvent на PowerShell.Exiting
+# закрывает транскрипт и при штатном завершении, и при exit внутри скрипта.
+$LogFile = Join-Path ([IO.Path]::GetTempPath()) "$($MyInvocation.MyCommand.Name).log"
+try {
+    Start-Transcript -LiteralPath $LogFile -Append -UseMinimalHeader -ErrorAction Stop | Out-Null
+    Register-EngineEvent -SourceIdentifier PowerShell.Exiting -SupportEvent -Action {
+        try { Stop-Transcript | Out-Null } catch { }
+    } | Out-Null
+} catch {
+    Write-Warning "Лог в файл не ведётся: $($_.Exception.Message)"
+}
+
 $hasUser = Test-Path -LiteralPath $UserDir -PathType Container
 $hasExt  = Test-Path -LiteralPath $ExtensionsDir -PathType Container
 if (-not $hasUser -and -not $hasExt) {

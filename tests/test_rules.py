@@ -119,5 +119,50 @@ for r in rows[1:]:
     if r[0] == 'iso':
         t(r[3] != '', f'{r[2]}: у ISO поле file заполнено')
 
+print('\n[6] set -euo pipefail и обоснованность исключения (CONVENTIONS.md §5)')
+NO_ERR = {'scripts/repo-validate.sh'}
+for path in sh_files:
+    rel = os.path.relpath(path, '.')
+    s = io.open(path, encoding='utf-8').read()
+    if rel in NO_ERR:
+        t('set -uo pipefail' in s and 'set -euo pipefail' not in s,
+          f'{rel}: -e не включён, как и описано в §5')
+        t('-e намеренно не включён' in s,
+          f'{rel}: обоснование записано комментарием в файле')
+    else:
+        t('set -euo pipefail' in s, f'{rel}: включён set -euo pipefail')
+
+print('\n[7] Лог в файл (CONVENTIONS.md §5)')
+for path in sh_files:
+    s = io.open(path, encoding='utf-8').read()
+    rel = os.path.basename(path)
+    t('LOG_FILE=' in s, f'{rel}: задан LOG_FILE')
+    t('tee -a "$LOG_FILE"' in s, f'{rel}: вывод идёт через tee -a')
+    t("trap 'exec >&- 2>&-; wait' EXIT" in s,
+      f'{rel}: tee закрывается через trap, иначе лог дописывается после выхода')
+    t(s.index('LOG_FILE=') > s.index('set -'),
+      f'{rel}: блок лога стоит после строки set')
+for path in ps_files:
+    s = io.open(path, encoding='utf-8').read()
+    rel = os.path.basename(path)
+    t('Start-Transcript' in s, f'{rel}: ведётся транскрипт')
+    t('-Append' in s, f'{rel}: лог дописывается, а не перетирается')
+    t('PowerShell.Exiting' in s,
+      f'{rel}: транскрипт закрывается при exit внутри скрипта')
+
+print('\n[8] SELF-HASH строк module/script свежий')
+import importlib.util
+spec = importlib.util.spec_from_file_location('cc', 'scripts/csv-check.py')
+cc = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(cc)
+for r in rows[1:]:
+    if r[0] in ('module', 'script'):
+        got = cc.self_hash(r[2], '.')
+        t(got is not None, f'{r[2]}: файлы сущности на месте')
+        if got:
+            t(len(r[5]) == 64, f'{r[2]}: в манифесте полный SHA256, а не сокращение')
+            t(r[5] == got[0], f'{r[2]}: sha256 совпадает с файлами')
+            t(r[6] == str(got[1]), f'{r[2]}: size_bytes совпадает с файлами')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

@@ -19,7 +19,16 @@
 #
 # Коды возврата: 0 — успех, 1 — ошибка, 3 — ни один каталог не найден.
 # ============================================================
-set -uo pipefail
+set -euo pipefail
+
+# Лог в файл (CONVENTIONS.md, раздел 5). tee в process substitution сохраняет
+# текущую оболочку, поэтому счётчики и переменные не теряются в сабшелле.
+# Закрытие дескрипторов и wait в trap гарантируют, что файл дописан до выхода.
+LOG_FILE="${TMPDIR:-/tmp}/${0##*/}.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+trap 'exec >&- 2>&-; wait' EXIT
+echo "=== ${0##*/} $(date '+%Y-%m-%d %H:%M:%S') ==="
+
 
 USER_DIR="${USER_DIR:-$HOME/.config/Code/User}"
 EXT_DIR="${EXT_DIR:-$HOME/.vscode/extensions}"
