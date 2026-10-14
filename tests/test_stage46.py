@@ -119,7 +119,7 @@ raw = open('manifest.csv', 'rb').read()
 t(b'\r\n' not in raw, 'manifest.csv в LF, без CRLF')
 rows = list(csv.reader(io.open('manifest.csv', encoding='utf-8')))
 head, body = rows[0], rows[1:]
-t(len(body) == 36, f'36 строк данных (факт {len(body)})')
+t(len(body) == 37, f'37 строк данных (факт {len(body)})')
 t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')
 sдио = [r for r in body if r[1] == 'drivers/packs']
 t(len(sдио) == 2, f'две строки drivers/packs (факт {len(sдио)})')
@@ -133,8 +133,16 @@ for r in sдио:
     t(os.path.isdir(f'tools/{r[1]}/{r[2]}'), f'{r[3]}: каталог сущности существует')
     t(r[4].startswith('https://'), f'{r[3]}: url заполнен')
     t(r[9] == 'planned', f'{r[3]}: status=planned')
-t(not [r for r in body if r[1] == 'drivers/export'],
-  'у export/ нет строк: утилит там нет')
+# На 4.6 у export/ не было строк — утилит там нет. С 2026-10-14 там есть
+# собственный скрипт интеграции (решение заказчика: только драйверы), поэтому
+# строка есть и она script, а не tool.
+exp_rows = [r for r in body if r[1] == 'drivers/export']
+t(len(exp_rows) == 1, f'у export/ одна строка (факт {len(exp_rows)})')
+for r in exp_rows:
+    t(r[0] == 'script', f'{r[2]}: type=script, а не tool')
+    t(r[3] == '' and r[4] == '', f'{r[2]}: file и url пусты — это свой скрипт')
+    t(r[9] == 'present', f'{r[2]}: status=present')
+    t(len(r[5]) == 64, f'{r[2]}: sha256 полной длины')
 
 print('\n[8] tools/README.md и PLAN.md согласованы')
 tr = io.open('tools/README.md', encoding='utf-8').read()
@@ -155,13 +163,31 @@ if m7:
 t('Частично поглощён Этапом 4.6' in pl, 'в Этапе 7 объяснено, что сделано на 4.6')
 t('офлайн-обновлений Windows (LCU/SSU)' in pl, 'остаток Этапа 7 не потерян')
 
-print('\n[9] Скрипты на этом этапе не пишутся')
-stray = []
+print('\n[9] Скрипты drivers/: только интеграция драйверов')
+# До 2026-10-14 скриптов в drivers/ не было вовсе. Решение заказчика по остатку
+# Этапа 7: скрипт интеграции делать, но ТОЛЬКО для драйверов, без /Add-Package.
+found = []
 for root, dirs, files in os.walk(DRV):
     for f in files:
         if f.endswith(('.ps1', '.sh')):
-            stray.append(os.path.join(root, f))
-t(not stray, 'в drivers/ нет .ps1/.sh' + (f' -> {stray}' if stray else ''))
+            found.append(os.path.join(root, f).replace(os.sep, '/'))
+found.sort()
+expected = [
+    'tools/drivers/export/scripts/integrate-drivers.ps1',
+    'tools/drivers/export/scripts/integrate-drivers.sh',
+]
+t(found == sorted(expected), f'в drivers/ ровно пара integrate-drivers (факт {found})')
+# Имена в комментариях встречаются намеренно — там объяснено, почему обновлений
+# нет. Поэтому проверяем только исполняемые строки: вызов, а не упоминание.
+for p in found:
+    calls = []
+    for line in io.open(p, encoding='utf-8').read().splitlines():
+        st = line.strip()
+        if st.startswith('#') or st.startswith('<#'):
+            continue
+        if '/Add-Package' in st or 'Add-WindowsPackage -' in st:
+            calls.append(st)
+    t(not calls, f'{p}: обновлений Windows не ставит' + (f' -> {calls}' if calls else ''))
 
 print('\n[10] Регрессия: предыдущие этапы целы')
 for p in ['tools/security/scanner/README.md',

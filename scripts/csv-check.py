@@ -37,6 +37,10 @@ SELF_ENTITIES = {
         "tools/backup/initial_backup/scripts/backup-vscode.ps1",
         "tools/backup/initial_backup/scripts/backup-vscode.sh",
     ],
+    "integrate-drivers": [
+        "tools/drivers/export/scripts/integrate-drivers.ps1",
+        "tools/drivers/export/scripts/integrate-drivers.sh",
+    ],
     "export-drivers": [
         "tools/backup/initial_backup/scripts/export-drivers.ps1",
         "tools/backup/initial_backup/scripts/export-drivers.sh",
