@@ -16,6 +16,11 @@
 | `07-blocking-mechanisms.md` | Механизмы блокировки: IFEO, GPO, hosts, firewall, ACL, wrapper |
 | `08-settings-attack-vectors.md` | Векторы отмены применённых настроек (A1–A12), разбор сценария audit mode → GPO → блокировка WU, рекомендации R1–R6 |
 | `09-mypublicwifi-rustdesk.md` | MyPublicWifi и RustDesk: функционал, лицензии, сравнение с встроенными средствами и Strelec, вердикт по внедрению |
+| `10-security-scanners-audit-encryption.md` | Этап 4.5: сканеры, аудит автозапуска, шифрование. Лицензии CureIt!/EEK для коммерческого выезда, Sysinternals, VeraCrypt 1.26.29 |
+| `11-driver-packs.md` | Этап 4.6: SDIO (GPLv3) против DriverPack (Ad-Supported, ставит мусор), состав и размер полного пака, выгрузка драйверов средствами ОС |
+| `12-backup-imaging-sync.md` | Этап 4.7: клонирование и образы, лицензия FreeFileSync для бизнеса, почему синхронизация не нужна |
+| `13-offline-updates.md` | Остаток Этапа 7: почему постоянный каталог офлайн-обновлений плохая идея, SSU внутри LCU, необратимость отката |
+| `14-firmware-update.md` | Этап 4.8: четыре канала прошивок, M-FLASH не читает exFAT, в Strelec средств прошивки нет, BitLocker и PCR, лицензии FPT |
 
 ## Профиль целевой инфраструктуры (фиксируется как константа)
 
