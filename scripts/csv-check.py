@@ -27,6 +27,11 @@ EXPECTED_FIELDS = 10
 # Хэш считается по конкатенации файлов в порядке сортировки путей,
 # поэтому он воспроизводим и сверяем с manifest.csv.
 SELF_ENTITIES = {
+    "apply-blocking": [
+        "tools/scripts/apply-blocking.conf",
+        "tools/scripts/apply-blocking.ps1",
+        "tools/scripts/apply-blocking.sh",
+    ],
     "system-audit": [
         "tools/scripts/system-audit.ps1",
         "tools/scripts/system-audit.sh",

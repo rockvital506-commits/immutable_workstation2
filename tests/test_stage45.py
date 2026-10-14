@@ -118,7 +118,7 @@ raw = open('manifest.csv', 'rb').read()
 t(b'\r\n' not in raw, 'manifest.csv в LF, без CRLF')
 rows = list(csv.reader(io.open('manifest.csv', encoding='utf-8')))
 head, body = rows[0], rows[1:]
-t(len(body) == 40, f'40 строк данных (факт {len(body)})')
+t(len(body) == 41, f'41 строк данных (факт {len(body)})')
 names = [r[2] for r in body]
 t(len(set(names)) == len(names), 'нет дублей имён')
 t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')

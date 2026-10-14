@@ -39,3 +39,4 @@ script,drivers/export,integrate-drivers,,,b56edbef896b8e76ca0c98500c6d5789492a02
 module,firmware/bios,bios_update,,,a399aa17c2efd43f14934c5dc89edb8fb817d0ff3a1cb475cd1ec9e8fa345aac,15612,1.0,2026-10-14,present
 script,firmware/bios,bios-inventory,,,a399aa17c2efd43f14934c5dc89edb8fb817d0ff3a1cb475cd1ec9e8fa345aac,15612,1.0,2026-10-14,present
 script,scripts,system-audit,,,9c9df665ba04b8dd44b23531ef35a924d17b0fcc3b907cf68e9c165e117e9229,18696,1.0,2026-10-14,present
+script,scripts,apply-blocking,,,0568376d1043776e1428f1cfddcf56ac1c66fc05f421612c546387fd1fbf2ad7,54010,1.0,2026-10-14,present
