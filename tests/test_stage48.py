@@ -125,7 +125,7 @@ sh = io.open(SH, encoding='utf-8').read()
 ps = io.open(PS, encoding='utf-8').read()
 for name, txt, needles in [
     ('.sh', sh, ['#!/usr/bin/env bash', 'set -euo pipefail', 'LOG_FILE=',
-                 'tee -a', "trap 'exec >&- 2>&-; wait' EXIT", 'DRYRUN']),
+                 'tee -a', 'exec bash "$0" "$@"', 'DRYRUN']),
     ('.ps1', ps, ['#Requires', 'CmdletBinding', '$ErrorActionPreference',
                   'Start-Transcript', '-Append', 'PowerShell.Exiting']),
 ]:
@@ -212,7 +212,7 @@ for p in ['tools/drivers/export/scripts/integrate-drivers.sh',
           'research/14-firmware-update.md',
           'tests/test_stage7.py']:
     t(os.path.isfile(p), f'на месте {p}')
-t(len(body) == 39, f'строк данных 39 (факт {len(body)})')
+t(len(body) == 40, f'строк данных 39 (факт {len(body)})')
 
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

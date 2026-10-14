@@ -19,12 +19,15 @@
 # ============================================================
 set -euo pipefail
 
-# Лог в файл (CONVENTIONS.md, раздел 5). tee в process substitution сохраняет
-# текущую оболочку, поэтому счётчики и переменные не теряются в сабшелле.
-# Закрытие дескрипторов и wait в trap гарантируют, что файл дописан до выхода.
+# Лог в файл (CONVENTIONS.md, раздел 5). Скрипт перезапускает сам себя через
+# tee, а не через process substitution: `wait` в trap виснет, если `set -e`
+# обрывает скрипт внутри функции, а tee ещё жив. Код возврата возвращается
+# через PIPESTATUS, поэтому для вызывающего поведение не меняется.
 LOG_FILE="${TMPDIR:-/tmp}/${0##*/}.log"
-exec > >(tee -a "$LOG_FILE") 2>&1
-trap 'exec >&- 2>&-; wait' EXIT
+if [ -z "${_LOGGED_SELF:-}" ]; then
+    _LOGGED_SELF=1 exec bash "$0" "$@" 2>&1 | tee -a "$LOG_FILE"
+    exit "${PIPESTATUS[0]}"
+fi
 echo "=== ${0##*/} $(date '+%Y-%m-%d %H:%M:%S') ==="
 
 SOURCE='' IMAGE='' MOUNT='' INDEX=1 DRYRUN=0 KEEP=0

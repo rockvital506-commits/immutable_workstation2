@@ -27,6 +27,10 @@ EXPECTED_FIELDS = 10
 # Хэш считается по конкатенации файлов в порядке сортировки путей,
 # поэтому он воспроизводим и сверяем с manifest.csv.
 SELF_ENTITIES = {
+    "system-audit": [
+        "tools/scripts/system-audit.ps1",
+        "tools/scripts/system-audit.sh",
+    ],
     "disk_image":     ["tools/backup/disk_image/scripts/disk-image.sh"],
     "initial_backup": ["tools/backup/initial_backup/scripts/export-drivers.sh"],
     "backup-chrome":  [

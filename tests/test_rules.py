@@ -138,8 +138,16 @@ for path in sh_files:
     rel = os.path.basename(path)
     t('LOG_FILE=' in s, f'{rel}: задан LOG_FILE')
     t('tee -a "$LOG_FILE"' in s, f'{rel}: вывод идёт через tee -a')
-    t("trap 'exec >&- 2>&-; wait' EXIT" in s,
-      f'{rel}: tee закрывается через trap, иначе лог дописывается после выхода')
+    # Process substitution с `wait` в trap виснет, если `set -e` обрывает
+    # скрипт внутри функции, а tee ещё жив (проверено: код 124 вместо 1).
+    # Поэтому лог ведётся самоперезапуском через конвейер, а код возврата
+    # возвращается через PIPESTATUS.
+    t('_LOGGED_SELF=1 exec bash "$0" "$@" 2>&1 | tee -a "$LOG_FILE"' in s,
+      f'{rel}: лог ведётся самоперезапуском через tee')
+    t('exit "${PIPESTATUS[0]}"' in s,
+      f'{rel}: код возврата сохраняется через PIPESTATUS')
+    t('exec > >(tee' not in s,
+      f'{rel}: process substitution с tee не используется')
     t(s.index('LOG_FILE=') > s.index('set -'),
       f'{rel}: блок лога стоит после строки set')
 for path in ps_files:
