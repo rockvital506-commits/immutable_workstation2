@@ -17,7 +17,7 @@
 | `diagnostics/` | `disk/`, `memory/`, `cpu/` | Проверка железа: диски, память, нагрузки | ✅ Этап 4.1 |
 | `security/` | `scanner/`, `audit/`, `encryption/` | Defender средствами ОС, Sysinternals для аудита, VeraCrypt и BitLocker | ✅ Этап 4.5 |
 | `network/` | `diagnostics/`, `speed/`, `scan/`, `wifi/`, `remote/`, `capture/` | Диагностика средствами ОС, iperf3, Nmap, Wi-Fi и точка доступа, RustDesk, Wireshark | ✅ Этап 4.4 |
-| `drivers/` | `windows/`, `linux/`, `chipset/`, `network/`, `storage/` | Драйвер-паки и точечные драйверы по вендорам | ⬜ Этап 7 |
+| `drivers/` | `packs/`, `export/` | SDIO с полным офлайн-паком, установка и выгрузка средствами ОС | ✅ Этап 4.6 |
 | `backup/` | `disk_image/`, `drivers/`, `profiles/`, `initial_backup/` | Образы дисков, экспорт драйверов, перенос профилей | ✅ Этап 3c |
 | `deployment/` | `unattended/`, `wim/`, `oem/`, `scripts/` | Подготовка и развёртывание образов | ⬜ Этап 6 |
 | `scripts/` | `windows/`, `linux/`, `flash/` | Наши наработки: PowerShell, bash, обслуживание флешки | ⬜ Этап 5 |

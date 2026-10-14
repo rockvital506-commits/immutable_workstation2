@@ -33,3 +33,5 @@ tool,security/audit,Autoruns,Autoruns.zip,https://download.sysinternals.com/file
 tool,security/audit,ProcessExplorer,ProcessExplorer.zip,https://download.sysinternals.com/files/ProcessExplorer.zip,PENDING,0,unversioned,2026-10-11,planned
 tool,security/audit,TCPView,TCPView.zip,https://download.sysinternals.com/files/TCPView.zip,PENDING,0,4.19,2026-10-11,planned
 tool,security/encryption,VeraCrypt,VeraCrypt_Setup_x64_1.26.29.msi,https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.29/VeraCrypt_Setup_x64_1.26.29.msi,PENDING,0,1.26.29,2026-10-11,planned
+tool,drivers/packs,SDIO,SDIO_2.0.4.887.zip,https://www.glenn.delahoy.com/snappy-driver-installer-origin/,PENDING,0,2.0.4.887,2026-10-11,planned
+tool,drivers/packs,SDIO-drivers,Drivers.torrent,https://sdi-tool.org/download/,PENDING,0,unversioned,2026-10-11,planned
