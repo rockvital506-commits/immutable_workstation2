@@ -37,6 +37,17 @@ SELF_ENTITIES = {
         "tools/backup/initial_backup/scripts/backup-vscode.ps1",
         "tools/backup/initial_backup/scripts/backup-vscode.sh",
     ],
+    # Имена в manifest.csv разные: модуль — "bios_update", скрипт —
+    # "bios-inventory" (как disk_image / disk-image в backup/), поэтому
+    # ключей два и они указывают на одну и ту же пару файлов.
+    "bios_update": [
+        "tools/firmware/bios/scripts/bios-inventory.ps1",
+        "tools/firmware/bios/scripts/bios-inventory.sh",
+    ],
+    "bios-inventory": [
+        "tools/firmware/bios/scripts/bios-inventory.ps1",
+        "tools/firmware/bios/scripts/bios-inventory.sh",
+    ],
     "integrate-drivers": [
         "tools/drivers/export/scripts/integrate-drivers.ps1",
         "tools/drivers/export/scripts/integrate-drivers.sh",

@@ -8,7 +8,12 @@
 
 Заполнены на Этапе 3: `windows/`, `linux/`, `winpe/`, `backup/`.
 Зарезервированы и появятся по мере наполнения: `diagnostics/`, `security/`,
-`network/`, `firmware/`, `dos/`, `_scratch/`.
+`network/`, `dos/`, `_scratch/`.
+
+Категория `firmware/` **исключена** решением заказчика от 2026-10-14: DOS-путь
+обновления прошивки устарел, для UEFI-плат не нужен. Файлы прошивок
+предназначены для отдельной маленькой FAT32-флешки, а не для образа —
+см. `tools/firmware/bios/fat32-stick.md`.
 
 ## Текущий состав
 
@@ -35,7 +40,6 @@
 | `security/` | Антивирусные и аудиторские сканеры | Kaspersky Rescue Disk, Dr.Web LiveDisk, Kali |
 | `network/` | Сетевые системы | SystemRescue, Clonezilla с сетью, iPXE-сборки |
 | `backup/` | Клонирование и образы | Clonezilla, Rescuezilla, Acronis |
-| `firmware/` | Прошивка BIOS/UEFI и дисков | FreeDOS-сборки с утилитами вендоров |
 | `dos/` | DOS и низкоуровневые утилиты | FreeDOS, MHDD |
 | `_scratch/` | Временные образы «на один выезд» | В git не попадает, чистится регулярно |
 

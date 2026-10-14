@@ -36,3 +36,5 @@ tool,security/encryption,VeraCrypt,VeraCrypt_Setup_x64_1.26.29.msi,https://githu
 tool,drivers/packs,SDIO,SDIO_2.0.4.887.zip,https://www.glenn.delahoy.com/snappy-driver-installer-origin/,PENDING,0,2.0.4.887,2026-10-11,planned
 tool,drivers/packs,SDIO-drivers,Drivers.torrent,https://sdi-tool.org/download/,PENDING,0,unversioned,2026-10-11,planned
 script,drivers/export,integrate-drivers,,,4b79145f815c07ddff1fcfad3cab9e849d8b8fcf37dc32de2f35098ca246c85e,11330,1.0,2026-10-14,present
+module,firmware/bios,bios_update,,,309d36a5514ce27cd9ee04fdba015c4a381a545968faa7eee7d3152c9e6cc135,15455,1.0,2026-10-14,present
+script,firmware/bios,bios-inventory,,,309d36a5514ce27cd9ee04fdba015c4a381a545968faa7eee7d3152c9e6cc135,15455,1.0,2026-10-14,present
