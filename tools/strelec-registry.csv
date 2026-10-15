@@ -6,10 +6,10 @@ smartmontools,diagnostics/disk,no,,"SMART-лог одной командой и�
 Prime95,diagnostics/cpu,no,,стресс CPU из живой Windows без перезагрузки,full,pending
 stress-ng,diagnostics/cpu,no,,стресс CPU и памяти в Linux,full,pending
 NTPWEdit,rescue/password,no,,правка SAM офлайн; в сборке пять иных средств сброса пароля,full,license_audited
-WinUtil,os/windows/tweaks,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
-Win11Debloat,os/windows/debloat,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
-Sophia_Script,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
-LGPO,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
+WinUtil,os/windows/tweaks,no,,"применяется в установленной ОС, WinPE не подходит",full,license_audited
+Win11Debloat,os/windows/debloat,no,,"применяется в установленной ОС, WinPE не подходит",full,license_audited
+Sophia_Script,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,license_audited
+LGPO,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,license_unverified
 RustDesk,network/remote,no,,"свой сервер вместо чужого посредника; в сборке TeamViewer, AnyDesk и др.",full,license_audited
 iperf3,network/speed,no,,замер полосы между двумя точками,full,pending
 Nmap,network/scan,no,,"в сборке Advanced IP Scanner, но он не про порты и службы",full,risk_accepted
