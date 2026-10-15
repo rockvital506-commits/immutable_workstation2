@@ -43,6 +43,6 @@ script,scripts,system-audit,,,020b1e809b1d000a28560935a522b2cf199304172b1561afac
 script,scripts,apply-blocking,,,0568376d1043776e1428f1cfddcf56ac1c66fc05f421612c546387fd1fbf2ad7,54010,1.0,2026-10-14,present
 script,scripts,validate-system,,,76c6cca37685257c89123134d2a74cacab88ea8aa592975f1791530eb2263b8d,38288,1.0,2026-10-15,present
 script,scripts,tune-ssd-ram,,,786646a441605e55c529f779766f43beb5a21ca0db1300184c21e16fd7553505,20972,1.0,2026-10-15,present
-module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_answer,,,782fad2ad0ca582a617db403fc82604ffa5d36155b61eed359a6b8287730a57d,34616,1.0,2026-10-15,present
-module,docs,docs,,,ba39a5bb7517e15ee8044e82951d912767456f67a24c532511bcd422162de4fd,87260,1.0,2026-10-15,present
-module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_algorithm,,,884b9394d430bd48c31a78b87524fc776b74a9a1aff158eed6324ea4379bb44d,63252,1.0,2026-10-15,present
+module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_answer,,,f46fb9305978d7b18dd9560ae888ef4c1694d7148e8b14a807f555ce3815f828,34909,1.0,2026-10-15,present
+module,docs,docs,,,059e0b5e84efd1793e9fef006cbefc422fdb67a1446b7141d0b28ed8dd4552a0,88757,1.0,2026-10-15,present
+module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_algorithm,,,8d0655865cc402f8ea76521faf1562c2c25c822399dfabeb97794759367d5d3f,63545,1.0,2026-10-15,present

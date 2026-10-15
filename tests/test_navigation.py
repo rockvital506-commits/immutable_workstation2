@@ -271,5 +271,64 @@ t(not naked,
 for x in naked[:10]:
     print('        ', x)
 
+
+# ================================================================ [J]
+print('\n[J] Объявление базы пути в рабочих документах (раздел 10.1)')
+DECL_RE = re.compile(r'(?m)^> \*\*База пути\.\*\*')
+BARE_RE = re.compile(r'`((?:tools|ventoy-partition|scripts|tests)/[^`]*)`')
+no_decl = []
+unresolved = []
+checked_docs = 0
+for root, dirs, files in os.walk('.'):
+    dirs[:] = [d for d in dirs if d not in ('.git', 'research')]
+    for f in files:
+        if not f.endswith('.md'):
+            continue
+        p = os.path.join(root, f)[2:]
+        # algorithm.md и шаблоны проверяются блоками B—H: там префиксы обязательны
+        if p.endswith('algorithm.md') or '/_templates/' in p or p == 'CONVENTIONS.md':
+            continue
+        txt = read(p)
+        # Зачёркнутый текст — запись о том, что создавать не стали: такой путь
+        # намеренно не существует, и это зафиксированное решение, а не дефект
+        txt = re.sub(r'~~[^~]*~~', ' ', txt)
+        bare = BARE_RE.findall(txt)
+        if not bare:
+            continue
+        checked_docs += 1
+        if not DECL_RE.search(txt):
+            no_decl.append(p)
+            continue
+        # Фиксация отказа: «не нужен», «не создан», «вместо», «дублировал бы».
+        # Это записанное решение не создавать каталог, а не битая ссылка.
+        NEG = re.compile(r'не нужн|не создава|не создан|вместо|отказ|закрыт|'
+                         r'второй экземпляр|дублир')
+        # База объявления: корень репозитория или каталог этого модуля
+        base = os.path.dirname(p) if 'от каталога' in txt.split('База пути')[1][:120] else ''
+        for raw in bare:
+            line = line_of(txt, txt.find(raw))
+            if NEG.search(line):
+                continue
+            tgt = raw.split('`')[0].strip().rstrip('/.,;:')
+            if '<' in tgt or ' ' in tgt or not tgt:
+                continue          # плейсхолдер или команда с аргументами
+            if any(c in tgt for c in '*{}'):
+                continue          # glob: описание набора файлов, а не путь
+            if os.path.exists(tgt):
+                continue
+            if base and os.path.exists(os.path.join(base, tgt)):
+                continue
+            unresolved.append(f'{p}: {tgt}')
+t(not no_decl,
+  f'во всех рабочих документах с путями объявлена база (без объявления {len(no_decl)})')
+for x in no_decl[:10]:
+    print('        ', x)
+t(not unresolved,
+  f'пути по объявленной базе разрешимы (не разрешается {len(unresolved)})')
+for x in unresolved[:10]:
+    print('        ', x)
+t(checked_docs > 30,
+  f'проверка охватила рабочие документы (охвачено {checked_docs})')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)
