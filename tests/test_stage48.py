@@ -212,7 +212,7 @@ for p in ['tools/drivers/export/scripts/integrate-drivers.sh',
           'research/14-firmware-update.md',
           'tests/test_stage7.py']:
     t(os.path.isfile(p), f'на месте {p}')
-t(len(body) == 43, f'строк данных 39 (факт {len(body)})')
+t(len(body) == 44, f'строк данных 39 (факт {len(body)})')
 
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

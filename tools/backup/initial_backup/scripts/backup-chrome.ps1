@@ -27,6 +27,11 @@ param(
     [switch]$Force
 )
 
+# Строгий режим: без него обращение к необъявленной переменной молча даёт
+# $null, и опечатка в имени превращается в тихое неверное поведение
+# (CONVENTIONS.md, раздел 5).
+Set-StrictMode -Version Latest
+
 $ErrorActionPreference = 'Stop'
 
 

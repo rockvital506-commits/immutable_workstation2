@@ -53,6 +53,11 @@ $BinaryExt = @(
     'mp3','mp4','mkv','avi','wav','pdf','doc','docx','xls','xlsx'
 )
 
+# Строгий режим: без него обращение к необъявленной переменной молча даёт
+# $null, и опечатка в имени превращается в тихое неверное поведение
+# (CONVENTIONS.md, раздел 5).
+Set-StrictMode -Version Latest
+
 Write-Host "repo-validate — $RepoRoot" -ForegroundColor White
 
 $AllFiles = Get-ChildItem -Path $RepoRoot -Recurse -File -Force |

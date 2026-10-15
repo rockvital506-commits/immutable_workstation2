@@ -123,7 +123,7 @@ for p in ['tools/drivers/packs/SDIO/README.md',
 names = [r[2] for r in rows]
 for n in ['SDIO', 'SDIO-drivers', 'VeraCrypt', 'initial_backup', 'disk_image']:
     t(n in names, f'в manifest осталась сущность {n}')
-t(len(rows) == 43, f'строк данных по-прежнему 40 (факт {len(rows)})')
+t(len(rows) == 44, f'строк данных по-прежнему 40 (факт {len(rows)})')
 
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

@@ -29,6 +29,7 @@ param(
     [string]$Diff
 )
 
+Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Continue'
 
 # Лог в файл (CONVENTIONS.md, раздел 5). Register-EngineEvent на PowerShell.Exiting

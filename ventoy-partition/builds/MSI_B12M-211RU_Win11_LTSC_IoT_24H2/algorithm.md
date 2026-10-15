@@ -280,7 +280,13 @@ Get-NetAdapter | Select Name, Status, LinkSpeed
 
 **Сеть.** offline.
 
-**Действия.** Скрипты из `scripts/`, политика из `config/`.
+**Действия.** Процедура — [`basic-setup.md`](../../../tools/scripts/procedures/basic-setup.md).
+
+Порядок инструментов обязателен: WinUtil → Win11Debloat → Sophia точечно
+→ свои скрипты. От порядка зависит одно конкретное значение реестра
+(`NoAutoRebootWithLoggedOnUsers`), которое WinUtil удаляет.
+
+Скрипты — [`tools/scripts/`](../../../tools/scripts/), политика — из `config/`.
 
 **Проверка.** Все применённые значения выгружены в `.reg`-файл отката:
 ```powershell
@@ -297,7 +303,14 @@ reg export HKLM\SOFTWARE\Policies\Microsoft\Windows config\policies-before.reg
 
 **Сеть.** offline.
 
-**Действия.**
+**Действия.** Процедура — [`block-telemetry.md`](../../../tools/scripts/procedures/block-telemetry.md).
+Скрипт — [`apply-blocking.ps1`](../../../tools/scripts/apply-blocking.ps1), профиль —
+[`apply-blocking.conf`](../../../tools/scripts/apply-blocking.conf). Порядок групп фиксирован:
+P0 → P1a → P1b → P2 → T → P3 → P5.
+
+Ниже — состав шага. Применять через скрипт, а не этими командами вручную:
+скрипт печатает обратную команду до каждого изменения и пишет отчёт.
+
 ```powershell
 # Реестр
 Set-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection' `
@@ -338,7 +351,9 @@ Get-ScheduledTask -TaskPath '\Microsoft\Windows\Application Experience\' | Selec
 
 **Сеть.** offline.
 
-**Действия.**
+**Действия.** Процедура — [`ssd-ram-tuning.md`](../../../tools/scripts/procedures/ssd-ram-tuning.md).
+Скрипт — [`tune-ssd-ram.ps1`](../../../tools/scripts/tune-ssd-ram.ps1).
+
 ```powershell
 powercfg /hibernate off                       # отключает и Fast Startup
 fsutil behavior query DisableDeleteNotify     # ожидается 0 (TRIM включён)
@@ -374,7 +389,14 @@ fsutil behavior query DisableDeleteNotify     # ожидается 0 (TRIM вк�
 
 ### Шаг 12. Валидация развёрнутой системы
 
+Процедура — [`validation.md`](../../../tools/scripts/procedures/validation.md). Скрипт — [`validate-system.ps1`](../../../tools/scripts/validate-system.ps1).
+
 См. раздел 5. Без прохождения всех пунктов станция не сдаётся.
+
+Приёмка выполняется в **три прогона**, а не в один: пункт 11 физически
+не проверяется до перезагрузки. Пункт 10 (`DISM /ScanHealth`) выполняется
+минуты и запускается только по явному `-ScanHealth` — перед сдачей
+выполнить с ним.
 
 ---
 

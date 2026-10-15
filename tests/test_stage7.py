@@ -163,7 +163,7 @@ for p in ['tools/drivers/export/README.md', 'tools/drivers/packs/SDIO/README.md'
           'tools/os/windows/updates/README.md',
           'tools/backup/initial_backup/scripts/export-drivers.sh']:
     t(os.path.isfile(p), f'на месте {p}')
-t(len(body) == 43, f'строк данных 37 (факт {len(body)})')
+t(len(body) == 44, f'строк данных 37 (факт {len(body)})')
 
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

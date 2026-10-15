@@ -8,10 +8,10 @@ iso,ISO/linux,linuxmint-22.3-cinnamon-64bit,linuxmint-22.3-cinnamon-64bit.iso,ht
 iso,ISO/backup,clonezilla-live-3.3.3-37-amd64,clonezilla-live-3.3.3-37-amd64.iso,https://sourceforge.net/projects/clonezilla/files/clonezilla_live_stable/3.3.3-37/,PENDING,0,3.3.3-37,2026-10-07,planned
 module,backup/disk_image,disk_image,,,597e4e5a6bead9469ea9cada624d7482f1e82401dca38bf33572d3c817ec5e46,5555,1.0,2026-10-07,present
 module,backup/initial_backup,initial_backup,,,def0c142572a0da8e3ce8c14461b053b4c68859d32379bac594fe3694aebc992,4793,1.0,2026-10-07,present
-script,backup/initial_backup,backup-chrome,,,399f3d03221c791b76501ef3348889dbc9ace23b1d5946db51685a1a81c09cd0,9396,1.0,2026-10-07,present
-script,backup/initial_backup,backup-vscode,,,a150fee7739483f353f3014a6a09c7f74643a3e44cbd8c01353755c49df223d8,11005,1.0,2026-10-07,present
-script,backup/initial_backup,export-drivers,,,46ca40dfc9094bd6e1d1d74d5241df2b9d3a6b9814af563315141dde8e906ee2,9482,1.0,2026-10-07,present
-script,backup/initial_backup,verify-backup,,,8ce09463079f9e09b9e7bd4c862b25bcf04167719818b8263e9c2cd2312d193d,6705,1.0,2026-10-07,present
+script,backup/initial_backup,backup-chrome,,,9c4abe0444c6f5e6863ed9247c8e79986ce95ec94048f083fd501d8f7537c40f,9717,1.0,2026-10-07,present
+script,backup/initial_backup,backup-vscode,,,5d485b0b9b194fc5ed95a8a7b517fce8c5f9cd4dc6237116f850c7aff03e592b,11326,1.0,2026-10-07,present
+script,backup/initial_backup,export-drivers,,,dada00e5822b28868ab07c54f78a051a919ff9fdbaf7db295d65975a7396263f,9803,1.0,2026-10-07,present
+script,backup/initial_backup,verify-backup,,,dc924b7ee5aa2da6c7f5541398686d2d3efedf4aadf43295f8d1f412f548d6b9,7026,1.0,2026-10-07,present
 script,backup/disk_image,disk-image,,,597e4e5a6bead9469ea9cada624d7482f1e82401dca38bf33572d3c817ec5e46,5555,1.0,2026-10-07,present
 tool,diagnostics/disk,smartmontools,smartmontools-7.5.win32-setup.exe,https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe,PENDING,0,7.5,2026-10-07,planned
 tool,diagnostics/disk,CrystalDiskInfo,CrystalDiskInfo9_9_2.zip,https://sourceforge.net/projects/crystaldiskinfo/files/9.9.2/,PENDING,0,9.9.2,2026-10-07,planned
@@ -23,6 +23,7 @@ tool,rescue/password,NTPWEdit,ntpwed07.zip,http://cdslow.org.ru/en/ntpwedit/,PEN
 tool,os/windows/tweaks,WinUtil,winutil.ps1,https://github.com/ChrisTitusTech/winutil/releases/download/26.10.07/winutil.ps1,PENDING,0,26.10.07,2026-10-10,planned
 tool,os/windows/debloat,Win11Debloat,Win11Debloat.ps1,https://github.com/Raphire/Win11Debloat/releases/download/2026.08.24/Get.ps1,PENDING,0,2026.08.24,2026-10-10,planned
 tool,os/windows/gpo_lock,Sophia_Script,Sophia.ps1,https://github.com/farag2/Sophia-Script-for-Windows/releases/download/7.3.0/Sophia.Script.for.Windows.11.LTSC.2024.v7.3.0.zip,PENDING,0,7.3.0,2026-10-10,planned
+tool,os/windows/gpo_lock,LGPO,LGPO.exe,https://www.microsoft.com/en-us/download/details.aspx?id=55319,PENDING,0,PENDING,2026-10-15,planned
 tool,network/remote,RustDesk,rustdesk-1.5.0-x86_64.exe,https://github.com/rustdesk/rustdesk/releases/download/1.5.0/rustdesk-1.5.0-x86_64.exe,PENDING,0,1.5.0,2026-10-10,planned
 tool,network/speed,iperf3,iperf-3.22-win64.zip,https://github.com/ar51an/iperf3-win-builds/releases/download/3.22/iperf-3.22-win64.zip,PENDING,0,3.22,2026-10-10,planned
 tool,network/scan,Nmap,nmap-7.991-setup.exe,https://nmap.org/download.html,PENDING,0,7.991,2026-10-10,planned
@@ -35,10 +36,10 @@ tool,security/audit,TCPView,TCPView.zip,https://download.sysinternals.com/files/
 tool,security/encryption,VeraCrypt,VeraCrypt_Setup_x64_1.26.29.msi,https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.29/VeraCrypt_Setup_x64_1.26.29.msi,PENDING,0,1.26.29,2026-10-11,planned
 tool,drivers/packs,SDIO,SDIO_2.0.4.887.zip,https://www.glenn.delahoy.com/snappy-driver-installer-origin/,PENDING,0,2.0.4.887,2026-10-11,planned
 tool,drivers/packs,SDIO-drivers,Drivers.torrent,https://sdi-tool.org/download/,PENDING,0,unversioned,2026-10-11,planned
-script,drivers/export,integrate-drivers,,,b56edbef896b8e76ca0c98500c6d5789492a0249e0f1a2097a7ad0be4f980a55,11487,1.0,2026-10-14,present
-module,firmware/bios,bios_update,,,a399aa17c2efd43f14934c5dc89edb8fb817d0ff3a1cb475cd1ec9e8fa345aac,15612,1.0,2026-10-14,present
-script,firmware/bios,bios-inventory,,,a399aa17c2efd43f14934c5dc89edb8fb817d0ff3a1cb475cd1ec9e8fa345aac,15612,1.0,2026-10-14,present
-script,scripts,system-audit,,,94d627b388e7e91f99ab0430c08466df4bf41761c20692a03f2766eab61e8cba,18765,1.0,2026-10-14,present
+script,drivers/export,integrate-drivers,,,8b603821f9b374c65a43f3637c970af672b6287c9d8545657a9cdc159dd71210,11808,1.0,2026-10-14,present
+module,firmware/bios,bios_update,,,94fda0b3a3f977b0c4f4905da3bd28ad8a4ac812c6055fa4957f18d28ee0d1b6,15933,1.0,2026-10-14,present
+script,firmware/bios,bios-inventory,,,94fda0b3a3f977b0c4f4905da3bd28ad8a4ac812c6055fa4957f18d28ee0d1b6,15933,1.0,2026-10-14,present
+script,scripts,system-audit,,,020b1e809b1d000a28560935a522b2cf199304172b1561afac2eb681027cd86d,18796,1.0,2026-10-14,present
 script,scripts,apply-blocking,,,0568376d1043776e1428f1cfddcf56ac1c66fc05f421612c546387fd1fbf2ad7,54010,1.0,2026-10-14,present
 script,scripts,validate-system,,,76c6cca37685257c89123134d2a74cacab88ea8aa592975f1791530eb2263b8d,38288,1.0,2026-10-15,present
 script,scripts,tune-ssd-ram,,,786646a441605e55c529f779766f43beb5a21ca0db1300184c21e16fd7553505,20972,1.0,2026-10-15,present

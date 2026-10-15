@@ -155,6 +155,8 @@ for path in ps_files:
     rel = os.path.basename(path)
     t('Start-Transcript' in s, f'{rel}: ведётся транскрипт')
     t('-Append' in s, f'{rel}: лог дописывается, а не перетирается')
+    t('Set-StrictMode -Version Latest' in s,
+      f'{rel}: строгий режим включён, иначе необъявленная переменная даёт $null')
     t('PowerShell.Exiting' in s,
       f'{rel}: транскрипт закрывается при exit внутри скрипта')
 
