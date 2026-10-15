@@ -30,8 +30,8 @@ tool,network/scan,Nmap,nmap-7.991-setup.exe,https://nmap.org/download.html,PENDI
 tool,network/capture,Wireshark,WiresharkPortable64_4.6.9.paf.exe,https://www.wireshark.org/download.html,PENDING,0,4.6.9,2026-10-10,planned
 tool,network/wifi,WifiInfoView,wifiinfoview-x64.zip,https://www.nirsoft.net/utils/wifi_information_view.html,PENDING,0,3.00,2026-10-10,planned
 tool,network/wifi,MyPublicWifi,MyPublicWiFi.exe,https://www.mypublicwifi.com/,PENDING,0,31.3,2026-10-10,planned
-tool,security/audit,Autoruns,Autoruns.zip,https://download.sysinternals.com/files/Autoruns.zip,PENDING,0,unversioned,2026-10-11,planned
-tool,security/audit,ProcessExplorer,ProcessExplorer.zip,https://download.sysinternals.com/files/ProcessExplorer.zip,PENDING,0,unversioned,2026-10-11,planned
+tool,security/audit,Autoruns,Autoruns.zip,https://download.sysinternals.com/files/Autoruns.zip,PENDING,0,14.3,2026-10-11,planned
+tool,security/audit,ProcessExplorer,ProcessExplorer.zip,https://download.sysinternals.com/files/ProcessExplorer.zip,PENDING,0,17.14,2026-10-11,planned
 tool,security/audit,TCPView,TCPView.zip,https://download.sysinternals.com/files/TCPView.zip,PENDING,0,4.19,2026-10-11,planned
 tool,security/encryption,VeraCrypt,VeraCrypt_Setup_x64_1.26.29.msi,https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.29/VeraCrypt_Setup_x64_1.26.29.msi,PENDING,0,1.26.29,2026-10-11,planned
 tool,drivers/packs,SDIO,SDIO_2.0.4.887.zip,https://www.glenn.delahoy.com/snappy-driver-installer-origin/,PENDING,0,2.0.4.887,2026-10-11,planned
@@ -44,5 +44,5 @@ script,scripts,apply-blocking,,,0568376d1043776e1428f1cfddcf56ac1c66fc05f421612c
 script,scripts,validate-system,,,76c6cca37685257c89123134d2a74cacab88ea8aa592975f1791530eb2263b8d,38288,1.0,2026-10-15,present
 script,scripts,tune-ssd-ram,,,786646a441605e55c529f779766f43beb5a21ca0db1300184c21e16fd7553505,20972,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_answer,,,f46fb9305978d7b18dd9560ae888ef4c1694d7148e8b14a807f555ce3815f828,34909,1.0,2026-10-15,present
-module,docs,docs,,,03b3e309c7957a5d9c1ffcc2ff4f74283f0494e1cda731687270de39b2af6de0,92058,1.0,2026-10-15,present
+module,docs,docs,,,6bf48671ca209231654899927d1ff530cea8c80a8cf96b810119beb8f7bb28e9,97587,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_algorithm,,,8d0655865cc402f8ea76521faf1562c2c25c822399dfabeb97794759367d5d3f,63545,1.0,2026-10-15,present

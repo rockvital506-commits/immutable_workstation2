@@ -66,7 +66,22 @@ for name, (sub, _stub) in UTILS.items():
     s = io.open(f'{SEC}/{sub}/{name}/README.md', encoding='utf-8').read()
     low = s.lower()
     if name in ('Autoruns', 'ProcessExplorer', 'TCPView'):
-        t('не сверена' in s, f'{name}: версия помечена несверенной')
+        # До 2026-10-15 версии этих утилит не были сверены, и проверка держала
+        # пометку «не сверена». Версии сняты с официального индекса
+        # Sysinternals, поэтому проверяется обратное: сверка записана с датой,
+        # а номер в README совпадает с manifest.csv.
+        mv = {r['name']: r['version']
+              for r in csv.DictReader(io.open('manifest.csv', encoding='utf-8'))}
+        t('сверена' in s and '2026-10-15' in s,
+          f'{name}: сверка версии записана с датой')
+        # Смотрим только строку таблицы «Версия», а не весь текст: в рассказе
+        # о том, что прежняя пометка снята, слова «не сверена» остаются.
+        vline = [ln for ln in s.split('\n') if ln.startswith('| Версия |')]
+        t(len(vline) == 1, f'{name}: в README одна строка «Версия» ({len(vline)})')
+        t(vline and 'не сверена' not in vline[0],
+          f'{name}: в строке «Версия» нет пометки о несверенности')
+        t(mv.get(name, '') != 'unversioned' and mv.get(name, '') in s,
+          f'{name}: версия из manifest.csv ({mv.get(name)}) приведена в README')
         t('бизнес' in low or 'коммерческ' in low,
           f'{name}: лицензия разобрана применительно к коммерческому использованию')
         t('брендировани' in s, f'{name}: указано ограничение на снятие брендирования')

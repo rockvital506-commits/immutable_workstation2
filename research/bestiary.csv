@@ -1,5 +1,5 @@
 id,signature,n,first_seen,last_seen,fix_target,closes,verdict,source
-B-01,Факт репозитория зашит в тест константой,12,2026-09-24,2026-10-15,state,test_rules.py [11],automated,tests/baseline.py; CONVENTIONS.md 12.9; 12-й случай - строка «Утилит здесь нет намеренно» была зашита в test_stage44 и test_stage45 и пала при приведении пометки к одной форме
+B-01,Факт репозитория зашит в тест константой,13,2026-09-24,2026-10-15,state,test_rules.py [11],automated,"tests/baseline.py; CONVENTIONS.md 12.9; 13-й случай - test_stage45.py требовал наличия пометки «не сверена» в README Sysinternals и пал, когда их сняли по официальному индексу"
 B-02,Проверка зашивает номер версии документа,4,2026-09-24,2026-10-15,state,test_stage8.py,automated,"tests/test_stage8.py; 4-й случай - версия Sophia 7.3.0 зашита в test_stage43.py:74, правлена вместе с манифестом при переходе на 8.0.0"
 B-03,Утверждение о содержимом файла без чтения файла,3,2026-09-24,2026-10-15,state,test_navigation.py,automated,CONVENTIONS.md 10.5; tests/test_navigation.py
 B-04,Сопоставление текста без учёта переносов строк в документе,2,2026-09-24,2026-10-15,state,test_navigation.py,automated,"приём: flat() в test_stage8.py/test_stage9.py/test_stage10.py; возврат не определён — правила «все тесты нормализуют» нет, flat есть в 3 из 17"
