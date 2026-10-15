@@ -4,7 +4,7 @@ tools_subcategories,30,подкатегорий в tools/ по признаку 
 tools_utilities,22,каталогов утилит и строк type=tool в manifest.csv
 manifest_sha_filled,18,строк манифеста с реальной SHA256
 manifest_planned,29,строк манифеста со статусом planned
-manifest_pending_sha,28,строк манифеста с sha256=PENDING
+manifest_pending_sha,27,строк манифеста с sha256=PENDING
 manifest_iso,7,строк манифеста с type=iso
 manifest_tool,22,строк манифеста с type=tool
 manifest_script,11,строк манифеста с type=script
