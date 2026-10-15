@@ -98,10 +98,31 @@ ntpwed07.zip  →  распаковать  →  ntpwed64.exe
 | Прямая ссылка на файл | http://cdslow.org.ru/en/ntpwedit/ — архив `ntpwed07.zip` |
 | SHA256 | `PENDING` |
 | Размер | ≈ 0.3 МБ |
-| Лицензия | Freeware |
+| Лицензия | **GNU GPL v2** |
 
 **Версия не сверена с официальным сайтом** — он недоступен из рабочей среды.
 Значение взято из вторичных источников, где 0.7 указывается как последняя.
+
+**Лицензия — не Freeware.** В заголовках исходников `version.c` и `dlghiber.c`
+(зеркало `jmclaren7/ntpwedit`, пересборка исходников с `cdslow.org.ru`):
+«Copyright (c) 2005-2017 Vadim Druzhin (cdslow@mail.ru). This program is free
+software; you can redistribute it and/or modify it under the terms of the GNU
+General Public License as published by the Free Software Foundation; **version
+2 of the License**». Зеркало `Zerglrisk/NTPWEdit-Mirror` помечено GPL-2.0.
+Основано на `chntpw` Petter Nordahl-Hagen.
+
+Что это значит для нас:
+
+| Действие | Допустимо |
+|----------|-----------|
+| Пользоваться в коммерческих целях | да, GPL не ограничивает назначение |
+| Хранить исходный архив `ntpwed07.zip` на флешке без изменений | да |
+| Отдать копию архива заказчику | да, приложив текст GPL-2.0 |
+| Встроить в свой продукт, не открывая исходники | нет |
+
+Прежняя запись «Freeware» была ошибкой: она взята из каталога `appnee.com`,
+который к тому же приписывает странице утилиты лицензию Creative Commons
+NonCommercial — ни то ни другое первоисточником не является.
 
 ## Аналоги
 

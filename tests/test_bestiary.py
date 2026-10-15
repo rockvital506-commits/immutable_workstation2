@@ -162,7 +162,7 @@ for f in sorted(os.listdir('research')):
             inseg = False
         if not inseg:
             continue
-        m = re.match(r'^#{3,4}\s+\**\s*([A-Z]{1,2}\d{1,2})\b', ln)
+        m = re.match(r'^#{3,4}\s+\**\s*([A-Z]{1,2}\d{1,3})(?![0-9])', ln)
         if m:
             ids.append(m.group(1))
     u = sorted(set(ids), key=lambda x: (x[0], int(x[1:])))
