@@ -19,7 +19,7 @@ SUBS = ['diagnostics', 'speed', 'scan', 'wifi', 'remote', 'capture']
 UTILS = {
     'RustDesk':     ('remote',  'rustdesk-1.5.0-x86_64.exe.md',        '1.5.0'),
     'iperf3':       ('speed',   'iperf-3.22-win64.zip.md',             '3.22'),
-    'Nmap':         ('scan',    'nmap-7.991-setup.exe.md',             '7.991'),
+    'Nmap':         ('scan',    'nmap-7.991.zip.md',                   '7.991'),
     'Wireshark':    ('capture', 'WiresharkPortable64_4.6.9.paf.exe.md','4.6.9'),
     'WifiInfoView': ('wifi',    'wifiinfoview-x64.zip.md',             '3.00'),
     'MyPublicWifi': ('wifi',    'MyPublicWiFi.exe.md',                 '31.3'),

@@ -126,7 +126,7 @@ Sysinternals в сборке нет вообще, шифрования нет, �
 
 Не разобраны вовсе: `smartmontools`, `Prime95`, `stress-ng`, `WinUtil`,
 `Win11Debloat`, `Sophia_Script`, `LGPO`, `iperf3`, `Wireshark`, `SDIO`,
-`SDIO-drivers`. Группа 1 (`NTPWEdit`, `RustDesk`, `Nmap`, `MyPublicWifi`)
+`SDIO-drivers` — одиннадцать утилит. Группа 1 (`NTPWEdit`, `RustDesk`, `Nmap`, `MyPublicWifi`)
 разобрана в разделе 5 «Находки группы 1».
 
 ## 5. Находки группы 1: NTPWEdit, RustDesk, Nmap, MyPublicWifi
@@ -186,7 +186,12 @@ Windows-сборку. Прежняя формулировка в README — «М
 | OEM-лицензия Nmap | Хранить и распространять законно | Платно, цена не запрашивалась |
 | Хранить в виде архива, не распаковывая | NPSL содержит оговорку про архивную форму | Оспоримо: раздел 10 про Windows-сборки звучит безусловнее, чем оговорка про архивы |
 
-`fix_target = decision`.
+`fix_target = decision`. **Решено заказчиком 2026-10-15: хранить
+нераспакованным архивом**, риск принят. Сущность в `manifest.csv`
+переименована: `nmap-7.991-setup.exe` → `nmap-7.991.zip`, внутри архива
+прежний инсталлятор; распаковка и установка — на месте. Заглушка, README
+утилиты, `tests/test_stage44.py` и список имён в `research/19` приведены к
+новому имени.
 
 ### N19. RustDesk: коммерческое использование без ограничений
 
@@ -231,13 +236,82 @@ Strelec средства создания точки доступа нет во�
 `fix_target = doc`. Версия переведена из «не проверена» в «подтверждена
 четырьмя независимыми каталогами, не первоисточником».
 
-## 6. Что не проверялось
+## 6. Находки группы 2: Autoruns, ProcessExplorer, TCPView, VeraCrypt
+
+### N21. Распространение утилит Sysinternals запрещено их лицензией
+
+`Autoruns`, `ProcessExplorer` и `TCPView` лежат в `tools/security/audit/` как
+файлы `Autoruns.zip`, `ProcessExplorer.zip`, `TCPView.zip`. В README у всех
+трёх в поле «Лицензия» стояло «freeware, включая бизнес», а ограничение на
+распространение упоминалось одной строкой с оговоркой «по сторонним данным».
+
+Формулировки по существу:
+
+> «Microsoft does not offer any type of distribution license, which means that
+> third-party entities are not permitted to distribute the utilities in their
+> software or through their websites» — `techtarget.com/searchwindowsserver/
+> definition/Windows-Sysinternals`.
+
+> «According to the Sysinternals licensing terms, redistribution is not
+> permitted without explicit permission» — Microsoft Q&A, 2025-11-12; там же
+> адрес для запроса разрешения: `licensing@microsoft.com`.
+
+Это та же коллизия, что у Nmap: флешка мастера выезжает к заказчикам, значит
+копия распространяется. В отличие от NPSL, в лицензионном соглашении
+Sysinternals оговорки про архивную форму нет, поэтому вариант «хранить
+нераспакованным архивом» здесь не работает так, как с Nmap.
+
+Текст EULA по первоисточнику не прочитан: `learn.microsoft.com` недоступен из
+рабочей среды (`http=000`). Обе формулировки — из вторичных источников, что
+записано в README явно.
+
+Вердикт по §7.2.1: **бесплатная редакция целесообразна** — платной у
+Sysinternals нет, аналоги из сборки отсутствуют вовсе (Sysinternals в сборке
+Strelec нет). Риск распространения принят заказчиком 2026-10-15.
+
+`fix_target = doc`. Исправлено: в трёх README вместо «по сторонним данным» —
+конкретные формулировки с источником и пометка о непрочитанном EULA.
+
+### N22. Лицензия VeraCrypt разрешает распространять неизменённые копии
+
+В README было записано «коммерческое использование разрешено» без
+формулировки лицензии. Формулировка TrueCrypt License 3.0
+(`launchpad.net/veracrypt`):
+
+> «You may make copies of This Product (unmodified) and distribute copies of
+> This Product (unmodified) **that are not included in another product forming
+> Your Product** (except as permitted under Chapter III). ... You may use This
+> Product freely ... on any number of computers/systems for non-commercial
+> and/or commercial purposes.»
+
+Распространение неизменённых копий разрешено, если копия не входит в состав
+чужого продукта. Флешка мастера — носитель с набором самостоятельных утилит,
+а не продукт, включающий VeraCrypt, поэтому наша схема под запрет не
+попадает. Это ровно та оговорка, которой не хватает в случаях Nmap и
+Sysinternals.
+
+Вердикт по §7.2.1: вопрос «целесообразна ли бесплатная редакция» решается
+однозначно — платных редакций у VeraCrypt нет. Чего вместе с бесплатностью
+нет: центрального хранилища ключей, удалённого восстановления, политик и
+поддержки.
+
+Попутно: вторичные источники расходятся в дате выпуска 1.26.29 — `uptodown`
+указывает 16.06.2026, обзорный материал — июнь 2026. Наша запись 2026-06-12
+получена через API GitHub по тегу, то есть по первоисточнику, и остаётся в
+силе; расхождение объясняется разницей между датой тега и датой публикации
+зеркалом.
+
+`fix_target = doc`. Исправлено.
+
+## 7. Что не проверялось
 
 - Состав сборки по `MInst/profiles/strelec64Windows10.ini` — образ недоступен.
 - Версия DMDE в сборке — в справочнике не указана. Основание своей копии
   записано по решению заказчика от 2026-10-15: своя версия свежее и
   запускается из живой ОС; сверка с версией в сборке — на выезде.
 - Лицензионное соглашение MyPublicWifi в оригинале — сайт недоступен.
+- Текст лицензионного соглашения Sysinternals — `learn.microsoft.com`
+  недоступен из рабочей среды, формулировки взяты из вторичных источников.
 - Текст NPSL 0.95 целиком — читались раздел 10, страница legal notices и
   аннотированная версия; полная юридическая оценка не проводилась.
 - Лицензии утилит из самой сборки Strelec — по правилу §7.2.1 они не

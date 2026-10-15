@@ -93,9 +93,35 @@ Sysinternals на `learn.microsoft.com/sysinternals/downloads/` указывае
 17.1 относился к выпуску 05.03.2026, актуален 17.14. В `manifest.csv` версия
 до этой сверки не была заполнена вовсе (`unversioned`).
 
-Лицензия по первоисточнику не проверена. По сторонним данным: freeware,
-использование в бизнесе разрешено, коммерческое распространение и снятие
-брендирования Microsoft запрещены.
+**Что именно разрешает лицензия.** Microsoft Sysinternals Software License —
+freeware: использование бесплатное, в том числе в бизнесе, число запусков и
+машин не ограничено. Запрещены две вещи: распространение — Microsoft не выдаёт
+лицензии на распространение, поэтому третьим лицам нельзя включать утилиты в
+свои продукты и выкладывать у себя; и снятие брендирования — утилиты нельзя
+переупаковывать под своим именем, убирать знаки и сведения о Microsoft.
+
+> «Microsoft does not offer any type of distribution license, which means that
+> third-party entities are not permitted to distribute the utilities in their
+> software or through their websites» — `techtarget.com/searchwindowsserver/
+> definition/Windows-Sysinternals`.
+>
+> «According to the Sysinternals licensing terms, redistribution is not
+> permitted without explicit permission» — ответ Microsoft Q&A от 2025-11-12,
+> там же адрес для запроса: `licensing@microsoft.com`.
+
+Текст самого лицензионного соглашения по первоисточнику не прочитан:
+`learn.microsoft.com` недоступен из рабочей среды (`http=000`), поэтому обе
+формулировки — из вторичных источников. Это не отменяет вывода, но и не
+заменяет чтения EULA перед тем, как принимать решение.
+
+**Последствие для нас то же, что у Nmap:** мы планировали хранить
+`ProcessExplorer.zip` на флешке мастера, а флешка выезжает к заказчикам, то есть речь о
+распространении копии. В отличие от NPSL, в лицензионном соглашении
+Sysinternals оговорки про архивную форму нет. Риск принят заказчиком
+2026-10-15 и записан в `research/23-license-scope.md`, N21.
+
+Прежняя формулировка «по сторонним данным» снята: вместо неё — конкретные
+формулировки с указанием источника и явная пометка о том, что EULA не прочитан.
 
 ## Аналоги
 

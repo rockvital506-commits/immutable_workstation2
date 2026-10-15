@@ -12,13 +12,13 @@ Sophia_Script,os/windows/gpo_lock,no,,"применяется в установ�
 LGPO,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
 RustDesk,network/remote,no,,"свой сервер вместо чужого посредника; в сборке TeamViewer, AnyDesk и др.",full,license_audited
 iperf3,network/speed,no,,замер полосы между двумя точками,full,pending
-Nmap,network/scan,no,,"в сборке Advanced IP Scanner, но он не про порты и службы",full,blocked
+Nmap,network/scan,no,,"в сборке Advanced IP Scanner, но он не про порты и службы",full,risk_accepted
 Wireshark,network/capture,no,,захват и разбор трафика,full,pending
 WifiInfoView,network/wifi,no,,состав и сигнал Wi-Fi из живой ОС,full,license_audited
 MyPublicWifi,network/wifi,no,,точка доступа на станции,full,license_unverified
-Autoruns,security/audit,no,,в сборке Sysinternals нет вообще,full,pending
-ProcessExplorer,security/audit,no,,в сборке Sysinternals нет вообще,full,pending
-TCPView,security/audit,no,,в сборке Sysinternals нет вообще,full,pending
-VeraCrypt,security/encryption,no,,в сборке шифрования нет,full,pending
+Autoruns,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
+ProcessExplorer,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
+TCPView,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
+VeraCrypt,security/encryption,no,,в сборке шифрования нет,full,license_audited
 SDIO,drivers/packs,no,,в сборке средств подбора драйверов нет,full,pending
 SDIO-drivers,drivers/packs,no,,в сборке средств подбора драйверов нет,full,pending

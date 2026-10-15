@@ -25,7 +25,7 @@
 «всех образов **и бинарников**», скрипт проверяет только образы.
 
 Вне проверки остаются, в частности: `LGPO.exe`, `VeraCrypt_Setup_x64_1.26.29.msi`,
-`SDIO_2.0.4.887.zip`, `Drivers.torrent`, `Autoruns.zip`, `nmap-7.991-setup.exe`,
+`SDIO_2.0.4.887.zip`, `Drivers.torrent`, `Autoruns.zip`, `nmap-7.991.zip`,
 `rustdesk-1.5.0-x86_64.exe`, `Win11Debloat.ps1`, `Sophia.ps1`, `winutil.ps1`.
 
 ### N2. Даже без фильтра путь строится неверно
