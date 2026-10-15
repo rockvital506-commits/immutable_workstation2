@@ -10,4 +10,4 @@ manifest_tool,23,строк манифеста с type=tool
 manifest_script,11,строк манифеста с type=script
 manifest_module,6,строк манифеста с type=module
 manifest_planned_zero_size,30,строк planned с size_bytes=0
-audit_findings,36,помеченных находок в четырёх AUDIT-документах research/
+audit_findings,43,помеченных находок в четырёх AUDIT-документах research/
