@@ -106,5 +106,5 @@ mode**. Обход OOBE обеспечивает `autounattend.xml`, а Microsof
 | `research/06-services-blocklist.md` | Службы и процессы, приоритеты P0–P3 |
 | `research/07-blocking-mechanisms.md` | Механизмы блокировки M1–M12 |
 | `research/08-settings-attack-vectors.md` | Векторы отмены настроек A1–A12, рекомендации R1–R6 |
-| `ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/algorithm.md` | Полный алгоритм станции из 14 шагов |
+| `ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/algorithm.md` | Полный алгоритм станции из 15 шагов |
 | `/CONVENTIONS.md` раздел 7 | Правило исследований и запроса на сторонние решения |

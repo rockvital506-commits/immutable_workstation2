@@ -183,6 +183,22 @@
                xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <ComputerName>MSI-B12M</ComputerName>
+      <!-- Ключ продукта установлен ЯВНО, чтобы установщик не подхватил ключ,
+           зашитый в прошивку (OEM:OA3, в ACPI-таблице MSDM). На этой станции
+           в прошивке ключ Windows 11 Home — для IoT Enterprise LTSC он не
+           подходит ни по редакции, ни по каналу лицензирования.
+
+           Значение — GVLK (KMS-клиентский ключ) для Windows IoT Enterprise
+           LTSC 2024 из официальной таблицы Microsoft:
+           learn.microsoft.com/windows-server/get-started/kms-client-activation-keys
+
+           GVLK НЕ является лицензией и систему не активирует: он указывает
+           редакции искать KMS-узел. Активация выполняется отдельным шагом
+           алгоритма после появления сети — ключом MAK, OEM или Retail.
+
+           Ключ задан в проходе specialize, а не windowsPE: при ключе в
+           windowsPE OOBE начинает запрашивать ключ у пользователя. -->
+      <ProductKey>KBN8V-HFGQ4-MGXVD-347P6-PDQGT</ProductKey>
       <TimeZone>Russian Standard Time</TimeZone>
     </component>
     <component name="Microsoft-Windows-International-Core"

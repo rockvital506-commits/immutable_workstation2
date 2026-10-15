@@ -7,7 +7,7 @@
 
 | Что | Где |
 |-----|-----|
-| Полный алгоритм из 14 шагов | `ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/algorithm.md` |
+| Полный алгоритм из 15 шагов | `ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/algorithm.md` |
 | Файл ответов станции | каталог `answer/` той же сборки |
 | Драйверы станции | каталог `drivers/` той же сборки |
 | Механизм автоустановки Ventoy | `ventoy-partition/ventoy/autoinstall/` |

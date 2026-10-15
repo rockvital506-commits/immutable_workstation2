@@ -272,9 +272,78 @@ t('Кто решил:' in chk2, 'в чек-листе фиксируется, к
 t('Решение принято заказчиком' in chk2,
   'в чек-листе прямо сказано, что решает заказчик')
 
-# --- [16] Регрессия ---------------------------------------------------------
+# --- [16] Ключ продукта: прошивка игнорируется, активация отдельным шагом ---
 
-print('\n[16] Регрессия')
+print('\n[16] Ключ продукта и активация')
+import xml.etree.ElementTree as ET
+
+NS = '{urn:schemas-microsoft-com:unattend}'
+GVLK = 'KBN8V-HFGQ4-MGXVD-347P6-PDQGT'
+ANS = ('ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/')
+
+for fn in ['autounattend-ltsc-2024.xml', 'autounattend-ltsc-2024-bypass.xml']:
+    root = ET.parse(ANS + fn).getroot()
+    keys = {}
+    for st in root.findall(f'{NS}settings'):
+        ps = st.get('pass')
+        for c in st.findall(f'{NS}component'):
+            for pk in c.findall(f'{NS}ProductKey'):
+                keys[ps] = (c.get('name'), (pk.text or '').strip())
+    t('specialize' in keys, f'{fn}: ProductKey есть в проходе specialize')
+    if 'specialize' in keys:
+        comp, val = keys['specialize']
+        t(comp == 'Microsoft-Windows-Shell-Setup',
+          f'{fn}: ProductKey в компоненте Shell-Setup (факт {comp})')
+        t(val == GVLK, f'{fn}: значение — GVLK редакции (факт {val})')
+    t('windowsPE' not in keys,
+      f'{fn}: в windowsPE ключа нет — иначе OOBE запросил бы его у пользователя')
+    raw = open(ANS + fn, 'rb').read()
+    t(b'OA3' in raw or b'OEM:OA3' in raw or 'OA3' in raw.decode('utf-8'),
+      f'{fn}: причина игнорирования ключа прошивки объяснена')
+
+alg = read('ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/'
+           'algorithm.md')
+t('### Шаг 12. Ключ продукта и активация' in alg, 'шаг 12 — ключ и активация')
+for i in range(1, 16):
+    t(f'### Шаг {i}. ' in alg, f'заголовок шага {i} на месте')
+t('### Шаг 16. ' not in alg, 'лишнего шага 16 нет')
+t(flat(alg).count('### Шаг 12. ') == 1, 'заголовок шага 12 не дублируется')
+for cmd in ['slmgr /upk', 'slmgr /cpky', 'slmgr /ipk', 'slmgr /ato',
+            'slmgr /dlv', 'slui 4', '0xC004C008']:
+    t(cmd in alg, f'шаг 12 содержит {cmd}')
+t('на старой' in alg, 'отвязка Retail-ключа привязана к старой станции')
+t('RETAIL' in alg and 'VOLUME_MAK' in alg,
+  'проверка типа лицензии после ввода ключа есть')
+alg_flat = flat(alg)
+t('лицензией не является' in alg_flat,
+  'указано, что GVLK лицензией не является')
+
+# Перекрёстные ссылки после перенумерации
+t('Шаг 13 станционного алгоритма' in read(
+    'tools/scripts/procedures/validation.md'),
+  'validation.md ссылается на шаг 13')
+t('из 15 шагов' in read('tools/os/windows/README.md'),
+  'os/windows/README.md: 15 шагов')
+t('из 15 шагов' in read('tools/os/windows/installation/README.md'),
+  'installation/README.md: 15 шагов')
+t('15 шагов от живой ОС' in read('PLAN.md'), 'PLAN.md: 15 шагов')
+t('### Шаг 12.' not in read('CONVENTIONS.md'),
+  'CONVENTIONS.md: пример обновлён на шаг 13')
+t('из 14 шагов' not in read('tools/os/windows/README.md'),
+  'старого «14 шагов» не осталось')
+
+ansr = read(ANS + 'README.md')
+t('ProductKey' in ansr and GVLK in ansr,
+  'answer/README.md объясняет ProductKey и приводит GVLK')
+t('шаг 12' in ansr, 'answer/README.md указывает на шаг активации')
+
+chk3 = read(f'{D}/field-checklist.md')
+t('slmgr /dlv' in chk3, 'в чек-листе есть проверка активации')
+t('Retail' in chk3, 'в чек-листе учтён перенос Retail-ключа')
+
+# --- [17] Регрессия ---------------------------------------------------------
+
+print('\n[17] Регрессия')
 for p in ['research/17-documentation.md',
           'ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/'
           'answer/README.md',
