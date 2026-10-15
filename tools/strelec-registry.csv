@@ -20,5 +20,5 @@ Autoruns,security/audit,no,,в сборке Sysinternals нет вообще,ful
 ProcessExplorer,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
 TCPView,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
 VeraCrypt,security/encryption,no,,в сборке шифрования нет,full,license_audited
-SDIO,drivers/packs,no,,в сборке средств подбора драйверов нет,full,pending
-SDIO-drivers,drivers/packs,no,,в сборке средств подбора драйверов нет,full,pending
+SDIO,drivers/packs,no,,в сборке средств подбора драйверов нет,full,license_audited
+SDIO-drivers,drivers/packs,no,,в сборке средств подбора драйверов нет,full,blocked
