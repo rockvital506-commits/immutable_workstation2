@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Проверка пула дефектов — CONVENTIONS.md раздел 12.
 
-Зачем. До 2026-10-15 в репозитории было 48 задокументированных находок AUDIT
+Зачем. До 2026-10-15 в репозитории было 36 задокументированных находок AUDIT
 и ни одной записи о повторяющемся дефекте. Один и тот же класс («факт
 зашит константой») падал 11 раз, потому что ничто не требовало после второго
 падения ставить проверку. Пул вводит порог: n >= 2 влечёт проверку в tests/.
@@ -104,7 +104,7 @@ print('\n[5] Мета-класс и полнота пула')
 t(any(r['id'] == 'B-09' for r in rows),
   'мета-класс B-09 «дефект не учтён» в пуле есть')
 meta = [r for r in rows if r['id'] == 'B-09'][0]
-t(int(meta['n']) >= 40, f'B-09: n отражает находки AUDIT (факт {meta["n"]})')
+t(int(meta['n']) >= 1, f'B-09: n заполнено (факт {meta["n"]})')
 t('closes' in COLS and meta['closes'] == 'test_bestiary.py',
   'B-09 закрывается проверкой самого пула')
 # Разовый класс обязан остаться в пуле с датами: иначе повтор через полгода
@@ -126,6 +126,45 @@ t('n >= 2' in conv, 'в CONVENTIONS.md записан порог n >= 2')
 for r in rows:
     if r['verdict'] == 'automated':
         t(bool(r['closes'].strip()), f"{r['id']}: automated без closes невозможен")
+
+print('\n[7] Число находок AUDIT сверено с документами, а не с памятью')
+# n мета-класса B-09 - это счёт. Счёт, взятый из памяти, разошёлся с фактом
+# на 12 (в записи было 48, в документах 36), поэтому число проверяется
+# пересчётом по разделам «Находки»/«Расхождения» четырёх AUDIT-документов.
+sys.path.insert(0, HERE)
+from baseline import expected
+HEAD = re.compile(r'^#{2,3}\s+\d*\.?\s*(Расхождения|Находки|Новые находки)', re.I)
+NEXT = re.compile(r'^##\s')
+found = 0
+detail = []
+for f in sorted(os.listdir('research')):
+    if not f.endswith('.md') or f == 'README.md':
+        continue
+    lines = io.open(os.path.join('research', f), encoding='utf-8').read().split('\n')
+    inseg = False
+    ids = []
+    for ln in lines:
+        if HEAD.search(ln):
+            inseg = True
+            continue
+        if inseg and NEXT.match(ln):
+            inseg = False
+        if not inseg:
+            continue
+        m = re.match(r'^#{3,4}\s+\**\s*([A-Z]{1,2}\d{1,2})\b', ln)
+        if m:
+            ids.append(m.group(1))
+    u = sorted(set(ids), key=lambda x: (x[0], int(x[1:])))
+    if u:
+        detail.append(f'{f}: {len(u)}')
+        found += len(u)
+t(found == expected('audit_findings'),
+  f'находок в research/ столько же, сколько в baseline.csv '
+  f'({expected("audit_findings")}, факт {found})')
+t(found == int(meta['n']),
+  f'B-09: n равно фактическому числу находок ({meta["n"]} против {found})')
+t(len(detail) >= 4, f'находки распределены не меньше чем по 4 документам ({len(detail)})')
+t(int(meta['n']) >= 30, f'B-09: n отражает масштаб ({meta["n"]})')
 
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)
