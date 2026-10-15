@@ -259,6 +259,16 @@ if [ -d "$BUILDS_DIR" ]; then
                 err "builds/$sname/algorithm.md: нет раздела-заголовка «${req}»"
             fi
         done
+        # Правило навигации (CONVENTIONS.md раздел 10): карта сущностей
+        # и раздел «Средства» в каждом шаге
+        if ! grep -q 'Карта сущностей' "$ALGO"; then
+            err "builds/$sname/algorithm.md: нет раздела «Карта сущностей» (раздел 10.4)"
+        fi
+        N_STEPS="$(grep -c '^### Шаг ' "$ALGO" || true)"
+        N_MEANS="$(grep -c '^\*\*Средства\.\*\*' "$ALGO" || true)"
+        if [ "$N_STEPS" -ne "$N_MEANS" ]; then
+            err "builds/$sname/algorithm.md: шагов $N_STEPS, разделов «Средства» $N_MEANS (раздел 10.3)"
+        fi
         # таблица шагов обязана нести колонку «Сеть» и хотя бы один статус
         # только строки таблицы внутри раздела, без пояснительного текста
         TBL="$(sed -n '/^## .*Порядок шагов/,/^## /p' "$ALGO" | grep '^|')"

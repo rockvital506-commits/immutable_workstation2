@@ -254,6 +254,18 @@ if (Test-Path $builds) {
                 Write-Host ("  FAIL builds/{0}/algorithm.md: нет раздела-заголовка «{1}»" -f $st.Name, $req) -ForegroundColor Red
             }
         }
+        # Правило навигации (CONVENTIONS.md раздел 10): карта сущностей и
+        # раздел «Средства» в каждом шаге
+        if ($text -notmatch [regex]::Escape('Карта сущностей')) {
+            $script:Errors++
+            Write-Host ("  FAIL builds/{0}/algorithm.md: нет раздела «Карта сущностей» (раздел 10.4)" -f $st.Name) -ForegroundColor Red
+        }
+        $nSteps = ([regex]::Matches($text, '(?m)^### Шаг ')).Count
+        $nMeans = ([regex]::Matches($text, '(?m)^\*\*Средства\.\*\*')).Count
+        if ($nSteps -ne $nMeans) {
+            $script:Errors++
+            Write-Host ("  FAIL builds/{0}/algorithm.md: шагов {1}, разделов «Средства» {2} (раздел 10.3)" -f $st.Name, $nSteps, $nMeans) -ForegroundColor Red
+        }
         $inSteps = $false
         $tbl = ''
         foreach ($l in ($text -split "`n")) {

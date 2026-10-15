@@ -15,7 +15,7 @@
 | Питание | USB-C PD |
 | Предустановлено | Windows 11 Home + утилиты MSI |
 | Дата алгоритма | 2026-10-15 |
-| Версия | 1.3 |
+| Версия | 1.4 |
 
 ## 1. Область покрытия
 
@@ -76,45 +76,49 @@ NVMe, чистую установку LTSC, установку драйверо�
 ### Карта сущностей
 
 Единый перечень всего, что применяется в алгоритме. По этой таблице можно
-собрать чемодан на выезд, не читая шаги.
+собрать чемодан на выезд, не читая шаги. Правило — `CONVENTIONS.md` §10.
 
-| Сущность | Тип | Раздел флешки | Путь на флешке | Шаг |
-|---|---|---|---|---|
-| [`en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso`](../../../ventoy-partition/ISO/windows/) | образ | VENTOY | `ISO/windows/` | 4, 6 |
-| [`WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso`](../../../ventoy-partition/ISO/winpe/) | образ | VENTOY | `ISO/winpe/` | 4, 5 |
-| [`ventoy.json`](../../../ventoy-partition/ventoy/ventoy.json) | конфигурация | VENTOY | `ventoy/ventoy.json` | 4, 6 |
-| [`answer/autounattend-ltsc-2024.xml`](answer/autounattend-ltsc-2024.xml) | файл ответа | VENTOY | `builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/` | 6 |
-| [`answer/autounattend-ltsc-2024-bypass.xml`](answer/autounattend-ltsc-2024-bypass.xml) | файл ответа | VENTOY | то же, при обходе требований | 6 |
-| [`drivers/`](drivers/) | каталог | VENTOY | `builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/drivers/` | 2, 7 |
-| [`export-drivers.ps1`](../../../tools/backup/initial_backup/scripts/export-drivers.ps1) | скрипт | TOOLS | `backup/initial_backup/scripts/` | 2, 15 |
-| [`backup-chrome.ps1`](../../../tools/backup/initial_backup/scripts/backup-chrome.ps1) | скрипт | TOOLS | `backup/initial_backup/scripts/` | 2, 15 |
-| [`backup-vscode.ps1`](../../../tools/backup/initial_backup/scripts/backup-vscode.ps1) | скрипт | TOOLS | `backup/initial_backup/scripts/` | 2, 15 |
-| [`verify-backup.ps1`](../../../tools/backup/initial_backup/scripts/verify-backup.ps1) | скрипт | TOOLS | `backup/initial_backup/scripts/` | 2, 15 |
-| [`disk-image.sh`](../../../tools/backup/disk_image/scripts/disk-image.sh) | скрипт | TOOLS | `backup/disk_image/scripts/` | 2, 15 |
-| [`integrate-drivers.sh`](../../../tools/drivers/export/scripts/integrate-drivers.sh) | скрипт | TOOLS | `drivers/export/scripts/` | 7 |
-| [`basic-setup.md`](../../../tools/scripts/procedures/basic-setup.md) | процедура | TOOLS | `scripts/procedures/` | 8 |
-| [`block-telemetry.md`](../../../tools/scripts/procedures/block-telemetry.md) | процедура | TOOLS | `scripts/procedures/` | 9 |
-| [`ssd-ram-tuning.md`](../../../tools/scripts/procedures/ssd-ram-tuning.md) | процедура | TOOLS | `scripts/procedures/` | 10 |
-| [`validation.md`](../../../tools/scripts/procedures/validation.md) | процедура | TOOLS | `scripts/procedures/` | 13 |
-| [`apply-blocking.ps1`](../../../tools/scripts/apply-blocking.ps1) | скрипт | TOOLS | `scripts/` | 9 |
-| [`apply-blocking.conf`](../../../tools/scripts/apply-blocking.conf) | профиль | TOOLS | `scripts/` | 9 |
-| [`tune-ssd-ram.ps1`](../../../tools/scripts/tune-ssd-ram.ps1) | скрипт | TOOLS | `scripts/` | 10 |
-| [`validate-system.ps1`](../../../tools/scripts/validate-system.ps1) | скрипт | TOOLS | `scripts/` | 13 |
-| [`research/07-blocking-mechanisms.md`](../../../research/07-blocking-mechanisms.md) | исследование | — | только в репозитории | 9 |
-| `diskpart`, `DISM`, `pnputil`, `slmgr`, `powercfg`, `fsutil` | средство ОС | — | в составе Windows | 5—14 |
+| Сущность | Тип | Путь на флешке | Шаг |
+|---|---|---|---|
+| [`en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso`](../../../ventoy-partition/ISO/windows/) | образ | `VENTOY:/ISO/windows/` | 4, 6 |
+| [`WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso`](../../../ventoy-partition/ISO/winpe/) | образ | `VENTOY:/ISO/winpe/` | 4, 5 |
+| [`ventoy.json`](../../../ventoy-partition/ventoy/ventoy.json) | конфигурация | `VENTOY:/ventoy/ventoy.json` | 4, 6 |
+| [`answer/autounattend-ltsc-2024.xml`](answer/autounattend-ltsc-2024.xml) | файл ответа | `BUILD:/answer/` | 6 |
+| [`answer/autounattend-ltsc-2024-bypass.xml`](answer/autounattend-ltsc-2024-bypass.xml) | файл ответа | `BUILD:/answer/`, при обходе требований | 6 |
+| [`drivers/`](drivers/) | каталог | `BUILD:/drivers/` | 2, 7 |
+| [`reports/`](reports/) | каталог | `BUILD:/reports/` | 1, 12, 13 |
+| [`backup/`](backup/) | каталог | `BUILD:/backup/` | 2, 15 |
+| [`export-drivers.ps1`](../../../tools/backup/initial_backup/scripts/export-drivers.ps1) | скрипт | `TOOLS:/backup/initial_backup/scripts/` | 2, 15 |
+| [`backup-chrome.ps1`](../../../tools/backup/initial_backup/scripts/backup-chrome.ps1) | скрипт | `TOOLS:/backup/initial_backup/scripts/` | 2, 15 |
+| [`backup-vscode.ps1`](../../../tools/backup/initial_backup/scripts/backup-vscode.ps1) | скрипт | `TOOLS:/backup/initial_backup/scripts/` | 2, 15 |
+| [`verify-backup.ps1`](../../../tools/backup/initial_backup/scripts/verify-backup.ps1) | скрипт | `TOOLS:/backup/initial_backup/scripts/` | 2, 15 |
+| [`disk-image.sh`](../../../tools/backup/disk_image/scripts/disk-image.sh) | скрипт | `TOOLS:/backup/disk_image/scripts/` | 2, 15 |
+| [`integrate-drivers.sh`](../../../tools/drivers/export/scripts/integrate-drivers.sh) | скрипт | `TOOLS:/drivers/export/scripts/` | 7 |
+| [`basic-setup.md`](../../../tools/scripts/procedures/basic-setup.md) | процедура | `TOOLS:/scripts/procedures/` | 8 |
+| [`block-telemetry.md`](../../../tools/scripts/procedures/block-telemetry.md) | процедура | `TOOLS:/scripts/procedures/` | 9, 14 |
+| [`ssd-ram-tuning.md`](../../../tools/scripts/procedures/ssd-ram-tuning.md) | процедура | `TOOLS:/scripts/procedures/` | 10 |
+| [`validation.md`](../../../tools/scripts/procedures/validation.md) | процедура | `TOOLS:/scripts/procedures/` | 13 |
+| [`apply-blocking.ps1`](../../../tools/scripts/apply-blocking.ps1) | скрипт | `TOOLS:/scripts/` | 9 |
+| [`apply-blocking.conf`](../../../tools/scripts/apply-blocking.conf) | профиль | `TOOLS:/scripts/` | 9, 14 |
+| [`tune-ssd-ram.ps1`](../../../tools/scripts/tune-ssd-ram.ps1) | скрипт | `TOOLS:/scripts/` | 10 |
+| [`validate-system.ps1`](../../../tools/scripts/validate-system.ps1) | скрипт | `TOOLS:/scripts/` | 13 |
+| [`tools/diagnostics/strelec-tools.md`](../../../tools/diagnostics/strelec-tools.md) | перечень утилит Strelec | `TOOLS:/diagnostics/` | 1 |
+| [`research/07-blocking-mechanisms.md`](../../../research/07-blocking-mechanisms.md) | исследование | `REPO:/research/`, на флешку не копируется | 9 |
+| `diskpart`, `DISM`, `pnputil`, `slmgr`, `slui`, `powercfg`, `fsutil`, `wmic` | средство ОС | `SYSTEM:` | 1, 5—14 |
 
-**Как читать пути.** В таблице три системы отсчёта, и они не взаимозаменяемы:
+**Как читать пути.** Префикс объявляет систему отсчёта — `CONVENTIONS.md` §10.1:
 
-| Запись | Откуда считается |
+| Префикс | Откуда считается |
 |---|---|
-| «Раздел флешки» VENTOY | корень раздела Ventoy, exFAT, 340.72 ГБ |
-| «Раздел флешки» TOOLS | корень раздела Tools, NTFS, 128.00 ГБ |
-| `builds/…` без раздела | каталог этой сборки на разделе VENTOY |
-| Ссылка в первом столбце | путь в репозитории — там же лежит заглушка или текст |
+| `VENTOY:/` | корень раздела Ventoy, exFAT, 340.72 ГБ |
+| `TOOLS:/` | корень раздела Tools, NTFS, 128.00 ГБ |
+| `BUILD:/` | каталог этой сборки, `VENTOY:/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/` |
+| `REPO:/` | корень репозитория — на флешку не копируется |
+| `SYSTEM:` | команда или путь ОС, не сущность флешки |
 
-`drivers/`, `config/`, `scripts/`, `reports/`, `backup/`, `answer/` без
-указания раздела — каталоги **этой сборки**, а не одноимённые каталоги
-репозитория.
+Ссылка в первом столбце ведёт на файл в репозитории: это единственный адрес,
+который можно проверить. Путь на флешке дан рядом, потому что `tools/` и
+`builds/` лежат на разных разделах.
 
 ## 4. Шаги подробно
 
@@ -123,6 +127,14 @@ NVMe, чистую установку LTSC, установку драйверо�
 **Цель.** Понять, что переносим и что за железо на самом деле.
 
 **Сеть.** online (нужен доступ к сайту производителя за драйверами).
+
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| `Get-PnpDevice`, `Get-PhysicalDisk`, `slmgr`, `wmic` | средство ОС | `SYSTEM:` |
+| Victoria, HDDScan, AIDA64 | утилита из Strelec | `VENTOY:/ISO/winpe/` — перечень и версии в [`tools/diagnostics/strelec-tools.md`(../../../tools/diagnostics/strelec-tools.md) |
+| [`reports/`](reports/) | каталог сборки | `BUILD:/reports/` |
 
 **Действия.**
 ```powershell
@@ -169,13 +181,13 @@ Enterprise LTSC он не подходит, поэтому в файле отв�
 
 **Средства.** Все пять лежат на разделе Tools, но не в `tools/scripts/`:
 
-| Сущность | Что делает | Где лежит |
+| Сущность | Что делает | Путь на флешке |
 |---|---|---|
-| [`export-drivers.ps1`](../../../tools/backup/initial_backup/scripts/export-drivers.ps1) | выгружает драйверы живой ОС | `tools/backup/initial_backup/scripts/` |
-| [`backup-chrome.ps1`](../../../tools/backup/initial_backup/scripts/backup-chrome.ps1) | копия профиля Chrome | `tools/backup/initial_backup/scripts/` |
-| [`backup-vscode.ps1`](../../../tools/backup/initial_backup/scripts/backup-vscode.ps1) | копия настроек VS Code | `tools/backup/initial_backup/scripts/` |
-| [`disk-image.sh`](../../../tools/backup/disk_image/scripts/disk-image.sh) | образ диска из Clonezilla Live | `tools/backup/disk_image/scripts/` |
-| [`verify-backup.ps1`](../../../tools/backup/initial_backup/scripts/verify-backup.ps1) | проверка каждой копии | `tools/backup/initial_backup/scripts/` |
+| [`export-drivers.ps1`](../../../tools/backup/initial_backup/scripts/export-drivers.ps1) | выгружает драйверы живой ОС | `TOOLS:/backup/initial_backup/scripts/` |
+| [`backup-chrome.ps1`](../../../tools/backup/initial_backup/scripts/backup-chrome.ps1) | копия профиля Chrome | `TOOLS:/backup/initial_backup/scripts/` |
+| [`backup-vscode.ps1`](../../../tools/backup/initial_backup/scripts/backup-vscode.ps1) | копия настроек VS Code | `TOOLS:/backup/initial_backup/scripts/` |
+| [`disk-image.sh`](../../../tools/backup/disk_image/scripts/disk-image.sh) | образ диска из Clonezilla Live | `TOOLS:/backup/disk_image/scripts/` |
+| [`verify-backup.ps1`](../../../tools/backup/initial_backup/scripts/verify-backup.ps1) | проверка каждой копии | `TOOLS:/backup/initial_backup/scripts/` |
 
 Описание модулей — [`tools/backup/initial_backup/`](../../../tools/backup/initial_backup/)
 и [`tools/backup/disk_image/`](../../../tools/backup/disk_image/).
@@ -213,6 +225,16 @@ verify-backup.ps1 -Path <каждая копия>   # код 0 по каждой
 
 **Сеть.** offline.
 
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| Настройка Wi-Fi в BIOS | средство прошивки | `SYSTEM:` |
+| `Get-NetAdapter`, `ipconfig`, `Test-Connection` | средство ОС | `SYSTEM:` |
+
+Своих сущностей шаг не использует: отключение физическое, иначе оно ничего
+не гарантирует.
+
 **Действия.** Wi-Fi off в BIOS → перезагрузка → проверка в ОС.
 
 **Проверка.**
@@ -236,9 +258,9 @@ Test-Connection 8.8.8.8 -Count 1            # не проходит
 
 | Сущность | Где лежит на флешке |
 |---|---|
-| [`WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso`](../../../ventoy-partition/ISO/winpe/) | `ISO/winpe/` |
-| [`en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso`](../../../ventoy-partition/ISO/windows/) | `ISO/windows/` |
-| [`ventoy.json`](../../../ventoy-partition/ventoy/ventoy.json) | `ventoy/ventoy.json` |
+| [`WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso`](../../../ventoy-partition/ISO/winpe/) | `VENTOY:/ISO/winpe/` |
+| [`en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso`](../../../ventoy-partition/ISO/windows/) | `VENTOY:/ISO/windows/` |
+| [`ventoy.json`](../../../ventoy-partition/ventoy/ventoy.json) | `VENTOY:/ventoy/ventoy.json` |
 
 **Действия.** F11 / F7 при включении → boot menu → USB → выбрать пункт
 `WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso` (для разметки) или сразу
@@ -258,6 +280,17 @@ Secure Boot: Ventoy работает с ним при `VTOY_SECURE_BOOT_POLICY` 
 **Цель.** Получить чистую оптимальную разметку вместо заводской.
 
 **Сеть.** offline.
+
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| `diskpart` | средство ОС | `SYSTEM:` |
+| [`WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso`](../../../ventoy-partition/ISO/winpe/) | образ | `VENTOY:/ISO/winpe/` |
+| [`answer/autounattend-ltsc-2024.xml`](answer/autounattend-ltsc-2024.xml) | эталон разметки | `BUILD:/answer/` |
+
+Размеры разделов в командах ниже обязаны совпадать с разметкой файла ответа.
+Расхождение между ними уже было найдено и исправлено в версии 1.3.
 
 **Действия.**
 ```
@@ -314,6 +347,16 @@ diskpart → list volume       # четыре раздела: WinRE, System, MSR
 **Цель.** Поставить ОС без мусора и без походов через OOBE вручную.
 
 **Сеть.** offline.
+
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| [`answer/autounattend-ltsc-2024.xml`](answer/autounattend-ltsc-2024.xml) | файл ответа | `BUILD:/answer/` |
+| [`answer/autounattend-ltsc-2024-bypass.xml`](answer/autounattend-ltsc-2024-bypass.xml) | файл ответа, обход требований | `BUILD:/answer/` |
+| [`ventoy.json`](../../../ventoy-partition/ventoy/ventoy.json) | конфигурация Ventoy | `VENTOY:/ventoy/ventoy.json` |
+| [`en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso`](../../../ventoy-partition/ISO/windows/) | образ | `VENTOY:/ISO/windows/` |
+| [`CONVENTIONS.md`](../../../CONVENTIONS.md) | правило файла ответа | `REPO:/CONVENTIONS.md` |
 
 **Действия.** Файл ответа берётся из каталога сборки
 [`answer/`](answer/), а не из общего `/ventoy/autoinstall/`: он учитывает NVMe
@@ -375,7 +418,7 @@ Ventoy. Текущая запись ведёт на общий каталог и
 json configuration (ventoy.json)` — покажет, распознан ли блок.
 
 **6.5. Загрузить.** Ventoy → `/ISO/windows/` → образ LTSC 2024 → выбрать пункт
-«boot with /builds/.../autounattend.xml». Обычная загрузка ISO остаётся
+«boot with /builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/autounattend.xml». Обычная загрузка ISO остаётся
 доступной — это способ поставить систему вручную, если шаблон не сработал.
 
 **Проверка.**
@@ -445,6 +488,14 @@ Get-NetAdapter | Select Name, Status, LinkSpeed
 
 **Сеть.** offline.
 
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| [`basic-setup.md`](../../../tools/scripts/procedures/basic-setup.md) | процедура | `TOOLS:/scripts/procedures/` |
+| [`config/`](config/) | каталог политик сборки | `BUILD:/config/` |
+| [`scripts/`](scripts/) | каталог скриптов сборки | `BUILD:/scripts/` |
+
 **Действия.** Процедура — [`basic-setup.md`](../../../tools/scripts/procedures/basic-setup.md).
 
 Порядок инструментов обязателен: WinUtil → Win11Debloat → Sophia точечно
@@ -467,6 +518,16 @@ reg export HKLM\SOFTWARE\Policies\Microsoft\Windows config\policies-before.reg
 **Цель.** Убрать сбор данных и механизмы его самовосстановления.
 
 **Сеть.** offline.
+
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| [`block-telemetry.md`](../../../tools/scripts/procedures/block-telemetry.md) | процедура | `TOOLS:/scripts/procedures/` |
+| [`apply-blocking.ps1`](../../../tools/scripts/apply-blocking.ps1) | скрипт | `TOOLS:/scripts/` |
+| [`apply-blocking.conf`](../../../tools/scripts/apply-blocking.conf) | профиль групп блокировки | `TOOLS:/scripts/` |
+| [`research/07-blocking-mechanisms.md`](../../../research/07-blocking-mechanisms.md) | механизмы M1—M12 | `REPO:/research/` |
+| [`LGPO.exe`](../../../tools/os/windows/gpo_lock/LGPO/LGPO.exe.md) | утилита | `TOOLS:/os/windows/gpo_lock/LGPO/` |
 
 **Действия.** Процедура — [`block-telemetry.md`](../../../tools/scripts/procedures/block-telemetry.md).
 Скрипт — [`apply-blocking.ps1`](../../../tools/scripts/apply-blocking.ps1), профиль —
@@ -516,6 +577,14 @@ Get-ScheduledTask -TaskPath '\Microsoft\Windows\Application Experience\' | Selec
 
 **Сеть.** offline.
 
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| [`ssd-ram-tuning.md`](../../../tools/scripts/procedures/ssd-ram-tuning.md) | процедура | `TOOLS:/scripts/procedures/` |
+| [`tune-ssd-ram.ps1`](../../../tools/scripts/tune-ssd-ram.ps1) | скрипт | `TOOLS:/scripts/` |
+| `powercfg`, `fsutil` | средство ОС | `SYSTEM:` |
+
 **Действия.** Процедура — [`ssd-ram-tuning.md`](../../../tools/scripts/procedures/ssd-ram-tuning.md).
 Скрипт — [`tune-ssd-ram.ps1`](../../../tools/scripts/tune-ssd-ram.ps1).
 
@@ -543,6 +612,17 @@ fsutil behavior query DisableDeleteNotify     # ожидается 0 (TRIM вк�
 
 **Сеть.** online (под контролем).
 
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| Настройка Wi-Fi в BIOS | средство прошивки | `SYSTEM:` |
+| Журнал роутера | средство заказчика | `SYSTEM:` |
+
+Своих сущностей шаг не использует. Журнал роутера — единственный независимый
+способ увидеть, что станция никуда не обращается: средства самой станции
+к этому моменту уже ограничены политиками шага 9.
+
 **Действия.** Включить Wi-Fi в BIOS или подключить адаптер в ОС.
 
 **Проверка.** Подключение установлено. Желательно параллельно смотреть
@@ -558,6 +638,18 @@ fsutil behavior query DisableDeleteNotify     # ожидается 0 (TRIM вк�
 активирована, и это ожидаемое состояние.
 
 **Сеть.** online.
+
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| `slmgr`, `slui` | средство ОС | `SYSTEM:` |
+| Ключ заказчика | данные | не на флешке — ключ в репозиторий не кладётся |
+| Значение ключа из прошивки | данные | записано на шаге 1 в `BUILD:/reports/` |
+
+Ключ продукта в репозиторий и на флешку не копируется: `CONVENTIONS.md` §9
+запрещает лицензионные ключи в открытом виде. GVLK в файле ответа — исключение,
+он опубликован Microsoft и лицензией не является.
 
 **Почему ключ не подхватился сам.** В прошивке станции зашит ключ
 Windows 11 Home (OEM:OA3, лежит в ACPI-таблице MSDM). Файл ответа задаёт ключ
@@ -657,6 +749,18 @@ slmgr /upk
 
 ### Шаг 13. Валидация развёрнутой системы
 
+**Цель.** Сдать станцию по 12 проверкам, а не на глаз.
+
+**Сеть.** online.
+
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| [`validation.md`](../../../tools/scripts/procedures/validation.md) | процедура | `TOOLS:/scripts/procedures/` |
+| [`validate-system.ps1`](../../../tools/scripts/validate-system.ps1) | скрипт, 12 проверок | `TOOLS:/scripts/` |
+| [`reports/`](reports/) | куда складывать отчёты | `BUILD:/reports/` |
+
 Процедура — [`validation.md`](../../../tools/scripts/procedures/validation.md). Скрипт — [`validate-system.ps1`](../../../tools/scripts/validate-system.ps1).
 
 См. раздел 5. Без прохождения всех пунктов станция не сдаётся.
@@ -674,6 +778,17 @@ slmgr /upk
 
 **Сеть.** online.
 
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| Центр обновления Windows | средство ОС | `SYSTEM:` |
+| [`apply-blocking.conf`](../../../tools/scripts/apply-blocking.conf) | профиль блокировки | `TOOLS:/scripts/apply-blocking.conf` |
+| [`block-telemetry.md`](../../../tools/scripts/procedures/block-telemetry.md) | процедура | `TOOLS:/scripts/procedures/` |
+
+Профиль и процедура нужны для отката: если обновления не работают, ослабляют
+блокировку точечно по группам профиля, а не отключают её целиком.
+
 **Действия.** Запустить поиск обновлений, дождаться результата, установить.
 
 **Проверка.** Обновления находятся и устанавливаются; в журнале нет ошибок
@@ -689,6 +804,15 @@ slmgr /upk
 **Цель.** Зафиксировать рабочую систему как точку восстановления и эталон.
 
 **Сеть.** online.
+
+**Средства.**
+
+| Сущность | Тип | Путь на флешке |
+|---|---|---|
+| [`disk-image.sh`](../../../tools/backup/disk_image/scripts/disk-image.sh) | скрипт образа | `TOOLS:/backup/disk_image/scripts/` |
+| [`verify-backup.ps1`](../../../tools/backup/initial_backup/scripts/verify-backup.ps1) | проверка копии | `TOOLS:/backup/initial_backup/scripts/` |
+| [`backup/`](backup/) | куда складывать копию | `BUILD:/backup/` |
+| [`reports/`](reports/) | отметка об эталоне | `BUILD:/reports/` |
 
 **Действия.** Повторить шаг 2.4 с именем `MSI_B12M-211RU_clean`.
 
@@ -788,6 +912,7 @@ slmgr /upk
 | Дата | Версия | Что изменилось |
 |------|--------|----------------|
 | 2026-10-07 | 1.0 | Первый выпуск: полный цикл от живой ОС до валидации |
+| 2026-10-15 | 1.4 | Приведён к правилу навигации `CONVENTIONS.md` §10: во всех 15 шагах раздел «Средства», пути с префиксами базы пути, карта сущностей из 25 строк, ссылка на `LGPO.exe`, многоточие в названии пункта меню Ventoy заменено полным путём. Было 10 ссылок, стало 79 |
 | 2026-10-15 | 1.3 | Шаг 5 приведён к разметке файла ответа: WinRE 500 МБ добавлен, MSR 16 -> 128 МБ, `select disk 0` заменён на выбор по размеру и модели — `clean` на флешке стирает носитель. Расхождение нашёл сквозной тест Этапа 10 |
 | 2026-10-15 | 1.2 | Шаг 1 читает ключ из прошивки (`OA3xOriginalProductKey`). В шаге 12 — явная таблица, какой тип ключа годится для этого билда: MAK, GVLK+KMS и OEM для IoT — да; ключ из прошивки и Retail Pro/Home — нет; Retail Enterprise и ключ LTSC 2021 — не проверено |
 | 2026-10-15 | 1.1 | Добавлен шаг 12 «Ключ продукта и активация» с отвязкой Retail-ключа от предыдущей станции; шаги 12—14 сдвинуты на 13—15. В файлы ответа внесён явный `ProductKey` (GVLK), чтобы установщик не подхватывал ключ из прошивки |
