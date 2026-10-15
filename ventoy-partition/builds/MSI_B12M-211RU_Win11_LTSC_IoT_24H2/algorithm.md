@@ -73,6 +73,49 @@ NVMe, чистую установку LTSC, установку драйверо�
 Если станцию нельзя отключить физически (например, корпоративный сегмент),
 блокировка выполняется на маршрутизаторе до первого включения новой ОС.
 
+### Карта сущностей
+
+Единый перечень всего, что применяется в алгоритме. По этой таблице можно
+собрать чемодан на выезд, не читая шаги.
+
+| Сущность | Тип | Раздел флешки | Путь на флешке | Шаг |
+|---|---|---|---|---|
+| [`en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso`](../../../ventoy-partition/ISO/windows/) | образ | VENTOY | `ISO/windows/` | 4, 6 |
+| [`WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso`](../../../ventoy-partition/ISO/winpe/) | образ | VENTOY | `ISO/winpe/` | 4, 5 |
+| [`ventoy.json`](../../../ventoy-partition/ventoy/ventoy.json) | конфигурация | VENTOY | `ventoy/ventoy.json` | 4, 6 |
+| [`answer/autounattend-ltsc-2024.xml`](answer/autounattend-ltsc-2024.xml) | файл ответа | VENTOY | `builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/` | 6 |
+| [`answer/autounattend-ltsc-2024-bypass.xml`](answer/autounattend-ltsc-2024-bypass.xml) | файл ответа | VENTOY | то же, при обходе требований | 6 |
+| [`drivers/`](drivers/) | каталог | VENTOY | `builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/drivers/` | 2, 7 |
+| [`export-drivers.ps1`](../../../tools/backup/initial_backup/scripts/export-drivers.ps1) | скрипт | TOOLS | `backup/initial_backup/scripts/` | 2, 15 |
+| [`backup-chrome.ps1`](../../../tools/backup/initial_backup/scripts/backup-chrome.ps1) | скрипт | TOOLS | `backup/initial_backup/scripts/` | 2, 15 |
+| [`backup-vscode.ps1`](../../../tools/backup/initial_backup/scripts/backup-vscode.ps1) | скрипт | TOOLS | `backup/initial_backup/scripts/` | 2, 15 |
+| [`verify-backup.ps1`](../../../tools/backup/initial_backup/scripts/verify-backup.ps1) | скрипт | TOOLS | `backup/initial_backup/scripts/` | 2, 15 |
+| [`disk-image.sh`](../../../tools/backup/disk_image/scripts/disk-image.sh) | скрипт | TOOLS | `backup/disk_image/scripts/` | 2, 15 |
+| [`integrate-drivers.sh`](../../../tools/drivers/export/scripts/integrate-drivers.sh) | скрипт | TOOLS | `drivers/export/scripts/` | 7 |
+| [`basic-setup.md`](../../../tools/scripts/procedures/basic-setup.md) | процедура | TOOLS | `scripts/procedures/` | 8 |
+| [`block-telemetry.md`](../../../tools/scripts/procedures/block-telemetry.md) | процедура | TOOLS | `scripts/procedures/` | 9 |
+| [`ssd-ram-tuning.md`](../../../tools/scripts/procedures/ssd-ram-tuning.md) | процедура | TOOLS | `scripts/procedures/` | 10 |
+| [`validation.md`](../../../tools/scripts/procedures/validation.md) | процедура | TOOLS | `scripts/procedures/` | 13 |
+| [`apply-blocking.ps1`](../../../tools/scripts/apply-blocking.ps1) | скрипт | TOOLS | `scripts/` | 9 |
+| [`apply-blocking.conf`](../../../tools/scripts/apply-blocking.conf) | профиль | TOOLS | `scripts/` | 9 |
+| [`tune-ssd-ram.ps1`](../../../tools/scripts/tune-ssd-ram.ps1) | скрипт | TOOLS | `scripts/` | 10 |
+| [`validate-system.ps1`](../../../tools/scripts/validate-system.ps1) | скрипт | TOOLS | `scripts/` | 13 |
+| [`research/07-blocking-mechanisms.md`](../../../research/07-blocking-mechanisms.md) | исследование | — | только в репозитории | 9 |
+| `diskpart`, `DISM`, `pnputil`, `slmgr`, `powercfg`, `fsutil` | средство ОС | — | в составе Windows | 5—14 |
+
+**Как читать пути.** В таблице три системы отсчёта, и они не взаимозаменяемы:
+
+| Запись | Откуда считается |
+|---|---|
+| «Раздел флешки» VENTOY | корень раздела Ventoy, exFAT, 340.72 ГБ |
+| «Раздел флешки» TOOLS | корень раздела Tools, NTFS, 128.00 ГБ |
+| `builds/…` без раздела | каталог этой сборки на разделе VENTOY |
+| Ссылка в первом столбце | путь в репозитории — там же лежит заглушка или текст |
+
+`drivers/`, `config/`, `scripts/`, `reports/`, `backup/`, `answer/` без
+указания раздела — каталоги **этой сборки**, а не одноимённые каталоги
+репозитория.
+
 ## 4. Шаги подробно
 
 ### Шаг 1. Диагностика живой ОС
@@ -124,26 +167,39 @@ Enterprise LTSC он не подходит, поэтому в файле отв�
 **Сеть.** online в начале (если нужны недостающие инструменты), **offline**
 к моменту окончания.
 
+**Средства.** Все пять лежат на разделе Tools, но не в `tools/scripts/`:
+
+| Сущность | Что делает | Где лежит |
+|---|---|---|
+| [`export-drivers.ps1`](../../../tools/backup/initial_backup/scripts/export-drivers.ps1) | выгружает драйверы живой ОС | `tools/backup/initial_backup/scripts/` |
+| [`backup-chrome.ps1`](../../../tools/backup/initial_backup/scripts/backup-chrome.ps1) | копия профиля Chrome | `tools/backup/initial_backup/scripts/` |
+| [`backup-vscode.ps1`](../../../tools/backup/initial_backup/scripts/backup-vscode.ps1) | копия настроек VS Code | `tools/backup/initial_backup/scripts/` |
+| [`disk-image.sh`](../../../tools/backup/disk_image/scripts/disk-image.sh) | образ диска из Clonezilla Live | `tools/backup/disk_image/scripts/` |
+| [`verify-backup.ps1`](../../../tools/backup/initial_backup/scripts/verify-backup.ps1) | проверка каждой копии | `tools/backup/initial_backup/scripts/` |
+
+Описание модулей — [`tools/backup/initial_backup/`](../../../tools/backup/initial_backup/)
+и [`tools/backup/disk_image/`](../../../tools/backup/disk_image/).
+
 **Действия.**
 ```powershell
-# 2.1 Драйверы рабочей ОС
+# 2.1 Драйверы рабочей ОС (скрипт — tools/backup/initial_backup/scripts/)
 export-drivers.ps1 -Destination <флешка>\builds\MSI_B12M-211RU_Win11_LTSC_IoT_24H2\drivers
 
-# 2.2 Закрыть Chrome, затем профиль
-backup-chrome.ps1 -Destination <флешка>\builds\...\backup\profiles
+# 2.2 Закрыть Chrome, затем профиль (скрипт — tools/backup/initial_backup/scripts/)
+backup-chrome.ps1 -Destination <флешка>\builds\MSI_B12M-211RU_Win11_LTSC_IoT_24H2\backup\profiles
 
-# 2.3 Закрыть VS Code, затем настройки
-backup-vscode.ps1 -Destination <флешка>\builds\...\backup\profiles
+# 2.3 Закрыть VS Code, затем настройки (скрипт — tools/backup/initial_backup/scripts/)
+backup-vscode.ps1 -Destination <флешка>\builds\MSI_B12M-211RU_Win11_LTSC_IoT_24H2\backup\profiles
 ```
 ```bash
-# 2.4 Образ диска из Clonezilla Live
+# 2.4 Образ диска из Clonezilla Live (скрипт — tools/backup/disk_image/scripts/)
 sudo bash disk-image.sh --device /dev/nvme0n1 \
     --destination /home/partimg --name MSI_B12M-211RU_before
 ```
 
 **Проверка.**
 ```powershell
-verify-backup.ps1 -Path <каждая копия>     # код 0 по каждой
+verify-backup.ps1 -Path <каждая копия>   # код 0 по каждой; tools/backup/initial_backup/scripts/
 ```
 Код не 0 — бэкап переделать, работы не начинать.
 
@@ -175,6 +231,14 @@ Test-Connection 8.8.8.8 -Count 1            # не проходит
 **Цель.** Получить рабочую среду установки.
 
 **Сеть.** offline.
+
+**Средства.**
+
+| Сущность | Где лежит на флешке |
+|---|---|
+| [`WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso`](../../../ventoy-partition/ISO/winpe/) | `ISO/winpe/` |
+| [`en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso`](../../../ventoy-partition/ISO/windows/) | `ISO/windows/` |
+| [`ventoy.json`](../../../ventoy-partition/ventoy/ventoy.json) | `ventoy/ventoy.json` |
 
 **Действия.** F11 / F7 при включении → boot menu → USB → выбрать пункт
 `WinPE_11-10_Sergei_Strelec_x86_x64_RU.iso` (для разметки) или сразу
@@ -254,14 +318,14 @@ diskpart → list volume       # четыре раздела: WinRE, System, MSR
 **Действия.** Файл ответа берётся из каталога сборки
 [`answer/`](answer/), а не из общего `/ventoy/autoinstall/`: он учитывает NVMe
 256 ГБ этой станции, конкретный образ LTSC 2024 и ТЗ заказчика
-(`CONVENTIONS.md` §6).
+([`CONVENTIONS.md` §6](../../../CONVENTIONS.md)).
 
 **6.1. Выбрать файл.**
 
 | Ситуация | Файл |
 |----------|------|
-| Целевая станция (i3-1215U, TPM 2.0, 8 ГБ, NVMe 256 ГБ) | `answer/autounattend-ltsc-2024.xml` |
-| Неподдерживаемое железо, обход требований | `answer/autounattend-ltsc-2024-bypass.xml` |
+| Целевая станция (i3-1215U, TPM 2.0, 8 ГБ, NVMe 256 ГБ) | [`answer/autounattend-ltsc-2024.xml`](answer/autounattend-ltsc-2024.xml) |
+| Неподдерживаемое железо, обход требований | [`answer/autounattend-ltsc-2024-bypass.xml`](answer/autounattend-ltsc-2024-bypass.xml) |
 
 **6.2. Скопировать на флешку** в каталог сборки на разделе Ventoy, под именем
 `autounattend.xml`:
@@ -277,7 +341,7 @@ diskpart → list volume       # четыре раздела: WinRE, System, MSR
 **НЕ В КОРЕНЬ ФЛЕШКИ.** Файл ответа в корневом каталоге применяется ко всем ISO
 и отказаться от него нельзя (дефект Ventoy 1.1.05, `research/16`, N3).
 
-**6.3. Отредактировать `ventoy.json`** — блок `auto_install` в корне раздела
+**6.3. Отредактировать [`ventoy.json`](../../../ventoy-partition/ventoy/ventoy.json)** — блок `auto_install` в корне раздела
 Ventoy. Текущая запись ведёт на общий каталог и **для этой станции неверна**:
 
 ```json
@@ -340,9 +404,14 @@ json configuration (ventoy.json)` — покажет, распознан ли б
 
 **Сеть.** offline.
 
+**Средства.** Драйверы — каталог [`drivers/`](drivers/) в сборке (на флешке
+`builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/drivers/`), заполняется на шаге 2.1.
+Скрипт интеграции — [`integrate-drivers.sh`](../../../tools/drivers/export/scripts/integrate-drivers.sh).
+`DISM` и `pnputil` — средства установленной ОС.
+
 **Действия.**
 ```powershell
-DISM /Online /Add-Driver /Driver:<флешка>\builds\...\drivers /Recurse
+DISM /Online /Add-Driver /Driver:<флешка>\builds\MSI_B12M-211RU_Win11_LTSC_IoT_24H2\drivers /Recurse
 # либо по одному
 pnputil /add-driver oem*.inf /install
 ```
@@ -426,7 +495,7 @@ Get-ScheduledTask -TaskPath '\Microsoft\Windows\Application Experience\' |
 (для новых пользователей) **и** `Remove-AppxPackage` (для текущих) — одного
 из двух недостаточно. Удаление утилит MSI. Блокировка endpoints телеметрии на
 уровне hosts/роутера. Механизмы самовосстановления — по
-`research/07-blocking-mechanisms.md` (M1–M12): enforcement-задачи, IFEO,
+[`research/07-blocking-mechanisms.md`](../../../research/07-blocking-mechanisms.md) (M1–M12): enforcement-задачи, IFEO,
 WMI-подписки.
 
 **Проверка.**
@@ -689,7 +758,7 @@ slmgr /upk
 
 **Признаки отката настроек.** Телеметрия вернулась, если `AllowTelemetry` снова
 не 0, служба `DiagTrack` снова Running, или в журнале роутера появились запросы
-к доменам телеметрии. Действие: свериться с `research/07-blocking-mechanisms.md`,
+к доменам телеметрии. Действие: свериться с [`research/07-blocking-mechanisms.md`](../../../research/07-blocking-mechanisms.md),
 найти сработавший механизм самовосстановления, устранить причину, а не только
 значение.
 
