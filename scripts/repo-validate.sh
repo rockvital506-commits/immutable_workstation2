@@ -66,7 +66,7 @@ done
 for f in tools/docs/README.md tools/docs/recovery.md tools/docs/reinstall.md \
          tools/docs/field-checklist.md tools/docs/compatibility.md \
          tools/docs/flash-update.md tools/docs/flash-backup.md \
-         tools/docs/CHANGELOG-flash.md; do
+         tools/docs/CHANGELOG-flash.md tools/docs/summary.md; do
     if [ -f "$f" ]; then ok "есть $f"; else err "отсутствует документ $f"; fi
 done
 

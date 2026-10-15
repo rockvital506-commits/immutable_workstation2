@@ -77,6 +77,7 @@ $RequiredFiles = @(
     'tools/docs/README.md','tools/docs/recovery.md','tools/docs/reinstall.md',
     'tools/docs/field-checklist.md','tools/docs/compatibility.md',
     'tools/docs/flash-update.md','tools/docs/flash-backup.md',
+    'tools/docs/summary.md',
     'tools/docs/CHANGELOG-flash.md'
 )
 foreach ($f in $RequiredFiles) {

@@ -17,6 +17,7 @@
 | [flash-update.md](flash-update.md) | Обновить Ventoy или содержимое флешки |
 | [flash-backup.md](flash-backup.md) | Резервное копирование разделов, раз в месяц |
 | [CHANGELOG-flash.md](CHANGELOG-flash.md) | Что менялось на флешке и когда |
+| [summary.md](summary.md) | Итог сборки: что есть, что проверено, что осталось сделать |
 
 ## Порядок чтения на выезде
 

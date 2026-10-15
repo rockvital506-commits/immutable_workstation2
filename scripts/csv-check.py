@@ -36,6 +36,7 @@ SELF_ENTITIES = {
         "tools/docs/flash-update.md",
         "tools/docs/recovery.md",
         "tools/docs/reinstall.md",
+        "tools/docs/summary.md",
     ],
     "station_algorithm": [
         "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/README.md",
