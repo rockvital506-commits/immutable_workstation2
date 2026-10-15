@@ -66,7 +66,7 @@ $AllFiles = Get-ChildItem -Path $RepoRoot -Recurse -File -Force |
 function Get-RelPath { param([System.IO.FileInfo]$F) $F.FullName.Substring($RepoRoot.Length).TrimStart('\','/') }
 
 # ------------------------------------------------------------
-Write-Head '[1/6] Обязательные файлы корня'
+Write-Head '[1/7] Обязательные файлы корня'
 # ------------------------------------------------------------
 $RequiredFiles = @(
     'README.md','PLAN.md','CONVENTIONS.md','.gitignore','manifest.csv',
@@ -91,7 +91,7 @@ foreach ($t in @('UTILITY_README.md','SCRIPT_README.md','MODULE_README.md')) {
 }
 
 # ------------------------------------------------------------
-Write-Head '[2/6] Бинарные файлы не должны быть в git'
+Write-Head '[2/7] Бинарные файлы не должны быть в git'
 # ------------------------------------------------------------
 $BinFound = @($AllFiles | Where-Object { $BinaryExt -contains $_.Extension.TrimStart('.').ToLowerInvariant() })
 if ($BinFound.Count -eq 0) {
@@ -101,7 +101,7 @@ if ($BinFound.Count -eq 0) {
 }
 
 # ------------------------------------------------------------
-Write-Head '[3/6] Именование: только латиница, цифры, - _ .'
+Write-Head '[3/7] Именование: только латиница, цифры, - _ .'
 # ------------------------------------------------------------
 $BadNames = @()
 $AllEntries = Get-ChildItem -Path $RepoRoot -Recurse -Force |
@@ -113,7 +113,7 @@ if ($BadNames.Count -eq 0) { Write-Ok 'все имена файлов и кат�
 else { foreach ($n in $BadNames) { Write-Fail "недопустимое имя: $n" } }
 
 # ------------------------------------------------------------
-Write-Head '[4/6] Заглушки: <имя>.<расширение>.md + README рядом'
+Write-Head '[4/7] Заглушки: <имя>.<расширение>.md + README рядом'
 # ------------------------------------------------------------
 $StubPattern = '\.(' + ($BinaryExt -join '|') + ')\.md$'
 $Stubs = @($AllFiles | Where-Object { (Get-RelPath $_) -imatch $StubPattern })
@@ -140,7 +140,7 @@ if ($Stubs.Count -eq 0) {
 }
 
 # ------------------------------------------------------------
-Write-Head '[5/6] manifest.csv — структура и полнота'
+Write-Head '[5/7] manifest.csv — структура и полнота'
 # ------------------------------------------------------------
 $ManifestPath = Join-Path $RepoRoot 'manifest.csv'
 $ExpectedHeader = 'type,category,name,file,url,sha256,size_bytes,version,added,status'
@@ -183,7 +183,7 @@ if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) {
 }
 
 # ------------------------------------------------------------
-Write-Head '[6/6] ventoy/ventoy.json — синтаксис и структура'
+Write-Head '[6/7] ventoy/ventoy.json — синтаксис и структура'
 # ------------------------------------------------------------
 $VJson = Join-Path $RepoRoot 'ventoy-partition\ventoy\ventoy.json'
 if (Test-Path -LiteralPath $VJson -PathType Leaf) {
@@ -286,6 +286,34 @@ if (Test-Path $builds) {
         $script:Checks++
         Write-Host ("  OK   algorithm.md: проверено станций - {0}" -f $stations.Count) -ForegroundColor Green
     }
+}
+
+Write-Head '[7/7] research/bestiary.csv — пул дефектов (CONVENTIONS.md §12)'
+$Pool = Join-Path $RepoRoot 'research/bestiary.csv'
+if (Test-Path $Pool) {
+    Write-Ok 'есть research/bestiary.csv'
+    $PoolHead = 'id,signature,n,first_seen,last_seen,fix_target,closes,verdict,source'
+    $First = (Get-Content -LiteralPath $Pool -TotalCount 1 -Encoding UTF8).Trim()
+    if ($First -eq $PoolHead) { Write-Ok 'заголовок пула соответствует §12.5' }
+    else { Write-Fail 'заголовок пула не совпадает с §12.5' }
+    $PoolRows = @(Import-Csv -LiteralPath $Pool -Encoding UTF8)
+    if ($PoolRows.Count -gt 0) { Write-Ok "в пуле записей - $($PoolRows.Count)" }
+    else { Write-Fail 'пул пуст: ни одного класса дефекта' }
+    $PoolBad = @($PoolRows | Where-Object { ([int]$_.n) -ge 2 -and ($_.closes -eq '' -or $_.verdict -ne 'automated') })
+    $PoolOver = @($PoolRows | Where-Object { ([int]$_.n) -ge 2 })
+    if ($PoolBad.Count -eq 0) {
+        Write-Ok "порог n >= 2 соблюдён: у $($PoolOver.Count) классов есть closes и automated"
+    } else {
+        Write-Fail "порог нарушен: $($PoolBad.Count) классов с n >= 2 без closes или без automated"
+    }
+    $Named = @($PoolRows | Where-Object { $_.closes -ne '' } | ForEach-Object { ($_.closes -split ' ')[0] } | Sort-Object -Unique)
+    foreach ($c in $Named) {
+        $cp = Join-Path (Join-Path $RepoRoot 'tests') $c
+        if (Test-Path $cp) { Write-Ok "проверка из closes существует - tests/$c" }
+        else { Write-Fail "проверка из closes отсутствует - tests/$c" }
+    }
+} else {
+    Write-Fail 'отсутствует обязательный файл research/bestiary.csv'
 }
 
 Write-Host "Итог: проверок — $($script:Checks), предупреждений — $($script:Warnings), ошибок — $($script:Errors)" -ForegroundColor White

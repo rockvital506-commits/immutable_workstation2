@@ -10,7 +10,7 @@
 set -uo pipefail
 # -e намеренно не включён: скрипт копит счётчики проверок, предупреждений и
 # ошибок и обязан доходить до итогового вывода. Обрыв на первом же сбое лишил
-# бы смысла весь прогон — проверено: с -e выполнение останавливалось на [5/6].
+# бы смысла весь прогон — проверено: с -e выполнение останавливалось на [5/7].
 
 # Лог в файл (CONVENTIONS.md, раздел 5). Скрипт перезапускает сам себя через
 # tee, а не через process substitution: `wait` в trap виснет, если `set -e`
@@ -52,7 +52,7 @@ BINARY_EXT='iso|wim|esd|swm|vhd|vhdx|img|vtoy|efi|rom|bin|dat|exe|msi|msu|dll|sy
 printf '\033[1mrepo-validate\033[0m — %s\n' "$REPO_ROOT"
 
 # ------------------------------------------------------------
-head2 '[1/6] Обязательные файлы корня'
+head2 '[1/7] Обязательные файлы корня'
 # ------------------------------------------------------------
 for f in README.md PLAN.md CONVENTIONS.md .gitignore manifest.csv \
          ventoy-partition/ventoy/ventoy.json ventoy-partition/ISO/README.md \
@@ -76,7 +76,7 @@ for t in UTILITY_README.md SCRIPT_README.md MODULE_README.md; do
 done
 
 # ------------------------------------------------------------
-head2 '[2/6] Бинарные файлы не должны быть в git'
+head2 '[2/7] Бинарные файлы не должны быть в git'
 # ------------------------------------------------------------
 BIN_FOUND=0
 while IFS= read -r f; do
@@ -89,7 +89,7 @@ done < <(find . -path ./.git -prune -o -type f -print \
 [ "$BIN_FOUND" -eq 0 ] && ok "бинарных файлов не найдено (проверено $(find . -path ./.git -prune -o -type f -print | wc -l | tr -d ' ') файлов)"
 
 # ------------------------------------------------------------
-head2 '[3/6] Именование: только латиница, цифры, - _ .'
+head2 '[3/7] Именование: только латиница, цифры, - _ .'
 # ------------------------------------------------------------
 BAD_NAMES=0
 while IFS= read -r p; do
@@ -103,7 +103,7 @@ done < <(find . -path ./.git -prune -o -mindepth 1 -print | sed 's|^\./||')
 [ "$BAD_NAMES" -eq 0 ] && ok "все имена файлов и каталогов соответствуют правилу"
 
 # ------------------------------------------------------------
-head2 '[4/6] Заглушки: <имя>.<расширение>.md + README рядом'
+head2 '[4/7] Заглушки: <имя>.<расширение>.md + README рядом'
 # ------------------------------------------------------------
 STUBS=0
 while IFS= read -r stub; do
@@ -134,7 +134,7 @@ else
 fi
 
 # ------------------------------------------------------------
-head2 '[5/6] manifest.csv — структура и полнота'
+head2 '[5/7] manifest.csv — структура и полнота'
 # ------------------------------------------------------------
 MANIFEST='manifest.csv'
 EXPECTED_HEADER='type,category,name,file,url,sha256,size_bytes,version,added,status'
@@ -171,7 +171,7 @@ else
 fi
 
 # ------------------------------------------------------------
-head2 '[6/6] ventoy/ventoy.json — синтаксис и структура'
+head2 '[6/7] ventoy/ventoy.json — синтаксис и структура'
 # ------------------------------------------------------------
 VJSON='ventoy-partition/ventoy/ventoy.json'
 if [ -f "$VJSON" ]; then
@@ -284,6 +284,46 @@ EOFBUILDS
     if [ "$STATIONS" -gt 0 ]; then
         ok "algorithm.md: проверено станций — $STATIONS"
     fi
+fi
+
+
+# ------------------------------------------------------------
+head2 '[7/7] research/bestiary.csv — пул дефектов (CONVENTIONS.md §12)'
+# ------------------------------------------------------------
+POOL='research/bestiary.csv'
+if [ -f "$POOL" ]; then
+    ok "есть $POOL"
+    POOL_HEAD='id,signature,n,first_seen,last_seen,fix_target,closes,verdict,source'
+    if [ "$(head -1 "$POOL")" = "$POOL_HEAD" ]; then
+        ok 'заголовок пула соответствует §12.5'
+    else
+        err 'заголовок пула не совпадает с §12.5'
+    fi
+    POOL_ROWS=$(awk 'NR>1 && NF' "$POOL" | wc -l | tr -d ' ')
+    if [ "$POOL_ROWS" -gt 0 ]; then
+        ok "в пуле записей — $POOL_ROWS"
+    else
+        err 'пул пуст: ни одного класса дефекта'
+    fi
+    POOL_OVER=$(awk -F, 'NR>1 && $3+0>=2' "$POOL" | wc -l | tr -d ' ')
+    POOL_BAD=$(awk -F, 'NR>1 && $3+0>=2 && ($7=="" || $8!="automated")' "$POOL" | wc -l | tr -d ' ')
+    if [ "$POOL_BAD" -eq 0 ]; then
+        ok "порог n >= 2 соблюдён: у $POOL_OVER классов есть closes и automated"
+    else
+        err "порог нарушен: $POOL_BAD классов с n >= 2 без closes или без automated"
+    fi
+    while IFS= read -r closes; do
+        [ -z "$closes" ] && continue
+        if [ -f "tests/$closes" ]; then
+            ok "проверка из closes существует — tests/$closes"
+        else
+            err "проверка из closes отсутствует — tests/$closes"
+        fi
+    done <<EOFPOOL
+$(awk -F, 'NR>1 && $7!="" {split($7,a," "); print a[1]}' "$POOL" | sort -u)
+EOFPOOL
+else
+    err "отсутствует обязательный файл $POOL"
 fi
 
 

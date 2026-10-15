@@ -4,7 +4,7 @@
 Появился после вычитки сданных групп: у backup-vscode не было .sh-пары, и
 правило дуальности (CONVENTIONS.md, раздел 5) нигде не контролировалось.
 """
-import io, os, re, sys
+import io, os, re, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
@@ -240,5 +240,61 @@ from baseline import expected, keys
 t(len(keys()) >= 10, f'в baseline.csv не меньше десяти ключей (факт {len(keys())})')
 t(expected('manifest_rows') == len(rows) - 1,
   f"baseline.csv manifest_rows совпадает с manifest.csv ({len(rows) - 1})")
+print('\n[12] Класс B-10: харнесс не зашивает абсолютный путь')
+# Пока 15 тестов держали ROOT литералом с путём рабочей копии, копия проверяла
+# оригинал: возврат дефекта на копии (способ закрытия записи пула, раздел
+# 12.8) был физически невыполним, а правка baseline.csv копии не меняла
+# результат. Проверка держит два свойства: путей нет и корень выводится
+# из __file__.
+# Образец собирается из частей: записанный литералом, он встречался бы в
+# этом самом файле и проверка ловила бы собственный текст и сообщение.
+NEEDLE = '/' + os.path.join('home', 'user')
+
+
+def scan_abs(base, exts):
+    hits = []
+    for f in sorted(os.listdir(base)):
+        if not f.endswith(exts):
+            continue
+        txt = io.open(os.path.join(base, f), encoding='utf-8').read()
+        for i, ln in enumerate(txt.split('\n'), 1):
+            if NEEDLE in ln:
+                hits.append(f'{f}:{i}')
+    return hits
+
+
+hard = scan_abs('tests', ('.py',))
+t(not hard, f'в tests/*.py нет абсолютного пути к рабочей копии (найдено: {hard or "нет"})')
+hardsh = scan_abs('scripts', ('.sh', '.ps1', '.py'))
+t(not hardsh, f'в scripts/* нет абсолютного пути к рабочей копии (найдено: {hardsh or "нет"})')
+
+for f in sorted(os.listdir('tests')):
+    if not (f.startswith('test_') and f.endswith('.py')):
+        continue
+    txt = io.open(os.path.join('tests', f), encoding='utf-8').read()
+    t('os.path.abspath(__file__)' in txt,
+      f'{f}: корень выводится из __file__')
+    t('os.chdir(ROOT)' in txt,
+      f'{f}: тест переходит в свой корень, а не в каталог запуска')
+
+runner_txt = io.open(os.path.join('tests', 'run-all.py'), encoding='utf-8').read()
+t('cwd=os.path.dirname(HERE)' in runner_txt,
+  'run-all.py передаёт подпроцессам корень репозитория, а не каталог запуска')
+t('os.path.join(HERE, name)' in runner_txt,
+  'run-all.py собирает путь к тесту от __file__')
+
+# ROOT из окружения обязателен: без него копия в другом каталоге читает
+# baseline.csv оригинала, и расходование выглядит как непрошедший возврат.
+bl_txt = io.open(os.path.join('tests', 'baseline.py'), encoding='utf-8').read()
+t("os.environ.get('ROOT')" in bl_txt,
+  'baseline.py уважает ROOT из окружения')
+r = subprocess.run([sys.executable, '-c',
+                    'import sys; sys.path.insert(0, %r); '
+                    'import baseline; print(baseline.BASELINE)' % HERE],
+                   capture_output=True, text=True,
+                   env={**os.environ, 'ROOT': ROOT})
+t(r.stdout.strip() == os.path.join(ROOT, 'tests', 'baseline.csv'),
+  f'при ROOT из окружения baseline.csv берётся из него ({r.stdout.strip()})')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)
