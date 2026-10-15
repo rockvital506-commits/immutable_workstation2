@@ -14,7 +14,8 @@ N8 противоречие в назначении ventoy-partition/backup/.
 """
 import io, os, re, sys
 
-ROOT = '/home/user/immutable_workstation2'
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
 os.chdir(ROOT)
 checks = errors = 0
 

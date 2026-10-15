@@ -13,9 +13,11 @@
 Обоснование — research/16-autoinstall-persistence.md, CONVENTIONS.md §6.
 """
 import csv, io, json, os, re, sys
+from baseline import expected
 import xml.etree.ElementTree as ET
 
-ROOT = '/home/user/immutable_workstation2'
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
 os.chdir(ROOT)
 checks = errors = 0
 
@@ -198,7 +200,8 @@ if 'station_answer' in by_name:
     t(by_name['station_answer'][1] ==
       'builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2',
       'station_answer: category — каталог сборки')
-t(len(body) == 47, f'строк данных 47 (факт {len(body)})')
+t(len(body) == expected('manifest_rows'),
+  f"строк данных {expected('manifest_rows')} (факт {len(body)})")
 
 # --- [9] Правило закреплено в CONVENTIONS ---------------------------------
 

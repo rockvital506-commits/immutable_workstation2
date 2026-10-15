@@ -1,0 +1,12 @@
+key,value,что_это
+manifest_rows,47,строк данных в manifest.csv
+tools_subcategories,26,подкатегорий в tools/ без docs и _templates
+tools_utilities,23,каталогов утилит и строк type=tool в manifest.csv
+manifest_sha_filled,18,строк манифеста с реальной SHA256
+manifest_planned,30,строк манифеста со статусом planned
+manifest_pending_sha,29,строк манифеста с sha256=PENDING
+manifest_iso,7,строк манифеста с type=iso
+manifest_tool,23,строк манифеста с type=tool
+manifest_script,11,строк манифеста с type=script
+manifest_module,6,строк манифеста с type=module
+manifest_planned_zero_size,30,строк planned с size_bytes=0

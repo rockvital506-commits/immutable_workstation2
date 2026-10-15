@@ -14,9 +14,11 @@ i3-1215U / 8 ГБ распаянной DDR4 / NVMe 256 ГБ / AX211, мигра�
 ли соглашение».
 """
 import csv, io, os, re, sys
+from baseline import expected
 import xml.etree.ElementTree as ET
 
-ROOT = '/home/user/immutable_workstation2'
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
 os.chdir(ROOT)
 checks = errors = 0
 NS = '{urn:schemas-microsoft-com:unattend}'
@@ -368,12 +370,14 @@ for title, cond in OUTCOMES:
 print('\n[I] Итоговая сводка соответствует фактическому содержимому')
 
 ROWS = list(csv.DictReader(io.open('manifest.csv', encoding='utf-8')))
-t(len(ROWS) == 47, f'в манифесте 47 строк данных (факт {len(ROWS)})')
+t(len(ROWS) == expected('manifest_rows'),
+  f"в манифесте {expected('manifest_rows')} строк данных (факт {len(ROWS)})")
 
 by_type = {}
 for r in ROWS:
     by_type[r['type']] = by_type.get(r['type'], 0) + 1
-for want, n in [('iso', 7), ('tool', 23), ('script', 11), ('module', 6)]:
+for want in ('iso', 'tool', 'script', 'module'):
+    n = expected('manifest_' + want)
     t(by_type.get(want) == n, f'тип {want}: {n} строк (факт {by_type.get(want)})')
 
 # Каждая строка tool указывает каталог с README.md — иначе утилита не описана
@@ -488,7 +492,8 @@ for g in sorted(os.listdir('tools')):
     gp = f'tools/{g}'
     if os.path.isdir(gp):
         SUB += sum(1 for c in os.listdir(gp) if os.path.isdir(f'{gp}/{c}'))
-t(SUB == 26, f'подкатегорий в tools/ ровно 26 (факт {SUB})')
+t(SUB == expected('tools_subcategories'),
+  f"подкатегорий в tools/ {expected('tools_subcategories')} (факт {SUB})")
 
 # Каталоги ISO на разделе VENTOY обязаны существовать
 for r in ROWS:
@@ -500,9 +505,11 @@ for r in ROWS:
 # иначе неполную загрузку образа нечем обнаружить
 zero = [r['name'] for r in ROWS
         if r['status'] == 'planned' and r['size_bytes'] == '0']
-t(len(zero) == 30, f'30 planned-файлов имеют размер 0 (факт {len(zero)})')
+t(len(zero) == expected('manifest_planned_zero_size'),
+  f"{expected('manifest_planned_zero_size')} planned-файлов имеют размер 0 (факт {len(zero)})")
 nohash = [r['name'] for r in ROWS if r['sha256'] == 'PENDING']
-t(len(nohash) == 29, f'29 planned-файлов без SHA256 (факт {len(nohash)})')
+t(len(nohash) == expected('manifest_pending_sha'),
+  f"{expected('manifest_pending_sha')} planned-файлов без SHA256 (факт {len(nohash)})")
 
 smry = read('tools/docs/summary.md')
 smry_f = flat(smry)

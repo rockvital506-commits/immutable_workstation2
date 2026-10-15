@@ -20,8 +20,10 @@
 в рабочей среде отсутствует.
 """
 import csv, io, os, re, subprocess, sys, tempfile
+from baseline import expected
 
-ROOT = '/home/user/immutable_workstation2'
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
 os.chdir(ROOT)
 checks = errors = 0
 
@@ -328,7 +330,8 @@ if 'LGPO' in by_name:
     t(by_name['LGPO'][0] == 'tool', 'LGPO: type = tool')
     t(by_name['LGPO'][1] == 'os/windows/gpo_lock',
       f"LGPO: category = os/windows/gpo_lock (факт {by_name['LGPO'][1]})")
-t(len(body) == 47, f'строк данных 47 (факт {len(body)})')
+t(len(body) == expected('manifest_rows'),
+  f"строк данных {expected('manifest_rows')} (факт {len(body)})")
 
 # --- [11] Регрессия: предыдущие этапы целы --------------------------------
 

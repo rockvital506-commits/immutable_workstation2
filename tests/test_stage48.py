@@ -10,8 +10,10 @@
 Обоснование — research/14-firmware-update.md.
 """
 import csv, io, os, subprocess, sys
+from baseline import expected
 
-ROOT = '/home/user/immutable_workstation2'
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
 os.chdir(ROOT)
 checks = errors = 0
 
@@ -212,7 +214,8 @@ for p in ['tools/drivers/export/scripts/integrate-drivers.sh',
           'research/14-firmware-update.md',
           'tests/test_stage7.py']:
     t(os.path.isfile(p), f'на месте {p}')
-t(len(body) == 47, f'строк данных 47 (факт {len(body)})')
+t(len(body) == expected('manifest_rows'),
+  f"строк данных {expected('manifest_rows')} (факт {len(body)})")
 
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

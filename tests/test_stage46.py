@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Проверки группы tools/drivers/ (Этап 4.6)."""
 import csv, io, os, re, sys
+from baseline import expected
 
-ROOT = '/home/user/immutable_workstation2'
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
 os.chdir(ROOT)
 checks = errors = 0
 
@@ -119,7 +121,8 @@ raw = open('manifest.csv', 'rb').read()
 t(b'\r\n' not in raw, 'manifest.csv в LF, без CRLF')
 rows = list(csv.reader(io.open('manifest.csv', encoding='utf-8')))
 head, body = rows[0], rows[1:]
-t(len(body) == 47, f'строк данных 47 (факт {len(body)})')
+t(len(body) == expected('manifest_rows'),
+  f"строк данных {expected('manifest_rows')} (факт {len(body)})")
 t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')
 sдио = [r for r in body if r[1] == 'drivers/packs']
 t(len(sдио) == 2, f'две строки drivers/packs (факт {len(sдио)})')

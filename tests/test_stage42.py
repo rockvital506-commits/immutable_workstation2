@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Проверки группы tools/rescue/ (Этап 4.2)."""
 import csv, io, os, re, sys
+from baseline import expected
 
-ROOT = '/home/user/immutable_workstation2'
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
 os.chdir(ROOT)
 checks = errors = 0
 def ok(m):
@@ -58,7 +60,8 @@ t(b'\r\n' not in raw, 'manifest.csv в LF, без CRLF')
 rows = list(csv.reader(io.open('manifest.csv', encoding='utf-8')))
 head, body = rows[0], rows[1:]
 # Этап 4.3 добавил 3 утилиты os/windows, Этап 4.4 — 6 утилит network/: 21 -> 24 -> 30
-t(len(rows) - 1 == 47, f'строк данных 47 (факт {len(rows) - 1})')
+t(len(rows) - 1 == expected('manifest_rows'),
+  f"строк данных {expected('manifest_rows')} (факт {len(rows) - 1})")
 names = [r[2] for r in body]
 t(len(names) == len(set(names)), 'нет дублей имён')
 t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')
