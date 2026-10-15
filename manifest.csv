@@ -38,5 +38,7 @@ tool,drivers/packs,SDIO-drivers,Drivers.torrent,https://sdi-tool.org/download/,P
 script,drivers/export,integrate-drivers,,,b56edbef896b8e76ca0c98500c6d5789492a0249e0f1a2097a7ad0be4f980a55,11487,1.0,2026-10-14,present
 module,firmware/bios,bios_update,,,a399aa17c2efd43f14934c5dc89edb8fb817d0ff3a1cb475cd1ec9e8fa345aac,15612,1.0,2026-10-14,present
 script,firmware/bios,bios-inventory,,,a399aa17c2efd43f14934c5dc89edb8fb817d0ff3a1cb475cd1ec9e8fa345aac,15612,1.0,2026-10-14,present
-script,scripts,system-audit,,,9c9df665ba04b8dd44b23531ef35a924d17b0fcc3b907cf68e9c165e117e9229,18696,1.0,2026-10-14,present
+script,scripts,system-audit,,,94d627b388e7e91f99ab0430c08466df4bf41761c20692a03f2766eab61e8cba,18765,1.0,2026-10-14,present
 script,scripts,apply-blocking,,,0568376d1043776e1428f1cfddcf56ac1c66fc05f421612c546387fd1fbf2ad7,54010,1.0,2026-10-14,present
+script,scripts,validate-system,,,76c6cca37685257c89123134d2a74cacab88ea8aa592975f1791530eb2263b8d,38288,1.0,2026-10-15,present
+script,scripts,tune-ssd-ram,,,786646a441605e55c529f779766f43beb5a21ca0db1300184c21e16fd7553505,20972,1.0,2026-10-15,present

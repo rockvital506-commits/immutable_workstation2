@@ -25,7 +25,6 @@
 #Requires -Version 5.1
 [CmdletBinding()]
 param(
-    [ValidateScript({ Test-Path -LiteralPath $_ -PathType Container })]
     [string]$OutDir = (Get-Location).Path,
     [string]$Diff
 )
@@ -44,6 +43,10 @@ try {
     Write-Warning "Лог в файл не ведётся: $($_.Exception.Message)"
 }
 
+if (-not (Test-Path -LiteralPath $OutDir -PathType Container)) {
+    Write-Error "Каталог недоступен: $OutDir"
+    exit 3
+}
 if ($Diff -and -not (Test-Path -LiteralPath $Diff -PathType Leaf)) {
     Write-Error "Нет файла для сравнения: $Diff"
     exit 3

@@ -27,6 +27,14 @@ EXPECTED_FIELDS = 10
 # Хэш считается по конкатенации файлов в порядке сортировки путей,
 # поэтому он воспроизводим и сверяем с manifest.csv.
 SELF_ENTITIES = {
+    "tune-ssd-ram": [
+        "tools/scripts/tune-ssd-ram.ps1",
+        "tools/scripts/tune-ssd-ram.sh",
+    ],
+    "validate-system": [
+        "tools/scripts/validate-system.ps1",
+        "tools/scripts/validate-system.sh",
+    ],
     "apply-blocking": [
         "tools/scripts/apply-blocking.conf",
         "tools/scripts/apply-blocking.ps1",
