@@ -485,13 +485,32 @@ for r in TOOLS:
         NOREADME.append(r['name'])
 t(not NOREADME, f'у всех 23 утилит есть каталог с README.md (нет у {len(NOREADME)})')
 
+# Подкатегории считаются по признаку из CONVENTIONS.md раздел 4, а не как все
+# подкаталоги группы. Утилита — каталог, на который указывает строка
+# type=tool; держатель скриптов — каталог с именем scripts или procedures.
+# Группа os — объявленное исключение: её подкатегория windows делится на
+# подразделы, и подкатегориями считаются они. Прежний счёт «все подкаталоги
+# группы» давал 26, потому что os/windows входило одним элементом.
+UTIL_DIRS = {os.path.join('tools', r['category'], r['name']).replace(os.sep, '/')
+             for r in ROWS if r['type'] == 'tool'}
+HOLDERS = ('scripts', 'procedures')
 SUB = 0
+SUBS = []
 for g in sorted(os.listdir('tools')):
     if g in ('docs', '_templates'):
         continue
     gp = f'tools/{g}'
-    if os.path.isdir(gp):
-        SUB += sum(1 for c in os.listdir(gp) if os.path.isdir(f'{gp}/{c}'))
+    if not os.path.isdir(gp):
+        continue
+    parent = f'{gp}/windows' if g == 'os' else gp
+    if not os.path.isdir(parent):
+        continue
+    for c in sorted(os.listdir(parent)):
+        cp = f'{parent}/{c}'
+        if not os.path.isdir(cp) or c in HOLDERS or cp in UTIL_DIRS:
+            continue
+        SUB += 1
+        SUBS.append(f'{g}/{c}' if g != 'os' else f'os/windows/{c}')
 t(SUB == expected('tools_subcategories'),
   f"подкатегорий в tools/ {expected('tools_subcategories')} (факт {SUB})")
 

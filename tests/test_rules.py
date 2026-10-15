@@ -296,5 +296,55 @@ r = subprocess.run([sys.executable, '-c',
 t(r.stdout.strip() == os.path.join(ROOT, 'tests', 'baseline.csv'),
   f'при ROOT из окружения baseline.csv берётся из него ({r.stdout.strip()})')
 
+print('\n[13] Глубина category и держатели скриптов (CONVENTIONS.md §4)')
+# Правило: утилита на втором уровне от корня раздела, исключение - группа os,
+# где подкатегория windows делится на подразделы и утилита на третьем уровне.
+# Второй и третий признаки из раздела 4 проверяются здесь: состав держателя
+# скриптов и разрешение пути tools/<category>/<name>.
+BINARY = ('.exe', '.msi', '.msu', '.dll', '.sys', '.zip', '.7z', '.rar', '.gz',
+          '.xz', '.iso', '.wim', '.img', '.vhd', '.vhdx', '.efi', '.rom',
+          '.bin', '.dat', '.cab', '.deb', '.rpm')
+for r in rows[1:]:
+    if r[0] != 'tool':
+        continue
+    name, cat = r[2], r[1]
+    if cat.startswith('os/'):
+        t(cat.count('/') == 2 and cat.startswith('os/windows/'),
+          f'{name}: у группы os category из трёх частей ({cat})')
+    else:
+        t(cat.count('/') == 1,
+          f'{name}: вне группы os category из двух частей ({cat})')
+    t(os.path.isdir(os.path.join('tools', cat)),
+      f'{name}: каталог подкатегории существует ({cat})')
+    t(os.path.isdir(os.path.join('tools', cat, name)),
+      f'{name}: каталог утилиты разрешается как tools/{cat}/{name}')
+
+HOLDERS = ('scripts', 'procedures')
+holders = 0
+for root, dirs, files in os.walk('tools'):
+    base = os.path.basename(root)
+    if base not in HOLDERS:
+        continue
+    holders += 1
+    rel = os.path.relpath(root, '.')
+    t(any(f.endswith(('.sh', '.ps1', '.md')) for f in files),
+      f'{rel}: в держателе есть скрипты или процедуры')
+    wrong = [f for f in files
+             if f.endswith(BINARY) or '.' in f and f.rsplit('.', 1)[1] in
+             ('exe', 'msi', 'zip')]
+    t(not wrong, f'{rel}: в держателе нет бинарников (найдено {wrong or "нет"})')
+    nested = [d for d in dirs if d not in HOLDERS]
+    t(not nested, f'{rel}: в держателе нет каталогов утилит (найдено {nested or "нет"})')
+t(holders >= 5, f'держателей скриптов найдено не меньше пяти ({holders})')
+
+# Утилита обязана быть каталогом, на который указывает ровно одна строка:
+# иначе каталог либо лишний, либо строка указывает не туда.
+tool_dirs = {}
+for r in rows[1:]:
+    if r[0] == 'tool':
+        tool_dirs.setdefault(os.path.join('tools', r[1], r[2]).replace(os.sep, '/'), []).append(r[2])
+t(all(len(v) == 1 for v in tool_dirs.values()),
+  f'на каждый каталог утилиты указывает одна строка (каталогов {len(tool_dirs)})')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

@@ -1,6 +1,6 @@
 key,value,что_это
 manifest_rows,47,строк данных в manifest.csv
-tools_subcategories,26,подкатегорий в tools/ без docs и _templates
+tools_subcategories,30,подкатегорий в tools/ по признаку из CONVENTIONS.md 4
 tools_utilities,23,каталогов утилит и строк type=tool в manifest.csv
 manifest_sha_filled,18,строк манифеста с реальной SHA256
 manifest_planned,30,строк манифеста со статусом planned
