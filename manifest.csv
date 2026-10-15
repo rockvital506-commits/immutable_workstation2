@@ -35,7 +35,6 @@ tool,security/audit,ProcessExplorer,ProcessExplorer.zip,https://download.sysinte
 tool,security/audit,TCPView,TCPView.zip,https://download.sysinternals.com/files/TCPView.zip,PENDING,0,4.19,2026-10-11,planned
 tool,security/encryption,VeraCrypt,VeraCrypt_Setup_x64_1.26.29.msi,https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.29/VeraCrypt_Setup_x64_1.26.29.msi,PENDING,0,1.26.29,2026-10-11,planned
 tool,drivers/packs,SDIO,SDIO_2.0.4.887.zip,https://www.glenn.delahoy.com/snappy-driver-installer-origin/,PENDING,0,2.0.4.887,2026-10-11,planned
-tool,drivers/packs,SDIO-drivers,Drivers.torrent,https://sdi-tool.org/download/,PENDING,0,unversioned,2026-10-11,planned
 script,drivers/export,integrate-drivers,,,8b603821f9b374c65a43f3637c970af672b6287c9d8545657a9cdc159dd71210,11808,1.0,2026-10-14,present
 module,firmware/bios,bios_update,,,94fda0b3a3f977b0c4f4905da3bd28ad8a4ac812c6055fa4957f18d28ee0d1b6,15933,1.0,2026-10-14,present
 script,firmware/bios,bios-inventory,,,94fda0b3a3f977b0c4f4905da3bd28ad8a4ac812c6055fa4957f18d28ee0d1b6,15933,1.0,2026-10-14,present
@@ -44,5 +43,5 @@ script,scripts,apply-blocking,,,0568376d1043776e1428f1cfddcf56ac1c66fc05f421612c
 script,scripts,validate-system,,,76c6cca37685257c89123134d2a74cacab88ea8aa592975f1791530eb2263b8d,38288,1.0,2026-10-15,present
 script,scripts,tune-ssd-ram,,,786646a441605e55c529f779766f43beb5a21ca0db1300184c21e16fd7553505,20972,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_answer,,,f46fb9305978d7b18dd9560ae888ef4c1694d7148e8b14a807f555ce3815f828,34909,1.0,2026-10-15,present
-module,docs,docs,,,6bf48671ca209231654899927d1ff530cea8c80a8cf96b810119beb8f7bb28e9,97587,1.0,2026-10-15,present
+module,docs,docs,,,717e3b182ad1357f5577bb9c04ffa529e5f80ec98c67d5a883f4c05405fd2738,100466,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_algorithm,,,8d0655865cc402f8ea76521faf1562c2c25c822399dfabeb97794759367d5d3f,63545,1.0,2026-10-15,present

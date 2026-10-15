@@ -1,13 +1,13 @@
 key,value,что_это
-manifest_rows,47,строк данных в manifest.csv
+manifest_rows,46,строк данных в manifest.csv
 tools_subcategories,30,подкатегорий в tools/ по признаку из CONVENTIONS.md 4
-tools_utilities,23,каталогов утилит и строк type=tool в manifest.csv
+tools_utilities,22,каталогов утилит и строк type=tool в manifest.csv
 manifest_sha_filled,18,строк манифеста с реальной SHA256
-manifest_planned,30,строк манифеста со статусом planned
-manifest_pending_sha,29,строк манифеста с sha256=PENDING
+manifest_planned,29,строк манифеста со статусом planned
+manifest_pending_sha,28,строк манифеста с sha256=PENDING
 manifest_iso,7,строк манифеста с type=iso
-manifest_tool,23,строк манифеста с type=tool
+manifest_tool,22,строк манифеста с type=tool
 manifest_script,11,строк манифеста с type=script
 manifest_module,6,строк манифеста с type=module
-manifest_planned_zero_size,29,строк planned с size_bytes=0
+manifest_planned_zero_size,28,строк planned с size_bytes=0
 audit_findings,62,помеченных находок в AUDIT-документах research/ (16 17 19 20 21 22 23)

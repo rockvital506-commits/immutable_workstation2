@@ -18,7 +18,7 @@
 Документ сам предупреждает: **список не сверен с самим образом**, достоверный
 источник внутри ISO — `MInst/profiles/strelec64Windows10.ini`.
 
-## 2. Результат сверки 23 утилит
+## 2. Результат сверки утилит
 
 Реестр — `tools/strelec-registry.csv`, по одной строке на утилиту.
 
@@ -30,10 +30,12 @@
 | `MemTest86Plus` | 7.20 | 8.10 | свежее |
 | `DMDE` | не указана | 4.4.4.842 | **не записано** |
 
-**Вне сборки двадцать:** `smartmontools`, `Prime95`, `stress-ng`, `NTPWEdit`,
-`WinUtil`, `Win11Debloat`, `Sophia_Script`, `LGPO`, `RustDesk`, `iperf3`,
-`Nmap`, `Wireshark`, `WifiInfoView`, `MyPublicWifi`, `Autoruns`,
-`ProcessExplorer`, `TCPView`, `VeraCrypt`, `SDIO`, `SDIO-drivers`.
+**Вне сборки — остальные.** На момент сверки их было двадцать, включая
+`SDIO-drivers`; 2026-10-15 пак снят с флешки и перестал быть сущностью, в
+реестре осталось 22 утилиты: `smartmontools`, `Prime95`, `stress-ng`,
+`NTPWEdit`, `WinUtil`, `Win11Debloat`, `Sophia_Script`, `LGPO`, `RustDesk`,
+`iperf3`, `Nmap`, `Wireshark`, `WifiInfoView`, `MyPublicWifi`, `Autoruns`,
+`ProcessExplorer`, `TCPView`, `VeraCrypt`, `SDIO`.
 
 При этом функция трёх из них в сборке закрыта другими средствами:
 
@@ -127,7 +129,8 @@ Sysinternals в сборке нет вообще, шифрования нет, �
 Не разобраны вовсе: `smartmontools`, `Prime95`, `stress-ng`, `WinUtil`,
 `Win11Debloat`, `Sophia_Script`, `LGPO`, `iperf3`, `Wireshark`, `SDIO`,
 `iperf3`, `Wireshark` — пять утилит: `smartmontools`, `Prime95`, `stress-ng`,
-`iperf3`, `Wireshark`. Группа 1 (`NTPWEdit`, `RustDesk`, `Nmap`, `MyPublicWifi`)
+`iperf3`, `Wireshark`. По решению заказчика от 2026-10-15 они остаются на
+следующий заход, сегмент переведён в CHRONICLE. Группа 1 (`NTPWEdit`, `RustDesk`, `Nmap`, `MyPublicWifi`)
 разобрана в разделе 5 «Находки группы 1».
 
 ## 5. Находки группы 1: NTPWEdit, RustDesk, Nmap, MyPublicWifi
@@ -404,7 +407,15 @@ SDIO и её данные, но не драйверы внутри паков �
 индексы SDIO (50–100 МБ) и докачивать на месте; возить только нужные паки
 `DP_*`; брать драйверы с сайта производителя станции.
 
-`fix_target = decision`.
+`fix_target = decision`. **Решено заказчиком 2026-10-15: на флешке хранятся
+только индексы SDIO, 50–100 МБ; полный пак не хранится и не возится.**
+Распространения копий драйверов больше нет, поэтому вопрос снимается целиком.
+Сущность `SDIO-drivers` снята из `manifest.csv`, заглушка `Drivers.torrent.md`
+удалена, каталог стал процедурой `tools/drivers/packs/SDIO-drivers/README.md`
+— по тому же принципу, что на Этапе 7 процедура заменила каталог офлайн-обновлений.
+Счётчики в `tests/baseline.csv` пересчитаны: строк манифеста 47 → 46, утилит
+23 → 22, `planned` 30 → 29, `PENDING` по сумме 29 → 28, `planned` с нулевым
+размером 29 → 28.
 
 Попутно по N2: поле `version` у `SDIO-drivers` в манифесте стоит
 `unversioned` **осознанно** — раздача обновляется независимо от программы, и

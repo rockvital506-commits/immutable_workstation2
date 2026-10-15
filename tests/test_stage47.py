@@ -123,7 +123,7 @@ for p in ['tools/drivers/packs/SDIO/README.md',
           'research/12-backup-imaging-sync.md']:
     t(os.path.isfile(p), f'на месте {p}')
 names = [r[2] for r in rows]
-for n in ['SDIO', 'SDIO-drivers', 'VeraCrypt', 'initial_backup', 'disk_image']:
+for n in ['SDIO', 'VeraCrypt', 'initial_backup', 'disk_image']:
     t(n in names, f'в manifest осталась сущность {n}')
 t(len(rows) == expected('manifest_rows'),
   f"строк данных {expected('manifest_rows')} (факт {len(rows)})")

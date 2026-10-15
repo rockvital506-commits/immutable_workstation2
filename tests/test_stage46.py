@@ -29,9 +29,10 @@ def t(cond, m):
 DRV = 'tools/drivers'
 SUBS = ['packs', 'export']
 UTIL = ('packs', 'SDIO')
-PACK = ('packs', 'SDIO-drivers')
+# Пак драйверов с 2026-10-15 не сущность и не каталог утилиты: на флешке
+# хранятся только индексы SDIO, полный пак описан процедурой.
+PACKDOC = f'{DRV}/packs/SDIO-drivers/README.md'
 STUBS = ['SDIO_2.0.4.887.zip.md']
-PACK_STUBS = ['Drivers.torrent.md']
 REQ = ['## Назначение', '## Состав каталога', '## Версия и источник',
        '## Аналоги', '## История изменений']
 
@@ -47,11 +48,9 @@ for stub in STUBS:
     t(os.path.isfile(f'{d}/{stub}'), f'есть заглушка {d}/{stub}')
 t(not os.path.isfile(f'{DRV}/packs/SDIO_2.0.4.887.zip.md'),
   'заглушки не остались в корне packs/ — утилита оформлена папкой')
-pd = f'{DRV}/{PACK[0]}/{PACK[1]}'
-t(os.path.isdir(pd), f'есть каталог пака {pd}')
-t(os.path.isfile(f'{pd}/README.md'), f'есть {pd}/README.md')
-for stub in PACK_STUBS:
-    t(os.path.isfile(f'{pd}/{stub}'), f'есть заглушка {pd}/{stub}')
+t(os.path.isfile(PACKDOC), f'процедура пака на месте: {PACKDOC}')
+t(not os.path.isfile(f'{DRV}/packs/SDIO-drivers/Drivers.torrent.md'),
+  'заглушки Drivers.torrent.md больше нет — пак не хранится')
 t(not os.path.isfile(f'{d}/Drivers.torrent.md'),
   'пак не лежит в папке SDIO — он отдельная сущность')
 
@@ -85,14 +84,14 @@ t('/Recurse' in exp, 'в export/ упомянут обязательный /Recu
 t('export-drivers' in exp, 'в export/ есть ссылка на модуль бэкапа')
 
 print('\n[4] Размер пака не занижен')
-for p in [f'{pd}/README.md', f'{pd}/Drivers.torrent.md']:
+for p in [PACKDOC]:
     txt = io.open(p, encoding='utf-8').read()
     t('50' in txt, f'{os.path.basename(p)}: фигурируют 50 ГБ')
     t('расходятся' in txt, f'{os.path.basename(p)}: расхождение источников названо')
     t('25' in txt, f'{os.path.basename(p)}: прежнее значение 25 ГБ показано как одна из оценок')
 u = io.open(f'{d}/README.md', encoding='utf-8').read()
 t('50' in u, 'в README программы назван порядок размера пака')
-pk = io.open(f'{pd}/README.md', encoding='utf-8').read()
+pk = io.open(PACKDOC, encoding='utf-8').read()
 t('50,0 ГБ' in pk and 'sdi-tool.org' in pk,
   'в README пака названы 50,0 ГБ и источник')
 t('25' in pk, 'в README пака прежнее значение 25 ГБ показано как одна из оценок')
@@ -107,7 +106,7 @@ t('sdi-tool.org' not in u,
   'таблица размеров пака не дублируется в README программы — она одна, в SDIO-drivers')
 
 print('\n[6] Заглушки')
-for stub, base in [(x, d) for x in STUBS] + [(x, pd) for x in PACK_STUBS]:
+for stub, base in [(x, d) for x in STUBS]:
     txt = io.open(f'{base}/{stub}', encoding='utf-8').read()
     t('CONVENTIONS' in txt, f'{stub}: ссылка на CONVENTIONS.md')
     t('PENDING' in txt, f'{stub}: SHA256 помечен PENDING')
@@ -125,10 +124,9 @@ t(len(body) == expected('manifest_rows'),
   f"строк данных {expected('manifest_rows')} (факт {len(body)})")
 t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')
 sдио = [r for r in body if r[1] == 'drivers/packs']
-t(len(sдио) == 2, f'две строки drivers/packs (факт {len(sдио)})')
+t(len(sдио) == 1, f'одна строка drivers/packs — пак снят с флешки (факт {len(sдио)})')
 pairs = sorted((r[2], r[3]) for r in sдио)
-t(pairs == [('SDIO', 'SDIO_2.0.4.887.zip'), ('SDIO-drivers', 'Drivers.torrent')],
-  f'имена и файлы верны: {pairs}')
+t(pairs == [('SDIO', 'SDIO_2.0.4.887.zip')], f'имена и файлы верны: {pairs}')
 names = [r[2] for r in body]
 t(len(set(names)) == len(names), 'имена в manifest уникальны — правило не сломано')
 for r in sдио:
