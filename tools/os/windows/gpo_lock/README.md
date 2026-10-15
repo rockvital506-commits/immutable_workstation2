@@ -11,8 +11,8 @@
 
 ## Утилиты
 
-[`Sophia_Script/`](Sophia_Script/) — версия 7.3.0, MIT, 110 функций с парным
-откатом.
+[`Sophia_Script/`](Sophia_Script/) — версия 8.0.0, MIT, у каждой функции
+парный откат.
 
 [`LGPO/`](LGPO/) — `LGPO.exe` из Microsoft Security Compliance Toolkit,
 Proprietary (Freeware). Применяет локальную политику из файлов и делает её

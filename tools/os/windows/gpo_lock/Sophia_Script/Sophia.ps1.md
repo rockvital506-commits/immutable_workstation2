@@ -6,11 +6,11 @@
 |------|----------|
 | Имя файла | `Sophia.ps1` |
 | Назначение | Пресет Sophia Script: список функций с отметками, что выполнять |
-| Версия | 7.3.0 |
-| Дата релиза | 2026-09-05 |
-| Источник | https://github.com/farag2/Sophia-Script-for-Windows/releases/download/7.3.0/Sophia.Script.for.Windows.11.LTSC.2024.v7.3.0.zip |
+| Версия | 8.0.0 |
+| Дата релиза | 2026-10-11 |
+| Источник | https://github.com/farag2/Sophia-Script-for-Windows/releases/download/8.0.0/Sophia.Script.for.Windows.11.LTSC.2024.v8.0.0.zip |
 | SHA256 | `PENDING` |
-| Размер | архив 465087 байт |
+| Размер | архив 464640 байт |
 | Лицензия | MIT |
 | Статус | `planned` |
 
@@ -19,7 +19,7 @@
 Скачать ассет релиза:
 
 ```
-https://github.com/farag2/Sophia-Script-for-Windows/releases/download/7.3.0/Sophia.Script.for.Windows.11.LTSC.2024.v7.3.0.zip
+https://github.com/farag2/Sophia-Script-for-Windows/releases/download/8.0.0/Sophia.Script.for.Windows.11.LTSC.2024.v8.0.0.zip
 ```
 
 Внутри архива — каталог варианта для LTSC 2024 под Windows PowerShell 5.1:
@@ -28,13 +28,13 @@ https://github.com/farag2/Sophia-Script-for-Windows/releases/download/7.3.0/Soph
 |------|---------|
 | `Sophia.ps1` | Пресет, точка входа |
 | `Import-TabCompletion.ps1` | Автодополнение имён функций |
-| `Module\Sophia.psm1` | Реализация, 275642 байта |
+| `Module\Sophia.psm1` | Реализация, 261017 байт |
 | `Module\Sophia.psd1` | Манифест модуля |
 | `Module\Localizations\ru-RU\Sophia.psd1` | Русская локализация |
 
 Есть второй вариант — под PowerShell 7, ассет
-`Sophia.Script.for.Windows.11.LTSC.2024.PowerShell.7.v7.3.0.zip` размером
-10542142 байта. **Не брать**: PowerShell 7 не входит в состав Windows 11, его
+`Sophia.Script.for.Windows.11.LTSC.2024.PowerShell.7.v8.0.0.zip` размером
+10621352 байта. **Не брать**: PowerShell 7 не входит в состав Windows 11, его
 пришлось бы ставить на станцию заказчика отдельно.
 
 Распространение через WinGet, Chocolatey и Scoop есть, но для флешки не
@@ -46,15 +46,15 @@ https://github.com/farag2/Sophia-Script-for-Windows/releases/download/7.3.0/Soph
 После скачивания вычислить SHA256 архива и внести вместо `PENDING`:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 "C:\Temp\Sophia.Script.for.Windows.11.LTSC.2024.v7.3.0.zip"
+Get-FileHash -Algorithm SHA256 "C:\Temp\Sophia.Script.for.Windows.11.LTSC.2024.v8.0.0.zip"
 ```
 
 ```bash
-sha256sum "/mnt/tools/os/windows/gpo_lock/Sophia_Script/Sophia.Script.for.Windows.11.LTSC.2024.v7.3.0.zip"
+sha256sum "/mnt/tools/os/windows/gpo_lock/Sophia_Script/Sophia.Script.for.Windows.11.LTSC.2024.v8.0.0.zip"
 ```
 
 Контрольную сумму сверить с ассетом того же релиза на странице GitHub. Размер
-465087 байт сверен через API GitHub.
+464640 байт сверен через API GitHub.
 
 ## Куда положить на флешке
 
@@ -63,10 +63,17 @@ sha256sum "/mnt/tools/os/windows/gpo_lock/Sophia_Script/Sophia.Script.for.Window
 
 ## Напоминание про версию
 
-Версия закреплена как **7.3.0**. В сторонних обзорах встречались числа 7.1.4 и
-7.3.0 — верно 7.3.0, оно подтверждено и API GitHub, и заголовком самого
-`Sophia.ps1`. При обновлении меняются имя ассета, размер и контрольная сумма —
-править и `/manifest.csv`, и эту заглушку.
+Версия закреплена как **8.0.0**, сверена 2026-10-15 через API GitHub: тег
+релиза `8.0.0` от 2026-10-11 и файл `sophia_script_versions.json` в корне тега,
+где `Sophia_Script_Windows_11_LTSC2024_PowerShell_5_1 = 8.0.0`. Заголовок
+самого `Sophia.ps1` в этой сверке не читался. В сторонних обзорах раньше
+встречались числа 7.1.4 и 7.3.0; прежняя запись репозитория держала 7.3.0 от
+2026-09-05, выпуск 8.0.0 вышел 2026-10-11.
+
+Журнал изменений upstream записи 8.0.0 не содержит, поэтому состав правок
+между 7.3.0 и 8.0.0 по официальному журналу не восстанавливается. При
+обновлении меняются имя ассета, размер и контрольная сумма — править и
+`/manifest.csv`, и эту заглушку.
 
 ## Напоминание про пресет
 

@@ -71,7 +71,7 @@ t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')
 EXPECT = {
     'WinUtil':       ('os/windows/tweaks',   'winutil.ps1',   '26.10.07'),
     'Win11Debloat':  ('os/windows/debloat',  'Win11Debloat.ps1', '2026.08.24'),
-    'Sophia_Script': ('os/windows/gpo_lock', 'Sophia.ps1',    '7.3.0'),
+    'Sophia_Script': ('os/windows/gpo_lock', 'Sophia.ps1',    '8.0.0'),
 }
 by = {r[2]: r for r in body}
 for name, (cat, f, ver) in EXPECT.items():

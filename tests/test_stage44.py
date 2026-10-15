@@ -117,7 +117,9 @@ d = io.open(f'{NET}/diagnostics/README.md', encoding='utf-8').read()
 for cmd in ['ping', 'tracert', 'pathping', 'nslookup', 'Test-NetConnection',
             'ipconfig', 'netstat', 'arp -a', 'netsh']:
     t(cmd in d, f'в diagnostics/ есть {cmd}')
-t('Утилит здесь **нет намеренно**' in d, 'в diagnostics/ объяснено отсутствие утилит')
+# Признак приведён к одной форме во всех девяти подкатегориях без утилит;
+# проверяется строка без разметки, иначе bold внутри фразы ломает сравнение.
+t('Утилит здесь нет' in d, 'в diagnostics/ объяснено отсутствие утилит')
 sp = io.open(f'{NET}/speed/README.md', encoding='utf-8').read()
 t('940' in sp, 'в speed/ есть ориентир для гигабита')
 t('две стороны' in sp or 'двумя узлами' in sp, 'в speed/ указано, что нужны две стороны')

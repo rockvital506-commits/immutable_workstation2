@@ -331,5 +331,39 @@ for x in unresolved[:10]:
 t(checked_docs > 30,
   f'проверка охватила рабочие документы (охвачено {checked_docs})')
 
+print('\n[L] Подкатегория без утилит обязана говорить об этом')
+# Девять подкатегорий tools/ не содержат ни одного каталога утилиты. Пока
+# только три из них объясняли пустоту, читатель не мог отличить намеренное
+# отсутствие от забытого. Признак приведён к одной форме - строка
+# "Утилит здесь нет"; подкатегории, чьё содержимое составляют скрипты,
+# пометки не требуют: их наполнение и есть каталог scripts/.
+HOLDERS = ('scripts', 'procedures')
+MARK = 'Утилит здесь нет'
+no_util = []
+scanned = 0
+for g in sorted(os.listdir('tools')):
+    if g in ('docs', '_templates'):
+        continue
+    gp = os.path.join('tools', g)
+    if not os.path.isdir(gp):
+        continue
+    for c in sorted(os.listdir(gp)):
+        cp = os.path.join(gp, c)
+        if not os.path.isdir(cp) or c in HOLDERS:
+            continue
+        scanned += 1
+        kids = [d for d in os.listdir(cp)
+                if os.path.isdir(os.path.join(cp, d)) and d not in HOLDERS]
+        if kids:
+            continue
+        rd = os.path.join(cp, 'README.md')
+        txt = io.open(rd, encoding='utf-8').read() if os.path.isfile(rd) else ''
+        if MARK not in txt and not os.path.isdir(os.path.join(cp, 'scripts')):
+            no_util.append(f'{g}/{c}')
+t(not no_util,
+  f'у каждой подкатегории без утилит и без скриптов есть пометка (нет у {no_util or "ни у одной"})')
+t(scanned >= 20, f'обход охватил подкатегории ({scanned})')
+t(len([1 for g in os.listdir('tools')]) >= 9, 'групп в tools/ не меньше девяти')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

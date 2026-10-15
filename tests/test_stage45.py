@@ -79,7 +79,7 @@ for name, (sub, _stub) in UTILS.items():
 
 print('\n[4] Решения заказчика отражены в документах')
 sc = io.open(f'{SEC}/scanner/README.md', encoding='utf-8').read()
-t('Утилит здесь нет намеренно' in sc, 'в scanner/ объяснено отсутствие утилит')
+t('Утилит здесь нет' in sc, 'в scanner/ объяснено отсутствие утилит')
 t('MpCmdRun.exe' in sc, 'в scanner/ Defender описан средствами ОС')
 t('Get-MpComputerStatus' in sc, 'в scanner/ есть способ посмотреть состояние Defender')
 t('Start-MpWDOScan' in sc, 'в scanner/ описана офлайн-проверка')
