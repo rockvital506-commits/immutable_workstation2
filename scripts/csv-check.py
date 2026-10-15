@@ -35,6 +35,10 @@ SELF_ENTITIES = {
         "tools/docs/recovery.md",
         "tools/docs/reinstall.md",
     ],
+    "station_algorithm": [
+        "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/README.md",
+        "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/algorithm.md",
+    ],
     "station_answer": [
         "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/README.md",
         "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/autounattend-ltsc-2024.xml",

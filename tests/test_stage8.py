@@ -341,9 +341,40 @@ chk3 = read(f'{D}/field-checklist.md')
 t('slmgr /dlv' in chk3, 'в чек-листе есть проверка активации')
 t('Retail' in chk3, 'в чек-листе учтён перенос Retail-ключа')
 
-# --- [17] Регрессия ---------------------------------------------------------
+# --- [17] Пригодность ключей для билда и чтение ключа прошивки ------------
 
-print('\n[17] Регрессия')
+print('\n[17] Какие ключи годятся для этого билда')
+t('OA3xOriginalProductKey' in alg, 'шаг 1 читает ключ из прошивки')
+t('MSDM' in alg or 'OEM:OA3' in alg,
+  'объяснено, где именно в прошивке лежит ключ')
+t('на чистой' in flat(alg),
+  'объяснено, почему ключ читается до переустановки, а не после')
+alg_f = flat(alg)
+for keytype, verdict in [
+        ('MAK для Windows 11 IoT Enterprise LTSC 2024', 'да'),
+        ('GVLK + доступный KMS-узел', 'да'),
+        ('OEM-ключ IoT Enterprise LTSC для этой станции', 'да'),
+        ('Ключ из прошивки этой станции (Win11 Home, OEM)', 'нет'),
+        ('Retail-ключ Windows 11 Pro / Home', 'нет')]:
+    i = alg.find('| ' + keytype + ' |')
+    t(i > 0, f'в таблице есть строка «{keytype}»')
+    if i > 0:
+        row = alg[i:alg.find('\n', i)]
+        t(('**да**' in row) if verdict == 'да' else ('**нет**' in row),
+          f'«{keytype}» помечен как «{verdict}»')
+t('не проверено' in alg, 'непроверенные случаи отделены от проверенных')
+t('Retail-ключ Windows 11 Enterprise' in alg,
+  'случай Retail Enterprise вынесен отдельно')
+t('Windows 10 IoT Enterprise LTSC 2021' in alg,
+  'случай ключа от LTSC 2021 вынесен отдельно')
+t('Отвязка Retail-ключа ниже нужна для случаев' in alg_f,
+  'сказано, когда отвязка Retail применяется, а когда нет')
+t('| Версия | 1.2 |' in alg, 'паспорт: версия алгоритма обновлена')
+t('| 1.2 |' in alg, 'в истории изменений есть запись 1.2')
+
+# --- [18] Регрессия ---------------------------------------------------------
+
+print('\n[18] Регрессия')
 for p in ['research/17-documentation.md',
           'ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/'
           'answer/README.md',
