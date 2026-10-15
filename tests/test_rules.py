@@ -175,5 +175,70 @@ for r in rows[1:]:
             t(r[5] == got[0], f'{r[2]}: sha256 совпадает с файлами')
             t(r[6] == str(got[1]), f'{r[2]}: size_bytes совпадает с файлами')
 
+print('\n[9] Раздел 11 «Протокол исполнения» (CONVENTIONS.md §11)')
+t('## 11. Протокол исполнения' in conv, 'раздел 11 присутствует')
+for i, name in [(1, 'три фазы'), (2, 'обязательный запрос'), (3, 'приоритет источников'),
+                (4, 'триггеры запроса'), (5, 'сверка перед push')]:
+    t(f'### 11.{i}.' in conv, f'подраздел 11.{i} ({name})')
+low = conv.lower()
+t('не более трёх итераций' in low or 'не более 3 итераций' in low,
+  'предел итераций записан')
+# Ссылки на разделы обязаны быть разрешимы: §11 трижды ссылался на
+# «раздел 13», которого в файле не было. Проверка сравнивает номер ссылки
+# с фактическими заголовками, а не со списком ожидаемых.
+heads = {m.group(1) for m in re.finditer(r'(?m)^## (\d+)\.', conv)}
+refs = set(re.findall(r'раздел[ае]? (\d+)', conv)) | set(re.findall(r'§(\d+)', conv))
+bad_refs = sorted(r for r in refs if r not in heads)
+t(not bad_refs, f'все ссылки на разделы разрешимы (битые: {bad_refs or "нет"})')
+sub = {m.group(1) for m in re.finditer(r'(?m)^### (\d+\.\d+)\.', conv)}
+bad_sub = sorted(r for r in set(re.findall(r'раздел[ае]? (\d+\.\d+)', conv))
+                 | set(re.findall(r'§(\d+\.\d+)', conv)) if r not in sub)
+t(not bad_sub, f'все ссылки на подразделы разрешимы (битые: {bad_sub or "нет"})')
+t('AUDIT' in conv and 'CONSTRUCT' in conv and 'CHRONICLE' in conv,
+  'все три фазы названы')
+t('git fetch' in conv, 'сверка с remote названа командой')
+t('reset --soft' in conv and 'не годится' in conv,
+  'обосновано, почему reset --soft не подходит')
+for trg in ('Т1', 'Т2'):
+    t(trg in conv, f'триггер {trg} определён')
+
+print('\n[10] Раздел 12 «Определение дефекта и пул дефектов» (CONVENTIONS.md §12)')
+t('## 12. Определение дефекта и пул дефектов' in conv, 'раздел 12 присутствует')
+for i, name in [(1, 'что такое дефект'), (2, 'что не дефект'), (3, 'протокол классификации'),
+                (4, 'форма запроса'), (5, 'пул'), (6, 'порог'), (7, 'проверка пула'),
+                (8, 'закрытие'), (9, 'один источник')]:
+    t(f'### 12.{i}.' in conv, f'подраздел 12.{i} ({name})')
+for col in ('id', 'signature', 'n', 'first_seen', 'last_seen', 'fix_target',
+            'closes', 'verdict', 'source'):
+    t(f'`{col}`' in conv, f'колонка {col} описана в §12.5')
+for v in ('automated', 'open', 'wontfix'):
+    t(f'`{v}`' in conv, f'вердикт {v} описан')
+for ft in ('state', 'doc', 'decision'):
+    t(f'`{ft}`' in conv, f'fix_target {ft} описан')
+t('n >= 2' in conv, 'порог автоматизации записан как n >= 2')
+t('research/bestiary.csv' in conv, 'путь пула назван')
+t('tests/test_bestiary.py' in conv, 'проверка пула названа')
+t('возвратом дефекта' in conv, 'закрытие определено через возврат дефекта')
+# 12.2 обязано перечислять ровно восемь случаев не-дефекта: список и есть
+# определение, сокращение списка молча расширяет понятие дефекта.
+sec = conv.split('### 12.2.')[1].split('### 12.3.')[0]
+n_cases = len(re.findall(r'(?m)^\d+\. \*\*', sec))
+t(n_cases == 8, f'в §12.2 ровно восемь случаев не-дефекта (факт {n_cases})')
+# 12.1: оба условия должны быть названы, иначе определение неполно
+sec1 = conv.split('### 12.1.')[1].split('### 12.2.')[0]
+t('**А.**' in sec1 and '**Б.**' in sec1, 'в §12.1 названы оба условия А и Б')
+t(sec1.count('|') >= 10, 'в §12.1 есть таблица источников обязательства')
+t('с файлом и строкой' in sec1, 'источник требуется назвать с файлом и строкой')
+
+print('\n[11] Раздел 12.9 и tests/baseline.csv согласованы')
+t(os.path.isfile('tests/baseline.csv'), 'tests/baseline.csv существует')
+t(os.path.isfile('tests/baseline.py'), 'tests/baseline.py существует')
+bl = io.open('tests/baseline.py', encoding='utf-8').read()
+t('раздел 12' in bl, 'baseline.py ссылается на раздел 12, а не на несуществующий')
+sys.path.insert(0, HERE)
+from baseline import expected, keys
+t(len(keys()) >= 10, f'в baseline.csv не меньше десяти ключей (факт {len(keys())})')
+t(expected('manifest_rows') == len(rows) - 1,
+  f"baseline.csv manifest_rows совпадает с manifest.csv ({len(rows) - 1})")
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

@@ -46,3 +46,8 @@ def _load():
 def expected(key):
     """Ожидаемое значение по ключу. KeyError — ключ не объявлен в baseline.csv."""
     return _load()[key]
+
+
+def keys():
+    """Все объявленные ключи. Нужна проверке, что файл не выхолощен."""
+    return sorted(_load())

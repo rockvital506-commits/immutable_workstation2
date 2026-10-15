@@ -1,0 +1,12 @@
+id,signature,n,first_seen,last_seen,fix_target,closes,verdict,source
+B-01,Факт репозитория зашит в тест константой,11,2026-09-24,2026-10-15,state,test_rules.py [11],automated,tests/baseline.py; CONVENTIONS.md 12.9
+B-02,Проверка зашивает номер версии документа,3,2026-09-24,2026-10-15,state,test_stage8.py,automated,tests/test_stage8.py; builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/algorithm.md
+B-03,Утверждение о содержимом файла без чтения файла,3,2026-09-24,2026-10-15,state,test_navigation.py,automated,CONVENTIONS.md 10.5; tests/test_navigation.py
+B-04,Сопоставление текста без учёта переносов строк в документе,2,2026-09-24,2026-10-15,state,test_navigation.py,automated,"приём: flat() в test_stage8.py/test_stage9.py/test_stage10.py; возврат не определён — правила «все тесты нормализуют» нет, flat есть в 3 из 17"
+B-05,Правка не записалась при рапорте об успехе,3,2026-09-24,2026-10-15,state,test_rules.py [10],automated,CONVENTIONS.md 12.3 шаг 4; тесты читают файл после правки
+B-06,Пустой результат проверки принят за отсутствие изменений,2,2026-09-24,2026-10-15,doc,test_rules.py [10],automated,CONVENTIONS.md 12.2 пункт 6; scripts/repo-validate.sh
+B-07,Счётчик проверки считал не то,4,2026-09-24,2026-10-15,state,test_stage10.py,automated,tests/test_stage10.py; tests/test_navigation.py
+B-08,Push без сверки HEAD с remote,3,2026-09-24,2026-10-15,doc,test_rules.py [9],automated,CONVENTIONS.md 11.5
+B-09,Найденный дефект не учтён в пуле (мета-класс),48,2026-09-24,2026-10-15,doc,test_bestiary.py,automated,CONVENTIONS.md 12.6; research/bestiary.csv
+B-10,Абсолютный путь зашит в тест: копия тестирует оригинал,1,2026-10-15,2026-10-15,state,,open,tests/test_rules.py: ROOT из __file__; тест возврата дефекта на копии
+B-11,Ссылка на несуществующий раздел документа,3,2026-10-15,2026-10-15,state,test_rules.py [9],automated,CONVENTIONS.md 11 ссылался на раздел 13; tests/test_rules.py
