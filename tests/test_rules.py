@@ -346,5 +346,37 @@ for r in rows[1:]:
 t(all(len(v) == 1 for v in tool_dirs.values()),
   f'на каждый каталог утилиты указывает одна строка (каталогов {len(tool_dirs)})')
 
+print('\n[14] Реестр Strelec согласован с manifest.csv (CONVENTIONS.md §7.2.1)')
+# Реестр отвечает на вопрос "есть ли утилита в сборке", от которого зависит
+# объём лицензионной сверки. Проверка держит форму и состав: утилита без
+# строки в реестре осталась бы без режима сверки.
+import csv as _csv
+REG = 'tools/strelec-registry.csv'
+t(os.path.isfile(REG), f'{REG} существует')
+reg_rows = list(_csv.DictReader(io.open(REG, encoding='utf-8')))
+REG_COLS = ['name', 'category', 'in_strelec', 'strelec_version',
+            'own_copy_reason', 'audit_mode', 'status']
+t(list(reg_rows[0].keys()) == REG_COLS, 'заголовок реестра соответствует §7.2.1')
+mani_tools = {r[2] for r in rows[1:] if r[0] == 'tool'}
+reg_names = {r['name'] for r in reg_rows}
+t(reg_names == mani_tools,
+  f'реестр покрывает все утилиты манифеста (расхождение {reg_names ^ mani_tools or "нет"})')
+for r in reg_rows:
+    t(r['in_strelec'] in ('yes', 'no'),
+      f"{r['name']}: in_strelec из набора yes/no")
+    t(r['audit_mode'] in ('build_version', 'full'),
+      f"{r['name']}: audit_mode из набора build_version/full")
+    want = 'build_version' if r['in_strelec'] == 'yes' else 'full'
+    t(r['audit_mode'] == want,
+      f"{r['name']}: режим сверки соответствует признаку присутствия")
+    t(bool(r['own_copy_reason'].strip()),
+      f"{r['name']}: основание своей копии записано")
+    t(bool(r['status'].strip()), f"{r['name']}: состояние записано")
+t(os.path.isfile('tools/diagnostics/strelec-tools.md'),
+  'источник состава сборки на месте')
+src = io.open('tools/diagnostics/strelec-tools.md', encoding='utf-8').read()
+t('не сверен с самим образом' in src,
+  'в источнике состава сохранена оговорка о том, что он не сверен с ISO')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

@@ -1,0 +1,24 @@
+name,category,in_strelec,strelec_version,own_copy_reason,audit_mode,status
+CrystalDiskInfo,diagnostics/disk,yes,9.7.2,"в сборке 9.7.2, у нас 9.9.2 — свежее",build_version,pending
+MemTest86Plus,diagnostics/memory,yes,7.20,"в сборке 7.20, у нас 8.10 — свежее",build_version,pending
+DMDE,rescue/data_recovery,yes,не указана,не записана — дублирование под вопросом,build_version,decision_needed
+smartmontools,diagnostics/disk,no,,"SMART-лог одной командой из живой ОС, без перезагрузки",full,pending
+Prime95,diagnostics/cpu,no,,стресс CPU из живой Windows без перезагрузки,full,pending
+stress-ng,diagnostics/cpu,no,,стресс CPU и памяти в Linux,full,pending
+NTPWEdit,rescue/password,no,,правка SAM офлайн; в сборке пять иных средств сброса пароля,full,pending
+WinUtil,os/windows/tweaks,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
+Win11Debloat,os/windows/debloat,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
+Sophia_Script,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
+LGPO,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,pending
+RustDesk,network/remote,no,,"свой сервер вместо чужого посредника; в сборке TeamViewer, AnyDesk и др.",full,pending
+iperf3,network/speed,no,,замер полосы между двумя точками,full,pending
+Nmap,network/scan,no,,"в сборке Advanced IP Scanner, но он не про порты и службы",full,pending
+Wireshark,network/capture,no,,захват и разбор трафика,full,pending
+WifiInfoView,network/wifi,no,,состав и сигнал Wi-Fi из живой ОС,full,pending
+MyPublicWifi,network/wifi,no,,точка доступа на станции,full,pending
+Autoruns,security/audit,no,,в сборке Sysinternals нет вообще,full,pending
+ProcessExplorer,security/audit,no,,в сборке Sysinternals нет вообще,full,pending
+TCPView,security/audit,no,,в сборке Sysinternals нет вообще,full,pending
+VeraCrypt,security/encryption,no,,в сборке шифрования нет,full,pending
+SDIO,drivers/packs,no,,в сборке средств подбора драйверов нет,full,pending
+SDIO-drivers,drivers/packs,no,,в сборке средств подбора драйверов нет,full,pending
