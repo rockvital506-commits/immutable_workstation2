@@ -1002,12 +1002,51 @@ Security Compliance Toolkit, лицензия Proprietary (Freeware), лицен
 
 ---
 
-## Этап 6 — AutoInstall / unattended / persistence
+## Этап 6 — AutoInstall / unattended / persistence (AUDIT, реализация не начата)
 
-- [ ] `ventoy/autoinstall/` — реальные `autounattend.xml` (Windows) и kickstart/preseed (Linux)
-- [ ] `ventoy/persistence/` — `persistence.dat` + строки в `persistence/image_conf.json`
-- [ ] Привязка образов к шаблонам через блок `auto_install` в `ventoy.json`
-- [ ] Проверка загрузки в VM (UEFI + Legacy)
+Исследование — `research/16-autoinstall-persistence.md`. По правилу №2
+(`CONVENTIONS.md` §7.2) реализация не начата: часть пунктов уже закрыта на
+Этапе 3, часть требует решений.
+
+### Что уже построено и не требует переделки
+
+`ventoy.json` заполнен: блоки `control`, `menu_alias`, `persistence` и
+`auto_install` на месте. Каталог `persistence/` содержит README,
+`image_conf.json` и заглушку `.dat`. Каталог `autoinstall/` содержит README с
+четырьмя правилами плагина. Всё это сделано на Этапе 3.
+
+- [x] ~~`ventoy/persistence/` — строки в `image_conf.json`~~ — есть, и дубль в
+      `ventoy.json`
+- [x] ~~Привязка образов к шаблонам через блок `auto_install`~~ — блок есть;
+      уточняется по итогам AUDIT (R2, R3)
+
+### Что показали исследования
+
+**Файл ответа обязан содержать проход `windowsPE`.** Ventoy раскладывает шаблон
+как `X:\autounattend.xml`; без валидных настроек текущего прохода Setup не
+кэширует файл, и установка молча уходит в ручной режим.
+
+**Переменные `$$VT_…$$` — защита от установки на флешку.** Документация Ventoy
+формулирует риск прямо: жёстко заданный `DISK0` может установить ОС на диск,
+где лежит Ventoy. Для целевой станции есть точная переменная
+`$$VT_WINDOWS_DISK_NONVTOY_CLOSEST_256$$` — NVMe 256 ГБ.
+
+**Файл ответа в корне флешки применяется всегда** (дефект Ventoy 1.1.05,
+issue #3168) и отказаться от него нельзя. Наше размещение в
+`/ventoy/autoinstall/` — требование, а не стиль.
+
+**Правило «не задавать timeout» неполное.** При заданном `autosel` и
+отсутствующем `timeout` меню не появляется вовсе и шаблон применяется без
+спроса. Уточнение: не задавать ни `timeout`, ни `autosel`.
+
+- [ ] `ventoy/autoinstall/` — шаблоны `autounattend.xml` (Windows) и, по решению
+      заказчика, preseed для Linux Mint
+- [ ] `ventoy/persistence/persistence.dat` — бэкенд 16 ГБ, ext4, метка
+      `casper-rw` (в git не хранится, только заглушка и команда создания)
+- [ ] Привести README `autoinstall/` к факту: убрать `diskpart-256gb.txt`,
+      добавить правило про `windowsPE`, переменные и корень флешки
+- [ ] Проверка загрузки в VM (UEFI + Legacy) — **в песочнице невыполнимо**,
+      переносится в «Не проверено»
 
 **Фиксация:** коммит «Этап 6: автоустановка и persistence».
 
