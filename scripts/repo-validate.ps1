@@ -71,7 +71,12 @@ Write-Head '[1/6] Обязательные файлы корня'
 $RequiredFiles = @(
     'README.md','PLAN.md','CONVENTIONS.md','.gitignore','manifest.csv',
     'ventoy-partition/ventoy/ventoy.json','ventoy-partition/ISO/README.md',
-    'tools/README.md'
+    'tools/README.md',
+    # Документация на флешке. Каталог tools/docs/ отмечался закрытым в PLAN.md
+    # семь этапов подряд, пока не был создан, - валидация его не проверяла.
+    'tools/docs/README.md','tools/docs/recovery.md','tools/docs/reinstall.md',
+    'tools/docs/field-checklist.md','tools/docs/compatibility.md',
+    'tools/docs/CHANGELOG-flash.md'
 )
 foreach ($f in $RequiredFiles) {
     $full = Join-Path $RepoRoot ($f -replace '/', '\')

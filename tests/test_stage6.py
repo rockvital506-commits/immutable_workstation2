@@ -198,7 +198,7 @@ if 'station_answer' in by_name:
     t(by_name['station_answer'][1] ==
       'builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2',
       'station_answer: category — каталог сборки')
-t(len(body) == 45, f'строк данных 45 (факт {len(body)})')
+t(len(body) == 46, f'строк данных 46 (факт {len(body)})')
 
 # --- [9] Правило закреплено в CONVENTIONS ---------------------------------
 

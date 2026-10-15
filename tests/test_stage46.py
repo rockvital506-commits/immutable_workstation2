@@ -119,7 +119,7 @@ raw = open('manifest.csv', 'rb').read()
 t(b'\r\n' not in raw, 'manifest.csv в LF, без CRLF')
 rows = list(csv.reader(io.open('manifest.csv', encoding='utf-8')))
 head, body = rows[0], rows[1:]
-t(len(body) == 45, f'42 строк данных (факт {len(body)})')
+t(len(body) == 46, f'строк данных 46 (факт {len(body)})')
 t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')
 sдио = [r for r in body if r[1] == 'drivers/packs']
 t(len(sдио) == 2, f'две строки drivers/packs (факт {len(sдио)})')

@@ -60,6 +60,15 @@ for f in README.md PLAN.md CONVENTIONS.md .gitignore manifest.csv \
     if [ -f "$f" ]; then ok "есть $f"; else err "отсутствует обязательный файл $f"; fi
 done
 
+# Документация на флешке. Каталог tools/docs/ отмечался закрытым в PLAN.md
+# семь этапов подряд, пока не был создан, — валидация его не проверяла.
+# Поэтому список файлов здесь, а не только проверка каталога.
+for f in tools/docs/README.md tools/docs/recovery.md tools/docs/reinstall.md \
+         tools/docs/field-checklist.md tools/docs/compatibility.md \
+         tools/docs/CHANGELOG-flash.md; do
+    if [ -f "$f" ]; then ok "есть $f"; else err "отсутствует документ $f"; fi
+done
+
 for t in UTILITY_README.md SCRIPT_README.md MODULE_README.md; do
     if [ -f "tools/_templates/$t" ]; then ok "есть шаблон tools/_templates/$t"
     else err "отсутствует шаблон tools/_templates/$t"; fi

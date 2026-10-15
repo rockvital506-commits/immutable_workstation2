@@ -15,7 +15,8 @@ TESTS = ['test_repo.py', 'test_rules.py', 'test_stage42.py',
          'test_stage43.py', 'test_stage44.py', 'test_stage45.py',
          'test_stage46.py', 'test_stage47.py', 'test_stage7.py',
          'test_stage48.py', 'test_stage5.py',
-         'test_stage6.py']
+         'test_stage6.py',
+         'test_stage8.py']
 
 
 def main() -> int:

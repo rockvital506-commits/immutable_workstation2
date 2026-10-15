@@ -27,6 +27,14 @@ EXPECTED_FIELDS = 10
 # Хэш считается по конкатенации файлов в порядке сортировки путей,
 # поэтому он воспроизводим и сверяем с manifest.csv.
 SELF_ENTITIES = {
+    "docs": [
+        "tools/docs/CHANGELOG-flash.md",
+        "tools/docs/README.md",
+        "tools/docs/compatibility.md",
+        "tools/docs/field-checklist.md",
+        "tools/docs/recovery.md",
+        "tools/docs/reinstall.md",
+    ],
     "station_answer": [
         "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/README.md",
         "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/autounattend-ltsc-2024.xml",
