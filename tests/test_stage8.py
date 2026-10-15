@@ -196,8 +196,8 @@ DONE = ['| 1 |', '| 2 |', '| 3 |', '| 3c |', '| 3d |', '| 4 |', '| 5 |',
 for row in DONE:
     t(row in sec and sec.split(row)[1].split('\n')[0].count('✅') == 1,
       f'строка {row.strip("| ")} помечена готовой')
-t('| 9 |' in sec and '⬜' in sec.split('| 9 |')[1].split('\n')[0],
-  'Этап 9 ещё не помечен готовым')
+t('| 9 |' in sec and '✅' in sec.split('| 9 |')[1].split('\n')[0],
+  'Этап 9 помечен готовым')
 t('| 10 |' in sec and '⬜' in sec.split('| 10 |')[1].split('\n')[0],
   'Этап 10 ещё не помечен готовым')
 t('tools/docs/' in rd, 'README указывает фактическое размещение документации')

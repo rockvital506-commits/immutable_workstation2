@@ -44,5 +44,5 @@ script,scripts,apply-blocking,,,0568376d1043776e1428f1cfddcf56ac1c66fc05f421612c
 script,scripts,validate-system,,,76c6cca37685257c89123134d2a74cacab88ea8aa592975f1791530eb2263b8d,38288,1.0,2026-10-15,present
 script,scripts,tune-ssd-ram,,,786646a441605e55c529f779766f43beb5a21ca0db1300184c21e16fd7553505,20972,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_answer,,,782fad2ad0ca582a617db403fc82604ffa5d36155b61eed359a6b8287730a57d,34616,1.0,2026-10-15,present
-module,docs,docs,,,c3b7558e6662ed6a9154ffd891d461987137cf8064d28ddfb436cca92f446288,53835,1.0,2026-10-15,present
+module,docs,docs,,,33d9993ca1b1cfa6e05ac0ba9c1a09bedac776eb7faf2e8ab13045672d1cb3f3,72523,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_algorithm,,,2fec983bbf7793370b767b1632eafeba603cdcbd8da22abf1cf9b3c7fe7ef3b4,46924,1.0,2026-10-15,present

@@ -8,7 +8,8 @@
       * раздел VENTOY доступен, есть \ventoy\ventoy.json и \ISO
       * ventoy.json на флешке совпадает с версией из репозитория
       * каждому ISO на флешке соответствует заглушка в репозитории и наоборот
-      * SHA256 образов совпадает с manifest.csv (-Verify)
+      * SHA256 образов и бинарников совпадает с manifest.csv (-Verify,
+        все типы сущностей: образы на разделе VENTOY, утилиты на TOOLS)
       * набор групп на разделе TOOLS совпадает с tools\ в репозитории
       * свободное место на разделах
 
@@ -147,33 +148,54 @@ if ($RepoStubs.Count -eq 0 -and $FlashIsos.Count -eq 0) {
 }
 
 # ------------------------------------------------------------
-Write-Head '[4/5] Контрольные суммы образов (-Verify)'
+Write-Head '[4/5] Контрольные суммы (-Verify)'
 # ------------------------------------------------------------
+# Сверяются ВСЕ типы сущностей, а не только ISO: в манифесте 30 строк с
+# заполненным полем file, из них 23 - утилиты. Образы лежат на разделе VENTOY,
+# утилиты - на разделе TOOLS, поэтому база пути зависит от типа.
 if (-not $Verify) {
     Write-Ok 'проверка SHA256 пропущена (запустите с -Verify)'
 } else {
-    $checked = 0
+    $checked = 0; $nosha = 0; $missf = 0; $notools = 0
     foreach ($row in (Import-Csv -LiteralPath $ManifestPath)) {
-        if ($row.type -ne 'iso' -or [string]::IsNullOrWhiteSpace($row.file)) { continue }
-        $target = Join-Path $VentoyRoot ($row.category -replace '/', '\')
+        if ([string]::IsNullOrWhiteSpace($row.file)) { continue }
+
+        # Куда положить файл на флешке: образы - на VENTOY, остальное - на TOOLS
+        if ($row.type -eq 'iso') { $base = $VentoyRoot } else { $base = $ToolsRoot }
+        if ([string]::IsNullOrWhiteSpace($base)) {
+            if ($row.type -ne 'iso') { $notools++ }
+            continue
+        }
+
+        $target = Join-Path $base ($row.category -replace '/', '\\')
         $target = Join-Path $target $row.file
         if (-not (Test-Path -LiteralPath $target -PathType Leaf)) {
-            Write-Warn "manifest: $($row.category)/$($row.file) отсутствует на флешке"
+            Write-Warn "manifest: $($row.type) $($row.category)/$($row.file) отсутствует на флешке"
+            $missf++
             continue
         }
         if ($row.sha256 -eq 'PENDING' -or [string]::IsNullOrWhiteSpace($row.sha256)) {
-            Write-Warn "manifest: для $($row.file) нет SHA256 — сверить нечем"
+            Write-Warn "manifest: для $($row.category)/$($row.file) нет SHA256 — сверить нечем"
+            $nosha++
             continue
         }
         $actual = (Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant()
         $checked++
         if ($actual -eq $row.sha256.ToLowerInvariant()) {
-            Write-Ok "SHA256 совпадает: $($row.file)"
+            Write-Ok "SHA256 совпадает: $($row.type) $($row.category)/$($row.file)"
         } else {
-            Write-Fail "SHA256 НЕ совпадает: $($row.file) (ожидалось $($row.sha256.Substring(0,12))..., факт $($actual.Substring(0,12))...)"
+            Write-Fail "SHA256 НЕ совпадает: $($row.category)/$($row.file) (ожидалось $($row.sha256.Substring(0,12))..., факт $($actual.Substring(0,12))...)"
         }
     }
-    if ($checked -eq 0) { Write-Warn 'ни один образ не был сверен по SHA256' }
+
+    $summary = "  Итог сверки сумм: сверено $checked, без суммы $nosha, отсутствует $missf"
+    if ($notools -gt 0) { $summary += ", не проверено $notools (не задан -Tools)" }
+    Write-Host $summary
+    if ($checked -eq 0) {
+        Write-Warn 'ни одна контрольная сумма не была сверена с реальным файлом'
+    } else {
+        Write-Ok "сверено с реальными файлами: $checked"
+    }
 }
 
 # ------------------------------------------------------------

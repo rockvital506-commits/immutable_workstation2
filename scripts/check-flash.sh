@@ -11,7 +11,8 @@
 #   * раздел VENTOY смонтирован, есть /ventoy/ventoy.json и /ISO
 #   * ventoy.json на флешке совпадает с версией из репозитория
 #   * каждому ISO на флешке соответствует заглушка в репозитории и наоборот
-#   * SHA256 образов совпадает с manifest.csv (--verify)
+#   * SHA256 образов и бинарников совпадает с manifest.csv (--verify,
+#     все типы сущностей: образы на разделе VENTOY, утилиты на TOOLS)
 #   * набор групп на разделе TOOLS совпадает с tools/ в репозитории
 #   * свободное место на разделах
 #
@@ -177,35 +178,59 @@ else
 fi
 
 # ------------------------------------------------------------
-head2 '[4/5] Контрольные суммы образов (--verify)'
+head2 '[4/5] Контрольные суммы (--verify)'
 # ------------------------------------------------------------
+# Сверяются ВСЕ типы сущностей, а не только ISO: в манифесте 30 строк с
+# заполненным полем file, из них 23 — утилиты. Образы лежат на разделе VENTOY,
+# утилиты — на разделе TOOLS, поэтому база пути зависит от типа.
 if [ "$VERIFY" -eq 0 ]; then
     ok 'проверка SHA256 пропущена (запустите с --verify)'
 else
-    CHECKED=0
+    CHECKED=0 NOSHA=0 MISSF=0 NOTOOLS=0
     while IFS='|' read -r mtype mcat mname mfile msha msize mstatus; do
-        [ "$mtype" = 'iso' ] || continue
         [ -n "$mfile" ] || continue
-        target="$VENTOY_MOUNT/$mcat/$mfile"
+
+        # Куда положить файл на флешке: образы — на VENTOY, остальное — на TOOLS
+        case "$mtype" in
+            iso) base="$VENTOY_MOUNT" ;;
+            *)   base="$TOOLS_MOUNT"  ;;
+        esac
+        if [ -z "$base" ]; then
+            [ "$mtype" = 'iso' ] || NOTOOLS=$((NOTOOLS + 1))
+            continue
+        fi
+
+        target="$base/$mcat/$mfile"
         if [ ! -f "$target" ]; then
-            warn "manifest: $mcat/$mfile отсутствует на флешке"
+            warn "manifest: $mtype $mcat/$mfile отсутствует на флешке"
+            MISSF=$((MISSF + 1))
             continue
         fi
         if [ "$msha" = 'PENDING' ] || [ -z "$msha" ]; then
-            warn "manifest: для $mfile нет SHA256 — сверить нечем"
+            warn "manifest: для $mcat/$mfile нет SHA256 — сверить нечем"
+            NOSHA=$((NOSHA + 1))
             continue
         fi
         actual="$(sha256sum "$target" 2>/dev/null | awk '{print $1}')"
         CHECKED=$((CHECKED + 1))
         if [ "$(printf '%s' "$actual" | tr 'A-F' 'a-f')" = "$(printf '%s' "$msha" | tr 'A-F' 'a-f')" ]; then
-            ok "SHA256 совпадает: $mfile"
+            ok "SHA256 совпадает: $mtype $mcat/$mfile"
         else
-            err "SHA256 НЕ совпадает: $mfile (ожидалось ${msha:0:12}..., факт ${actual:0:12}...)"
+            err "SHA256 НЕ совпадает: $mcat/$mfile (ожидалось ${msha:0:12}..., факт ${actual:0:12}...)"
         fi
     done <<EOF
 $MANIFEST_PARSED
 EOF
-    [ "$CHECKED" -eq 0 ] && warn 'ни один образ не был сверен по SHA256'
+
+    printf '  Итог сверки сумм: сверено %s, без суммы %s, отсутствует %s' \
+           "$CHECKED" "$NOSHA" "$MISSF"
+    [ "$NOTOOLS" -gt 0 ] && printf ', не проверено %s (не задан --tools)' "$NOTOOLS"
+    printf '\n'
+    if [ "$CHECKED" -eq 0 ]; then
+        warn 'ни одна контрольная сумма не была сверена с реальным файлом'
+    else
+        ok "сверено с реальными файлами: $CHECKED"
+    fi
 fi
 
 # ------------------------------------------------------------
