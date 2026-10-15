@@ -328,7 +328,7 @@ if 'LGPO' in by_name:
     t(by_name['LGPO'][0] == 'tool', 'LGPO: type = tool')
     t(by_name['LGPO'][1] == 'os/windows/gpo_lock',
       f"LGPO: category = os/windows/gpo_lock (факт {by_name['LGPO'][1]})")
-t(len(body) == 44, f'строк данных 44 (факт {len(body)})')
+t(len(body) == 45, f'строк данных 44 (факт {len(body)})')
 
 # --- [11] Регрессия: предыдущие этапы целы --------------------------------
 

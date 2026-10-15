@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  autounattend-ltsc-2024.xml — файл ответа станции MSI Modern 15 B12M-211RU
+
+  Назначение: автоматическая установка Win11 IoT Enterprise LTSC 2024 из
+  en-us_windows_11_iot_enterprise_ltsc_2024_x64_dvd_f6b14814.iso на NVMe
+  256 ГБ. Файл принадлежит СБОРКЕ, а не общему каталогу: он учитывает
+  накопитель станции, конкретный образ и ТЗ заказчика (CONVENTIONS.md §6).
+
+  Куда положить на флешке и что вставить в ventoy.json — шаг 6 algorithm.md.
+
+  КРИТИЧНО:
+  1. Кодировка UTF-8. Раскрытие переменных Ventoy требует UTF-8.
+  2. Проход windowsPE обязателен: без него Setup не кэширует файл и молча
+     уходит в ручной режим (research/16, N1).
+  3. Имя файла на флешке должно быть autounattend.xml — иначе установщик его
+     не подхватит. Переименовать при копировании.
+  4. Диск задан переменной, а не числом: жёсткий DiskID 0 может поставить ОС
+     на флешку Ventoy (research/16, N2).
+  5. НЕ класть в корень флешки: файл в корне применяется ко всем ISO и
+     отказаться от него нельзя (research/16, N3).
+
+  Обход требований (LabConfig) в этом файле НЕ включён: станция поддерживается
+  официально (i3-1215U, TPM 2.0, 8 ГБ). Для неподдерживаемого железа —
+  autounattend-ltsc-2024-bypass.xml.
+
+  Не проверено: файл ни разу не применялся к реальному установщику.
+-->
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+
+  <!-- ============================================================
+       windowsPE — ОБЯЗАТЕЛЬНЫЙ проход. Здесь язык, разметка и выбор
+       образа. Без этого прохода файл не кэшируется.
+       ============================================================ -->
+  <settings pass="windowsPE">
+    <component name="Microsoft-Windows-International-Core-WinPE"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS"
+               xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <SetupUILanguage>
+        <UILanguage>en-US</UILanguage>
+      </SetupUILanguage>
+      <InputLocale>0409:00000409</InputLocale>
+      <SystemLocale>en-US</SystemLocale>
+      <UILanguage>en-US</UILanguage>
+      <UserLocale>ru-RU</UserLocale>
+    </component>
+
+    <component name="Microsoft-Windows-Setup"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS"
+               xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+      <!-- Разметка GPT под NVMe 256 ГБ. Порядок и размеры — research/16, N10.
+           WinRE первым разделом, EFI вторым, MSR третьим, Windows на остаток. -->
+      <DiskConfiguration>
+        <Disk wcm:action="add">
+          <!-- ПЕРЕМЕННАЯ VENTOY: не-Ventoy диск, ближайший к 256 ГБ.
+               На этой станции это NVMe. Не заменять на литеральное число. -->
+          <DiskID>$$VT_WINDOWS_DISK_NONVTOY_CLOSEST_256$$</DiskID>
+          <WillWipeDisk>true</WillWipeDisk>
+          <CreatePartitions>
+            <CreatePartition wcm:action="add">
+              <Order>1</Order>
+              <Size>500</Size>
+              <Type>Primary</Type>
+            </CreatePartition>
+            <CreatePartition wcm:action="add">
+              <Order>2</Order>
+              <Size>260</Size>
+              <Type>EFI</Type>
+            </CreatePartition>
+            <CreatePartition wcm:action="add">
+              <Order>3</Order>
+              <Size>128</Size>
+              <Type>MSR</Type>
+            </CreatePartition>
+            <CreatePartition wcm:action="add">
+              <Order>4</Order>
+              <Extend>true</Extend>
+              <Type>Primary</Type>
+            </CreatePartition>
+          </CreatePartitions>
+          <ModifyPartitions>
+            <ModifyPartition wcm:action="add">
+              <Order>1</Order>
+              <PartitionID>1</PartitionID>
+              <Format>NTFS</Format>
+              <Label>WinRE</Label>
+              <TypeID>DE94BBA4-06D1-4D40-A16A-BFD50179D6AC</TypeID>
+            </ModifyPartition>
+            <ModifyPartition wcm:action="add">
+              <Order>2</Order>
+              <PartitionID>2</PartitionID>
+              <Format>FAT32</Format>
+              <Label>System</Label>
+            </ModifyPartition>
+            <ModifyPartition wcm:action="add">
+              <Order>3</Order>
+              <PartitionID>3</PartitionID>
+            </ModifyPartition>
+            <ModifyPartition wcm:action="add">
+              <Order>4</Order>
+              <PartitionID>4</PartitionID>
+              <Format>NTFS</Format>
+              <Label>Windows</Label>
+              <Letter>C</Letter>
+            </ModifyPartition>
+          </ModifyPartitions>
+        </Disk>
+        <WillShowUI>OnError</WillShowUI>
+      </DiskConfiguration>
+
+      <ImageInstall>
+        <OSImage>
+          <InstallTo>
+            <DiskID>$$VT_WINDOWS_DISK_NONVTOY_CLOSEST_256$$</DiskID>
+            <PartitionID>4</PartitionID>
+          </InstallTo>
+          <InstallToAvailablePartition>false</InstallToAvailablePartition>
+          <WillShowUI>OnError</WillShowUI>
+        </OSImage>
+      </ImageInstall>
+
+      <UserData>
+        <AcceptEula>true</AcceptEula>
+        <!-- Ключ не задаётся: у IoT Enterprise LTSC 2024 активация идёт
+             своим каналом, подстановка потребительского ключа переведёт
+             установку на другую редакцию. -->
+      </UserData>
+    </component>
+  </settings>
+
+  <!-- ============================================================
+       specialize — имя компьютера, часовой пояс, принятие EULA.
+       ============================================================ -->
+  <settings pass="specialize">
+    <component name="Microsoft-Windows-Shell-Setup"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS"
+               xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <ComputerName>MSI-B12M</ComputerName>
+      <TimeZone>Russian Standard Time</TimeZone>
+    </component>
+    <component name="Microsoft-Windows-International-Core"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS"
+               xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <InputLocale>0419:00000419</InputLocale>
+      <SystemLocale>ru-RU</SystemLocale>
+      <UILanguage>ru-RU</UILanguage>
+      <UserLocale>ru-RU</UserLocale>
+    </component>
+  </settings>
+
+  <!-- ============================================================
+       oobeSystem — пропуск экранов OOBE и локальная учётная запись.
+
+       Решение заказчика: имя + ПУСТОЙ пароль. Пароль задаётся на шаге 8
+       алгоритма, до сдачи станции. Локальная учётная запись создаётся
+       только при физически отключённой сети (шаг 3 алгоритма);
+       OOBE\BYPASSNRO больше не работает (research/16, N8).
+       ============================================================ -->
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-Shell-Setup"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS"
+               xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+      <OOBE>
+        <HideEULAPage>true</HideEULAPage>
+        <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
+        <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+        <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+        <ProtectYourPC>3</ProtectYourPC>
+      </OOBE>
+
+      <UserAccounts>
+        <LocalAccounts>
+          <LocalAccount wcm:action="add">
+            <Name>user</Name>
+            <Group>Administrators</Group>
+            <DisplayName>User</DisplayName>
+            <Description>Локальная учётная запись станции MSI B12M-211RU</Description>
+            <!-- Пароль намеренно не задан: пустой элемент Password с
+                 PlainText=true означает вход без пароля. Задать пароль —
+                 шаг 8 алгоритма, до передачи станции. -->
+            <Password>
+              <Value></Value>
+              <PlainText>true</PlainText>
+            </Password>
+          </LocalAccount>
+        </LocalAccounts>
+      </UserAccounts>
+
+      <AutoLogon>
+        <Enabled>true</Enabled>
+        <Username>user</Username>
+        <LogonCount>1</LogonCount>
+      </AutoLogon>
+
+      <TimeZone>Russian Standard Time</TimeZone>
+    </component>
+  </settings>
+</unattend>

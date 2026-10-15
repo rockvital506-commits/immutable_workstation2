@@ -27,6 +27,11 @@ EXPECTED_FIELDS = 10
 # Хэш считается по конкатенации файлов в порядке сортировки путей,
 # поэтому он воспроизводим и сверяем с manifest.csv.
 SELF_ENTITIES = {
+    "station_answer": [
+        "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/README.md",
+        "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/autounattend-ltsc-2024.xml",
+        "ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/autounattend-ltsc-2024-bypass.xml",
+    ],
     "tune-ssd-ram": [
         "tools/scripts/tune-ssd-ram.ps1",
         "tools/scripts/tune-ssd-ram.sh",

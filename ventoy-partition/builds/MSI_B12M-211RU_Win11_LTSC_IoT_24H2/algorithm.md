@@ -224,17 +224,86 @@ diskpart → list volume       # три раздела, нужные буквы
 
 **Сеть.** offline.
 
-**Действия.** Ventoy → ISO Windows. Файл ответов подхватывается из
-`/ventoy/autoinstall/autounattend.xml` (правило `auto_install` в `ventoy.json`,
-секция `parent: /ISO/windows`).
+**Действия.** Файл ответа берётся из каталога сборки
+[`answer/`](answer/), а не из общего `/ventoy/autoinstall/`: он учитывает NVMe
+256 ГБ этой станции, конкретный образ LTSC 2024 и ТЗ заказчика
+(`CONVENTIONS.md` §6).
 
-Файл обязан называться именно `autounattend.xml`. В нём — пропуск OOBE,
-создание локальной учётной записи, отключение телеметрии на этапе specialize.
+**6.1. Выбрать файл.**
 
-**Проверка.** Установка прошла без запросов, рабочий стол доступен, сеть
-не запрашивалась.
+| Ситуация | Файл |
+|----------|------|
+| Целевая станция (i3-1215U, TPM 2.0, 8 ГБ, NVMe 256 ГБ) | `answer/autounattend-ltsc-2024.xml` |
+| Неподдерживаемое железо, обход требований | `answer/autounattend-ltsc-2024-bypass.xml` |
 
-**Откат.** Образ диска из шага 2.
+**6.2. Скопировать на флешку** в каталог сборки на разделе Ventoy, под именем
+`autounattend.xml`:
+
+```
+/mnt/ventoy/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/answer/autounattend-ltsc-2024.xml
+  ->  <буква>:\builds\MSI_B12M-211RU_Win11_LTSC_IoT_24H2\autounattend.xml
+```
+
+Имя при копировании меняется намеренно: установщик Windows подхватывает только
+`autounattend.xml`.
+
+**НЕ В КОРЕНЬ ФЛЕШКИ.** Файл ответа в корневом каталоге применяется ко всем ISO
+и отказаться от него нельзя (дефект Ventoy 1.1.05, `research/16`, N3).
+
+**6.3. Отредактировать `ventoy.json`** — блок `auto_install` в корне раздела
+Ventoy. Текущая запись ведёт на общий каталог и **для этой станции неверна**:
+
+```json
+"auto_install": [
+    {
+        "parent": "/ISO/windows",
+        "template": "/ventoy/autoinstall/autounattend.xml"
+    }
+]
+```
+
+Заменить на:
+
+```json
+"auto_install": [
+    {
+        "parent": "/ISO/windows",
+        "template": "/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/autounattend.xml"
+    }
+]
+```
+
+Правится **одна строка** — значение `template`. Ключ `parent` остаётся
+`/ISO/windows`: сопоставление по `image` не работает (`research/16`, K3).
+
+**НЕ ДОБАВЛЯТЬ** ключи `timeout` и `autosel`. При заданном `autosel` и
+отсутствующем `timeout` меню не появляется вовсе и шаблон применяется без
+спроса (`research/16`, N5). Нужен именно режим ожидания выбора.
+
+**6.4. Проверить конфигурацию до загрузки.** `F5 → Tools menu → Check plugin
+json configuration (ventoy.json)` — покажет, распознан ли блок.
+
+**6.5. Загрузить.** Ventoy → `/ISO/windows/` → образ LTSC 2024 → выбрать пункт
+«boot with /builds/.../autounattend.xml». Обычная загрузка ISO остаётся
+доступной — это способ поставить систему вручную, если шаблон не сработал.
+
+**Проверка.**
+
+| Что | Как | Норма |
+|-----|-----|-------|
+| Шаблон применился | `C:\Windows\Panther\unattend.xml` существует | файл есть |
+| Разметка | `Get-Partition` | 4 раздела: WinRE 500 МБ, System 260 МБ, MSR 128 МБ, Windows |
+| Установка на NVMe, не на флешку | `Get-Disk \| Select Number, FriendlyName` | системный диск — NVMe |
+| Учётная запись | `Get-LocalUser` | `user`, группа Administrators |
+| Сеть не запрашивалась | — | OOBE прошёл без запроса сети |
+
+Если шаблон не применился, начинать диагностику с `C:\Windows\Panther\`, а не
+с правки файла: чужой `autounattend.xml` от Rufus или Ventoy выше в порядке
+поиска и молча перекрывает наш (`research/16`, N4).
+
+**Откат.** Образ диска из шага 2. Точка невозврата — **начало** установки:
+в файле стоит `WillWipeDisk = true`, данные накопителя уничтожаются до
+завершения установки, а не после.
 
 ---
 
