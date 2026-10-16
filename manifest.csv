@@ -33,8 +33,8 @@ tool,network/wifi,MyPublicWifi,MyPublicWiFi.exe,https://www.mypublicwifi.com/,PE
 tool,security/audit,Autoruns,Autoruns.zip,https://download.sysinternals.com/files/Autoruns.zip,7b3a8eed819f732a3e4c134aecaeaebb8d643a46490ccddb82cc8a1a745c4cf7,0,14.3,2026-10-11,planned
 tool,security/audit,ProcessExplorer,ProcessExplorer.zip,https://download.sysinternals.com/files/ProcessExplorer.zip,746770d3f54326dd7da16c2b2815803ab131f348cba24a91cb6a38cfd2f7073f,0,17.14,2026-10-11,planned
 tool,security/audit,TCPView,TCPView.zip,https://download.sysinternals.com/files/TCPView.zip,4fc5ceba3e1b27ad95a24df35d094b454ec5f9478e12a8ca2b1b222705b9683b,0,4.19,2026-10-11,planned
-tool,security/encryption,VeraCrypt,VeraCrypt_Setup_x64_1.26.29.msi,https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.29/VeraCrypt_Setup_x64_1.26.29.msi,PENDING,52789248,1.26.29,2026-10-11,planned
-tool,drivers/packs,SDIO,SDIO_2.0.4.887.zip,https://www.glenn.delahoy.com/snappy-driver-installer-origin/,PENDING,0,2.0.4.887,2026-10-11,planned
+tool,security/encryption,VeraCrypt,VeraCrypt_Setup_x64_1.26.29.msi,https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.29/VeraCrypt_Setup_x64_1.26.29.msi,5ba6426983123cfb92bc1f09bd888fdbc0f53f300d0d9c5da52ce3aee8d474f0,52789248,1.26.29,2026-10-11,present
+tool,drivers/packs,SDIO,SDIO_2.0.4.887.zip,https://www.glenn.delahoy.com/snappy-driver-installer-origin/,9d92cdd3bebf04d48e495b30277ae61ef2a61a67e1d164a6a241c1bc3a8a3d0b,0,2.0.4.887,2026-10-11,planned
 script,drivers/export,integrate-drivers,,,8b603821f9b374c65a43f3637c970af672b6287c9d8545657a9cdc159dd71210,11808,1.0,2026-10-14,present
 module,firmware/bios,bios_update,,,94fda0b3a3f977b0c4f4905da3bd28ad8a4ac812c6055fa4957f18d28ee0d1b6,15933,1.0,2026-10-14,present
 script,firmware/bios,bios-inventory,,,94fda0b3a3f977b0c4f4905da3bd28ad8a4ac812c6055fa4957f18d28ee0d1b6,15933,1.0,2026-10-14,present
@@ -43,5 +43,5 @@ script,scripts,apply-blocking,,,0568376d1043776e1428f1cfddcf56ac1c66fc05f421612c
 script,scripts,validate-system,,,76c6cca37685257c89123134d2a74cacab88ea8aa592975f1791530eb2263b8d,38288,1.0,2026-10-15,present
 script,scripts,tune-ssd-ram,,,786646a441605e55c529f779766f43beb5a21ca0db1300184c21e16fd7553505,20972,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_answer,,,f46fb9305978d7b18dd9560ae888ef4c1694d7148e8b14a807f555ce3815f828,34909,1.0,2026-10-15,present
-module,docs,docs,,,cb0a5470ce57555ec0d5e91f4af338f02397abc214b2463f9a67a68f97c887b3,103223,1.0,2026-10-15,present
+module,docs,docs,,,9ec3e7f2ad174038ec348065a21e23800f99c6a9730daed44c7d14f0e461b1a0,106212,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_algorithm,,,8d0655865cc402f8ea76521faf1562c2c25c822399dfabeb97794759367d5d3f,63545,1.0,2026-10-15,present

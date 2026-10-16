@@ -133,7 +133,11 @@ for r in sдио:
     t(r[0] == 'tool', f'{r[3]}: type=tool')
     t(os.path.isdir(f'tools/{r[1]}/{r[2]}'), f'{r[3]}: каталог сущности существует')
     t(r[4].startswith('https://'), f'{r[3]}: url заполнен')
-    t(r[9] == 'planned', f'{r[3]}: status=planned')
+    # Статус по четырём условиям §4, а не снимком: размер у SDIO неизвестен,
+    # поэтому перехода в present нет даже при известной сумме.
+    ready = (r[4].startswith('https://') and r[5] != 'PENDING' and r[6] != '0')
+    want = 'present' if ready else 'planned'
+    t(r[9] == want, f'{r[3]}: status={want} по четырём условиям §4 (факт {r[9]})')
 # На 4.6 у export/ не было строк — утилит там нет. С 2026-10-14 там есть
 # собственный скрипт интеграции (решение заказчика: только драйверы), поэтому
 # строка есть и она script, а не tool.
