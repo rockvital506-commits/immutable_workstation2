@@ -106,10 +106,22 @@ t('sdi-tool.org' not in u,
   'таблица размеров пака не дублируется в README программы — она одна, в SDIO-drivers')
 
 print('\n[6] Заглушки')
+# Ожидание из manifest.csv, не литералом: прежняя проверка требовала 'PENDING'
+# и не давала заглушке принять реальную сумму (находка N41).
+MANI = {r['file']: r['sha256']
+        for r in csv.DictReader(io.open('manifest.csv', encoding='utf-8'))}
+SHA_FIELD = re.compile(r'\|\s*SHA256\s*\|\s*`?([0-9a-fA-F]{64}|PENDING)`?')
 for stub, base in [(x, d) for x in STUBS]:
     txt = io.open(f'{base}/{stub}', encoding='utf-8').read()
     t('CONVENTIONS' in txt, f'{stub}: ссылка на CONVENTIONS.md')
-    t('PENDING' in txt, f'{stub}: SHA256 помечен PENDING')
+    want = MANI.get(stub[:-3])
+    t(want is not None, f'{stub}: строка есть в manifest.csv')
+    got = SHA_FIELD.search(txt)
+    t(got is not None, f'{stub}: в заглушке есть поле SHA256 со значением')
+    if got and want:
+        t(got.group(1).lower() == want.lower(),
+          f'{stub}: SHA256 в заглушке равен значению manifest.csv '
+          f'(в заглушке {got.group(1)[:12]}, в манифесте {want[:12]})')
     t('SHA256' in txt and 'Источник' in txt, f'{stub}: обязательные поля на месте')
     t('Как получить' in txt, f'{stub}: есть раздел «Как получить»')
     t('Куда положить на флешке' in txt, f'{stub}: есть раздел про размещение')

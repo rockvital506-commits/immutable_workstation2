@@ -8,7 +8,7 @@
 | Назначение | Snappy Driver Installer Origin — подбор и установка драйверов по HWID |
 | Версия | 2.0.4.887 — **не сверена с первоисточником** |
 | Источник | https://www.glenn.delahoy.com/snappy-driver-installer-origin/ |
-| SHA256 | `PENDING` |
+| SHA256 | `9d92cdd3bebf04d48e495b30277ae61ef2a61a67e1d164a6a241c1bc3a8a3d0b` |
 | Размер | около 11 МБ |
 | Лицензия | GNU GPL v3.0 — коммерческое использование разрешено |
 | Статус | `planned` |
@@ -19,7 +19,7 @@
 
 ## Проверка подлинности
 
-Вычислить SHA256 после скачивания и внести вместо `PENDING`:
+Сверить SHA256 скачанного файла с ожидаемым значением из таблицы выше — они обязаны совпасть:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 "E:\tools\drivers\packs\SDIO_2.0.4.887.zip"

@@ -9,7 +9,7 @@
 | Версия | 2026.08.24 |
 | Дата релиза | 2026-08-24 |
 | Источник | https://github.com/Raphire/Win11Debloat |
-| SHA256 | `PENDING` |
+| SHA256 | `e596cfe70d08499b5832204290db489f2b9dcfb23506bfffd162727aca477e77` |
 | Размер | 28155 байт |
 | Лицензия | MIT |
 | Статус | `present` — заглушка, URL и ожидаемая сумма на месте (§4) |
@@ -55,7 +55,7 @@ https://codeload.github.com/Raphire/Win11Debloat/zip/refs/tags/2026.08.24
 
 ## Проверка подлинности
 
-После скачивания вычислить SHA256 точки входа и внести вместо `PENDING`:
+Сверить SHA256 скачанного файла с ожидаемым значением из таблицы выше — они обязаны совпасть:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 "E:\tools\os\windows\debloat\Win11Debloat\Win11Debloat.ps1"

@@ -428,5 +428,43 @@ t(bl_map['manifest_pending_sha']
   == bl_map['manifest_rows'] - bl_map['manifest_sha_filled'],
   'sha_filled и pending_sha в сумме дают все строки')
 
+print('\n[16] SHA256 в заглушке равен значению manifest.csv (§2, §4)')
+# Класс B-13. Сумма хранилась в двух местах: в manifest.csv и в заглушке
+# бинарника. Обновлялось первое, второе оставалось `PENDING` — разошлись
+# восемь заглушек, включая VeraCrypt, у которой строка манифеста уже была
+# `present`. Пять тестов групп tools/ требовали в заглушке буквального
+# 'PENDING' и тем самым запрещали заглушке принять реальную сумму: правка
+# манифеста роняла тест, и расхождение выглядело обязательным состоянием.
+# Проверка сквозная — по всем строкам tool/iso, а не по подмножеству группы.
+SHA_ROW = re.compile(r'\|\s*SHA256\s*\|\s*`?([0-9a-fA-F]{64}|PENDING)`?')
+stubs = {}
+for base in ('tools', os.path.join('ventoy-partition', 'ISO')):
+    for root, dirs, fs in os.walk(base):
+        dirs[:] = [d for d in dirs if d != '__pycache__']
+        for f in fs:
+            if f.endswith('.md'):
+                stubs[f] = os.path.join(root, f)
+mrows2 = list(_csv2.DictReader(io.open('manifest.csv', encoding='utf-8')))
+checked = 0
+for r in mrows2:
+    if r['type'] not in ('tool', 'iso') or not r['file']:
+        continue
+    key = r['file'] + '.md'
+    t(key in stubs, f"{r['name']}: заглушка {key} найдена")
+    if key not in stubs:
+        continue
+    txt = io.open(stubs[key], encoding='utf-8').read()
+    m = SHA_ROW.search(txt)
+    t(m is not None, f"{r['name']}: в заглушке есть поле SHA256 со значением")
+    if not m:
+        continue
+    checked += 1
+    t(m.group(1).lower() == r['sha256'].lower(),
+      f"{r['name']}: SHA256 в заглушке равен manifest.csv "
+      f"(заглушка {m.group(1)[:12]}, манифест {r['sha256'][:12]})")
+t(checked == sum(1 for r in mrows2
+                 if r['type'] in ('tool', 'iso') and r['file']),
+  f'проверены все строки tool/iso с файлом ({checked})')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

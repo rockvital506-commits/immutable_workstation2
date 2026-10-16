@@ -8,7 +8,7 @@
 | Назначение | Пассивное сканирование эфира: SSID, BSSID, канал, RSSI, PHY, вендор |
 | Версия | 3.00 — **не сверена с nirsoft.net**, сайт недоступен из рабочей среды |
 | Источник | https://www.nirsoft.net/utils/wifi_information_view.html |
-| SHA256 | `PENDING` |
+| SHA256 | `9264a6ef47b882fa67b9431f6410c62be091524c39877a09cf6744dea8d8a988` |
 | Размер | около 486 КБ |
 | Лицензия | Freeware (NirSoft) |
 | Статус | `planned` |
@@ -24,7 +24,7 @@ x86 и x64. Портативный: распаковать и запустить
 
 ## Проверка подлинности
 
-После скачивания вычислить SHA256 и внести вместо `PENDING`:
+Сверить SHA256 скачанного файла с ожидаемым значением из таблицы выше — они обязаны совпасть:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 "E:\tools\network\wifi\WifiInfoView\wifiinfoview-x64.zip"

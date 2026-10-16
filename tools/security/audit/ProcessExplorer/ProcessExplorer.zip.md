@@ -8,7 +8,7 @@
 | Назначение | Процессы, потоки, DLL, дескрипторы, цифровые подписи |
 | Версия | **не закреплена** — в источниках 17.1 и 17.14, первоисточник недоступен |
 | Источник | https://download.sysinternals.com/files/ProcessExplorer.zip |
-| SHA256 | `PENDING` |
+| SHA256 | `746770d3f54326dd7da16c2b2815803ab131f348cba24a91cb6a38cfd2f7073f` |
 | Размер | около 3,3 МБ |
 | Лицензия | Microsoft Sysinternals Software License, freeware включая бизнес |
 | Статус | `planned` |
@@ -19,7 +19,7 @@
 
 ## Проверка подлинности
 
-После скачивания вычислить SHA256 и внести вместо `PENDING`:
+Сверить SHA256 скачанного файла с ожидаемым значением из таблицы выше — они обязаны совпасть:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 "E:\tools\security\audit\ProcessExplorer\ProcessExplorer.zip"

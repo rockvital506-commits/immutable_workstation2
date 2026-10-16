@@ -10,10 +10,10 @@
 | Версия | 7.5 (2025-05-12) |
 | Источник | https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe |
 | Зеркало | https://sourceforge.net/projects/smartmontools/files/ |
-| SHA256 | `PENDING` — вносится после скачивания |
-| Размер | ≈ 1.5 МБ |
+| SHA256 | `896337fcc253220614cf8cdbd5cf2321c5aa326a37a04160a672a281e6104c70` |
+| Размер | 1 508 408 байт (1,4 МБ) |
 | Лицензия | GPL-2.0 |
-| Статус | `planned` |
+| Статус | `present` |
 
 ## Как получить
 
@@ -22,8 +22,11 @@
 curl -LO https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe
 ```
 
-После скачивания заполнить SHA256 и размер в `/manifest.csv` и поменять
-`status` на `present`.
+Сумма и размер внесены в `/manifest.csv` и в эту заглушку: сумма — из
+манифеста пакетного менеджера `microsoft/winget-pkgs`, пакет
+`smartmontools.smartmontools` версии 7.5, размер — из API релизов GitHub.
+После скачивания сверить SHA256 файла с ожидаемым значением из таблицы выше —
+они обязаны совпасть.
 
 ## Проверка подлинности
 

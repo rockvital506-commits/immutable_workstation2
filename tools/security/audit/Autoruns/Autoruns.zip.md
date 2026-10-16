@@ -8,7 +8,7 @@
 | Назначение | Всё, что стартует вместе с системой; `Autorunsc.exe` даёт отчёт в CSV |
 | Версия | **не закреплена** — сверить с первоисточником нельзя, `microsoft.com` недоступен |
 | Источник | https://download.sysinternals.com/files/Autoruns.zip |
-| SHA256 | `PENDING` |
+| SHA256 | `7b3a8eed819f732a3e4c134aecaeaebb8d643a46490ccddb82cc8a1a745c4cf7` |
 | Размер | около 3 МБ |
 | Лицензия | Microsoft Sysinternals Software License, freeware включая бизнес |
 | Статус | `planned` |
@@ -19,7 +19,7 @@
 
 ## Проверка подлинности
 
-После скачивания вычислить SHA256 и внести вместо `PENDING`:
+Сверить SHA256 скачанного файла с ожидаемым значением из таблицы выше — они обязаны совпасть:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 "E:\tools\security\audit\Autoruns\Autoruns.zip"

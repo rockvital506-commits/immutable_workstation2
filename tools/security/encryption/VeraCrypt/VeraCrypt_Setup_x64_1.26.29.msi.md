@@ -8,7 +8,7 @@
 | Назначение | Шифрование контейнеров, разделов, флешек и системного диска |
 | Версия | 1.26.29, релиз 2026-06-12 — **сверена с первоисточником** через API GitHub |
 | Источник | https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.29/VeraCrypt_Setup_x64_1.26.29.msi |
-| SHA256 | `PENDING` |
+| SHA256 | `5ba6426983123cfb92bc1f09bd888fdbc0f53f300d0d9c5da52ce3aee8d474f0` |
 | Размер | **52 789 248 байт** |
 | Лицензия | TrueCrypt License 3.0 + Apache 2.0; коммерческое использование разрешено |
 | Статус | `planned` |
@@ -19,7 +19,7 @@
 
 ## Проверка подлинности
 
-После скачивания вычислить SHA256 и внести вместо `PENDING`:
+Сверить SHA256 скачанного файла с ожидаемым значением из таблицы выше — они обязаны совпасть:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 "E:\tools\security\encryption\VeraCrypt\VeraCrypt_Setup_x64_1.26.29.msi"

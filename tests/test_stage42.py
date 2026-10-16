@@ -49,10 +49,24 @@ for name, (sub, stub) in UTILS.items():
       f'{name}: честно помечено, что версия не сверена с первоисточником')
 
 print('\n[3] Заглушки')
+# Ожидание берётся из manifest.csv, а не литералом. Прежняя проверка требовала
+# в заглушке строку 'PENDING' и тем самым консервировала расхождение: когда
+# сумма появлялась в манифесте, заглушка обязана была остаться пустой, иначе
+# тест падал. Так разошлись восемь заглушек (находка N41).
+MANI = {r['name']: r['sha256']
+        for r in csv.DictReader(io.open('manifest.csv', encoding='utf-8'))}
+SHA_FIELD = re.compile(r'\|\s*SHA256\s*\|\s*`?([0-9a-fA-F]{64}|PENDING)`?')
 for name, (sub, stub) in UTILS.items():
     s = io.open(f'{RES}/{sub}/{name}/{stub}', encoding='utf-8').read()
     t('CONVENTIONS' in s, f'{name}: ссылка на CONVENTIONS.md')
-    t('PENDING' in s, f'{name}: SHA256 помечен PENDING')
+    want = MANI.get(name)
+    t(want is not None, f'{name}: строка есть в manifest.csv')
+    got = SHA_FIELD.search(s)
+    t(got is not None, f'{name}: в заглушке есть поле SHA256 со значением')
+    if got and want:
+        t(got.group(1).lower() == want.lower(),
+          f'{name}: SHA256 в заглушке равен значению manifest.csv '
+          f'(в заглушке {got.group(1)[:12]}, в манифесте {want[:12]})')
 
 print('\n[4] manifest.csv')
 raw = open('manifest.csv','rb').read()

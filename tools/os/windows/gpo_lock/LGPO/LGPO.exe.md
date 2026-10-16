@@ -43,8 +43,7 @@ winget install -e --id Microsoft.SecurityComplianceToolkit.LGPO
 
 ## Проверка подлинности
 
-После скачивания вычислить SHA256 и внести его в `/manifest.csv` и в эту
-заглушку вместо `PENDING`:
+Сверить SHA256 скачанного файла с ожидаемым значением из таблицы выше — они обязаны совпасть:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 "E:\tools\os\windows\gpo_lock\LGPO\LGPO.exe"

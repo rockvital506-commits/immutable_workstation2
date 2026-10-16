@@ -8,7 +8,7 @@
 | Назначение | Все TCP/UDP-соединения с привязкой к процессу |
 | Версия | 4.19 — **не сверена с первоисточником** |
 | Источник | https://download.sysinternals.com/files/TCPView.zip |
-| SHA256 | `PENDING` |
+| SHA256 | `4fc5ceba3e1b27ad95a24df35d094b454ec5f9478e12a8ca2b1b222705b9683b` |
 | Размер | около 1,5 МБ |
 | Лицензия | Microsoft Sysinternals Software License, freeware включая бизнес |
 | Статус | `planned` |
@@ -19,7 +19,7 @@
 
 ## Проверка подлинности
 
-После скачивания вычислить SHA256 и внести вместо `PENDING`:
+Сверить SHA256 скачанного файла с ожидаемым значением из таблицы выше — они обязаны совпасть:
 
 ```powershell
 Get-FileHash -Algorithm SHA256 "E:\tools\security\audit\TCPView\TCPView.zip"
