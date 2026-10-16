@@ -378,5 +378,55 @@ src = io.open('tools/diagnostics/strelec-tools.md', encoding='utf-8').read()
 t('не сверен с самим образом' in src,
   'в источнике состава сохранена оговорка о том, что он не сверен с ISO')
 
+print('\n[15] Счётчики baseline.csv совпадают с manifest.csv (§12.9)')
+# Класс B-01 лечился выносом констант из тестов в baseline.csv. Лечением
+# была перенесена только половина: значение стало храниться в одном месте,
+# но сравнивалось с фактом один раз — при внесении. Ключ manifest_sha_filled
+# простоял с числом 18 от создания файла, пока в манифесте стало 27 строк
+# с реальной суммой; расхождение не ловилось ни одним тестом, потому что
+# [11] сверял с manifest.csv только manifest_rows.
+# Проверка закрывает ровно этот зазор: каждый ключ baseline.csv, который
+# выводится из manifest.csv, пересчитывается здесь и сравнивается с файлом.
+import csv as _csv2
+mrows = list(_csv2.DictReader(io.open('manifest.csv', encoding='utf-8')))
+mtype = [r['type'] for r in mrows]
+
+
+def _filled(r):
+    return bool(r['sha256'].strip()) and r['sha256'] != 'PENDING'
+
+
+DERIVED = {
+    'manifest_rows': lambda: len(mrows),
+    'manifest_iso': lambda: mtype.count('iso'),
+    'manifest_tool': lambda: mtype.count('tool'),
+    'manifest_script': lambda: mtype.count('script'),
+    'manifest_module': lambda: mtype.count('module'),
+    'manifest_sha_filled': lambda: sum(1 for r in mrows if _filled(r)),
+    'manifest_planned': lambda: sum(1 for r in mrows
+                                    if r['status'] == 'planned'),
+    'manifest_present': lambda: sum(1 for r in mrows
+                                    if r['status'] == 'present'),
+    'manifest_pending_sha': lambda: sum(1 for r in mrows
+                                        if r['sha256'] == 'PENDING'),
+    'manifest_planned_zero_size': lambda: sum(
+        1 for r in mrows
+        if r['status'] == 'planned' and r['size_bytes'].strip() in ('', '0')),
+}
+bl_all = _csv2.DictReader(io.open('tests/baseline.csv', encoding='utf-8'))
+bl_map = {r['key'].strip(): int(r['value']) for r in bl_all}
+for key in sorted(DERIVED):
+    t(key in bl_map, f'ключ {key} объявлен в baseline.csv')
+    if key in bl_map:
+        fact = DERIVED[key]()
+        t(bl_map[key] == fact,
+          f'{key} совпадает с manifest.csv (факт {fact}, в файле {bl_map[key]})')
+t(sum(1 for r in mrows if r['status'] == 'planned')
+  + sum(1 for r in mrows if r['status'] == 'present') == len(mrows),
+  'статус каждой строки манифеста — planned или present, третьего нет')
+t(bl_map['manifest_pending_sha']
+  == bl_map['manifest_rows'] - bl_map['manifest_sha_filled'],
+  'sha_filled и pending_sha в сумме дают все строки')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)
