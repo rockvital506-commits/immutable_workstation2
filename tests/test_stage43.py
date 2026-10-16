@@ -84,7 +84,10 @@ for name, (cat, f, ver) in EXPECT.items():
     t(r[3] == f, f'{name}: file={f}')
     t(r[4].startswith('https://'), f'{name}: url заполнен')
     t(r[7] == ver, f'{name}: version={ver} (факт {r[7]})')
-    t(r[9] == 'planned', f'{name}: status=planned')
+    # Статус выводится из правила §4 «Когда строка становится present», а не
+    # держится снимком: заглушка + URL + ожидаемая сумма с пометкой = present.
+    want = 'present' if (r[5] != 'PENDING' and r[6] != '0') else 'planned'
+    t(r[9] == want, f'{name}: status={want} по правилу §4 (факт {r[9]})')
     t(os.path.isdir(f'tools/{cat}/{name}'), f'{name}: каталог по category есть')
 
 print('\n[5] Решения заказчика R1/R3/R4 зафиксированы в индексе группы')

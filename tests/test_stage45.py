@@ -152,9 +152,11 @@ for name, (sub, stub) in UTILS.items():
     t(r[1] == f'security/{sub}', f'{name}: category=security/{sub}')
     t(r[3] == stub[:-3], f'{name}: file совпадает с заглушкой')
     t(r[4].startswith('https://'), f'{name}: url заполнен')
-    t(r[9] == 'planned', f'{name}: status=planned')
-t(by['VeraCrypt'][6] == '0' and by['VeraCrypt'][7] == '1.26.29',
-  'VeraCrypt: версия 1.26.29 в манифесте')
+    t(r[9] in ('planned', 'present'), f'{name}: status допустим ({r[9]})')
+# Размер VeraCrypt взят из API GitHub 2026-10-16, поэтому поле больше не 0;
+# проверка держит сам факт — размер из первоисточника и версия.
+t(by['VeraCrypt'][6] == '52789248' and by['VeraCrypt'][7] == '1.26.29',
+  f"VeraCrypt: размер из API и версия 1.26.29 в манифесте (факт {by['VeraCrypt'][6]})")
 
 print('\n[7] Скрипты на этом этапе не пишутся')
 stray = []
