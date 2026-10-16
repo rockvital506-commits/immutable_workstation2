@@ -96,10 +96,23 @@ Autorunsc64.exe -accepteula -a * -c > "%USERPROFILE%\Desktop\autoruns.csv"
 | Дата проверки версии | 2026-10-15 |
 | Официальный сайт | https://learn.microsoft.com/sysinternals/downloads/autoruns |
 | Прямая ссылка на файл | https://download.sysinternals.com/files/Autoruns.zip |
-| SHA256 | `PENDING` |
+| SHA256 | `7b3a8eed819f732a3e4c134aecaeaebb8d643a46490ccddb82cc8a1a745c4cf7` — ожидаемая, источник ниже |
 | Размер | около 3 МБ |
 | Лицензия | Microsoft Sysinternals Software License — freeware, включая бизнес |
 
+
+**Откуда ожидаемая сумма.** Манифест пакета `Microsoft.Sysinternals.Autoruns` версии `14.3` в
+репозитории `microsoft/winget-pkgs`, поле `InstallerSha256`; URL в манифесте
+совпадает с нашим. Это сторонний каталог по правилу §4, а не сайт вендора,
+поэтому источник указан явно. Версия пакета совпадает с нашей, поэтому сумма
+относится именно к нашему файлу. Прочитано через `api.github.com`
+2026-10-16: `raw.githubusercontent.com` из рабочей среды недоступен.
+
+**Почему строка остаётся `planned`.** Сумма известна, а размер — нет:
+`манифест WinGet` размера не содержит, сайт вендора вне белого списка рабочей среды, а
+сторонние каталоги дают противоречащие числа: `Autoruns.zip` описывают как 2.80, 2.86, 3 и 3.04 МБ. Заполнять `size_bytes`
+числом без источника §4 запрещает, поэтому строка остаётся `planned` с этой
+причиной. Размер появится после скачивания файла — вместе со сверкой суммы.
 **Версия сверена 2026-10-15 по первоисточнику** — официальный индекс утилит
 Sysinternals на `learn.microsoft.com/sysinternals/downloads/` указывает
 `Autoruns v14.3 (June 17, 2026)`. Прежняя пометка «не сверена» снята:
