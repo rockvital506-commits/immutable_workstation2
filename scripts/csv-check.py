@@ -34,6 +34,7 @@ SELF_ENTITIES = {
         "tools/docs/field-checklist.md",
         "tools/docs/flash-backup.md",
         "tools/docs/flash-update.md",
+        "tools/docs/flash-verify.md",
         "tools/docs/recovery.md",
         "tools/docs/reinstall.md",
         "tools/docs/summary.md",
