@@ -550,7 +550,7 @@ if ($SelectedGroups -contains 'P3') {
         if ($script:P3Enable.Count -eq 0) {
             Write-Step '  P3_ENABLE пуст: ни одна ситуативная позиция не применяется.'
             Write-Step '  Это штатное состояние: каждая позиция P3 ломает рабочую'
-            Write-Step '  функцию и включается явно под профиль заказчика.'
+            Write-Step '  функцию и включается явно под профиль владельца.'
         }
         foreach ($item in $script:P3Enable) {
             if (-not $P3Map.Contains($item)) {

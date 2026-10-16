@@ -92,14 +92,14 @@ for name, (sub, _stub) in UTILS.items():
           'VeraCrypt: коммерческое использование разрешено явно')
         t('CVE-2026-54073' in s, 'VeraCrypt: упомянута причина брать 1.26.29')
 
-print('\n[4] Решения заказчика отражены в документах')
+print('\n[4] Решения владельца отражены в документах')
 sc = io.open(f'{SEC}/scanner/README.md', encoding='utf-8').read()
 t('Утилит здесь нет' in sc, 'в scanner/ объяснено отсутствие утилит')
 t('MpCmdRun.exe' in sc, 'в scanner/ Defender описан средствами ОС')
 t('Get-MpComputerStatus' in sc, 'в scanner/ есть способ посмотреть состояние Defender')
 t('Start-MpWDOScan' in sc, 'в scanner/ описана офлайн-проверка')
 t('10 дней' in sc, 'в scanner/ зафиксировано, что MSERT истекает')
-t('соглас' in sc, 'в scanner/ есть условие про согласие заказчика')
+t('соглас' in sc, 'в scanner/ есть условие про согласие владельца')
 for u in ['Dr.Web CureIt', 'Kaspersky Virus Removal Tool', 'SmartFix',
           'Emsisoft Emergency Kit', 'Microsoft Safety Scanner']:
     t(u in sc, f'в scanner/ назван сторонний сканер: {u}')

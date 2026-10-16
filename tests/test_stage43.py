@@ -105,7 +105,7 @@ for name, (cat, f, ver) in EXPECT.items():
     t(r[9] == want, f'{name}: status={want} по четырём условиям §4 (факт {r[9]})')
     t(os.path.isdir(f'tools/{cat}/{name}'), f'{name}: каталог по category есть')
 
-print('\n[5] Решения заказчика R1/R3/R4 зафиксированы в индексе группы')
+print('\n[5] Решения владельца R1/R3/R4 зафиксированы в индексе группы')
 g = io.open(f'{OS}/README.md', encoding='utf-8').read()
 t('audit mode' in g.lower() or 'audit' in g, 'в индексе упомянут audit mode')
 t('GTweak' in g, 'в индексе явно назван GTweak как невходящий в состав')
@@ -149,7 +149,7 @@ ac = io.open(f'{OS}/activation/README.md', encoding='utf-8').read()
 t('slmgr' in ac, 'в activation/ описан slmgr')
 t('активатор' in ac.lower(), 'в activation/ зафиксирован отказ от активаторов')
 
-print('\n[7] Скрипты на этом этапе не пишутся — решение заказчика')
+print('\n[7] Скрипты на этом этапе не пишутся — решение владельца')
 stray = []
 for root, dirs, files in os.walk(OS):
     for f in files:

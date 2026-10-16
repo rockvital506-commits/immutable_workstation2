@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Проверки Этапа 5 — скрипты автоматизации.
 
-Решения заказчика от 2026-10-14/15:
+Решения владельца от 2026-10-14/15:
   1. Четыре скрипта: system-audit, apply-blocking, validate-system,
      tune-ssd-ram — по паре .sh + .ps1 на каждый.
   2. Одновременно — пошаговые процедуры-инструкции; в алгоритме станции
@@ -167,7 +167,7 @@ with tempfile.TemporaryDirectory() as td:
                 os.path.join(td, 'нет.txt'), '--dry-run')
     t(rc == 3, f'недоступный дамп: код 3 (факт {rc})')
 
-# GPO и wrapper-подмена в скрипт не входят — это решения заказчика.
+# GPO и wrapper-подмена в скрипт не входят — это решения владельца.
 ab_sh = io.open(f'{SC}/apply-blocking.sh', encoding='utf-8').read()
 ab_ps = io.open(f'{SC}/apply-blocking.ps1', encoding='utf-8').read()
 t('LGPO' not in ab_sh, 'apply-blocking.sh не вызывает LGPO: GPO отдельный шаг')
@@ -325,7 +325,7 @@ for n in NAMES:
     if n in by_name:
         t(by_name[n][0] == 'script', f'{n}: type = script')
         t(by_name[n][1] == 'scripts', f'{n}: category = scripts')
-t('LGPO' in by_name, 'строка LGPO есть (решение заказчика)')
+t('LGPO' in by_name, 'строка LGPO есть (решение владельца)')
 if 'LGPO' in by_name:
     t(by_name['LGPO'][0] == 'tool', 'LGPO: type = tool')
     t(by_name['LGPO'][1] == 'os/windows/gpo_lock',

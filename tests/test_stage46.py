@@ -62,7 +62,7 @@ probe = re.sub(r'https?://\S+', '', s)
 found = [m for m in re.findall(r'<([^<>\n]{1,40})>', probe) if m.strip() and ' ' not in m]
 t(not found, 'нет незаполненных плейсхолдеров' + (f' -> {found}' if found else ''))
 
-print('\n[3] Решения заказчика отражены')
+print('\n[3] Решения владельца отражены')
 grp = io.open(f'{DRV}/README.md', encoding='utf-8').read()
 t('Онлайн-установщики вендоров' in grp, 'в индексе сказано, что онлайн-установщики не взяты')
 t('Intel Driver & Support Assistant' in grp, 'назван Intel DSA')
@@ -151,7 +151,7 @@ for r in sдио:
     want = 'present' if ready else 'planned'
     t(r[9] == want, f'{r[3]}: status={want} по четырём условиям §4 (факт {r[9]})')
 # На 4.6 у export/ не было строк — утилит там нет. С 2026-10-14 там есть
-# собственный скрипт интеграции (решение заказчика: только драйверы), поэтому
+# собственный скрипт интеграции (решение владельца: только драйверы), поэтому
 # строка есть и она script, а не tool.
 exp_rows = [r for r in body if r[1] == 'drivers/export']
 t(len(exp_rows) == 1, f'у export/ одна строка (факт {len(exp_rows)})')
@@ -181,7 +181,7 @@ t('Частично поглощён Этапом 4.6' in pl, 'в Этапе 7 �
 t('офлайн-обновлений Windows (LCU/SSU)' in pl, 'остаток Этапа 7 не потерян')
 
 print('\n[9] Скрипты drivers/: только интеграция драйверов')
-# До 2026-10-14 скриптов в drivers/ не было вовсе. Решение заказчика по остатку
+# До 2026-10-14 скриптов в drivers/ не было вовсе. Решение владельца по остатку
 # Этапа 7: скрипт интеграции делать, но ТОЛЬКО для драйверов, без /Add-Package.
 found = []
 for root, dirs, files in os.walk(DRV):

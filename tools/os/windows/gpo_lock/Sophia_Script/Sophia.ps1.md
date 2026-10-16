@@ -35,7 +35,7 @@ https://github.com/farag2/Sophia-Script-for-Windows/releases/download/8.0.0/Soph
 Есть второй вариант — под PowerShell 7, ассет
 `Sophia.Script.for.Windows.11.LTSC.2024.PowerShell.7.v8.0.0.zip` размером
 10621352 байта. **Не брать**: PowerShell 7 не входит в состав Windows 11, его
-пришлось бы ставить на станцию заказчика отдельно.
+пришлось бы ставить на станцию владельца отдельно.
 
 Распространение через WinGet, Chocolatey и Scoop есть, но для флешки не
 годится: нужен закреплённый файл с известной контрольной суммой, а не «последняя

@@ -12,7 +12,7 @@
 | Нужно | Чем |
 |-------|-----|
 | Лог SMART в отчёт | `smartctl -x > reports\smart_<дата>.txt` |
-| Показать заказчику | CrystalDiskInfo |
+| Показать владельцу | CrystalDiskInfo |
 | Сравнить состояние между визитами | `smartctl` — текстовый вывод сравнивается построчно |
 | Температура NVMe | `smartctl -a` или `nvme smart-log` в Live Mint |
 

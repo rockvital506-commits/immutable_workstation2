@@ -106,7 +106,7 @@ try {
             $lines.Add("$($v.MountPoint): $($v.ProtectionStatus), ключей: $($v.KeyProtector.Count)")
         }
         $lines.Add('Правило проекта: перед прошивкой BitLocker приостановить ОДИН раз')
-        $lines.Add('на весь выезд и возобновить после проверки.')
+        $lines.Add('на всё время работ и возобновить после проверки.')
     } else {
         $lines.Add('  (шифрование не включено)')
     }

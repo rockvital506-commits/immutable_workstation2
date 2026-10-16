@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Проверки Этапа 6 — автоустановка и persistence.
 
-Решения заказчика от 2026-10-15:
+Решения владельца от 2026-10-15:
   1. Для каждой задачи и каждой сборки — СВОЙ файл ответа; лежит в каталоге
      сборки, а не в общем ventoy/autoinstall/. В algorithm.md — точные
      указания: куда положить и какие строки ventoy.json править.
@@ -92,14 +92,14 @@ for p in [MAIN, BYPASS]:
     t('DE94BBA4-06D1-4D40-A16A-BFD50179D6AC' in s,
       f'{rel}: GUID раздела WinRE')
     t('<Extend>true</Extend>' in s, f'{rel}: раздел Windows на остаток')
-    # Решение заказчика: имя + пустой пароль.
+    # Решение владельца: имя + пустой пароль.
     t('<PlainText>true</PlainText>' in s, f'{rel}: пароль пустой (PlainText)')
     t('<LogonCount>1</LogonCount>' in s, f'{rel}: AutoLogon на один вход')
     t('HideOnlineAccountScreens' in s, f'{rel}: экраны онлайн-учётки скрыты')
 
 # --- [3] Обход требований — отдельный файл --------------------------------
 
-print('\n[3] LabConfig: отдельный файл (решение заказчика)')
+print('\n[3] LabConfig: отдельный файл (решение владельца)')
 main = io.open(MAIN, encoding='utf-8').read()
 byp = io.open(BYPASS, encoding='utf-8').read()
 t('reg add' not in main, 'основной файл НЕ вносит LabConfig')
@@ -172,7 +172,7 @@ for entry in cfg.get('persistence', []):
     t('casper-rw' in entry.get('backend', ''),
       'persistence: метка casper-rw для Mint (N11)')
 
-# --- [7] preseed не создаётся (решение заказчика) --------------------------
+# --- [7] preseed не создаётся (решение владельца) --------------------------
 
 print('\n[7] Linux Mint: persistence, не установка')
 import glob
