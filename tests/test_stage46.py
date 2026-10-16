@@ -1,0 +1,222 @@
+# -*- coding: utf-8 -*-
+"""Проверки группы tools/drivers/ (Этап 4.6)."""
+import csv, io, os, re, sys
+from baseline import expected
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)   # копия репозитория тестирует копию, не оригинал
+os.chdir(ROOT)
+checks = errors = 0
+
+
+def ok(m):
+    global checks
+    checks += 1
+    print('  OK   ' + m)
+
+
+def bad(m):
+    global checks, errors
+    checks += 1
+    errors += 1
+    print('  FAIL ' + m)
+
+
+def t(cond, m):
+    ok(m) if cond else bad(m)
+
+
+DRV = 'tools/drivers'
+SUBS = ['packs', 'export']
+UTIL = ('packs', 'SDIO')
+# Пак драйверов с 2026-10-15 не сущность и не каталог утилиты: на флешке
+# хранятся только индексы SDIO, полный пак описан процедурой.
+PACKDOC = f'{DRV}/packs/SDIO-drivers/README.md'
+STUBS = ['SDIO_2.0.4.887.zip.md']
+REQ = ['## Назначение', '## Состав каталога', '## Версия и источник',
+       '## Аналоги', '## История изменений']
+
+print('[1] Структура группы')
+t(os.path.isfile(f'{DRV}/README.md'), 'есть индекс группы')
+for s in SUBS:
+    t(os.path.isdir(f'{DRV}/{s}'), f'есть подкатегория {s}/')
+    t(os.path.isfile(f'{DRV}/{s}/README.md'), f'есть индекс {s}/README.md')
+d = f'{DRV}/{UTIL[0]}/{UTIL[1]}'
+t(os.path.isdir(d), f'есть каталог утилиты {d}')
+t(os.path.isfile(f'{d}/README.md'), f'есть {d}/README.md')
+for stub in STUBS:
+    t(os.path.isfile(f'{d}/{stub}'), f'есть заглушка {d}/{stub}')
+t(not os.path.isfile(f'{DRV}/packs/SDIO_2.0.4.887.zip.md'),
+  'заглушки не остались в корне packs/ — утилита оформлена папкой')
+t(os.path.isfile(PACKDOC), f'процедура пака на месте: {PACKDOC}')
+t(not os.path.isfile(f'{DRV}/packs/SDIO-drivers/Drivers.torrent.md'),
+  'заглушки Drivers.torrent.md больше нет — пак не хранится')
+t(not os.path.isfile(f'{d}/Drivers.torrent.md'),
+  'пак не лежит в папке SDIO — он отдельная сущность')
+
+print('\n[2] README утилиты заполнен по шаблону')
+s = io.open(f'{d}/README.md', encoding='utf-8').read()
+missing = [r for r in REQ if r not in s]
+t(not missing, 'все обязательные разделы' + (f' (нет: {missing})' if missing else ''))
+probe = re.sub(r'https?://\S+', '', s)
+found = [m for m in re.findall(r'<([^<>\n]{1,40})>', probe) if m.strip() and ' ' not in m]
+t(not found, 'нет незаполненных плейсхолдеров' + (f' -> {found}' if found else ''))
+
+print('\n[3] Решения владельца отражены')
+grp = io.open(f'{DRV}/README.md', encoding='utf-8').read()
+t('Онлайн-установщики вендоров' in grp, 'в индексе сказано, что онлайн-установщики не взяты')
+t('Intel Driver & Support Assistant' in grp, 'назван Intel DSA')
+t('MSI Center' in grp, 'назван MSI Center')
+t('DriverPack Solution' in grp, 'в индексе назван исключённый DriverPack Solution')
+t('builds/' in grp, 'драйверы станции отправлены в builds/')
+t('pnputil' in grp, 'в индексе назван pnputil как основной слой')
+packs = io.open(f'{DRV}/packs/README.md', encoding='utf-8').read()
+t('GPL' in packs, 'в packs/ названа лицензия GPL')
+t('Expert Mode' in packs or 'по умолчанию' in packs,
+  'в packs/ объяснено, почему DriverPack исключён')
+exp = io.open(f'{DRV}/export/README.md', encoding='utf-8').read()
+t('Утилит здесь нет' in exp, 'в export/ объяснено отсутствие утилит')
+t('pnputil /add-driver' in exp, 'в export/ есть установка из INF')
+t('/enum-devices /problem' in exp, 'в export/ есть поиск проблемных устройств')
+t('Export-Driver' in exp, 'в export/ есть выгрузка драйверов')
+t('Add-Driver' in exp, 'в export/ есть интеграция в образ')
+t('/Recurse' in exp, 'в export/ упомянут обязательный /Recurse')
+t('export-drivers' in exp, 'в export/ есть ссылка на модуль бэкапа')
+
+print('\n[4] Размер пака не занижен')
+for p in [PACKDOC]:
+    txt = io.open(p, encoding='utf-8').read()
+    t('50' in txt, f'{os.path.basename(p)}: фигурируют 50 ГБ')
+    t('расходятся' in txt, f'{os.path.basename(p)}: расхождение источников названо')
+    t('25' in txt, f'{os.path.basename(p)}: прежнее значение 25 ГБ показано как одна из оценок')
+u = io.open(f'{d}/README.md', encoding='utf-8').read()
+t('50' in u, 'в README программы назван порядок размера пака')
+pk = io.open(PACKDOC, encoding='utf-8').read()
+t('50,0 ГБ' in pk and 'sdi-tool.org' in pk,
+  'в README пака названы 50,0 ГБ и источник')
+t('25' in pk, 'в README пака прежнее значение 25 ГБ показано как одна из оценок')
+
+print('\n[5] Честность по версии и первоисточнику')
+t('не сверена с первоисточником' in u, 'версия SDIO помечена несверенной')
+t('SourceForge' in u, 'названа причина: SourceForge недоступен')
+t('Origin' in u and 'samlab-ws' in u, 'развилка SDI/SDIO разобрана')
+t('2.0.4.887' in u, 'версия 2.0.4.887 указана')
+t('SDIO-drivers' in u, 'в README программы есть ссылка на пак')
+t('sdi-tool.org' not in u,
+  'таблица размеров пака не дублируется в README программы — она одна, в SDIO-drivers')
+
+print('\n[6] Заглушки')
+# Ожидание из manifest.csv, не литералом: прежняя проверка требовала 'PENDING'
+# и не давала заглушке принять реальную сумму (находка N41).
+MANI = {r['file']: r['sha256']
+        for r in csv.DictReader(io.open('manifest.csv', encoding='utf-8'))}
+SHA_FIELD = re.compile(r'\|\s*SHA256\s*\|\s*`?([0-9a-fA-F]{64}|PENDING)`?')
+for stub, base in [(x, d) for x in STUBS]:
+    txt = io.open(f'{base}/{stub}', encoding='utf-8').read()
+    t('CONVENTIONS' in txt, f'{stub}: ссылка на CONVENTIONS.md')
+    want = MANI.get(stub[:-3])
+    t(want is not None, f'{stub}: строка есть в manifest.csv')
+    got = SHA_FIELD.search(txt)
+    t(got is not None, f'{stub}: в заглушке есть поле SHA256 со значением')
+    if got and want:
+        t(got.group(1).lower() == want.lower(),
+          f'{stub}: SHA256 в заглушке равен значению manifest.csv '
+          f'(в заглушке {got.group(1)[:12]}, в манифесте {want[:12]})')
+    t('SHA256' in txt and 'Источник' in txt, f'{stub}: обязательные поля на месте')
+    t('Как получить' in txt, f'{stub}: есть раздел «Как получить»')
+    t('Куда положить на флешке' in txt, f'{stub}: есть раздел про размещение')
+    t('Tools:\\drivers\\packs\\' in txt, f'{stub}: путь на флешке указан')
+
+print('\n[7] manifest.csv')
+raw = open('manifest.csv', 'rb').read()
+t(b'\r\n' not in raw, 'manifest.csv в LF, без CRLF')
+rows = list(csv.reader(io.open('manifest.csv', encoding='utf-8')))
+head, body = rows[0], rows[1:]
+t(len(body) == expected('manifest_rows'),
+  f"строк данных {expected('manifest_rows')} (факт {len(body)})")
+t(all(len(r) == 10 for r in body), 'во всех строках 10 полей')
+sдио = [r for r in body if r[1] == 'drivers/packs']
+t(len(sдио) == 1, f'одна строка drivers/packs — пак снят с флешки (факт {len(sдио)})')
+pairs = sorted((r[2], r[3]) for r in sдио)
+t(pairs == [('SDIO', 'SDIO_2.0.4.887.zip')], f'имена и файлы верны: {pairs}')
+names = [r[2] for r in body]
+t(len(set(names)) == len(names), 'имена в manifest уникальны — правило не сломано')
+for r in sдио:
+    t(r[0] == 'tool', f'{r[3]}: type=tool')
+    t(os.path.isdir(f'tools/{r[1]}/{r[2]}'), f'{r[3]}: каталог сущности существует')
+    t(r[4].startswith('https://'), f'{r[3]}: url заполнен')
+    # Статус по четырём условиям §4, а не снимком: размер у SDIO неизвестен,
+    # поэтому перехода в present нет даже при известной сумме.
+    ready = (r[4].startswith('https://') and r[5] != 'PENDING' and r[6] != '0')
+    want = 'present' if ready else 'planned'
+    t(r[9] == want, f'{r[3]}: status={want} по четырём условиям §4 (факт {r[9]})')
+# На 4.6 у export/ не было строк — утилит там нет. С 2026-10-14 там есть
+# собственный скрипт интеграции (решение владельца: только драйверы), поэтому
+# строка есть и она script, а не tool.
+exp_rows = [r for r in body if r[1] == 'drivers/export']
+t(len(exp_rows) == 1, f'у export/ одна строка (факт {len(exp_rows)})')
+for r in exp_rows:
+    t(r[0] == 'script', f'{r[2]}: type=script, а не tool')
+    t(r[3] == '' and r[4] == '', f'{r[2]}: file и url пусты — это свой скрипт')
+    t(r[9] == 'present', f'{r[2]}: status=present')
+    t(len(r[5]) == 64, f'{r[2]}: sha256 полной длины')
+
+print('\n[8] tools/README.md и PLAN.md согласованы')
+tr = io.open('tools/README.md', encoding='utf-8').read()
+line = [l for l in tr.splitlines() if l.startswith('| `drivers/`')]
+t(len(line) == 1, 'в tools/README.md одна строка для группы drivers/')
+if line:
+    for sb in SUBS:
+        t(sb in line[0], f'в строке drivers/ названа подкатегория {sb}')
+    t('4.6' in line[0], 'строка drivers/ ссылается на Этап 4.6')
+    for old in ['`windows/`', '`chipset/`', 'Этап 7']:
+        t(old not in line[0], f'в строке нет прежнего {old}')
+pl = io.open('PLAN.md', encoding='utf-8').read()
+m7 = re.search(r'^## Этап 7 — (.+)$', pl, re.M)
+t(m7 is not None, 'в PLAN.md есть Этап 7')
+if m7:
+    t('Драйверы' not in m7.group(1),
+      f'Этап 7 переименован, драйверы из него убраны: «{m7.group(1)}»')
+t('Частично поглощён Этапом 4.6' in pl, 'в Этапе 7 объяснено, что сделано на 4.6')
+t('офлайн-обновлений Windows (LCU/SSU)' in pl, 'остаток Этапа 7 не потерян')
+
+print('\n[9] Скрипты drivers/: только интеграция драйверов')
+# До 2026-10-14 скриптов в drivers/ не было вовсе. Решение владельца по остатку
+# Этапа 7: скрипт интеграции делать, но ТОЛЬКО для драйверов, без /Add-Package.
+found = []
+for root, dirs, files in os.walk(DRV):
+    for f in files:
+        if f.endswith(('.ps1', '.sh')):
+            found.append(os.path.join(root, f).replace(os.sep, '/'))
+found.sort()
+expected = [
+    'tools/drivers/export/scripts/integrate-drivers.ps1',
+    'tools/drivers/export/scripts/integrate-drivers.sh',
+]
+t(found == sorted(expected), f'в drivers/ ровно пара integrate-drivers (факт {found})')
+# Имена в комментариях встречаются намеренно — там объяснено, почему обновлений
+# нет. Поэтому проверяем только исполняемые строки: вызов, а не упоминание.
+for p in found:
+    calls = []
+    for line in io.open(p, encoding='utf-8').read().splitlines():
+        st = line.strip()
+        if st.startswith('#') or st.startswith('<#'):
+            continue
+        if '/Add-Package' in st or 'Add-WindowsPackage -' in st:
+            calls.append(st)
+    t(not calls, f'{p}: обновлений Windows не ставит' + (f' -> {calls}' if calls else ''))
+
+print('\n[10] Регрессия: предыдущие этапы целы')
+for p in ['tools/security/scanner/README.md',
+          'tools/security/encryption/VeraCrypt/README.md',
+          'tools/network/README.md',
+          'tests/test_rules.py',
+          'research/11-driver-packs.md',
+          'ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/algorithm.md']:
+    t(os.path.isfile(p), f'на месте {p}')
+names = [r[2] for r in body]
+for n in ['VeraCrypt', 'Autoruns', 'TCPView', 'WinUtil', 'RustDesk']:
+    t(n in names, f'в manifest осталась сущность {n}')
+
+print(f'\nИтог: проверок {checks}, ошибок {errors}')
+sys.exit(1 if errors else 0)

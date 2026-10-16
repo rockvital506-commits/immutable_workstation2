@@ -1,0 +1,23 @@
+name,category,in_strelec,strelec_version,own_copy_reason,audit_mode,status
+CrystalDiskInfo,diagnostics/disk,yes,9.7.2,"в сборке 9.7.2, у нас 9.9.2 — свежее",build_version,build_version_noted
+MemTest86Plus,diagnostics/memory,yes,7.20,"в сборке 7.20, у нас 8.10 — свежее",build_version,build_version_noted
+DMDE,rescue/data_recovery,yes,не указана,своя версия свежее и запускается из живой ОС без загрузки в WinPE; версия в сборке неизвестна — сверить при работе,build_version,license_audited
+smartmontools,diagnostics/disk,no,,"SMART-лог одной командой из живой ОС, без перезагрузки",full,license_audited
+Prime95,diagnostics/cpu,no,,стресс CPU из живой Windows без перезагрузки,full,license_unverified
+stress-ng,diagnostics/cpu,no,,стресс CPU и памяти в Linux,full,license_audited
+NTPWEdit,rescue/password,no,,правка SAM офлайн; в сборке пять иных средств сброса пароля,full,license_audited
+WinUtil,os/windows/tweaks,no,,"применяется в установленной ОС, WinPE не подходит",full,license_audited
+Win11Debloat,os/windows/debloat,no,,"применяется в установленной ОС, WinPE не подходит",full,license_audited
+Sophia_Script,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,license_audited
+LGPO,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,license_unverified
+RustDesk,network/remote,no,,"свой сервер вместо чужого посредника; в сборке TeamViewer, AnyDesk и др.",full,license_audited
+iperf3,network/speed,no,,замер полосы между двумя точками,full,license_audited
+Nmap,network/scan,no,,"в сборке Advanced IP Scanner, но он не про порты и службы",full,risk_accepted
+Wireshark,network/capture,no,,захват и разбор трафика,full,license_audited
+WifiInfoView,network/wifi,no,,состав и сигнал Wi-Fi из живой ОС,full,license_audited
+MyPublicWifi,network/wifi,no,,точка доступа на станции,full,license_unverified
+Autoruns,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
+ProcessExplorer,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
+TCPView,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
+VeraCrypt,security/encryption,no,,в сборке шифрования нет,full,license_audited
+SDIO,drivers/packs,no,,в сборке средств подбора драйверов нет,full,license_audited
