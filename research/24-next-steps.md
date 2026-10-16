@@ -18,7 +18,7 @@
 | Строк с `sha256=PENDING` | 18 | 6 `iso` + 12 `tool` |
 | Утилит с ожидаемой суммой | 10 из 22 | поле `sha256` у `type=tool` |
 | Утилит в `present` (сумма + размер) | 4 | `smartmontools`, `Win11Debloat`, `LGPO`, `VeraCrypt` |
-| Сумма есть, размера нет | 6 | `WifiInfoView`, `Autoruns`, `ProcessExplorer`, `TCPView`, `SDIO`, `DMDE` |
+| Сумма есть, размера нет | 7 | 6 утилит (`WifiInfoView`, `Autoruns`, `ProcessExplorer`, `TCPView`, `SDIO`, `DMDE`) + 1 образ (`linuxmint-22.3-cinnamon-64bit`); исправлено 2026-10-16, прежние 6 не учитывали образ |
 | `planned` с `size_bytes=0` | 21 | поле `size_bytes` |
 | Находок AUDIT | 77 | пересчёт `test_bestiary.py` [7] |
 | Классов дефектов в пуле | 13, `B-01`…`B-13` | `research/bestiary.csv` |
