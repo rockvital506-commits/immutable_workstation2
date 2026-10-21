@@ -20,6 +20,7 @@ TESTS = ['test_repo.py', 'test_rules.py', 'test_stage42.py',
          'test_stage9.py',
          'test_stage10.py',
          'test_navigation.py',
+         'test_alternative.py',
          'test_bestiary.py',
          'test_ps1_lint.py']
 

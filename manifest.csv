@@ -16,7 +16,7 @@ script,backup/disk_image,disk-image,,,597e4e5a6bead9469ea9cada624d7482f1e82401dc
 tool,diagnostics/disk,smartmontools,smartmontools-7.5.win32-setup.exe,https://github.com/smartmontools/smartmontools/releases/download/RELEASE_7_5/smartmontools-7.5.win32-setup.exe,896337fcc253220614cf8cdbd5cf2321c5aa326a37a04160a672a281e6104c70,1508408,7.5,2026-10-07,present
 tool,diagnostics/disk,CrystalDiskInfo,CrystalDiskInfo9_9_2.zip,https://sourceforge.net/projects/crystaldiskinfo/files/9.9.2/,PENDING,0,9.9.2,2026-10-07,planned
 tool,diagnostics/memory,MemTest86Plus,mt86plus_8.10.iso,https://www.memtest.org/,PENDING,0,8.10,2026-10-07,planned
-tool,diagnostics/cpu,Prime95,p95v3106.win64.zip,https://www.mersenne.org/download/,PENDING,0,31.06,2026-10-07,planned
+tool,diagnostics/cpu,Prime95,p95v3019b20.win64.zip,https://download.mersenne.ca/gimps/v30/30.19/p95v3019b20.win64.zip,d9475f2ff3f4a6a701abc49a86a66126cb48abd10bda6fa87039d98fa8756bca,8805545,30.19b20,2026-10-07,planned
 tool,diagnostics/cpu,stress-ng,stress-ng-0.22.01.tar.gz,https://github.com/ColinIanKing/stress-ng/releases,PENDING,0,0.22.01,2026-10-07,planned
 tool,rescue/data_recovery,DMDE,dmde-4-4-4-842-win64-gui.zip,https://dmde.com/download/dmde-4-4-4-842-win64-gui.zip,205b2cb4c6531070df921af786350b53389e375d0fe00f1e344d87540c48a481,0,4.4.4.842,2026-10-07,planned
 tool,rescue/password,NTPWEdit,ntpwed07.zip,http://cdslow.org.ru/en/ntpwedit/,PENDING,0,0.7,2026-10-07,planned
@@ -26,7 +26,7 @@ tool,os/windows/gpo_lock,Sophia_Script,Sophia.ps1,https://github.com/farag2/Soph
 tool,os/windows/gpo_lock,LGPO,LGPO.exe,https://www.microsoft.com/en-us/download/details.aspx?id=55319,cb7159d134a0a1e7b1ed2ada9a3ce8ce8f4de391d14403d55438af824247cc55,531635,3.0.2004.13001,2026-10-15,present
 tool,network/remote,RustDesk,rustdesk-1.5.0-x86_64.exe,https://github.com/rustdesk/rustdesk/releases/download/1.5.0/rustdesk-1.5.0-x86_64.exe,PENDING,25887600,1.5.0,2026-10-10,planned
 tool,network/speed,iperf3,iperf-3.22-win64.zip,https://github.com/ar51an/iperf3-win-builds/releases/download/3.22/iperf-3.22-win64.zip,PENDING,1209932,3.22,2026-10-10,planned
-tool,network/scan,Nmap,nmap-7.991.zip,https://nmap.org/download.html,PENDING,0,7.991,2026-10-10,planned
+tool,network/scan,Nmap,nmap-7.992.zip,https://nmap.org/dist/nmap-7.992-setup.exe,PENDING,0,7.992,2026-10-10,planned
 tool,network/capture,Wireshark,WiresharkPortable64_4.6.9.paf.exe,https://www.wireshark.org/download.html,PENDING,0,4.6.9,2026-10-10,planned
 tool,network/wifi,WifiInfoView,wifiinfoview-x64.zip,https://www.nirsoft.net/utils/wifi_information_view.html,9264a6ef47b882fa67b9431f6410c62be091524c39877a09cf6744dea8d8a988,0,3.00,2026-10-10,planned
 tool,network/wifi,MyPublicWifi,MyPublicWiFi.exe,https://www.mypublicwifi.com/,PENDING,0,31.3,2026-10-10,planned
@@ -43,5 +43,5 @@ script,scripts,apply-blocking,,,696606eab098ed0535b679834b49b55cf384977afe5cb9c0
 script,scripts,validate-system,,,76c6cca37685257c89123134d2a74cacab88ea8aa592975f1791530eb2263b8d,38288,1.0,2026-10-15,present
 script,scripts,tune-ssd-ram,,,bb382aac90776914f1073d60169518a077bf4d45b2bddaf8397e7ed712da2be4,20972,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_answer,,,b99963756759ee59ed2af578d3426420d83f662bad62399f47ad264f8a6f95ec,34909,1.0,2026-10-15,present
-module,docs,docs,,,91be7594926d41ed2bd0ee58034cfc614c331dd183b44cc438eb11da67d61d97,120721,1.0,2026-10-15,present
+module,docs,docs,,,12509843c7e8d6b845e74c53745b5404767650bf2896e5ac1e25872494723bbb,121051,1.0,2026-10-15,present
 module,builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2,station_algorithm,,,def31273bcffff697d075c998eea413509599864585a4f54ce542ec73b2141a3,66680,1.0,2026-10-15,present

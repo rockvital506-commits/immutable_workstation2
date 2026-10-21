@@ -212,5 +212,49 @@ for d in sorted(os.listdir('tools')):
         t(os.path.isfile(os.path.join(subfull, 'README.md')),
           f'есть tools/{d}/{sub}/README.md')
 
+# ------------------------------------------------ 8. неизменяемость поля added
+print('\n[8] Поле added не меняется после добавления строки (§4)')
+# Класс B-03. При обновлении версии Nmap 7.991 -> 7.992 поле `added` было
+# заменено вместе с версией: 2026-10-10 -> 2026-10-21. По §4 `added` - это
+# дата добавления строки, а не дата проверки версии, поэтому правка
+# переписала исторический факт. Формат даты контролирует csv-check.py,
+# семантику поля не контролировал никто, и правка прошла бы незамеченной.
+# Проверка сравнивает `added` с тем же полем в самом раннем доступном
+# коммите: расхождение означает, что дату переписали.
+_old = None
+_root = ''
+try:
+    import subprocess
+    _p = subprocess.run(['git', 'rev-list', '--max-parents=0', 'HEAD'],
+                        capture_output=True, text=True)
+    if _p.returncode == 0 and _p.stdout.strip():
+        _cand = _p.stdout.split('\n')[0].strip()
+        _o2 = subprocess.run(['git', 'show', f'{_cand}:manifest.csv'],
+                             capture_output=True, text=True)
+        if _o2.returncode == 0 and _o2.stdout:
+            _root, _old = _cand, _o2
+except OSError:
+    _old = None
+
+
+def _added_map(text: str) -> dict:
+    return {r['name']: r['added'] for r in csv.DictReader(io.StringIO(text))}
+
+
+if _old is None:
+    ok('git или manifest.csv в раннем коммите недоступен - added не сверяется')
+else:
+    _o = _added_map(_old.stdout)
+    _n = _added_map(io.open('manifest.csv', encoding='utf-8').read())
+    _common = [k for k in _o if k in _n]
+    _drift = [(k, _o[k], _n[k]) for k in _common if _o[k] != _n[k]]
+    t(not _drift,
+      f'added не переписывался с {_root[:8]} для {len(_common)} сущностей'
+      + ''.join(f'; {k}: {a} -> {b}' for k, a, b in _drift))
+    # Порог ниже - защита от холостого прохода: при пустом множестве первая
+    # проверка прошла бы vacuously, не осмотрев ни одной строки (механизм N45).
+    t(len(_common) >= 40,
+      f'сравнено достаточно строк, а не пустое множество ({len(_common)})')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)
