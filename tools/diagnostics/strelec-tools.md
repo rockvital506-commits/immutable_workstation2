@@ -170,6 +170,6 @@ Western Digital Data Lifeguard и RWEverything, которые есть в x86-�
 |--------|--------------------------|
 | SMART-лог в файл одной командой из живой ОС | `smartmontools` (`smartctl -x`) |
 | Тест ОЗУ свежее, чем 7.20 в сборке | `MemTest86+` 8.10 |
-| Стресс CPU из живой Windows без перезагрузки | `Prime95` 31.06 |
+| Стресс CPU из живой Windows без перезагрузки | `Prime95` 30.19b20 |
 | Стресс CPU/памяти/IO в Linux | `stress-ng` 0.22.01 |
 | SMART и температура без GUI, в отчёт | `smartmontools`, `nvme-cli` в Live Mint |

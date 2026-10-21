@@ -19,7 +19,7 @@ SUBS = ['diagnostics', 'speed', 'scan', 'wifi', 'remote', 'capture']
 UTILS = {
     'RustDesk':     ('remote',  'rustdesk-1.5.0-x86_64.exe.md',        '1.5.0'),
     'iperf3':       ('speed',   'iperf-3.22-win64.zip.md',             '3.22'),
-    'Nmap':         ('scan',    'nmap-7.991.zip.md',                   '7.991'),
+    'Nmap':         ('scan',    'nmap-7.992.zip.md',                   '7.992'),
     'Wireshark':    ('capture', 'WiresharkPortable64_4.6.9.paf.exe.md','4.6.9'),
     'WifiInfoView': ('wifi',    'wifiinfoview-x64.zip.md',             '3.00'),
     'MyPublicWifi': ('wifi',    'MyPublicWiFi.exe.md',                 '31.3'),
@@ -57,7 +57,11 @@ print('\n[3] Честность по первоисточнику')
 src = {
     'RustDesk':     'сверена с первоисточником',
     'iperf3':       'сверена с первоисточником',
-    'Nmap':         'не сверена с первоисточником',
+    # Фраза начинается со слова «Версия» намеренно: проверка ниже делает
+    # `phrase in s`, а строка 'сверена с первоисточником' входит подстрокой в
+    # 'не сверена с первоисточником'. Без первого слова проверка проходила бы
+    # и на прежнем тексте, то есть не ловила бы откат к «не сверена».
+    'Nmap':         'Версия сверена с первоисточником',
     'Wireshark':    'не сверена с первоисточником',
     'WifiInfoView': 'не сверена с первоисточником',
     'MyPublicWifi': 'не проверена с первоисточником',
@@ -176,7 +180,7 @@ def verified(name):
 
 
 n_verified = sum(1 for n in UTILS if verified(n))
-t(n_verified == 2, f'по факту с первоисточником сверено 2 утилиты (факт {n_verified})')
+t(n_verified == 3, f'по факту с первоисточником сверено 3 утилиты (факт {n_verified})')
 
 # Д2: диапазон портов 0-65535 — это 65536 значений, а не 65535.
 nm = io.open(f'{NET}/scan/Nmap/README.md', encoding='utf-8').read()

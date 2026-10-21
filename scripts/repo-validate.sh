@@ -320,7 +320,10 @@ if [ -f "$POOL" ]; then
             err "проверка из closes отсутствует — tests/$closes"
         fi
     done <<EOFPOOL
-$(awk -F, 'NR>1 && $7!="" {split($7,a," "); print a[1]}' "$POOL" | sort -u)
+$(awk -F, 'NR>1 && $7!="" {
+        n = split($7, a, /[; ]+/)
+        for (i = 1; i <= n; i++) if (a[i] ~ /\.py$/) print a[i]
+    }' "$POOL" | sort -u)
 EOFPOOL
 else
     err "отсутствует обязательный файл $POOL"

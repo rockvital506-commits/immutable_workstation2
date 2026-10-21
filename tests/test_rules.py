@@ -240,6 +240,36 @@ from baseline import expected, keys
 t(len(keys()) >= 10, f'в baseline.csv не меньше десяти ключей (факт {len(keys())})')
 t(expected('manifest_rows') == len(rows) - 1,
   f"baseline.csv manifest_rows совпадает с manifest.csv ({len(rows) - 1})")
+
+# Находка N54, класс B-01. test_stage10.py держал факт репозитория
+# литералами: '47', '23 утилиты', '16 файлов `.ps1`'. Заголовок проверки
+# обещал «числа в сводке совпадают с манифестом», а тело сравнивало сводку
+# с числами, которые перестали быть фактом: строк в manifest.csv 46, утилит
+# 22, файлов `.ps1` 14. Такая проверка не просто не ловила отставание
+# tools/docs/summary.md — она его охраняла, потому что падала бы именно на
+# исправленном документе.
+# Проверка ниже структурная, а не по конкретному числу: она требует, чтобы
+# в сравнении со сводкой не стояло quoted-литерала с цифрой. Значения,
+# выведенные из ROWS, подставляются через f-строку и цифр в исходнике не
+# содержат, поэтому исправленный код проходит, а возвращённый литерал — нет.
+# Регулярка ищет отдельное число, а не цифру внутри слова: `'SHA256'` и
+# расширение `.ps1` содержат цифры, но числами не являются. Первая версия
+# проверки была наивной — `'[^']*\d[^']*'` — и давала два ложных
+# срабатывания именно на них. Разделение проверено на обеих сторонах:
+# литералы из 340ff66 ловятся, четыре контроля пропускаются.
+_s10 = io.open(os.path.join('tests', 'test_stage10.py'), encoding='utf-8').read()
+_num = re.compile(r'(?<![0-9A-Za-z_])\d+(?![0-9A-Za-z_.])')
+_lit = []
+for _i, _ln in enumerate(_s10.split('\n'), 1):
+    if 'in smry' not in _ln:
+        continue
+    for _q in re.findall(r"'([^']*)'", _ln):
+        if _num.search(_q):
+            _lit.append(f'{_i}: {_q[:40]}')
+t(not _lit,
+  'в test_stage10.py нет числа литералом в сравнении со сводкой (§12.9)'
+  + ('' if not _lit else f'; найдено {_lit}'))
+
 print('\n[12] Класс B-10: харнесс не зашивает абсолютный путь')
 # Пока 15 тестов держали ROOT литералом с путём рабочей копии, копия проверяла
 # оригинал: возврат дефекта на копии (способ закрытия записи пула, раздел
@@ -465,6 +495,363 @@ for r in mrows2:
 t(checked == sum(1 for r in mrows2
                  if r['type'] in ('tool', 'iso') and r['file']),
   f'проверены все строки tool/iso с файлом ({checked})')
+
+print('\n[17] Реестр Strelec: in_strelec подтверждён чтением состава (§7.2.1)')
+# Класс B-16. Сверка состава трижды делалась поиском подстроки вместо чтения
+# раздела: N14 дал три ложных «в сборке есть» по утилитам из раздела «Чего в
+# Strelec нет», N40 и N43 повторили тот же механизм на причинах PENDING.
+# Поиск подстроки не различает разделов, а strelec-tools.md перечисляет
+# утилиты и в составе, и в списке отсутствующих. Проверка режет документ по
+# заголовку «Чего в Strelec нет и что берём из Tools» и читает части отдельно.
+# Имя утилиты основанием не служит: MemTest86Plus в документе записан как
+# «Memtest86+», поэтому для in_strelec=yes сверяется версия из strelec_version.
+_st = io.open(os.path.join('tools', 'diagnostics', 'strelec-tools.md'),
+              encoding='utf-8').read().split('\n')
+_cut = None
+for _i, _l in enumerate(_st):
+    if _l.startswith('## Чего в Strelec нет'):
+        _cut = _i
+        break
+t(_cut is not None, 'в strelec-tools.md найден раздел «Чего в Strelec нет»')
+_comp = '\n'.join(_st[:_cut]) if _cut else ''
+_abs = '\n'.join(_st[_cut:]) if _cut else ''
+t(len(_comp) > 0 and len(_abs) > 0,
+  f'документ разрезан на состав ({len(_comp)} зн.) и отсутствующие '
+  f'({len(_abs)} зн.)')
+_VER = re.compile(r'^\d+(?:\.\d+)*$')
+_reg = list(_csv2.DictReader(
+    io.open(os.path.join('tools', 'strelec-registry.csv'), encoding='utf-8')))
+_yes = _no = 0
+for r in _reg:
+    if r['in_strelec'] == 'yes':
+        _yes += 1
+        _v = r['strelec_version'].strip()
+        if _VER.match(_v):
+            t(_v in _comp,
+              f"{r['name']}: in_strelec=yes подтверждён версией {_v} в составе")
+        else:
+            t('не указана' in _v,
+              f"{r['name']}: версия в сборке заявлена как неизвестная")
+    else:
+        _no += 1
+        t(r['name'] not in _comp,
+          f"{r['name']}: in_strelec=no, в составе сборки имени нет")
+t(_yes >= 1 and _no >= 1, f'разобраны обе группы реестра (yes {_yes}, no {_no})')
+
+print('\n[18] Живые счётчики в связном тексте равны пересчёту (§12.5)')
+# Класс B-15. Значение живёт в research/bestiary.csv и пересказывается в
+# связном тексте: research/24-next-steps.md §1 и research/README.md. Пересказ
+# не обновлялся вместе с источником: N44 нашёл в §1 три отставших числа, тот
+# же механизм повторился в research/README.md:51 и в индексе §8 того же файла.
+# Отличие от B-12 и B-13: пересказ находится не в baseline.csv и не в заглушке
+# бинарника, а в тексте плана, и до этой проверки его никто не читал.
+_b = list(_csv2.DictReader(
+    io.open(os.path.join('research', 'bestiary.csv'), encoding='utf-8')))
+_ncls = len(_b)
+_last = max(r['id'] for r in _b)
+_n24 = io.open(os.path.join('research', '24-next-steps.md'),
+               encoding='utf-8').read()
+_nrd = io.open(os.path.join('research', 'README.md'), encoding='utf-8').read()
+_b09 = [r for r in _b if r['id'] == 'B-09']
+t(len(_b09) == 1 and int(_b09[0]['n']) == expected('audit_findings'),
+  f"baseline.csv audit_findings равен B-09.n ({expected('audit_findings')})")
+_m = re.search(r'\|\s*Находок AUDIT\s*\|\s*(\d+)\s*\|', _n24)
+t(_m is not None and int(_m.group(1)) == expected('audit_findings'),
+  f"research/24 §1 «Находок AUDIT» равен baseline.csv "
+  f"({_m.group(1) if _m else 'строки нет'} против {expected('audit_findings')})")
+_m = re.search(r'\|\s*Классов дефектов в пуле\s*\|\s*(\d+),\s*`B-01`…`(B-\d+)`',
+               _n24)
+t(_m is not None and int(_m.group(1)) == _ncls and _m.group(2) == _last,
+  f'research/24 §1 «Классов дефектов» равен bestiary.csv '
+  f'({_ncls} классов, последний {_last})')
+_m = re.search(r'(\d+)\s+классов\s+`B-01`…`(B-\d+)`', _nrd)
+t(_m is not None and int(_m.group(1)) == _ncls and _m.group(2) == _last,
+  f'research/README.md «классов B-01…» равен bestiary.csv '
+  f'({_ncls} классов, последний {_last})')
+
+# Расширение 2026-10-21, находка N50. До этой правки блок читал только
+# значения из bestiary.csv и поэтому пропустил тот же механизм на
+# счётчиках, выведенных из manifest.csv: при закрытии A5 строка Prime95
+# впервые получила сумму, и обновлён был только tests/baseline.csv.
+# Пересказ в research/24 §1 и в tools/docs/flash-verify.md остался на 28
+# при факте 29 — восемь живых вхождений в двух файлах. Заголовок блока
+# обещал «живые счётчики в связном тексте», а тело сверяло только пул:
+# название шире тела, и это само по себе рассинхрон.
+_fv = io.open(os.path.join('tools', 'docs', 'flash-verify.md'),
+              encoding='utf-8').read()
+_n_sha = sum(1 for r in mrows if _filled(r))
+_n_pend = sum(1 for r in mrows if r['sha256'] == 'PENDING')
+_n_tool_sha = sum(1 for r in mrows if r['type'] == 'tool' and _filled(r))
+_n_tool = sum(1 for r in mrows if r['type'] == 'tool')
+_n_zero = sum(1 for r in mrows if r['status'] == 'planned'
+              and r['size_bytes'].strip() in ('', '0'))
+_n_file_sha = sum(1 for r in mrows if r['file'] and _filled(r))
+_n_file_pend = sum(1 for r in mrows if r['file'] and not _filled(r))
+
+_m = re.search(r'\|\s*Строк с реальной SHA256\s*\|\s*(\d+)\s*\|', _n24)
+t(_m is not None and int(_m.group(1)) == _n_sha,
+  f'research/24 §1 «Строк с реальной SHA256» равен manifest.csv '
+  f"({_m.group(1) if _m else 'строки нет'} против {_n_sha})")
+_m = re.search(r'\|\s*Строк с `sha256=PENDING`\s*\|\s*(\d+)\s*\|', _n24)
+t(_m is not None and int(_m.group(1)) == _n_pend,
+  f'research/24 §1 «Строк с sha256=PENDING» равен manifest.csv '
+  f"({_m.group(1) if _m else 'строки нет'} против {_n_pend})")
+_m = re.search(r'\|\s*Утилит с ожидаемой суммой\s*\|\s*(\d+) из (\d+)\s*\|', _n24)
+t(_m is not None and int(_m.group(1)) == _n_tool_sha
+  and int(_m.group(2)) == _n_tool,
+  f'research/24 §1 «Утилит с ожидаемой суммой» равен manifest.csv '
+  f"({_m.group(0) if _m else 'строки нет'} против {_n_tool_sha} из {_n_tool})")
+_m = re.search(r'\|\s*`planned` с `size_bytes=0`\s*\|\s*(\d+)\s*\|', _n24)
+t(_m is not None and int(_m.group(1)) == _n_zero,
+  f'research/24 §1 «planned с size_bytes=0» равен manifest.csv '
+  f"({_m.group(1) if _m else 'строки нет'} против {_n_zero})")
+
+# tools/docs/flash-verify.md — второй пересказ того же факта
+_m = re.search(r'Строки с заполненной ожидаемой суммой — (\d+)\.', _fv)
+t(_m is not None and int(_m.group(1)) == _n_sha,
+  f'flash-verify.md «строк с ожидаемой суммой» равен manifest.csv '
+  f"({_m.group(1) if _m else 'строки нет'} против {_n_sha})")
+_m = re.search(r'\|\s*Итого сверяемых\s*\|\s*\*\*(\d+)\*\*', _fv)
+t(_m is not None and int(_m.group(1)) == _n_sha,
+  f'flash-verify.md «Итого сверяемых» равен manifest.csv '
+  f"({_m.group(1) if _m else 'строки нет'} против {_n_sha})")
+_m = re.search(r'поле `file` заполнено, сумма есть\s*\|\s*\*\*(\d+)\*\*'
+               r'\s*\(1 `iso` \+ (\d+) `tool`\)', _fv)
+t(_m is not None and int(_m.group(1)) == _n_file_sha
+  and int(_m.group(2)) == _n_tool_sha,
+  f'flash-verify.md «file заполнен и сумма есть» равен manifest.csv '
+  f"({_m.group(0) if _m else 'строки нет'} против {_n_file_sha} "
+  f'и {_n_tool_sha} tool)')
+_m = re.search(r'\|\s*`file` заполнено, сумма `PENDING`\s*\|\s*\*\*(\d+)\*\*', _fv)
+t(_m is not None and int(_m.group(1)) == _n_file_pend,
+  f'flash-verify.md «file заполнено, сумма PENDING» равен manifest.csv '
+  f"({_m.group(1) if _m else 'строки нет'} против {_n_file_pend})")
+
+# Расширение 2026-10-21, находка N52. Таблица §1 держит одиннадцать строк
+# живых счётчиков, а блок читал семь. Четыре оставались непокрытыми, и урок
+# N52 здесь прямой: «Сумма есть, размера нет» держит не только число, но и
+# разбивку «6 утилит + 1 образ» и перечень имён. Такие связанные значения
+# расходятся с источником и тогда, когда само число верно, — N52 выросла
+# именно на непокрытой строке §2.2. Строки разбираются по ячейкам, а не
+# регуляркой по метке: в метках есть бэктики и скобки.
+def _row24(label):
+    for _ln in _n24.split('\n'):
+        if _ln.startswith('| ' + label + ' |'):
+            return [c.strip() for c in _ln.strip().strip('|').split('|')]
+    return None
+
+def _names24(cell):
+    return sorted(re.findall(r'`([^`]+)`', cell or ''))
+
+_n_all = len(mrows)
+_n_pres = sum(1 for r in mrows if r['status'] == 'present')
+_n_plan = sum(1 for r in mrows if r['status'] == 'planned')
+_pres_ok = lambda r: (_filled(r) and r['size_bytes'].strip() not in ('', '0'))
+_f_tool_pres = sorted(r['name'] for r in mrows
+                      if r['type'] == 'tool' and r['status'] == 'present'
+                      and _pres_ok(r))
+_f_nosize = sorted(r['name'] for r in mrows
+                   if _filled(r) and r['size_bytes'].strip() in ('', '0'))
+_f_nosize_tool = [n for n in _f_nosize
+                  if any(r['name'] == n and r['type'] == 'tool' for r in mrows)]
+_f_nosize_iso = [n for n in _f_nosize
+                 if any(r['name'] == n and r['type'] == 'iso' for r in mrows)]
+
+_c = _row24('Строк в `manifest.csv`')
+_m = re.search(r'^(\d+)$', (_c or [''])[1] if _c else '')
+t(_m is not None and int(_m.group(1)) == _n_all,
+  f'research/24 §1 «Строк в manifest.csv» равен manifest.csv '
+  f'({_m.group(1) if _m else "строки нет"} против {_n_all})')
+
+_c = _row24('`present` / `planned`')
+_m = re.search(r'^(\d+)\s*/\s*(\d+)$', (_c or [''])[1] if _c else '')
+t(_m is not None and int(_m.group(1)) == _n_pres
+  and int(_m.group(2)) == _n_plan,
+  f'research/24 §1 «present / planned» равен manifest.csv '
+  f'({_m.group(0) if _m else "строки нет"} против {_n_pres} / {_n_plan})')
+
+_c = _row24('Утилит в `present` (сумма + размер)')
+_m = re.search(r'^(\d+)$', (_c or [''])[1] if _c else '')
+t(_m is not None and int(_m.group(1)) == len(_f_tool_pres),
+  f'research/24 §1 «Утилит в present» равен manifest.csv '
+  f'({_m.group(1) if _m else "строки нет"} против {len(_f_tool_pres)})')
+t(_c is not None and _names24(_c[2] if len(_c) > 2 else '') == _f_tool_pres,
+  f'research/24 §1 перечень утилит в present равен manifest.csv '
+  f'({len(_f_tool_pres)} имён)'
+  + ('' if _c and _names24(_c[2] if len(_c) > 2 else '') == _f_tool_pres
+     else f'; факт {_f_tool_pres}'))
+
+_c = _row24('Сумма есть, размера нет')
+_m = re.search(r'^(\d+)$', (_c or [''])[1] if _c else '')
+t(_m is not None and int(_m.group(1)) == len(_f_nosize),
+  f'research/24 §1 «Сумма есть, размера нет» равен manifest.csv '
+  f'({_m.group(1) if _m else "строки нет"} против {len(_f_nosize)})')
+_mb = re.search(r'(\d+)\s+утилит\s*\(.*?\)\s*\+\s*(\d+)\s+образ',
+                (_c or [''])[2] if _c and len(_c) > 2 else '')
+t(_mb is not None and int(_mb.group(1)) == len(_f_nosize_tool)
+  and int(_mb.group(2)) == len(_f_nosize_iso),
+  f'research/24 §1 разбивка «N утилит + M образ» равна manifest.csv '
+  f'({_mb.group(0) if _mb else "нет"} против {len(_f_nosize_tool)} утилит '
+  f'+ {len(_f_nosize_iso)} образ)')
+t(_c is not None and _names24(_c[2] if len(_c) > 2 else '') == _f_nosize,
+  f'research/24 §1 перечень «сумма есть, размера нет» равен manifest.csv '
+  f'({len(_f_nosize)} имён)'
+  + ('' if _c and _names24(_c[2] if len(_c) > 2 else '') == _f_nosize
+     else f'; факт {_f_nosize}'))
+
+# Порог ниже — защита от холостого прохода: если регулярки перестанут
+# совпадать из-за правки формулировки, проверки выше упрутся в `None`
+# и упадут, но этот порог называет причину прямо.
+_n_cnt = len(re.findall(r'\|\s*(?:Строк с реальной SHA256|'
+                        r'Строк с `sha256=PENDING`|'
+                        r'Утилит с ожидаемой суммой|'
+                        r'`planned` с `size_bytes=0`)\s*\|', _n24))
+_n_cnt += sum(1 for _lb in ('Строк в `manifest.csv`', '`present` / `planned`',
+                            'Утилит в `present` (сумма + размер)',
+                            'Сумма есть, размера нет')
+              if _row24(_lb) is not None)
+t(_n_cnt == 8,
+  f'в §1 найдены все восемь строк счётчиков, а не часть ({_n_cnt} из 8)')
+
+# Решение владельца 2026-10-21 по N51, вариант A. Строка «Прогоны» в §1
+# пересказывала числа, которые выводит сам прогон, и устаревала четыре раза:
+# 186/0, 456/0, 767/0 и 800/0 против факта 809/0. Проверить её изнутри
+# набора нельзя — проверка в test_rules.py меняет число проверок
+# test_rules.py, то есть сверяемое значение. §12.9 вынести такие значения в
+# baseline.csv запрещает прямо: «значения, которые тест вычисляет сам и
+# сравнивает между собой» туда не кладутся. Поэтому лечением стал отказ от
+# второго источника: числа из строки убраны, а проверка ниже не даёт им
+# вернуться. Первая проверка требует наличия строки, чтобы её удаление не
+# выглядело исполнением правила.
+_pg = re.search(r'^\|\s*Прогоны\s*\|(.*)$', _n24, re.M)
+t(_pg is not None, 'строка «Прогоны» в §1 research/24 присутствует')
+if _pg:
+    _vol = re.findall(r'\d+\s*/\s*\d+', _pg.group(1))
+    t(not _vol,
+      'строка «Прогоны» не содержит летучих чисел вида N/M '
+      f'(решение владельца 2026-10-21 по N51); найдено: {_vol}')
+
+# Находка N52. Правка N50 заменила в §2.2 «18 строк без суммы» на 17, но
+# оставила связанное «Остальные 12 — утилиты» и список из двенадцати имён в
+# том же предложении. Число 12 было верным до A5: строка Prime95 получила
+# сумму, и утилит без суммы осталось одиннадцать. Предложение стало
+# арифметически несходным — 6 + 12 против заявленных 17.
+# Ценность проверки в том, что первые два утверждения не требуют внешнего
+# источника: несоответствие видно из самого текста. Третье сверяет состав
+# списка с manifest.csv, чтобы список не отстал от факта молча.
+_m_tot = re.search(r'Осталось (\d+) строк без суммы\. Из них (\d+) — ISO', _n24)
+_m_ut = re.search(r'Остальные (\d+) — утилиты', _n24)
+_m_lst = re.search(r'Все (\d+):((?:(?!Двенадцатой|Тринадцатой).)*?)\.\s',
+                   _n24, re.S)
+t(_m_tot is not None and _m_ut is not None and _m_lst is not None,
+  'в §2.2 найдены все три части утверждения о строках без суммы')
+if _m_tot and _m_ut and _m_lst:
+    _tot, _iso = int(_m_tot.group(1)), int(_m_tot.group(2))
+    _utl = int(_m_ut.group(1))
+    _dcl = int(_m_lst.group(1))
+    _nms = re.findall(r'`([^`]+)`', _m_lst.group(2))
+    t(_iso + _utl == _tot,
+      f'§2.2 сходится арифметически: {_iso} ISO + {_utl} утилит = {_tot} '
+      f'(заявлено {_tot})')
+    t(_dcl == len(_nms),
+      f'§2.2 «Все {_dcl}» равно числу имён в списке ({len(_nms)})')
+    _fact_ut = sorted(r['name'] for r in mrows
+                      if r['sha256'] == 'PENDING' and r['type'] == 'tool')
+    t(sorted(_nms) == _fact_ut,
+      f'§2.2 список утилит без суммы равен manifest.csv ({len(_fact_ut)} имён)'
+      + ('' if sorted(_nms) == _fact_ut else
+         f'; лишние {sorted(set(_nms) - set(_fact_ut))}, '
+         f'пропущены {sorted(set(_fact_ut) - set(_nms))}'))
+    t(_utl == len(_fact_ut),
+      f'§2.2 число утилит без суммы равно manifest.csv '
+      f'({_utl} против {len(_fact_ut)})')
+
+# Находка N53, класс B-15. tools/docs/summary.md объявляет в шапке: «Все
+# числа взяты подсчётом по файлам репозитория и строкам manifest.csv на
+# дату сверки. Если файл изменён — пересчитайте, не переписывайте от руки».
+# Документ живой по собственному объявлению, но его числа не сверял ни один
+# прогон: test_stage10.py сводку читал, однако сравнивал её с литералами, а
+# не с манифестом (находка N54). Одиннадцать значений отстали — 47 строк
+# при 46, 23 утилиты при 22, 30 planned при 25, 155 файлов .md при 163,
+# 21 исследование при 27, 16 тестов при 19, 16 файлов .ps1 при 14, и в
+# tools/docs/README.md 28 строк с суммой при 29 и 18 PENDING при 17.
+_smry = io.open(os.path.join('tools', 'docs', 'summary.md'),
+                encoding='utf-8').read()
+_drd = io.open(os.path.join('tools', 'docs', 'README.md'),
+               encoding='utf-8').read()
+_drd_f = re.sub(r'\s+', ' ', _drd)
+
+# Счётчики файлов считаются здесь же: по §12.9 самовычисляемое значение в
+# baseline.csv не кладётся. Обход excludes .git и __pycache__, иначе счёт
+# расходится с git ls-files на артефактах прогона.
+_cnt = {'ps1': 0, 'md': 0, 'readme': 0, 'research': 0, 'tests': 0}
+for _r, _d, _fs in os.walk('.'):
+    _d[:] = [x for x in _d if x not in {'.git', '__pycache__'}]
+    for _f in _fs:
+        _p = os.path.join(_r, _f)[2:]
+        if _f.endswith('.ps1'):
+            _cnt['ps1'] += 1
+        if _f.endswith('.md'):
+            _cnt['md'] += 1
+            if os.path.basename(_f) == 'README.md':
+                _cnt['readme'] += 1
+            if _p.startswith('research/'):
+                _cnt['research'] += 1
+        if _p.startswith('tests/test_') and _f.endswith('.py'):
+            _cnt['tests'] += 1
+
+
+def _snum(pattern, text, label, fact):
+    _mm = re.search(pattern, text)
+    t(_mm is not None and int(_mm.group(1)) == fact,
+      f'summary.md «{label}» равен пересчёту '
+      f'({_mm.group(1) if _mm else "строки нет"} против {fact})')
+
+
+_snum(r'\((\d+) строк данных\)', _smry, 'строк данных', len(mrows))
+_snum(r'### Утилиты \((\d+)\)', _smry, 'Утилиты', _n_tool)
+_snum(r'\*\*Всего (\d+) утилиты', _smry, 'Всего утилиты', _n_tool)
+_snum(r'все (\d+) файлов со статусом `planned`', _smry,
+      'planned-файлов', _n_plan)
+_snum(r'\*\*Скачать (\d+) файлов\*\*', _smry, 'Скачать файлов', _n_plan)
+_snum(r'сверить все (\d+) сумм', _smry, 'сумм к сверке', _n_sha)
+_snum(r'\| Файлов `\.md` \| (\d+) \|', _smry, 'Файлов .md', _cnt['md'])
+_snum(r'\| Файлов `README\.md` \| (\d+) \|', _smry,
+      'Файлов README.md', _cnt['readme'])
+_snum(r'\| Исследований в `research/` \| (\d+) \|', _smry,
+      'Исследований в research/', _cnt['research'])
+_snum(r'\| Тестов в `tests/` \| (\d+) \|', _smry, 'Тестов в tests/',
+      _cnt['tests'])
+_snum(r'\| Все (\d+) файлов `\.ps1` \|', _smry, 'файлов .ps1', _cnt['ps1'])
+
+# Таблица §2 сверяется по типам: у каждой строки три числа, и расхождение
+# в любом из них — тот же механизм. Именно здесь сводка держала
+# tool 23/0/23 при факте 22/4/18 и script 11/0/11 при факте 11/11/0.
+for _ty in ('iso', 'tool', 'script', 'module'):
+    _sub = [r for r in mrows if r['type'] == _ty]
+    _fp = sum(1 for r in _sub if r['status'] == 'present')
+    _fl = sum(1 for r in _sub if r['status'] == 'planned')
+    _mt = re.search(r'\| `' + _ty + r'` \| (\d+) \| (\d+) \| (\d+) \|', _smry)
+    t(_mt is not None and int(_mt.group(1)) == len(_sub)
+      and int(_mt.group(2)) == _fp and int(_mt.group(3)) == _fl,
+      f'summary.md строка `{_ty}` равна manifest.csv '
+      f'({_mt.group(0) if _mt else "строки нет"} '
+      f'против {_ty} {len(_sub)} / {_fp} / {_fl})')
+
+_mi = re.search(r'\| \*\*Итого\*\* \| \*\*(\d+)\*\* \| \*\*(\d+)\*\* '
+                r'\| \*\*(\d+)\*\* \|', _smry)
+t(_mi is not None and int(_mi.group(1)) == len(mrows)
+  and int(_mi.group(2)) == _n_pres and int(_mi.group(3)) == _n_plan,
+  f'summary.md строка «Итого» равна manifest.csv '
+  f'({_mi.group(0) if _mi else "строки нет"} '
+  f'против {len(mrows)} / {_n_pres} / {_n_plan})')
+
+# tools/docs/README.md — второй пересказ тех же двух чисел
+_md = re.search(r'покрыты (\d+) строк с суммой и почему (\d+) строк', _drd_f)
+t(_md is not None and int(_md.group(1)) == _n_sha
+  and int(_md.group(2)) == _n_pend,
+  f'tools/docs/README.md «строк с суммой / PENDING» равен manifest.csv '
+  f'({_md.group(0) if _md else "строки нет"} против {_n_sha} / {_n_pend})')
 
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)

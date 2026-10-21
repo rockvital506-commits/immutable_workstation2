@@ -98,8 +98,12 @@ runner = io.open(os.path.join('tests', 'run-all.py'), encoding='utf-8').read()
 named = set()
 for r in rows:
     c = r['closes'].strip()
-    if c:
-        named.add((r['id'], c.split(' ')[0]))
+    # В closes может быть названо несколько проверок через точку с запятой:
+    # решение владельца 2026-10-21 по N46/N47 закрыло B-03 двумя файлами.
+    # Разбор «первый токен до пробела» читал бы только первую и молча
+    # терял остальные, то есть проверял не всё названное.
+    for fname in re.findall(r'[A-Za-z0-9_\-]+\.py', c):
+        named.add((r['id'], fname))
 for rid, fname in sorted(named):
     path = os.path.join('tests', fname)
     t(os.path.isfile(path), f'{rid}: {path} существует')
