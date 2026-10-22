@@ -1,0 +1,17 @@
+select disk x
+
+clean
+convert mbr
+
+create partition primary size=100
+format quick fs=fat32 label="MBR_BOOT"
+assign letter="S"
+active 
+
+create partition primary
+format quick fs=ntfs label="Windows"
+assign letter="C"
+
+
+
+
