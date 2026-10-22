@@ -11,4 +11,4 @@ manifest_tool,22,строк манифеста с type=tool
 manifest_script,11,строк манифеста с type=script
 manifest_module,6,строк манифеста с type=module
 manifest_planned_zero_size,20,строк planned с size_bytes=0
-audit_findings,90,помеченных находок в AUDIT-документах research/ (16 17 19 20 21 22 23 25)
+audit_findings,95,помеченных находок в разделах Находки/Расхождения research/*.md кроме README.md (считает test_bestiary.py [7])

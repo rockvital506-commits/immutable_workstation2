@@ -10,7 +10,7 @@ WinUtil,os/windows/tweaks,no,,"применяется в установленн�
 Win11Debloat,os/windows/debloat,no,,"применяется в установленной ОС, WinPE не подходит",full,license_audited
 Sophia_Script,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,license_audited
 LGPO,os/windows/gpo_lock,no,,"применяется в установленной ОС, WinPE не подходит",full,license_unverified
-RustDesk,network/remote,no,,"свой сервер вместо чужого посредника; в сборке TeamViewer, AnyDesk и др.",full,license_audited
+RustDesk,network/remote,yes,не указана,"свой сервер вместо чужого посредника; в сборке есть — группа «Удалённый доступ и VPN», версия в меню не указана",build_version,license_audited
 iperf3,network/speed,no,,замер полосы между двумя точками,full,license_audited
 Nmap,network/scan,no,,"в сборке Advanced IP Scanner, но он не про порты и службы",full,risk_accepted
 Wireshark,network/capture,no,,захват и разбор трафика,full,license_audited
@@ -19,5 +19,5 @@ MyPublicWifi,network/wifi,no,,точка доступа на станции,full
 Autoruns,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
 ProcessExplorer,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
 TCPView,security/audit,no,,в сборке Sysinternals нет вообще,full,license_audited
-VeraCrypt,security/encryption,no,,в сборке шифрования нет,full,license_audited
+VeraCrypt,security/encryption,yes,1.26.24,"в сборке 1.26.24, у нас 1.26.29 — свежее",build_version,license_audited
 SDIO,drivers/packs,no,,в сборке средств подбора драйверов нет,full,license_audited
