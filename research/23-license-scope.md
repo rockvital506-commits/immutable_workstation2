@@ -48,6 +48,13 @@
 `iperf3`, `Nmap`, `Wireshark`, `WifiInfoView`, `MyPublicWifi`, `Autoruns`,
 `ProcessExplorer`, `TCPView`, `VeraCrypt`, `SDIO`.
 
+> **Обновлено 2026-10-22 (N55, N59, `research/27-winpe11-observation.md`).**
+> Сверка съёмкой меню WinPE 11 x64: `VeraCrypt 1.26.24` и `RustDesk` в сборке
+> **есть** — строки реестра переведены в `in_strelec=yes`. «В сборке» стало 5
+> из 22 (`CrystalDiskInfo`, `MemTest86Plus`, `DMDE`, `VeraCrypt`, `RustDesk`),
+> «вне сборки» — 17. `DMDE` в меню 24 групп не обнаружен — утверждение о его
+> присутствии не подтверждено (см. «Не проверено» в `research/27`).
+
 При этом функция трёх из них в сборке закрыта другими средствами:
 
 | Утилита | Что есть в сборке вместо |

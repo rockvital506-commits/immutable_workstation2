@@ -21,9 +21,9 @@
 | Утилит в `present` (сумма + размер) | 4 | `smartmontools`, `Win11Debloat`, `LGPO`, `VeraCrypt` |
 | Сумма есть, размера нет | 7 | 6 утилит (`WifiInfoView`, `Autoruns`, `ProcessExplorer`, `TCPView`, `SDIO`, `DMDE`) + 1 образ (`linuxmint-22.3-cinnamon-64bit`); исправлено 2026-10-16, прежние 6 не учитывали образ |
 | `planned` с `size_bytes=0` | 20 | поле `size_bytes` |
-| Находок AUDIT | 90 | пересчёт `test_bestiary.py` [7] |
+| Находок AUDIT | 95 | пересчёт `test_bestiary.py` [7] |
 | Классов дефектов в пуле | 16, `B-01`…`B-16` | `research/bestiary.csv` |
-| Прогоны | `tests/run-all.py`, `scripts/repo-validate.sh`, `scripts/csv-check.py manifest.csv` — прогнаны, ошибок нет | фактический прогон 2026-10-21; конкретные числа проверок не приводятся намеренно: решение владельца 2026-10-21 по N51 |
+| Прогоны | `tests/run-all.py`, `scripts/repo-validate.sh`, `scripts/csv-check.py manifest.csv` — прогнаны, ошибок нет | фактический прогон 2026-10-22; конкретные числа проверок не приводятся намеренно: решение владельца 2026-10-21 по N51 |
 
 Этапы 1–10 закрыты, сегмент лицензионной сверки закрыт, N3 закрыт в пределах,
 достижимых из рабочей среды.

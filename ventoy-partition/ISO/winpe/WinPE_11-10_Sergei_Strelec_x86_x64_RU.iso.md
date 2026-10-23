@@ -25,12 +25,15 @@
 
 ## Состав сборки
 
-Полный перечень утилит этой сборки — в [`tools/diagnostics/strelec-tools.md`](../../../tools/diagnostics/strelec-tools.md).
+Полный перечень утилит этой сборки — в [`tools/diagnostics/strelec-tools.md`](../../../tools/diagnostics/strelec-tools.md)
+(таксономия 24 групп меню / 201 пункт, сверено съёмкой 2026-10-22 —
+[`research/27-winpe11-observation.md`](../../../research/27-winpe11-observation.md)).
 
 Сборка содержит пять ядер: `WinPE 11 x64`, `WinPE 10 x64`, `WinPE 10 x86`,
-`WinPE 8 x86`, `WinPE 8 x86 (Native)`. Состав программ между ядрами различается:
-в x64-образе 2026.02.05 нет Victoria, HD Tune Pro, Western Digital Data
-Lifeguard и RWEverything, которые есть в x86-образе.
+`WinPE 8 x86`, `WinPE 8 x86 (Native)`. Состав программ между ядрами различается
+(по описанию автора). Съёмка меню WinPE 11 x64 2026-10-22 показала Victoria 5.37
+в ядре x64 — прежняя запись «в x64 нет Victoria» ошибочна (N56); HD Tune Pro,
+Western Digital Data Lifeguard и RWEverything в меню x64 не обнаружены.
 
 Антивирусы в `SSTR/MInst/Portable/Antivirus` лежат **пустышками** — перед
 работой заменить актуальными версиями с официальных сайтов.
