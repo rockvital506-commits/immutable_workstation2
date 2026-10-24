@@ -9,7 +9,8 @@
 - [Исходные сведения: только три группы](context.md).
 - [Реестр блоков](block-register.md).
 - [Карточки решений](decisions/README.md).
-- [B01: материалы для обсуждения](decisions/B01-region.md).
+- [B01: согласован интерактивный выбор](decisions/B01-region.md).
+- [B02: разбор всех полей, решение ожидается](decisions/B02-winpe.md).
 - [Ревизии](revisions/README.md).
 - [Общий регламент](../../workflow.md).
 - [Основной алгоритм](../../../ventoy-partition/builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/algorithm.md).
