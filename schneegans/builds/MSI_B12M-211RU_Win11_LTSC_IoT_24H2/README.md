@@ -7,7 +7,8 @@ ru-RU + Russian, третья пара выключена, регион Lithuani
 интерактивно» заменено. XML ещё не получен; проверка практикой впереди.
 B02: выбран генерируемый сайтом CMD для PE; остальные настройки не приняты.
 Disable 8.3 file names оставлен выключенным.
-Следующее поле — Disable Windows Defender.
+Disable Windows Defender оставлен выключенным.
+Следующее поле — Pause before disk is partitioned and formatted.
 
 - [Исходные сведения: только три группы](context.md).
 - [Реестр блоков](block-register.md).
