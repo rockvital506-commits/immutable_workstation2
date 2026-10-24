@@ -33,12 +33,14 @@ Partition layout — GPT согласована.
 Сквозная сверка решений B02 выполнена; реализация и практика впереди.
 B03 Activation согласован: поле ключа пустое.
 B04 согласован: только Intel / AMD 64-bit (amd64), x86/Arm64 выключены.
-Следующее поле — B05 Bypass Windows 11 requirements check.
+B05: владелец выбрал обход требований, но pinned-код применяет его только
+к штатной PE, не к выбранному generated CMD. Подробности — в карточке B05.
 
 - [Исходные сведения: только три группы](context.md).
 - [Реестр блоков](block-register.md).
 - [Карточки решений](decisions/README.md).
 - [B01: UI English, последовательный разбор полей](decisions/B01-region.md).
+- [B05: настройки установки](decisions/B05-setup.md).
 - [B04: только amd64](decisions/B04-architectures.md).
 - [B03: поле ключа оставляем пустым](decisions/B03-activation.md).
 - [B02: генерируемый CMD выбран, продолжается разбор полей](decisions/B02-winpe.md).
