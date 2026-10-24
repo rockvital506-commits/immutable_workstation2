@@ -10,7 +10,8 @@ Disable 8.3 file names оставлен выключенным.
 Disable Windows Defender оставлен выключенным.
 Пауза перед разметкой включена (флажок установлен по сообщению владельца).
 Пауза перед перезагрузкой в конце PE также включена.
-Следующее поле — Apply Windows image in compact mode.
+Компактное применение образа выключено.
+Следующее поле — Skip integrity check when applying image.
 
 - [Исходные сведения: только три группы](context.md).
 - [Реестр блоков](block-register.md).
