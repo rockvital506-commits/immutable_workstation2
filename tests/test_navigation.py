@@ -391,5 +391,40 @@ t('второй рабочей копии' in plan and 'reg import/restore' in p
 t('не утверждение, что S2-01–04 уже пройдены' in plan,
   'аналогия результатов не выдаёт теоретические этапы за практику')
 
+# Согласованный процесс Schneegans: отдельная база знаний, не готовый XML.
+sg = 'schneegans/'
+workflow = read(sg + 'workflow.md')
+msi_path = sg + 'builds/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/'
+registry = read(msi_path + 'block-register.md')
+context = read(msi_path + 'context.md')
+ids = re.findall(r'^\| (B[0-9]{2}) \|', registry, re.M)
+t(len(ids) == 28 and len(set(ids)) == 28,
+  'Schneegans: все 28 блоков исследованной формы имеют уникальные ID')
+t(all(x in registry for x in ('C01', 'C02', 'C03')),
+  'Schneegans: импорт, пресеты и вывод не потеряны')
+t([l for l in context.splitlines() if l.startswith('## ')] ==
+  ['## Паспорт станции', '## Будущая ОС', '## Назначение'],
+  'Schneegans: контекст ограничен тремя согласованными группами')
+t(all(x in ' '.join(workflow.split()) for x in ('каждое поле', 'подшаг', 'критерии', 'до изучения XML сайта',
+  'без перезаписи', 'Не переписывать молча принятые старые билды')),
+  'Schneegans: полнота разбора, независимый кандидат и эволюция заданы')
+t(not any(f.endswith('.xml') for _, _, files in os.walk(sg) for f in files),
+  'Schneegans: до завершения решений нет притворных кандидатов XML')
+# Последний инвариант относится к исходной ревизии гайда: при первой реальной
+# генерации заменить его проверкой метаданных/происхождения артефактов.
+sg_dead = []
+for directory, _, files in os.walk(sg):
+    for filename in files:
+        if not filename.endswith('.md'):
+            continue
+        path = os.path.join(directory, filename)
+        for link in re.findall(r'\]\(([^)\s]+)\)', read(path)):
+            if link.startswith(('http:', 'https:', '#', 'mailto:')):
+                continue
+            target = os.path.normpath(os.path.join(directory, link.split('#', 1)[0]))
+            if not os.path.exists(target):
+                sg_dead.append(path + ': ' + link)
+t(not sg_dead, f'Schneegans: относительные ссылки разрешимы ({sg_dead})')
+
 print(f'\nИтог: проверок {checks}, ошибок {errors}')
 sys.exit(1 if errors else 0)
