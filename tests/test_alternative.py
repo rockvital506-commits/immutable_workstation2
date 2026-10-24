@@ -384,7 +384,7 @@ msi = read(f'{BUILDS}/MSI_B12M-211RU_Win11_LTSC_IoT_24H2/alternative_algorithm.m
 step2 = next(sec for head, sec in steps_of(msi) if head.startswith('### Шаг 2.'))
 t('**Критерии успеха:**' in step2 and 'msi-alt-preinstall-02' in msi,
   'Шаг 2 имеет критерии и устойчивую навигацию')
-t('1.03' in step2 and '1.05' in step2 and 'не успешный браузерный результат' in ' '.join(step2.split()),
+t('1.03' in step2 and '1.05' in step2 and 'не использовать как успешный браузерный результат' in ' '.join(step2.split()),
   'Шаг 2 не выдаёт неудачный экспорт 1.03 за успешный')
 t('/MIR' not in '\n'.join(re.findall(r'```bat\n(.*?)```', step2, re.S)),
   'исполняемые команды Шага 2 не зеркалируют назначение')
