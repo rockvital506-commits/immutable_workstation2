@@ -32,12 +32,14 @@ Partition layout — GPT согласована.
 ещё не принято, настройки гибернации/быстрого запуска пока не менять.
 Сквозная сверка решений B02 выполнена; реализация и практика впереди.
 B03 Activation согласован: поле ключа пустое.
-Следующий блок — B04 Processor architectures.
+B04 согласован: только Intel / AMD 64-bit (amd64), x86/Arm64 выключены.
+Следующее поле — B05 Bypass Windows 11 requirements check.
 
 - [Исходные сведения: только три группы](context.md).
 - [Реестр блоков](block-register.md).
 - [Карточки решений](decisions/README.md).
 - [B01: UI English, последовательный разбор полей](decisions/B01-region.md).
+- [B04: только amd64](decisions/B04-architectures.md).
 - [B03: поле ключа оставляем пустым](decisions/B03-activation.md).
 - [B02: генерируемый CMD выбран, продолжается разбор полей](decisions/B02-winpe.md).
 - [Ревизии](revisions/README.md).
