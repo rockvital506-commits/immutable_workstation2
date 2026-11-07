@@ -5399,3 +5399,107 @@ artifact+approval ссылочных файлов побайтно совпад�
 нарушений, git diff --check чистый; все 53 normative artifact pins сохранены.
 Публичные счётчики: 206 md / 86 README / 31 research / 30 test modules;
 454 относительные ссылки по публичному дереву, битых нет. Local evidence исключено.
+
+## 46. Предложения отдельных разрешений выпуска/экспорта: блокирующая часть модели
+
+### 46.1. Внедрение и предел результата
+
+ENT-0014 r0001: protocol, depends_on ENT-0013 r0001; четыре normative файла
+`permissions/ent-0014/r0001/{proposal.schema.json,check.py,verify.py,usage.md}`.
+Условное внедрение по делегированию владельца после проверок, approve_revision
+`6688f15c-116e-4c91-bb01-944272df4b88` — summary основания, не отдельная цитата
+согласия на эти bytes и не реальное разрешение выпуска. Теперь 14 сущностей /
+20 ревизий / 57 нормативных артефактов / 20 approve_revision. Реальных
+restrict/revoke/lift/correct/release/export/activate событий не создавалось.
+
+**Это proposal-only/отрицательная часть модели, не положительный менеджер
+разрешений.** Полноценный grant/event format, owner authentication, семантика
+его отзыва/конфликтов и исполнение переходов отложены; старый ENT7 r0001 не
+расширен. Нельзя назвать этот этап закрытием G04/G05/G07 или разрешением выпуска.
+Положительный путь не реализуется простым удалением текущего отрицательного gate.
+
+Release/export — отдельные proposals, activation не входит ни в один.
+Каждый pin связывает exact candidate и весь registry/явно известный ledger
+этого run. Export содержит полный sorted allowlist выбранных 34 payload paths
+и hash/size другого release proposal с тем же snapshot. Это связь намерений,
+не утверждение, что release разрешён. Одна запись не означает два разрешения;
+kind authorize_release/owner_approved, неизвестные поля/activation отвергаются.
+Новый состав/ledger/index/parent требует нового proposal/run; single-use
+хранилища нет, история не переписывается и ничего не активируется автоматически.
+
+### 46.2. Проверка, обоснование и сохранённые пробелы
+
+Закрытая schema переиспользует определения base через прежний локальный registry,
+без сетевого retrieval/новых библиотек. Five pins: 4 normative ENT13 + собственная
+schema; прежний loader сверяет transitive dependencies. Собственные bytes checker
+учитываются отдельно обычным approval, не self-hash. Сохраняется требование
+доверенной не изменяемой противником установки и прежний check/runpy TOCTOU предел.
+
+`check_proposal` работает над bytes/внешними pins, не читает source/не пишет данные/
+не исполняет код inputs. Проверяет strict JSON/schema/native sizes, exact snapshot,
+unique sorted decision paths, parent/allowlist и ENT13 consistency. Потом отдельно
+вычисляет известные scope-запреты для release/agent_system.release, а при export
+также export/agent_system.transfer. Validate/candidate scope не заменяет эти пары;
+известный export-only запрет не теряется. Успешный bounded разбор даёт
+**blocked_incomplete_candidate** с INCOMPLETE_CORE_COVERAGE и
+POSITIVE_PERMISSION_PATH_UNIMPLEMENTED, все release/export/activation/transition/
+performed false. Структурная схема, точный hash или approve_revision не дают права.
+
+Выбрана проверяемая отрицательная часть вместо преждевременной выдачи grants
+для неполного ядра. Плюсы: точный предмет, независимость операций и сохранение
+известных запретов; прежние инструменты переиспользованы. Минусы: дополнительный
+proposal/повторные pure checks, отсутствует positive decision engine. Uniqueness
+JSON objects в decisions schema заменена прямой проверкой уникальных путей,
+чтобы не требовать квадратичного сравнения объектов. Это архитектурное обоснование,
+не benchmark альтернатив. Риски: недоверенные pins/installation, stale/неполный
+ledger, ложные coverage claims и переоценка structural PASS. Поведение/реальная
+среда/полномочия/публикация не проверены. Proposals — только local, не ledger approvals.
+
+### 46.3. Тесты и read-only практика
+
+До регистрации **30/30 собственных тестов и 31/31 наборов репозитория PASS**.
+Проверены обе корректные, но blocked proposals; попытки owner/grant/activation/
+совместного action, подмена candidate/index/ledger/parent, duplicate decision paths,
+float sizes, wrong literal scope, extra/missing payload paths, parent-chain/same UUID,
+known export-only revoke, fake ready, входной Python payload без исполнения,
+изменение installed pins, limits и отсутствие изменения входных объектов.
+Никаких реальных отрицательных событий ради тестов не записано. После регистрации
+41/41 deployment и 30/30 собственных PASS.
+
+Практический caller из доверенного checkout закрепил текущие 57 normative files,
+20 известных решений и registry (78 объявленных inputs); ожидания caller_supplied,
+не authenticated. ENT5 one-root-fd acquisition — 21.367 ms; отдельный ENT9 execute
+validate/agent_system.permissions для ENT14 — passed_known_inputs, **14 closure /
+42 checked artifacts**, 384.728 ms. Это контроль учёта компонентов, не разрешение
+release/export. Из captured bytes выбраны ровно прежние 34 candidate payload files.
+Оба новых предложения вернули **blocked_incomplete_candidate**:
+release — 772.665 ms, export — 998.855 ms. Это единичные наблюдения, не benchmark
+и не доказательство превосходства скорости. Caller вручную связал их с общим
+планом, automatic_binding=false; checker сам не потребляет ENT9 envelope.
+
+Registry: 48279 bytes, SHA-256
+`51fce73acd3089885ae9aed479d425cff610e3e361faad647f4f8c843ea49c3e`.
+Plan: 14910 bytes, SHA-256
+`1d0558d6ce97e2266a91a9349d3b20eee26a528d8bc5602e19afaadcc1e314b4`.
+Release proposal: 4543 bytes, SHA-256
+`37bfab074ef3b26bb212a94442bf52ca1053920eb77de1758ea602a5d3251b71`.
+Export proposal: 6247 bytes, SHA-256
+`cf5cfc3a8adf5522293f7f085b13f69e175c7cc375eb86b4eea404e1382cf227`.
+Локальные proposals/results/plan/acquisition/validation/documents/journal:
+`agent_system/local/permissions/6ff5c560-89bf-42f5-90b0-02ab8bff6098/`, вне Git.
+Это не экспортный пакет. Grants не созданы, копирование в новую среду/публикация/
+активация не выполнялись. 19 прежних revision records совпадают, 72 прежних
+artifact+approval файлов побайтно совпадают с HEAD e605baf. Предыдущий candidate
+и его selected records не переписаны; полный индекс/ledger обновлён лишь новым
+approve_revision компонента и закреплён отдельно для нового run.
+
+Далее следует закрывать содержательные/исполнительные пробелы выбранного B:
+определить и проверить безопасный механизм сборки неполного пробного комплекта
+в явно ограниченной staging-области, без публикации/полного выпуска/активации.
+Положительная авторизация совместимого выпуска остаётся заблокирована до
+проверяемых реализаций, покрытия и отдельного действительного решения владельца;
+новые proposals не заменяют эту работу.
+
+Итоговая проверка после регистрации и практики: **31/31 наборов PASS**,
+pip check без нарушений, git diff --check чистый. Все 57 normative pins целы;
+207 md / 86 README / 31 research / 31 test module, local evidence игнорируется Git.

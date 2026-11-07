@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "decision_id": "6688f15c-116e-4c91-bb01-944272df4b88",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0014",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "permissions/ent-0014/r0001/proposal.schema.json",
+      "sha256": "142a2a628ed5125229ac48a9e1d6768f62cf21ff138cc12a83fa1c220369ac39",
+      "size_bytes": 4320
+    },
+    {
+      "path": "permissions/ent-0014/r0001/check.py",
+      "sha256": "18d47b251a0709ebd021a9473553c7faeb12b8e977d90ed41b20899dde9df1d2",
+      "size_bytes": 7333
+    },
+    {
+      "path": "permissions/ent-0014/r0001/verify.py",
+      "sha256": "d94ce36432537ce5e13f4d059fc6f0a0772c0e8fc6cbfb19734aa59e1937ed1e",
+      "size_bytes": 8170
+    },
+    {
+      "path": "permissions/ent-0014/r0001/usage.md",
+      "sha256": "3ba366a47b00d576bfb1254dee15404b6e3c245437f3097be301907326eb2fd1",
+      "size_bytes": 15107
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-07",
+  "statement_form": "summary",
+  "statement": "Условное внедрение отдельного protocol предложений выпуска/экспорта и его ограниченного отрицательного пути по ранее данному делегированию после проверок. Summary основания, не отдельная прямая цитата о конкретных bytes и не реальное разрешение выпуска, экспорта или активации.",
+  "basis": "До регистрации 30/30 собственных тестов и 31/31 наборов репозитория PASS. Проверены exact request/candidate/index/known-ledger binding, separate release/export intent, exact export path set/release parent, operation-specific известные scoped-запреты, no grant claims и обязательная остановка incomplete candidate. Положительная событийная модель release permissions, owner authentication, полнота ledger/coverage и реальные переходы не реализованы. Никаких новых библиотек; повторно используются ENT13/ENT9/ENT6/base schema. Результативность подтверждена только для bounded proposal consistency/отрицательных путей, не для выдачи разрешений или скорости относительно альтернатив."
+}

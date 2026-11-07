@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:schema:permission-proposal:1",
+  "title": "Proposal only: not an owner grant",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "kind": {
+      "const": "permission_proposal"
+    },
+    "request_id": {
+      "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/uuid"
+    },
+    "authority": {
+      "const": "proposal_only"
+    },
+    "action": {
+      "enum": [
+        "release",
+        "export"
+      ]
+    },
+    "area": {
+      "enum": [
+        "agent_system.release",
+        "agent_system.transfer"
+      ]
+    },
+    "candidate": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "registry": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "decisions": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "properties": {
+          "sha256": {
+            "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "path": {
+            "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/path"
+          }
+        },
+        "required": [
+          "sha256",
+          "size_bytes",
+          "path"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "export_paths": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10000,
+          "items": {
+            "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/path"
+          },
+          "uniqueItems": true
+        }
+      ]
+    },
+    "release_request": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+            },
+            "size_bytes": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "sha256",
+            "size_bytes"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "transition_allowed": {
+      "const": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "release"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "area": {
+            "const": "agent_system.release"
+          },
+          "export_paths": {
+            "type": "null"
+          },
+          "release_request": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "area": {
+            "const": "agent_system.transfer"
+          },
+          "export_paths": {
+            "type": "array"
+          },
+          "release_request": {
+            "type": "object",
+            "properties": {
+              "sha256": {
+                "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+              },
+              "size_bytes": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "sha256",
+              "size_bytes"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ],
+  "required": [
+    "schema_version",
+    "kind",
+    "request_id",
+    "authority",
+    "action",
+    "area",
+    "candidate",
+    "registry",
+    "decisions",
+    "export_paths",
+    "release_request",
+    "transition_allowed"
+  ]
+}
