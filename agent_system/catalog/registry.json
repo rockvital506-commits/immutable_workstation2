@@ -473,6 +473,139 @@
           "provenance": {
             "summary": "Самостоятельная разработка на основе утверждённых точных версий, модели B и условного делегирования после проверок. Неполная семантика событий явно блокирует общий допуск, положительные свидетельства не подменяют разрешение выпуска."
           }
+        },
+        {
+          "revision": "r0002",
+          "title": "Связывание состава, графа и scoped-событий",
+          "kind": "check",
+          "scopes": [
+            "agent_system.governance.decisions",
+            "agent_system.validation"
+          ],
+          "artifacts": [
+            {
+              "path": "validation/ent-0006/r0002/check.py",
+              "sha256": "d94e2c85c2bd40ff31b5d7edd2f0c9755cf5eb3ce6ab42488aeaff4feb8c275c",
+              "size_bytes": 12042,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0006/r0002/verify.py",
+              "sha256": "accc799767fe84367c554937de1ae5e0923521348c23d5b6ac9df5019b398f34",
+              "size_bytes": 17421,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0006/r0002/usage.md",
+              "sha256": "69aada3c8f03c892bbada23791a7cf02fc2a90e610c40fe6578240b972730929",
+              "size_bytes": 12139,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0004",
+                "revision": "r0002"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0005",
+                "revision": "r0002"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0007",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0006",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/4e032693-1b15-41c4-81bd-cc7bf460fa91.json",
+              "sha256": "e1300fd01f6a0aa5e195e3a0305b9ef45818dace7b8f14c8126a3e171f580ac4"
+            }
+          },
+          "provenance": {
+            "summary": "Реализация принятой модели неизменяемых решений с точными ссылками, совместными ограничениями и явными пределами неполного слоя. Точный состав внедрён агентом по условному разрешению после проверок; реальные события над существующими сущностями не создавались."
+          }
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0007",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "События решений о точных ревизиях",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.governance.decisions",
+            "agent_system.validation"
+          ],
+          "artifacts": [
+            {
+              "path": "specification/ent-0007/r0001/decision-events.schema.json",
+              "sha256": "4cce54eaff0d12e1e59a4aeb0eb1dd9f0f0b951f43968317c70adb7c714005c1",
+              "size_bytes": 12322,
+              "role": "normative"
+            },
+            {
+              "path": "specification/ent-0007/r0001/events.py",
+              "sha256": "26a7dee29f5f5196fd458da90246f343035f2843bed5434f2e71340abb0eaabe",
+              "size_bytes": 11016,
+              "role": "normative"
+            },
+            {
+              "path": "specification/ent-0007/r0001/verify.py",
+              "sha256": "fca460f867777250da0348845bbedc1cc6804a57988abfb1c50f6db32dc18378",
+              "size_bytes": 13994,
+              "role": "normative"
+            },
+            {
+              "path": "specification/ent-0007/r0001/usage.md",
+              "sha256": "ddaa2074aa5dfe6595f95b24f0e937871a2430be84f9a2c416f87d5d2974b4df",
+              "size_bytes": 10376,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0004",
+                "revision": "r0002"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/4c73d55a-5109-488d-8374-d0607e6b4e7c.json",
+              "sha256": "1619ede975e8d919f334777b509dd1a4e1579331ae3d252527f397786ab1e15d"
+            }
+          },
+          "provenance": {
+            "summary": "Реализация принятой модели неизменяемых решений с точными ссылками, совместными ограничениями и явными пределами неполного слоя. Точный состав внедрён агентом по условному разрешению после проверок; реальные события над существующими сущностями не создавались."
+          }
         }
       ]
     }

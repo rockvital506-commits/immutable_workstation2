@@ -1,0 +1,396 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:schema:decision-events:1",
+  "title": "Entity revision decisions and scoped restrictions",
+  "oneOf": [
+    {
+      "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision"
+    },
+    {
+      "$ref": "#/$defs/restrict_use"
+    },
+    {
+      "$ref": "#/$defs/revoke_use"
+    },
+    {
+      "$ref": "#/$defs/lift_restriction"
+    },
+    {
+      "$ref": "#/$defs/correct_record"
+    }
+  ],
+  "$defs": {
+    "restrict_use": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/schema_version"
+        },
+        "decision_id": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/decision_id"
+        },
+        "subject": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/subject"
+        },
+        "artifacts": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/artifacts"
+        },
+        "actor_role": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/actor_role"
+        },
+        "recorded_by": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/recorded_by"
+        },
+        "decision_date": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/decision_date"
+        },
+        "statement": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/statement"
+        },
+        "statement_form": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/statement_form"
+        },
+        "basis": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/basis"
+        },
+        "decision_type": {
+          "const": "restrict_use"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "operations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:\\*|[a-z][a-z0-9_.-]*)$(?![\\s\\S])"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "areas": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:\\*|[a-z][a-z0-9_.-]*)$(?![\\s\\S])"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "operations",
+            "areas"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "decision_id",
+        "subject",
+        "artifacts",
+        "actor_role",
+        "recorded_by",
+        "decision_date",
+        "statement",
+        "statement_form",
+        "basis",
+        "decision_type",
+        "reason",
+        "scope"
+      ],
+      "additionalProperties": false
+    },
+    "revoke_use": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/schema_version"
+        },
+        "decision_id": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/decision_id"
+        },
+        "subject": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/subject"
+        },
+        "artifacts": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/artifacts"
+        },
+        "actor_role": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/actor_role"
+        },
+        "recorded_by": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/recorded_by"
+        },
+        "decision_date": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/decision_date"
+        },
+        "statement": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/statement"
+        },
+        "statement_form": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/statement_form"
+        },
+        "basis": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/basis"
+        },
+        "decision_type": {
+          "const": "revoke_use"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "operations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:\\*|[a-z][a-z0-9_.-]*)$(?![\\s\\S])"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "areas": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:\\*|[a-z][a-z0-9_.-]*)$(?![\\s\\S])"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "operations",
+            "areas"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "decision_id",
+        "subject",
+        "artifacts",
+        "actor_role",
+        "recorded_by",
+        "decision_date",
+        "statement",
+        "statement_form",
+        "basis",
+        "decision_type",
+        "reason",
+        "scope"
+      ],
+      "additionalProperties": false
+    },
+    "lift_restriction": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/schema_version"
+        },
+        "decision_id": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/decision_id"
+        },
+        "subject": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/subject"
+        },
+        "artifacts": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/artifacts"
+        },
+        "actor_role": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/actor_role"
+        },
+        "recorded_by": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/recorded_by"
+        },
+        "decision_date": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/decision_date"
+        },
+        "statement": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/statement"
+        },
+        "statement_form": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/statement_form"
+        },
+        "basis": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/basis"
+        },
+        "decision_type": {
+          "const": "lift_restriction"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "operations": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:\\*|[a-z][a-z0-9_.-]*)$(?![\\s\\S])"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "areas": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:\\*|[a-z][a-z0-9_.-]*)$(?![\\s\\S])"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "operations",
+            "areas"
+          ],
+          "additionalProperties": false
+        },
+        "target": {
+          "type": "object",
+          "properties": {
+            "decision_id": {
+              "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/uuid"
+            },
+            "sha256": {
+              "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+            }
+          },
+          "required": [
+            "decision_id",
+            "sha256"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "decision_id",
+        "subject",
+        "artifacts",
+        "actor_role",
+        "recorded_by",
+        "decision_date",
+        "statement",
+        "statement_form",
+        "basis",
+        "decision_type",
+        "reason",
+        "scope",
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "correct_record": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/schema_version"
+        },
+        "decision_id": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/decision_id"
+        },
+        "subject": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/subject"
+        },
+        "artifacts": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/artifacts"
+        },
+        "actor_role": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/actor_role"
+        },
+        "recorded_by": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/recorded_by"
+        },
+        "decision_date": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/decision_date"
+        },
+        "statement": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/statement"
+        },
+        "statement_form": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/statement_form"
+        },
+        "basis": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/approve_revision/properties/basis"
+        },
+        "decision_type": {
+          "const": "correct_record"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "object",
+          "properties": {
+            "decision_id": {
+              "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/uuid"
+            },
+            "sha256": {
+              "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+            }
+          },
+          "required": [
+            "decision_id",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "changes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 2,
+                "pattern": "^/"
+              },
+              "old_value": {},
+              "new_value": {}
+            },
+            "required": [
+              "path",
+              "old_value",
+              "new_value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "decision_id",
+        "subject",
+        "artifacts",
+        "actor_role",
+        "recorded_by",
+        "decision_date",
+        "statement",
+        "statement_form",
+        "basis",
+        "decision_type",
+        "reason",
+        "target",
+        "changes"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

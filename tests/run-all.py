@@ -26,7 +26,8 @@ TESTS = ['test_repo.py', 'test_rules.py', 'test_stage42.py',
          'test_agent_catalog.py',
          'test_agent_schema.py',
          'test_agent_reader.py',
-         'test_agent_graph.py']
+         'test_agent_graph.py',
+         'test_agent_events.py']
 
 
 def main() -> int:
