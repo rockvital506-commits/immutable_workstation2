@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008'})
-        self.assertEqual(len(self.registry['entities']), 8)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009'})
+        self.assertEqual(len(self.registry['entities']), 9)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -465,6 +465,38 @@ class PlanReportDeploymentTests(unittest.TestCase):
         self.assertEqual(decision['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
                                                for a in rev['artifacts']])
         self.assertIn('структурного протокола', decision['statement'])
+
+
+class PlanExecutorDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'kind': 'check', 'artifacts': [{'path': 'validation/ent-0009/r0001/execute.py', 'sha256': '1a4340e4dfe4b01841702ffcb88a65caa0f8ccc05d6adce03c1e4b3d2e6ebdf9', 'size_bytes': 12955, 'role': 'normative'}, {'path': 'validation/ent-0009/r0001/verify.py', 'sha256': 'a082eeb938a62f4005d83f3664d027c403055c1f7851ff73a3a6517a09f41268', 'size_bytes': 11721, 'role': 'normative'}, {'path': 'validation/ent-0009/r0001/usage.md', 'sha256': '6c9ed888e4d5538a53521fa4406ce6df50e287718d2c5cc4545882432173425f', 'size_bytes': 11256, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0008', 'revision': 'r0001'}}]}
+
+    def test_exact_executor_composition(self):
+        registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0009')
+        self.assertEqual(len(entity['revisions']), 1)
+        rev = entity['revisions'][0]
+        for key, value in self.EXPECTED.items():
+            self.assertEqual(rev[key], value)
+        for artifact in rev['artifacts']:
+            artifact_bytes(artifact)
+        decision = json.loads(artifact_bytes(rev['approval']['reference']))
+        self.assertEqual(decision['subject'], dict(catalog_id=CATALOG_ID, entity_id='ENT-0009', revision='r0001'))
+        self.assertEqual(decision['statement_form'], 'summary')
+        self.assertEqual(decision['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                               for a in rev['artifacts']])
+
+    def test_installed_pins_cover_exact_profile(self):
+        import runpy
+        registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        selected = {('ENT-0001', 'r0001'), ('ENT-0002', 'r0003'), ('ENT-0003', 'r0002'),
+                    ('ENT-0004', 'r0002'), ('ENT-0005', 'r0003'), ('ENT-0006', 'r0003'),
+                    ('ENT-0007', 'r0001'), ('ENT-0008', 'r0001')}
+        pins = {a['path']: {k: a[k] for k in ('sha256', 'size_bytes')}
+                for e in registry['entities'] for v in e['revisions']
+                if (e['entity_id'], v['revision']) in selected for a in v['artifacts']}
+        installed = runpy.run_path(str(BASE / 'validation/ent-0009/r0001/execute.py'))['PINS']
+        self.assertEqual(installed, pins)
+        self.assertEqual(len(installed), 21)
 
 
 if __name__ == '__main__':

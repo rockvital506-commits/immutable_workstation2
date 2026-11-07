@@ -822,6 +822,59 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Исполнитель закреплённого плана и локальная композиция слоёв",
+          "kind": "check",
+          "scopes": [
+            "agent_system.validation"
+          ],
+          "artifacts": [
+            {
+              "path": "validation/ent-0009/r0001/execute.py",
+              "sha256": "1a4340e4dfe4b01841702ffcb88a65caa0f8ccc05d6adce03c1e4b3d2e6ebdf9",
+              "size_bytes": 12955,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0009/r0001/verify.py",
+              "sha256": "a082eeb938a62f4005d83f3664d027c403055c1f7851ff73a3a6517a09f41268",
+              "size_bytes": 11721,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0009/r0001/usage.md",
+              "sha256": "6c9ed888e4d5538a53521fa4406ce6df50e287718d2c5cc4545882432173425f",
+              "size_bytes": 11256,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0008",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/940b70a1-ceb1-47fa-aaec-ce7076462c5f.json",
+              "sha256": "4287bd131847dc4a328605806b8fbb9fa2014e36f248ed65ca250d509d596ea3"
+            }
+          },
+          "provenance": {
+            "summary": "Новая разработка по заданию и условному делегированию владельца, модель B. Реализация исполнения одного плана без аутентификации/общего допуска/автопереходов; отдельный verifier чужих bundles отсутствует."
+          }
+        }
+      ]
     }
   ]
 }
