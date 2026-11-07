@@ -746,6 +746,82 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0008",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "План входов и локальный отчёт: структурный протокол",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.validation",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "specification/ent-0008/r0001/validation-plan.schema.json",
+              "sha256": "e53e11315ebe54566edc5a395e7c4eee57cb82bdac86f9573feed57a0602664b",
+              "size_bytes": 3590,
+              "role": "normative"
+            },
+            {
+              "path": "specification/ent-0008/r0001/validation-run-report.schema.json",
+              "sha256": "7dece17f75d695484b2814c89f17f4e1623f6fec033d24c92953c740540da8bc",
+              "size_bytes": 15972,
+              "role": "normative"
+            },
+            {
+              "path": "specification/ent-0008/r0001/verify.py",
+              "sha256": "7196efe0f6b59f74ba791f80f497ce827d517d344e2c84556991db2f7f54a026",
+              "size_bytes": 14770,
+              "role": "normative"
+            },
+            {
+              "path": "specification/ent-0008/r0001/usage.md",
+              "sha256": "f775530264c1fa0a76b368a264ce4b343405b6b7b6b0e1a39002e97ea3ea0c65",
+              "size_bytes": 14765,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0004",
+                "revision": "r0002"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0005",
+                "revision": "r0003"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0006",
+                "revision": "r0003"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/23877997-03d6-434e-b368-e48d92971b76.json",
+              "sha256": "7f864bdd65ec880e27cb4c5a3f6938ffedc773741f015ccc467ce5c2901401e7"
+            }
+          },
+          "provenance": {
+            "summary": "Новая разработка на основании задания и условного делегирования владельца; продолжение выбранной модели B. Формат и структурные проверки не являются подтверждением выполнения либо общего допуска."
+          }
+        }
+      ]
     }
   ]
 }

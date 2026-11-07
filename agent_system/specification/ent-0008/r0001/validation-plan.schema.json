@@ -1,0 +1,156 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "kind": {
+      "const": "validation_plan"
+    },
+    "plan_id": {
+      "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/uuid"
+    },
+    "catalog_id": {
+      "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/uuid"
+    },
+    "execution_profile": {
+      "const": "linux-observed-set-5r3-6r3"
+    },
+    "expectation_authority": {
+      "const": "caller_supplied_not_authenticated"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{0,127}$(?![\\s\\S])"
+        },
+        "area": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{0,127}$(?![\\s\\S])"
+        }
+      },
+      "required": [
+        "operation",
+        "area"
+      ],
+      "additionalProperties": false
+    },
+    "selection": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/subject"
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "registry": {
+      "allOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/artifact"
+            },
+            {
+              "properties": {
+                "size_bytes": {
+                  "maximum": 16777216
+                }
+              }
+            }
+          ]
+        },
+        {
+          "properties": {
+            "path": {
+              "const": "catalog/registry.json"
+            }
+          }
+        }
+      ]
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "allOf": [
+              {
+                "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/artifact"
+              },
+              {
+                "properties": {
+                  "size_bytes": {
+                    "maximum": 16777216
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "properties": {
+              "path": {
+                "not": {
+                  "pattern": "^catalog/approvals(?:/|$)"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 9999,
+      "uniqueItems": true
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "allOf": [
+              {
+                "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/artifact"
+              },
+              {
+                "properties": {
+                  "size_bytes": {
+                    "maximum": 16777216
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "properties": {
+              "path": {
+                "pattern": "^catalog/approvals/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.json$(?![\\s\\S])"
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 9999,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "plan_id",
+    "catalog_id",
+    "execution_profile",
+    "expectation_authority",
+    "context",
+    "selection",
+    "registry",
+    "artifacts",
+    "decisions"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:schema:validation-plan:1",
+  "title": "Declared input plan; shape only, not trusted authority"
+}

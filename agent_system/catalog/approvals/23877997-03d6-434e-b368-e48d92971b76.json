@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "decision_id": "23877997-03d6-434e-b368-e48d92971b76",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0008",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "specification/ent-0008/r0001/validation-plan.schema.json",
+      "sha256": "e53e11315ebe54566edc5a395e7c4eee57cb82bdac86f9573feed57a0602664b",
+      "size_bytes": 3590
+    },
+    {
+      "path": "specification/ent-0008/r0001/validation-run-report.schema.json",
+      "sha256": "7dece17f75d695484b2814c89f17f4e1623f6fec033d24c92953c740540da8bc",
+      "size_bytes": 15972
+    },
+    {
+      "path": "specification/ent-0008/r0001/verify.py",
+      "sha256": "7196efe0f6b59f74ba791f80f497ce827d517d344e2c84556991db2f7f54a026",
+      "size_bytes": 14770
+    },
+    {
+      "path": "specification/ent-0008/r0001/usage.md",
+      "sha256": "f775530264c1fa0a76b368a264ce4b343405b6b7b6b0e1a39002e97ea3ea0c65",
+      "size_bytes": 14765
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-07",
+  "statement": "Условное внедрение структурного протокола по ранее данному делегированию владельца после проверок. Это summary основания, не отдельная прямая реплика владельца о конкретных байтах. Одобрение не относится к ещё не созданному orchestrator, связности отчётов, выпуску или активации.",
+  "statement_form": "summary",
+  "basis": "29/29 структурных тестов, включая полную матрицу статусов и явные демонстрации пределов Schema; общий прогон до регистрации 25/25. Формат повторно использует утверждённые определения и parser/jsonschema, не добавляет внешних библиотек. Подтверждён результат ограниченного форматного этапа; cross-document binding, runtime orchestration, аутентификация плана и общая полнота не реализованы и не получают PASS. Фиксированные not_checked, overall_admission=not_evaluated и transition_allowed=false обязательны. Исторические ревизии сохраняются. Это не разрешение выпуска или активации."
+}

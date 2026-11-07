@@ -1,0 +1,649 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "kind": {
+      "const": "validation_run_report"
+    },
+    "run_id": {
+      "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/uuid"
+    },
+    "plan_id": {
+      "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/uuid"
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "execution_profile": {
+      "const": "linux-observed-set-5r3-6r3"
+    },
+    "source_consistency": {
+      "const": "mutable_tree_observations"
+    },
+    "status": {
+      "enum": [
+        "passed_known_inputs",
+        "blocked_known_scope",
+        "failed",
+        "unsupported",
+        "incomplete"
+      ]
+    },
+    "overall_admission": {
+      "const": "not_evaluated"
+    },
+    "transition_allowed": {
+      "const": false
+    },
+    "stages": {
+      "type": "object",
+      "properties": {
+        "acquisition": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "not_run",
+                "passed_known_inputs",
+                "failed",
+                "unsupported"
+              ]
+            },
+            "evidence": {
+              "type": "object",
+              "properties": {
+                "sha256": {
+                  "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 16777216
+                }
+              },
+              "required": [
+                "sha256",
+                "size_bytes"
+              ],
+              "additionalProperties": false
+            },
+            "diagnostics": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Z0-9_]{0,95}$(?![\\s\\S])"
+                  }
+                },
+                "required": [
+                  "code"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 0,
+              "maxItems": 100,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "status",
+            "diagnostics"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "const": "not_run"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "diagnostics": {
+                    "maxItems": 0
+                  }
+                },
+                "not": {
+                  "required": [
+                    "evidence"
+                  ]
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "passed_known_inputs",
+                      "blocked_known_scope"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "evidence"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "const": "passed_known_inputs"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "diagnostics": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "failed",
+                      "unsupported",
+                      "blocked_known_scope"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "diagnostics": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "binding": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "not_run",
+                "passed_known_inputs",
+                "blocked_known_scope",
+                "failed",
+                "unsupported"
+              ]
+            },
+            "evidence": {
+              "type": "object",
+              "properties": {
+                "sha256": {
+                  "$ref": "urn:agent-system:schema:catalog-base:1#/$defs/digest"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 16777216
+                }
+              },
+              "required": [
+                "sha256",
+                "size_bytes"
+              ],
+              "additionalProperties": false
+            },
+            "diagnostics": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Z0-9_]{0,95}$(?![\\s\\S])"
+                  }
+                },
+                "required": [
+                  "code"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 0,
+              "maxItems": 100,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "status",
+            "diagnostics"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "const": "not_run"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "diagnostics": {
+                    "maxItems": 0
+                  }
+                },
+                "not": {
+                  "required": [
+                    "evidence"
+                  ]
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "passed_known_inputs",
+                      "blocked_known_scope"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "evidence"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "const": "passed_known_inputs"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "diagnostics": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "failed",
+                      "unsupported",
+                      "blocked_known_scope"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "diagnostics": {
+                    "minItems": 1
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "const": "blocked_known_scope"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "diagnostics": {
+                    "contains": {
+                      "properties": {
+                        "code": {
+                          "const": "KNOWN_SCOPE_BLOCK"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "acquisition",
+        "binding"
+      ],
+      "additionalProperties": false
+    },
+    "not_checked": {
+      "const": [
+        "plan_authentication",
+        "source_authentication",
+        "global_event_completeness",
+        "core_coverage",
+        "environment_compatibility",
+        "release_permission",
+        "activation_permission",
+        "semantic_correction_resolution",
+        "release_decisions"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "run_id",
+    "plan_id",
+    "plan",
+    "execution_profile",
+    "source_consistency",
+    "status",
+    "overall_admission",
+    "transition_allowed",
+    "stages",
+    "not_checked"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "passed_known_inputs"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "stages": {
+            "properties": {
+              "acquisition": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "passed_known_inputs"
+                    ]
+                  }
+                }
+              },
+              "binding": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "passed_known_inputs"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "blocked_known_scope"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "stages": {
+            "properties": {
+              "acquisition": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "passed_known_inputs"
+                    ]
+                  }
+                }
+              },
+              "binding": {
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "blocked_known_scope"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "incomplete"
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "stages": {
+                "properties": {
+                  "acquisition": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "not_run"
+                        ]
+                      }
+                    }
+                  },
+                  "binding": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "not_run"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "stages": {
+                "properties": {
+                  "acquisition": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "passed_known_inputs"
+                        ]
+                      }
+                    }
+                  },
+                  "binding": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "not_run"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "stages": {
+                "properties": {
+                  "acquisition": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "failed"
+                        ]
+                      }
+                    }
+                  },
+                  "binding": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "not_run"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "stages": {
+                "properties": {
+                  "acquisition": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "passed_known_inputs"
+                        ]
+                      }
+                    }
+                  },
+                  "binding": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "failed"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "unsupported"
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "stages": {
+                "properties": {
+                  "acquisition": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "unsupported"
+                        ]
+                      }
+                    }
+                  },
+                  "binding": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "not_run"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "stages": {
+                "properties": {
+                  "acquisition": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "passed_known_inputs"
+                        ]
+                      }
+                    }
+                  },
+                  "binding": {
+                    "properties": {
+                      "status": {
+                        "enum": [
+                          "unsupported"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:schema:validation-run-report:1",
+  "title": "Local run envelope; shape only, not evidence or permission"
+}
