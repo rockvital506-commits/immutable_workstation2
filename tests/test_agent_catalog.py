@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011'})
-        self.assertEqual(len(self.registry['entities']), 11)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012'})
+        self.assertEqual(len(self.registry['entities']), 12)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -551,6 +551,40 @@ class WorkProtocolDeploymentTests(unittest.TestCase):
         self.assertIs(data['agent_behavior_verified'], False)
         self.assertEqual(data['overall_admission'], 'not_evaluated')
         self.assertIs(data['transition_allowed'], False)
+
+
+class GovernanceProtocolDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'kind': 'protocol', 'artifacts': [{'path': 'protocols/ent-0012/r0001/governance.md', 'sha256': '2402346a739436871ba22b90306cf86c3836eb54f3ddb3801bbfa78398bbc0f9', 'size_bytes': 21236, 'role': 'normative'}, {'path': 'transfer/ent-0012/r0001/prompt.md', 'sha256': '8ce3983ed99058bfa1d1c559142fd884c60bb92b27331b58d2759e47b6e5866a', 'size_bytes': 4825, 'role': 'normative'}, {'path': 'transfer/ent-0012/r0001/prepare.py', 'sha256': 'ec2f904f93b15ed234f19b21a87d6a0e8cebc02c538c693c268241dd2420785a', 'size_bytes': 5468, 'role': 'normative'}, {'path': 'protocols/ent-0012/r0001/verify.py', 'sha256': '82acb918e2b4f99171bc421b3fd028fbb0d0eefef68626fd7adccf65399d9d8c', 'size_bytes': 8946, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0011', 'revision': 'r0001'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0009', 'revision': 'r0001'}}]}
+
+    def test_exact_governance_and_preparation_composition(self):
+        registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0012')
+        self.assertEqual(len(entity['revisions']), 1)
+        rev = entity['revisions'][0]
+        for key, value in self.EXPECTED.items():
+            self.assertEqual(rev[key], value)
+        for artifact in rev['artifacts']:
+            artifact_bytes(artifact)
+        decision = json.loads(artifact_bytes(rev['approval']['reference']))
+        self.assertEqual(decision['subject'], dict(catalog_id=CATALOG_ID, entity_id='ENT-0012', revision='r0001'))
+        self.assertEqual(decision['statement_form'], 'summary')
+        self.assertEqual(decision['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                               for a in rev['artifacts']])
+
+    def test_exact_preparation_pins_and_component_identity(self):
+        import runpy
+        registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        module = runpy.run_path(str(BASE / 'transfer/ent-0012/r0001/prepare.py'))
+        expected = {}
+        for e in registry['entities']:
+            if e['entity_id'] in ('ENT-0009', 'ENT-0011'):
+                for a in e['revisions'][0]['artifacts']:
+                    expected[a['path']] = {k: a[k] for k in ('sha256', 'size_bytes')}
+        for a in self.EXPECTED['artifacts'][:2]:
+            expected[a['path']] = {k: a[k] for k in ('sha256', 'size_bytes')}
+        self.assertEqual(module['PINS'], expected)
+        self.assertEqual(set(module['COMPONENT']), {a['path'] for a in self.EXPECTED['artifacts']})
+        self.assertEqual(len(module['PINS']), 8)
 
 
 if __name__ == '__main__':

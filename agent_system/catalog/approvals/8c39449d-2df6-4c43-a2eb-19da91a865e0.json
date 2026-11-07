@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "decision_id": "8c39449d-2df6-4c43-a2eb-19da91a865e0",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0012",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "protocols/ent-0012/r0001/governance.md",
+      "sha256": "2402346a739436871ba22b90306cf86c3836eb54f3ddb3801bbfa78398bbc0f9",
+      "size_bytes": 21236
+    },
+    {
+      "path": "transfer/ent-0012/r0001/prompt.md",
+      "sha256": "8ce3983ed99058bfa1d1c559142fd884c60bb92b27331b58d2759e47b6e5866a",
+      "size_bytes": 4825
+    },
+    {
+      "path": "transfer/ent-0012/r0001/prepare.py",
+      "sha256": "ec2f904f93b15ed234f19b21a87d6a0e8cebc02c538c693c268241dd2420785a",
+      "size_bytes": 5468
+    },
+    {
+      "path": "protocols/ent-0012/r0001/verify.py",
+      "sha256": "82acb918e2b4f99171bc421b3fd028fbb0d0eefef68626fd7adccf65399d9d8c",
+      "size_bytes": 8946
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-07",
+  "statement": "Условное внедрение процедурного протокола самоуправления и ограниченной подготовки переноса по ранее данному делегированию владельца после проверок. Это summary основания, не отдельная прямая цитата об одобрении конкретных байтов. Не разрешает выпуск, экспорт или активацию.",
+  "statement_form": "summary",
+  "basis": "До регистрации 25/25 проверок подготовки и 29/29 наборов репозитория PASS. Есть полный текст двух жизненных циклов A1–A6/B1–B5, отдельный непустой versioned каталог подготовки с prompt и исполняемый freeze: exact plan pin/context/selection, все 4 artifact metadata, immutable receipt prepared_only. Автоматические проверки не исполняют текстовую политику, exporter/адаптацию/активацию; release/export/activation флаги всегда false, closure/coverage/полномочия пока not_checked. Переиспользованы прежний preflight и инструменты без новых библиотек/дубля ядра. Доверенная установка не должна изменяться противником. Подтверждён результат ограниченного этапа, не завершённость G04/G05/G07 или всего совместимого выпуска."
+}

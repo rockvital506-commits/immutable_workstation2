@@ -982,6 +982,75 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Самоуправление двух жизненных циклов и закреплённая подготовка переноса",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.governance",
+            "agent_system.transfer",
+            "agent_system.connection"
+          ],
+          "artifacts": [
+            {
+              "path": "protocols/ent-0012/r0001/governance.md",
+              "sha256": "2402346a739436871ba22b90306cf86c3836eb54f3ddb3801bbfa78398bbc0f9",
+              "size_bytes": 21236,
+              "role": "normative"
+            },
+            {
+              "path": "transfer/ent-0012/r0001/prompt.md",
+              "sha256": "8ce3983ed99058bfa1d1c559142fd884c60bb92b27331b58d2759e47b6e5866a",
+              "size_bytes": 4825,
+              "role": "normative"
+            },
+            {
+              "path": "transfer/ent-0012/r0001/prepare.py",
+              "sha256": "ec2f904f93b15ed234f19b21a87d6a0e8cebc02c538c693c268241dd2420785a",
+              "size_bytes": 5468,
+              "role": "normative"
+            },
+            {
+              "path": "protocols/ent-0012/r0001/verify.py",
+              "sha256": "82acb918e2b4f99171bc421b3fd028fbb0d0eefef68626fd7adccf65399d9d8c",
+              "size_bytes": 8946,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0011",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0009",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/8c39449d-2df6-4c43-a2eb-19da91a865e0.json",
+              "sha256": "b73522ab001ea798a74975e0cdfef3c73c793e2ad731f372c4b606ebd06ed526"
+            }
+          },
+          "provenance": {
+            "summary": "Новая универсальная разработка по заданию владельца о двух жизненных циклах, отдельном каталоге подготовки с versioned prompt и самоприменимости. Исполняется только подготовка, не экспорт/выпуск/активация; частная архитектура и скрытые инструкции не перенесены."
+          }
+        }
+      ]
     }
   ]
 }
