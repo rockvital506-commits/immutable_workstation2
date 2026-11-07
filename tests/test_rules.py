@@ -35,9 +35,11 @@ EXCEPTIONS = {
                    'tools/backup/initial_backup/README.md'],
 }
 
+from _repo_scope import walk_public_tree
+
 print('[1] Правило дуальности скриптов (CONVENTIONS.md, раздел 5)')
 scripts = {}
-for root, dirs, fs in os.walk('.'):
+for root, dirs, fs in walk_public_tree('.'):
     dirs[:] = [d for d in dirs if d not in ('.git', '__pycache__')]
     for f in fs:
         if f.endswith(('.ps1', '.sh')):
@@ -782,10 +784,10 @@ _drd = io.open(os.path.join('tools', 'docs', 'README.md'),
 _drd_f = re.sub(r'\s+', ' ', _drd)
 
 # Счётчики файлов считаются здесь же: по §12.9 самовычисляемое значение в
-# baseline.csv не кладётся. Обход excludes .git и __pycache__, иначе счёт
-# расходится с git ls-files на артефактах прогона.
+# baseline.csv не кладётся. Обход исключает .git, __pycache__ и приватный
+# agent_system/local: локальный архив не публичная документация/скрипты.
 _cnt = {'ps1': 0, 'md': 0, 'readme': 0, 'research': 0, 'tests': 0}
-for _r, _d, _fs in os.walk('.'):
+for _r, _d, _fs in walk_public_tree('.'):
     _d[:] = [x for x in _d if x not in {'.git', '__pycache__'}]
     for _f in _fs:
         _p = os.path.join(_r, _f)[2:]

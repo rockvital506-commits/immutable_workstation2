@@ -875,6 +875,59 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0010",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Offline-проверка согласованности записанного bundle и semantic replay",
+          "kind": "check",
+          "scopes": [
+            "agent_system.validation"
+          ],
+          "artifacts": [
+            {
+              "path": "validation/ent-0010/r0001/bundle.py",
+              "sha256": "edfe812458cce41dbcbcdffa6bd568a57ac287506969cc315e2d8a8a999eba08",
+              "size_bytes": 10655,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0010/r0001/verify.py",
+              "sha256": "6056350c72c9b94a76d9a7c86cff9890947ea9261f3e5e4936ef4053ca05e544",
+              "size_bytes": 10526,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0010/r0001/usage.md",
+              "sha256": "8b9d39a9824ce41bb68e3aeecb2bffad2b272d556c95c2148ac8ded6cf19d6d1",
+              "size_bytes": 12047,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0009",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/92eab047-e423-4e9a-addd-c4571d9eece7.json",
+              "sha256": "62331fdadc62343a229949654b83f5855989bda02d5a2b37f19fd766d16c76b4"
+            }
+          },
+          "provenance": {
+            "summary": "Новая разработка по заданию и условному делегированию владельца. Проверяет согласованность claims и переданных архивных bytes, не факт исполнения/подлинность/глобальную полноту или право перехода."
+          }
+        }
+      ]
     }
   ]
 }

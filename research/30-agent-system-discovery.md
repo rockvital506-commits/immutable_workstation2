@@ -4926,3 +4926,123 @@ admission и не решает аутентификацию плана/само�
 дочерними evidence и отрицательными тестами подмены, с честной границей между
 согласованностью claims и доказательством реального source. Затем покрытие
 work/governance и пробный состав; переходы release/activation остаются отдельными.
+
+## 42. Offline-согласованность bundle и повтор семантики — ENT-0010 r0001
+
+### 42.1. Реализация и граница доверия
+
+Внедрено по делегированию после проверок: bundle.py, verify.py, usage.md;
+точная depends_on ENT-0009 r0001 и его транзитивный профиль. Теперь 10 сущностей,
+16 ревизий, 42 артефакта и 16 approve_revision. Новое свидетельство — summary
+делегирования; нет выдуманной цитаты владельца, реальных restrict/revoke/lift/
+correct/release событий, разрешения выпуска, экспорта или активации.
+
+API принимает исходный report, отдельно закреплённые caller pins report/plan,
+ровно referenced documents и отдельно предоставленные архивные payload bytes.
+Не открывает source по пути, не принимает код/URI/callback из bundle, не пишет
+файлы и не исполняет operation. Maps копируются, значения — immutable bytes.
+Source может уже отсутствовать. Проверяет 3 статических pins ENT-0009, тот
+проверяет 21 artifact installed closure; установка доверенна и недоступна
+противнику на запись во время загрузки. Непроверенный source не bootstrap trust.
+Сверка перед runpy не объявлена атомарной при writable installation.
+
+Сначала типы/пределы/content addresses/внешний pin, strict JSON и форма оболочки;
+затем точный состав ссылок, SHA/size, внешний plan pin/preflight, plan_id/profile.
+При acquisition passed требуются все объявленные payloads, с точными SHA/size
+и metadata evidence. Проверяется закрытая форма source claims, inventory до/
+после и stat fingerprint: directory-mode/device/inode/links/logical paths.
+Логические пути проверяет уже существующий pinned parser, без копии grammar.
+
+Если есть binding child, ENT-0006 заново вычисляет полный результат по архиву,
+точной selection/context плана. Сравнивается весь parsed report, включая
+closure, checked_artifacts, событийный слой, input refs, diagnostics и not_checked.
+Неизвестное добавление/удаление поля/перехэшированная подмена не скрываются за
+совпавшим status. Второй реализации графа/событий нет. Точное сравнение сырых
+ссылок не подменяется повторной сериализацией JSON; semantic comparison отдельно
+не зависит от key-order/indent, но сохраняет детерминированные списки tool.
+
+### 42.2. Что означает результат — без усиления обещания
+
+Успех называется consistent_recorded_bundle, НЕ passed admission. recorded_status
+отдельно сохраняет failed/incomplete/blocked run; checks показывает выполненные
+проверки, включая semantic_replay, если он состоялся. Failed child может точно
+replay-совпасть: это согласованная запись ошибки, не успешное выполнение.
+Unsupported replay остаётся unsupported. Отсутствующий negative child — лишь
+failure_claim_only, не подтверждение причины ошибки. Неизвестный формат failure
+evidence acquisition не игнорируется: unsupported.
+
+Всегда overall_admission=not_evaluated, transition_allowed=false. Явные
+not_checked включают execution_authentication и source_observation_truth,
+плюс plan/source authentication, полноту, ядро, среду, release/activation и
+неподдержанные семантические коррекции/события выпуска. Согласованный bundle
+можно сфабриковать: архив подтверждает байты, не место/время/право их получения.
+Stat/inode/mtime проверяются на внутреннюю согласованность, НЕ по реальному FS.
+Тест с согласованной ложной mtime намеренно проходит и сохраняет эти not_checked.
+Это ограничение модели, не дефект, исправимый ещё одним флагом PASS.
+
+ENT-0009 не архивирует source bytes автоматически. Архив принимает caller
+отдельно; безопасная загрузка/получение архива из чужой среды не реализованы.
+Неполный/лишний архив блокируется. Это не разрешение собирать частные данные или
+выгружать их в Git/чат: payloads реальны, documents могут иметь private link targets.
+Нет атомарного снимка/глобальной полноты/знания будущих отзывов/аутентификации.
+
+### 42.3. Проверки, эффективность, история
+
+- **35/35**: внешние pins/наборы documents/размеры/bytes, missing/extra/changed
+  payloads, plan_id; перехэшированные context/extra closure/checked artifact/
+  unknown fields/removed obligations; inventory/stat/path claims; scoped block,
+  failed/unsupported semantic replay, failure без child, incomplete/partial;
+  strict JSON/types/limits, отсутствующая среда/изменённая установка; no input
+  mutation и positive offline после удаления source; согласованная подделка
+  observations как честный отрицательный предел утверждения о реальности.
+- До регистрации **27/27**, после регистрации **27/27** наборов. Exact deployment
+  tests подтверждают три артефакта/summary/depends_on и 3 entry pins ENT-0009.
+- Все 15 прежних записей ревизий и 54 ссылки на нормативные артефакты/approvals
+  сверены с HEAD 2e356d1 побайтово: неизменны. При восстановлении 107 snapshot-
+  путей совпали с fetched HEAD, stash сохранён без применения/удаления. Среда
+  восстановлена по прежнему hash-lock вне Git, новых библиотек нет.
+
+Плюсы: автономность от source, переиспользование уже проверенной семантики,
+обнаружение более глубоких подмен, чем одна проверка SHA, сохранение partial/
+negative статусов без общего допуска. Минусы: отдельный архив, память до
+10000 файлов/64 MiB и до 3 документов/16 MiB каждый, повторная проверка installed
+closure и семантики. Ограничения реализации, не benchmark максимальной нагрузки.
+Цена повторного replay осознанна; ускорение не обещано, проверку нельзя ослабить
+ради скорости. Нового collector/attestation только ради этого этапа не создаём.
+
+### 42.4. Реальный связный запуск и offline-повтор
+
+Доверенная локальная фикстура подготовила план/архив checkout, вызвала executor,
+затем verifier без source locator. Выбран ENT-0010 r0001, export /
+agent_system.validation. Получены индекс, 42 артефакта, 16 решений; closure
+10 версий, checked artifacts 27. Архив 59 файлов, 553088 bytes. Проверка затем
+повторена из сохранённых documents/payloads с тем же результатом.
+
+Индекс SHA-256: `c4d0584d756076214d2006095ed1b69afb9d1d810221b3b43da4468e1dd8af66`.
+План 11464 bytes, SHA-256:
+`39a4bd04943a169aca7c3b02b97ad9f5bfe6a417a7385aaffc0b31b69647fe2e`.
+Отчёт 1269 bytes, SHA-256:
+`7ef04a4d439c9d86ef3aef79cbeecae9842ac5ead80f20d4dba9d5e396e030ce`.
+Один executor 390.733 мс, in-memory verifier 290.449 мс; не универсальный benchmark
+и не сравнение ускорения. recorded_status=passed_known_inputs,
+status=consistent_recorded_bundle, diagnostics пусты, transition_allowed=false.
+
+Caller явно сохранил report/documents/архив/consistency result в
+`agent_system/local/validation/b26fa7cd-f3c3-423a-82bf-9866f0bf9e9d/`, вне Git/
+экспорта. Подготовка архива доверяет checkout, не переносится как безопасный
+collector чужого источника. Ссылки проверены по сохранённым bytes. Локальные pins
+подтверждают совпадение, не подпись/реальность собственника или истории source.
+
+Далее возвращаемся к покрытию обязательного ядра и work/governance, затем
+пробному составу: достигнутый слой проверки не подменяет универсальные правила.
+Безопасный collector/доверие к факту исполнения остаются отдельными пробелами,
+но не поводом бесконечно расширять метаслой вместо основной системы. Release,
+экспорт и активация по-прежнему требуют отдельного проверенного основания.
+
+Финальная коррекция §42: первый итоговый прогон 26/27 выявил, что старый общий
+inventory test считал .md-копии в игнорируемом agent_system/local как публичные
+документы (218 вместо 202). Сводка не подогнана под временные данные. Два общих
+root-обхода test_rules переведены на явную public scope: только приватный
+agent_system/local, .git и __pycache__ исключаются. Добавлены две регрессии,
+подтверждающие, что другие local-каталоги и новые публичные файлы не скрываются.
+Это исправление области инвентаризации, не ослабление проверки bundle/документов.
