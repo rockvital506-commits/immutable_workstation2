@@ -1,0 +1,23 @@
+{
+  "schema_version": "1",
+  "decision_id": "be885bac-20c4-42ef-8e1c-9487cd42a543",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0002",
+    "revision": "r0002"
+  },
+  "artifacts": [
+    {
+      "path": "catalog/contracts/agent_system/ent-0002/r0002.md",
+      "sha256": "915ec302c0cb2e294ea1014582f6007aee463c33032af3ea25540a21ce0fa145",
+      "size_bytes": 15377
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-07",
+  "statement": "оставить и внедрить",
+  "statement_form": "quote",
+  "basis": "Явное подтверждение владельца после предъявления полного текста ENT-0002 r0002 с поддержкой символических ссылок с первой реализации, SHA-256 и размером. Разрешено внедрение только этой версии, не реализация валидатора, не выпуск и не активация."
+}

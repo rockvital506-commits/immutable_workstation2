@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Regression checks for the first implemented catalog fragment.
+"""Regression checks for the implemented catalog fragment.
 
 Not a general catalog/event validator, behavior test, or proof of authorship.
+The artifact reader below is only a fixture helper, not the symlink validator
+required by ENT-0002 r0002.
 """
 import copy
 import hashlib
@@ -40,7 +42,8 @@ def artifact_bytes(item):
 class FirstCatalogTests(unittest.TestCase):
     def setUp(self):
         self.registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
-        self.entity = self.registry['entities'][0]
+        self.entity = next(e for e in self.registry['entities']
+                           if e['entity_id'] == 'ENT-0001')
         self.rev = self.entity['revisions'][0]
         self.reference = self.rev['approval']['reference']
         self.decision = json.loads(artifact_bytes(self.reference))
@@ -48,7 +51,9 @@ class FirstCatalogTests(unittest.TestCase):
     def test_identity_and_initial_scope(self):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
-        self.assertEqual(len(self.registry['entities']), 1)
+        self.assertEqual({e['entity_id'] for e in self.registry['entities']},
+                         {'ENT-0001', 'ENT-0002'})
+        self.assertEqual(len(self.registry['entities']), 2)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -106,6 +111,66 @@ class FirstCatalogTests(unittest.TestCase):
                      './README.md', 'C:/data', 'a\\b']:
             with self.subTest(path=path), self.assertRaises(ValueError):
                 artifact_bytes(dict(path=path, sha256=DIGEST))
+
+
+class ValidationContractTests(unittest.TestCase):
+    def setUp(self):
+        self.registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        self.entity = next(e for e in self.registry['entities']
+                           if e['entity_id'] == 'ENT-0002')
+        self.rev = self.entity['revisions'][0]
+        self.decision = json.loads(artifact_bytes(self.rev['approval']['reference']))
+
+    def test_exact_revision_and_dependency(self):
+        self.assertEqual([r['revision'] for r in self.entity['revisions']], ['r0002'])
+        self.assertFalse((BASE / 'catalog/contracts/agent_system/ent-0002/r0001.md').exists())
+        self.assertEqual(self.rev['kind'], 'contract')
+        self.assertEqual(self.rev['relations'], [dict(type='depends_on', target=dict(
+            catalog_id=CATALOG_ID, entity_id='ENT-0001', revision='r0001'))])
+        target = self.rev['relations'][0]['target']
+        dependency = next(e for e in self.registry['entities']
+                          if e['entity_id'] == target['entity_id'])
+        self.assertIn(target['revision'], [r['revision'] for r in dependency['revisions']])
+
+    def test_exact_presented_bytes(self):
+        self.assertEqual(len(self.rev['artifacts']), 1)
+        a = self.rev['artifacts'][0]
+        self.assertEqual(a['path'], 'catalog/contracts/agent_system/ent-0002/r0002.md')
+        self.assertEqual(a['sha256'],
+                         '915ec302c0cb2e294ea1014582f6007aee463c33032af3ea25540a21ce0fa145')
+        self.assertEqual(a['size_bytes'], 15377)
+        data = artifact_bytes(a)
+        self.assertFalse(data.startswith(b'\xef\xbb\xbf'))
+        self.assertNotIn(b'\r', data)
+        self.assertTrue(data.endswith(b'\n') and not data.endswith(b'\n\n'))
+        text = (ROOT / 'research/30-agent-system-discovery.md').read_text()
+        presented = text.split('### 28.2.', 1)[1].split('```markdown\n', 1)[1].split('```', 1)[0]
+        self.assertEqual(data, presented.encode('utf-8'))
+
+    def test_decision_binding_and_authority(self):
+        d = self.decision
+        self.assertEqual(d['subject'], dict(catalog_id=CATALOG_ID,
+                                          entity_id='ENT-0002', revision='r0002'))
+        self.assertEqual(d['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                         for a in self.rev['artifacts']])
+        self.assertEqual(self.rev['approval']['status'], 'approved')
+        self.assertEqual(d['schema_version'], '1')
+        self.assertEqual(d['decision_type'], 'approve_revision')
+        self.assertEqual(d['statement_form'], 'quote')
+        self.assertEqual(d['statement'], 'оставить и внедрить')
+        self.assertEqual(d['decision_date'], '2026-11-07')
+        self.assertEqual((d['actor_role'], d['recorded_by']), ('owner', 'agent'))
+        self.assertIn('не реализация валидатора, не выпуск и не активация', d['basis'])
+        self.assertEqual(str(uuid.UUID(d['decision_id'])), d['decision_id'])
+        self.assertEqual(self.rev['approval']['reference']['path'],
+                         'catalog/approvals/' + d['decision_id'] + '.json')
+
+    def test_corrupt_artifact_or_evidence_rejected(self):
+        for item, key, value in [(self.rev['artifacts'][0], 'sha256', '0' * 64),
+                                 (self.rev['artifacts'][0], 'size_bytes', 15378),
+                                 (self.rev['approval']['reference'], 'sha256', '0' * 64)]:
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                artifact_bytes(dict(item, **{key: value}))
 
 
 if __name__ == '__main__':

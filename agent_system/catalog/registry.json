@@ -35,6 +35,49 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0002",
+      "revisions": [
+        {
+          "revision": "r0002",
+          "title": "Контракт проверки каталога и границ результата",
+          "kind": "contract",
+          "scopes": [
+            "agent_system.validation",
+            "agent_system.governance",
+            "agent_system.transition"
+          ],
+          "artifacts": [
+            {
+              "path": "catalog/contracts/agent_system/ent-0002/r0002.md",
+              "sha256": "915ec302c0cb2e294ea1014582f6007aee463c33032af3ea25540a21ce0fa145",
+              "size_bytes": 15377,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0001",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/be885bac-20c4-42ef-8e1c-9487cd42a543.json",
+              "sha256": "b76c183263087457aec4f6d84f0c4b66442836f4122ed1cdad67e9fb3bb7fa2e"
+            }
+          },
+          "provenance": {
+            "summary": "Новая разработка по принятым решениям о версиях, байтах, зависимостях и свидетельствах; после уточнения владельца включена поддержка символических ссылок с первой реализации. Полный текст r0002 отдельно предъявлен и принят."
+          }
+        }
+      ]
     }
   ]
 }
