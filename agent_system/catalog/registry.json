@@ -1,0 +1,40 @@
+{
+  "schema_version": "1",
+  "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+  "entities": [
+    {
+      "entity_id": "ENT-0001",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Контракт обязательного ядра совместимого выпуска",
+          "kind": "contract",
+          "scopes": [
+            "agent_system.governance",
+            "agent_system.release",
+            "agent_system.connection"
+          ],
+          "artifacts": [
+            {
+              "path": "catalog/contracts/agent_system/ent-0001/r0001.md",
+              "sha256": "684e18cc01dc6b1ffd66899615df03b01e756f40f1354f3ac82a81563a944773",
+              "size_bytes": 7564,
+              "role": "normative"
+            }
+          ],
+          "relations": [],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/8c68d9f9-c096-46a5-a601-4195a4e0d6ce.json",
+              "sha256": "088c6307d8ab87875dbf6984b6f2b690c3eadaca0078d1d798721d623dae91a3"
+            }
+          },
+          "provenance": {
+            "summary": "Новая разработка на основании явных решений владельца: переносимое самоприменимое ядро, самоуправление и базовая методология работы. Точная версия отдельно предъявлена и принята."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -123,3 +123,6 @@ tools/_scratch/*
 # Python
 __pycache__/
 *.pyc
+
+# agent_system: local bindings and working data are not portable catalog data
+/agent_system/local/
