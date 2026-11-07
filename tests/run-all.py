@@ -23,7 +23,8 @@ TESTS = ['test_repo.py', 'test_rules.py', 'test_stage42.py',
          'test_alternative.py',
          'test_bestiary.py',
          'test_ps1_lint.py',
-         'test_agent_catalog.py']
+         'test_agent_catalog.py',
+         'test_agent_schema.py']
 
 
 def main() -> int:

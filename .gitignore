@@ -126,3 +126,6 @@ __pycache__/
 
 # agent_system: local bindings and working data are not portable catalog data
 /agent_system/local/
+
+# Isolated agent_system verification environment (never export)
+/.venv/

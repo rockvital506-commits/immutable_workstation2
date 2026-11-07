@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003'})
-        self.assertEqual(len(self.registry['entities']), 3)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004'})
+        self.assertEqual(len(self.registry['entities']), 4)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -262,6 +262,58 @@ class BaseSchemaArtifactTests(unittest.TestCase):
         for a in self.rev['artifacts']:
             with self.subTest(path=a['path']), self.assertRaises(ValueError):
                 artifact_bytes(dict(a, size_bytes=a['size_bytes'] + 1))
+
+
+class StructuralCheckDeploymentTests(unittest.TestCase):
+    EXPECTED = {
+        'verify.py': (10872, '995309346354263828e7de22e112c519708a56f139be4be3dc1a8c9ad02111ea'),
+        'requirements-linux-cp311.lock': (746, '4f0eda8261647c9bc18d2f013ef914737290e20c6a82de15f476108b6a528e71'),
+        'usage.md': (7164, '50271abc545b7e99a5a42bfcd7034dede3ebcb249629de7ec536e5a335ad4101'),
+    }
+
+    def setUp(self):
+        self.registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        entity = next(e for e in self.registry['entities'] if e['entity_id'] == 'ENT-0004')
+        self.assertEqual(len(entity['revisions']), 1)
+        self.rev = entity['revisions'][0]
+        self.decision = json.loads(artifact_bytes(self.rev['approval']['reference']))
+
+    def test_exact_artifact_bytes(self):
+        self.assertEqual(len(self.rev['artifacts']), 3)
+        for a, (name, (size, digest)) in zip(self.rev['artifacts'], self.EXPECTED.items()):
+            self.assertEqual(a, dict(path='validation/ent-0004/r0001/' + name,
+                                     size_bytes=size, sha256=digest, role='normative'))
+            data = artifact_bytes(a)
+            self.assertNotIn(b'\r', data)
+            self.assertFalse(data.startswith(b'\xef\xbb\xbf'))
+            self.assertTrue(data.endswith(b'\n') and not data.endswith(b'\n\n'))
+
+    def test_exact_dependency(self):
+        self.assertEqual((self.rev['revision'], self.rev['kind']), ('r0001', 'check'))
+        self.assertEqual(self.rev['relations'], [dict(type='depends_on', target=dict(
+            catalog_id=CATALOG_ID, entity_id='ENT-0003', revision='r0001'))])
+
+    def test_conditional_permission_not_fake_quote(self):
+        d = self.decision
+        self.assertEqual(d['subject'], dict(catalog_id=CATALOG_ID,
+                                          entity_id='ENT-0004', revision='r0001'))
+        self.assertEqual(d['statement_form'], 'summary')
+        self.assertEqual(d['decision_type'], 'approve_revision')
+        self.assertEqual(d['decision_date'], '2026-11-07')
+        self.assertEqual((d['actor_role'], d['recorded_by']), ('owner', 'agent'))
+        self.assertIn('Это не отдельная реплика владельца', d['statement'])
+        self.assertIn('14 структурных тестов', d['basis'])
+        self.assertIn('не выпуск и не активация', d['basis'])
+        self.assertEqual(d['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                         for a in self.rev['artifacts']])
+        self.assertEqual(str(uuid.UUID(d['decision_id'])), d['decision_id'])
+        self.assertEqual(self.rev['approval']['reference']['path'],
+                         'catalog/approvals/' + d['decision_id'] + '.json')
+
+    def test_corruption_rejected(self):
+        for a in self.rev['artifacts'] + [self.rev['approval']['reference']]:
+            with self.subTest(path=a['path']), self.assertRaises(ValueError):
+                artifact_bytes(dict(a, sha256='0' * 64))
 
 
 if __name__ == '__main__':

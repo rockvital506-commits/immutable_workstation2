@@ -135,6 +135,60 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0004",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Структурные регрессионные испытания базовой схемы",
+          "kind": "check",
+          "scopes": [
+            "agent_system.validation.structure",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "validation/ent-0004/r0001/verify.py",
+              "sha256": "995309346354263828e7de22e112c519708a56f139be4be3dc1a8c9ad02111ea",
+              "size_bytes": 10872,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0004/r0001/requirements-linux-cp311.lock",
+              "sha256": "4f0eda8261647c9bc18d2f013ef914737290e20c6a82de15f476108b6a528e71",
+              "size_bytes": 746,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0004/r0001/usage.md",
+              "sha256": "50271abc545b7e99a5a42bfcd7034dede3ebcb249629de7ec536e5a335ad4101",
+              "size_bytes": 7164,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0003",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/178f1a57-f829-4245-8ea8-bba6386f3da2.json",
+              "sha256": "822d312048b5619d40d3c4a38fd73236dd6362137d8cf988e7a74de883b7f20b"
+            }
+          },
+          "provenance": {
+            "summary": "Исполнение утверждённой схемы ENT-0003 r0001 сторонним jsonschema в отдельно разрешённой изолированной среде. Точный состав внедрён агентом по условному разрешению владельца после положительных и отрицательных испытаний; предел проверенности — структурный слой Linux x86-64 / CPython 3.11."
+          }
+        }
+      ]
     }
   ]
 }
