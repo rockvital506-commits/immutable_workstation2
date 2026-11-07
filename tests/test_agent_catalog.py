@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005'})
-        self.assertEqual(len(self.registry['entities']), 5)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006'})
+        self.assertEqual(len(self.registry['entities']), 6)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -369,6 +369,32 @@ class MutableTreeDeploymentTests(unittest.TestCase):
         self.assertIn('атомарный снимок дерева', text)
         self.assertIn('Обнаруженная подмена', text)
         self.assertIn('Безопасная граница чтения обязательна', text)
+
+
+class GraphCheckDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'kind': 'check', 'artifacts': [{'path': 'validation/ent-0006/r0001/check.py', 'sha256': 'd2d61ef073aebe99f81fd62b620a657b748f03915022d54462dd8ec5bd24d7e8', 'size_bytes': 10144, 'role': 'normative'}, {'path': 'validation/ent-0006/r0001/verify.py', 'sha256': 'd5af8877f45818966225eebcce89d2f749d39a45e4f0ac0e52ff2bcfcb92c189', 'size_bytes': 14721, 'role': 'normative'}, {'path': 'validation/ent-0006/r0001/usage.md', 'sha256': '865aa405bcd4647cf3eec780ede1eb60b8feeb28ce30958a2c654745de9bc5be', 'size_bytes': 10919, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0004', 'revision': 'r0002'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0005', 'revision': 'r0002'}}]}
+
+    def test_exact_composition_dependency_and_summary(self):
+        registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0006')
+        self.assertEqual(len(entity['revisions']), 1)
+        revision = entity['revisions'][0]
+        for key, value in self.EXPECTED.items():
+            self.assertEqual(revision[key], value)
+        for artifact in revision['artifacts']:
+            artifact_bytes(artifact)
+        decision = json.loads(artifact_bytes(revision['approval']['reference']))
+        self.assertEqual(decision['subject'], dict(catalog_id=CATALOG_ID,
+                                                 entity_id='ENT-0006', revision='r0001'))
+        self.assertEqual(decision['statement_form'], 'summary')
+        self.assertIn('Это summary делегирования', decision['statement'])
+        self.assertEqual(decision['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                               for a in revision['artifacts']])
+
+    def test_corruption_rejected(self):
+        for artifact in self.EXPECTED['artifacts']:
+            with self.subTest(path=artifact['path']), self.assertRaises(ValueError):
+                artifact_bytes(dict(artifact, sha256='0' * 64))
 
 
 if __name__ == '__main__':
