@@ -78,6 +78,63 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0003",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Базовая структурная схема каталога",
+          "kind": "schema",
+          "scopes": [
+            "agent_system.specification",
+            "agent_system.validation",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "specification/ent-0003/r0001/catalog-base.schema.json",
+              "sha256": "42fab3c453930ad9128b2b422837b82d84db9ed6092872765bd7fe1ffaf9a820",
+              "size_bytes": 8696,
+              "role": "normative"
+            },
+            {
+              "path": "specification/ent-0003/r0001/usage.md",
+              "sha256": "f54ae129b412ea54fbeaea945c24ff1cf11ee7ede54ac704e49ffe57317ccd59",
+              "size_bytes": 8650,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0001",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0002",
+                "revision": "r0002"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/1c111816-4db9-452c-b389-ebc24cf3f6f3.json",
+              "sha256": "ab23f7d758770cca284040e798fd0864228b6c1f8049916f3b357fd15f970ded"
+            }
+          },
+          "provenance": {
+            "summary": "Первая формальная схема принятой модели индекса и approve_revision, с метаданными символических ссылок по ENT-0002 r0002. Полный двухфайловый состав отдельно предъявлен и принят владельцем; общий допуск и исполнение схемы движком этим не подтверждены."
+          }
+        }
+      ]
     }
   ]
 }

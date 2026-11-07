@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002'})
-        self.assertEqual(len(self.registry['entities']), 2)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003'})
+        self.assertEqual(len(self.registry['entities']), 3)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -171,6 +171,97 @@ class ValidationContractTests(unittest.TestCase):
                                  (self.rev['approval']['reference'], 'sha256', '0' * 64)]:
             with self.subTest(key=key), self.assertRaises(ValueError):
                 artifact_bytes(dict(item, **{key: value}))
+
+
+class BaseSchemaArtifactTests(unittest.TestCase):
+    # These tests verify deployment bytes and references, not Schema execution.
+    EXPECTED = {
+        'catalog-base.schema.json': (8696, '42fab3c453930ad9128b2b422837b82d84db9ed6092872765bd7fe1ffaf9a820'),
+        'usage.md': (8650, 'f54ae129b412ea54fbeaea945c24ff1cf11ee7ede54ac704e49ffe57317ccd59'),
+    }
+
+    def setUp(self):
+        self.registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        entity = next(e for e in self.registry['entities'] if e['entity_id'] == 'ENT-0003')
+        self.assertEqual(len(entity['revisions']), 1)
+        self.rev = entity['revisions'][0]
+        self.decision = json.loads(artifact_bytes(self.rev['approval']['reference']))
+
+    def test_exact_two_file_presented_composition(self):
+        self.assertEqual(self.rev['revision'], 'r0001')
+        self.assertEqual(self.rev['kind'], 'schema')
+        self.assertEqual(len(self.rev['artifacts']), 2)
+        report = (ROOT / 'research/30-agent-system-discovery.md').read_text()
+        for a, (name, (size, digest)) in zip(self.rev['artifacts'], self.EXPECTED.items()):
+            self.assertEqual(a, dict(path='specification/ent-0003/r0001/' + name,
+                                     sha256=digest, size_bytes=size, role='normative'))
+            data = artifact_bytes(a)
+            lang = 'json' if name.endswith('.json') else 'markdown'
+            presented = report.split('Полный артефакт ' + name, 1)[1].split(
+                '```' + lang + '\n', 1)[1].split('```', 1)[0].encode('utf-8')
+            self.assertEqual(data, presented)
+            self.assertFalse(data.startswith(b'\xef\xbb\xbf'))
+            self.assertNotIn(b'\r', data)
+            self.assertTrue(data.endswith(b'\n') and not data.endswith(b'\n\n'))
+
+    def test_complete_decision_and_authority(self):
+        d = self.decision
+        self.assertEqual(d['subject'], dict(catalog_id=CATALOG_ID,
+                                          entity_id='ENT-0003', revision='r0001'))
+        self.assertEqual(d['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                         for a in self.rev['artifacts']])
+        self.assertEqual(d['statement'], 'оставить и внедрить')
+        self.assertEqual(d['statement_form'], 'quote')
+        self.assertEqual(d['decision_type'], 'approve_revision')
+        self.assertEqual(d['decision_date'], '2026-11-07')
+        self.assertEqual((d['actor_role'], d['recorded_by']), ('owner', 'agent'))
+        self.assertEqual(self.rev['approval']['status'], 'approved')
+        self.assertEqual(str(uuid.UUID(d['decision_id'])), d['decision_id'])
+        self.assertEqual(self.rev['approval']['reference']['path'],
+                         'catalog/approvals/' + d['decision_id'] + '.json')
+        self.assertIn('не установка стороннего движка', d['basis'])
+        self.assertIn('не выпуск и не активация', d['basis'])
+
+    def test_exact_dependencies_exist(self):
+        targets = [dict(catalog_id=CATALOG_ID, entity_id=e, revision=r)
+                   for e, r in [('ENT-0001', 'r0001'), ('ENT-0002', 'r0002')]]
+        self.assertEqual(self.rev['relations'], [dict(type='depends_on', target=t)
+                                                for t in targets])
+        for target in targets:
+            entity = next(e for e in self.registry['entities']
+                          if e['entity_id'] == target['entity_id'])
+            self.assertIn(target['revision'], [r['revision'] for r in entity['revisions']])
+
+    def test_schema_json_and_local_references(self):
+        schema = json.loads(artifact_bytes(self.rev['artifacts'][0]))
+        self.assertEqual(schema['$schema'], 'https://json-schema.org/draft/2020-12/schema')
+        refs = []
+
+        def walk(value):
+            if isinstance(value, dict):
+                if '$ref' in value:
+                    ref = value['$ref']
+                    self.assertTrue(ref.startswith('#/$defs/'))
+                    self.assertIn(ref[len('#/$defs/'):], schema['$defs'])
+                    refs.append(ref)
+                for child in value.values():
+                    walk(child)
+            elif isinstance(value, list):
+                for child in value:
+                    walk(child)
+
+        walk(schema)
+        self.assertEqual(len(refs), 28)
+        self.assertEqual(schema['oneOf'], [{'$ref': '#/$defs/registry'},
+                                          {'$ref': '#/$defs/approve_revision'}])
+
+    def test_corrupt_either_file_or_witness_rejected(self):
+        for a in self.rev['artifacts'] + [self.rev['approval']['reference']]:
+            with self.subTest(path=a['path']), self.assertRaises(ValueError):
+                artifact_bytes(dict(a, sha256='0' * 64))
+        for a in self.rev['artifacts']:
+            with self.subTest(path=a['path']), self.assertRaises(ValueError):
+                artifact_bytes(dict(a, size_bytes=a['size_bytes'] + 1))
 
 
 if __name__ == '__main__':
