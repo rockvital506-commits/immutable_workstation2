@@ -27,6 +27,7 @@
 - [Версионированная таблица и frozen component records](candidates/ent-0013/r0001/candidate.json).
 - [ENT-0014 r0001 — предложения разрешения выпуска/экспорта, только blocked-путь](permissions/ent-0014/r0001/usage.md).
 - [ENT-0015 r0001 — private local trial staging, не публикация](staging/ent-0015/r0001/usage.md).
+- [ENT-0016 r0001 — read-only проверка pinned private trial](staging/ent-0016/r0001/usage.md).
 - [Версионированный промпт подготовки переноса](transfer/ent-0012/r0001/prompt.md).
 
 Артефакт читается только с заранее заданными ожидаемыми SHA-256, размером,
@@ -105,3 +106,8 @@ ENT-0015 собирает только неполный trial object store в fi
 Нет произвольного destination, зеркала paths/исполнения symlink, overwrite/resume
 или автоудаления failed_partial. Это не готовый exporter/consumer и не допуск;
 права release/export/activation false, private same-uid namespace предполагается доверенным.
+
+ENT-0016 читает fixed local trial по внешнему manifest pin, без создания/исправления
+файлов и выполнения содержимого. consistent_archived_trial проверяет captured bytes
+и archived ledger, не факт stage execution и не текущие решения/полномочия.
+Новый live ledger не обнаруживается автоматически; current_permissions=not_evaluated.

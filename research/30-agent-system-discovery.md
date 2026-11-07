@@ -5617,3 +5617,121 @@ manifest pin, без исполнения содержимого и без sourc
 без нарушений, git diff --check чистый; все 60 normative pins целы. Публичные
 счётчики: 208 md / 86 README / 31 research / 32 test modules. Обе local области
 исключены из Git; прежняя история сохранена, публикация/активация не выполнялись.
+
+## 48. Read-only pinned trial reader и архивная согласованность
+
+### 48.1. Внедрённый результат и предел независимости
+
+ENT-0016 r0001 — protocol, depends_on ENT-0015 r0001. Три normative артефакта:
+`staging/ent-0016/r0001/{read.py,verify.py,usage.md}`. Условное внедрение по
+делегированию после проверок; approve_revision
+`5c2010e5-281d-473d-9414-02c3e0f54cc9` — summary основания, не новая прямая цитата
+о конкретных bytes и не разрешение выпуска/export/activation. Индекс теперь
+16 сущностей / 22 ревизии / 63 normative artifacts / 22 approve_revision.
+Реальные restrict/revoke/lift/correct/release/activate события не добавлялись.
+
+`read_trial(run_id, expected_manifest)` принимает canonical UUID и внешний
+SHA-256/native size pin manifest. Не принимает произвольный root/import path,
+не вызывает stage_trial, не выполняет содержимое, не исправляет/не создаёт files.
+Область fixed installed BASE/local/trials/UUID. Внешнее доверенное основание
+обязательно: пересчитать hash неизвестного файла — не аутентификация.
+
+Чтение отдельно от writer, но независимость ограниченная: общие pinned ENT15
+helpers directory/fingerprint/binding и прежние ENT13/14/9/6 loaders/semantics.
+Это не независимый аудит общей ошибки стека. Новый код работает над captured
+bytes и не загружает код из trial; новых библиотек нет. Доверенная installation
+не должна быть concurrently writable противником; прежний check/runpy TOCTOU
+и отсутствие source/manifest/execution authentication остаются.
+
+### 48.2. Byte acquisition, replay и актуальность
+
+Открываются существующие directories readonly/NOFOLLOW/create=False; uid,
+private modes и same st_dev проверяются. Manifest/object reads nonblocking,
+regular type/mode600/euid/nlink1/size/hash, before-after fingerprints и inode
+binding. В run ровно objects+trial.json, в objects ровно referenced digests.
+Logical paths — только metadata, не источник physical path traversal.
+Закрытый профиль ENT15 manifest, strict UTF8/LF JSON, no duplicates/constants,
+native bounded sizes, sorted unique rows, closed gates. До 16 MiB manifest/
+object, 64 MiB registry+ledger+payloads и отдельно candidate до 16 MiB;
+не глобальный CPU/RAM quota. Максимум 10001 unique objects / 80 MiB captured bytes.
+
+ENT13 consistency и ENT6 archived stage_trial/read_trial scopes вычисляются над
+первыми captured bytes. Повторный manifest/object readback и inventories/bindings
+наблюдают сохраняющуюся порчу/подмены, но не заменяют inputs семантической проверки.
+Нет atomic snapshot, защиты от всех transient изменений/hostile same uid/root,
+proof отсутствия privileged same-device bind mount или сохранности после возврата.
+Read-only path не вызывает write/mkdir/chmod/fsync; ОС может обновить atime.
+
+Успех **consistent_archived_trial**, current_permissions=not_evaluated,
+overall_admission=not_evaluated, release/export/activation/transition=false.
+Возвращаются только refs/counts, не payload bytes/команды/активная связка.
+Reader использует archived registry/ledger, не читает live catalog автоматически;
+отсутствие новых restrict/revoke не проверено. Нужен отдельный новый run с
+актуальными объявленными ожиданиями перед затронутым дальнейшим действием.
+Согласованный сфабрикованный архив может пройти; это не доказательство факта
+stage execution, истинности claims, поведения или совместимости новой среды.
+
+Выбран fixed private root + внешний pin + capture/replay вместо доверия receipt/
+исполнения files. Плюсы: ограниченный input surface и reuse; минусы: повторный
+I/O/память/общий стек, нет arbitrary foreign importer или live permission engine.
+Это обоснование ограниченной эффективности, не benchmark альтернатив.
+
+### 48.3. Отрицательные результаты тестов и исправление fixture
+
+Первый расширенный прогон: **39/41 PASS, 2 FAIL** scoped fixtures ожидали блок
+при restriction исторической ревизии вне selected closure. Причина — clone
+первого по имени approval, а не approval выбранной ENT12 r0001. Production
+правильно не применил чужой запрет к payload. Fixture исправлен на точный
+selected component/approval/artifacts; проверки не ослаблялись, FAIL не игнорирован.
+Повтор собственных: **41/41 PASS**. До регистрации все **33/33 наборов PASS**;
+после регистрации deployment **45/45 PASS**.
+
+Проверены настоящие local symlink на всех уровнях/manifest/object, FIFO,
+hardlink, unsafe modes без chmod, extra/missing files, same-size corruption с
+восстановленным mtime, malformed/duplicate JSON/native sizes/over-limit refs,
+profile/run binding, logical traversal без physical open, later object/inventory/
+directory mutation, read errors, fd count, unsupported platform и changed pins.
+Read-only проверен запретом explicit writes/creates/chmod/fsync. Synthetic read/
+stage restrictions только fixtures. Два важных позитивных предела: согласованно
+изменённый UUID/manifest может пройти без реального writer run; новый live ledger
+вне archive не проверяется молча. Ни один тест не даёт реального полномочия.
+
+### 48.4. Практический прогон
+
+После восстановления checkout прежний ignored local trial из §47 не найден.
+Его UUID/manifest не воссоздавались под видом старого исполнения. Создан **новый**
+ENT15 trial по отдельно закреплённым текущим known inputs, затем прочитан ENT16.
+Caller из доверенного checkout: 63 normative files + 22 known decisions + registry
+(86 объявленных inputs), ожидания caller_supplied_not_authenticated. ENT5 one-root-fd
+acquisition 36.951 ms; отдельный ENT9 validate/agent_system.trial_reading для ENT16:
+passed_known_inputs, **16 closure / 48 checked artifacts**, 510.001 ms.
+Это контроль учёта компонентов, не общий допуск или current permissions.
+
+ENT15 staging 1438.842 ms. Новый trial:
+`agent_system/local/trials/ff9d826d-1279-49f5-a296-e953a9fe3efb/`.
+ENT16 отдельно прочитал его по внешнему pin из caller receipt:
+**consistent_archived_trial**, 34 payload / 22 archived decisions / 58 objects /
+575441 captured bytes, 1658.838 ms. Current permissions not_evaluated; публикация/
+новая среда/активация не выполнялись. Это единичные наблюдения, не benchmark
+и не authentication факта чужого исполнения. Caller связывает общий план/результаты
+вручную; automatic_binding=false, reader не потребляет ENT9 report/ENT15 receipt.
+
+Manifest: 11154 bytes, SHA-256
+`8b99e2dce4050f76859c0e350e1ce64a35ed922309590f76cac2ec9138bcd0ee`.
+Registry: 52690 bytes, SHA-256
+`2dfb708c5e62bb053e4113512f364c47a562300f564968d9accb20c909f73cc7`.
+Plan: 16341 bytes, SHA-256
+`3985b9c95a3e58f325c528a3075051dedfefe30c9aa3d7bca4aead2a543925fb`.
+Stage receipt/reader result/plan/acquisition/validation/documents/journal отдельно:
+`agent_system/local/trial-evidence/ff9d826d-1279-49f5-a296-e953a9fe3efb/`, вне Git.
+21 прежних revision records совпадают; 81 прежний artifact+approval файл побайтно
+совпадает с HEAD e261603. Старые normative данные/candidate не переписаны.
+
+Следующий bounded этап — отдельное сопоставление архивного payload с новым
+явно закреплённым current-known registry/ledger для конкретной операции/области,
+не изменение архивного snapshot и не разрешение export/release/activation.
+
+Итог после регистрации, практики и оформления: **33/33 наборов PASS**,
+pip check без нарушений, git diff --check чистый; все 63 normative pins целы.
+Публичные счётчики: 209 md / 86 README / 31 research / 33 test modules.
+Local trial/evidence игнорируются Git; публикация/активация не выполнялись.

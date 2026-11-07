@@ -1234,6 +1234,59 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Read-only проверка private trial по внешнему manifest pin",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.trial"
+          ],
+          "artifacts": [
+            {
+              "path": "staging/ent-0016/r0001/read.py",
+              "sha256": "942839d7e292cd7f744346f27693cd4e7cc573961d1599f66df4c566548545cf",
+              "size_bytes": 9691,
+              "role": "normative"
+            },
+            {
+              "path": "staging/ent-0016/r0001/verify.py",
+              "sha256": "f06e8a76da5f2c9005934d47b0f439b4b8751a0bc50a921bd773bbbd6305967f",
+              "size_bytes": 11917,
+              "role": "normative"
+            },
+            {
+              "path": "staging/ent-0016/r0001/usage.md",
+              "sha256": "3dccac0b1705a6a9723d8d72228733010c710a2e3a012ad84c1412b3e6210251",
+              "size_bytes": 12738,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0015",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/5c2010e5-281d-473d-9414-02c3e0f54cc9.json",
+              "sha256": "bd88da27ee51eb6bd3ca97b7f088ba6de868ee5ea0668464731dc6d94cc6d7d9"
+            }
+          },
+          "provenance": {
+            "summary": "Универсальная разработка по заданию B и условному делегированию после проверок. Отдельная bounded byte acquisition/archive replay, не исполнение trial и не текущие permissions; общие helpers доверенны. Частная архитектура/built-in инструкции не перенесены."
+          }
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1",
+  "decision_id": "5c2010e5-281d-473d-9414-02c3e0f54cc9",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0016",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "staging/ent-0016/r0001/read.py",
+      "sha256": "942839d7e292cd7f744346f27693cd4e7cc573961d1599f66df4c566548545cf",
+      "size_bytes": 9691
+    },
+    {
+      "path": "staging/ent-0016/r0001/verify.py",
+      "sha256": "f06e8a76da5f2c9005934d47b0f439b4b8751a0bc50a921bd773bbbd6305967f",
+      "size_bytes": 11917
+    },
+    {
+      "path": "staging/ent-0016/r0001/usage.md",
+      "sha256": "3dccac0b1705a6a9723d8d72228733010c710a2e3a012ad84c1412b3e6210251",
+      "size_bytes": 12738
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-07",
+  "statement_form": "summary",
+  "statement": "Условное внедрение read-only private trial reader по ранее данному делегированию после проверок. Summary основания, не отдельная цитата о конкретных bytes и не разрешение выпуска/export/activation.",
+  "basis": "До регистрации 41/41 собственных тестов и 33/33 наборов репозитория PASS. Отдельное readonly fd чтение pinned manifest/точных объектов, bounded hash/capture/readback/inventory/binding, archived ENT13/ENT6 replay без выполнения inputs. Реальные symlink/FIFO/hardlink/permissions/ошибки/порча/fd leaks проверены. Первые 2 негативные scoped fixtures выбрали историческую ревизию вне closure; исправлены на выбранную ревизию без ослабления production checks. Coherent fabricated archive намеренно может пройти: execution/manifest authentication/current decisions/global completeness/поведение не доказаны. Новых библиотек нет; общие trusted helpers означают ограниченную, не полную независимость. Реальные гранты/публикация/активация не созданы, все gates false; эффективность обоснована reuse и bounded input surface, не benchmark."
+}

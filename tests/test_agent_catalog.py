@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013', 'ENT-0014', 'ENT-0015'})
-        self.assertEqual(len(self.registry['entities']), 15)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013', 'ENT-0014', 'ENT-0015', 'ENT-0016'})
+        self.assertEqual(len(self.registry['entities']), 16)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -663,6 +663,31 @@ class TrialStagingDeploymentTests(unittest.TestCase):
         module=runpy.run_path(str(BASE/'staging/ent-0015/r0001/stage.py'))
         self.assertEqual(module['PINS'],expected)
         self.assertEqual(len(expected),4)
+
+
+class TrialReaderDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'kind': 'protocol', 'artifacts': [{'path': 'staging/ent-0016/r0001/read.py', 'sha256': '942839d7e292cd7f744346f27693cd4e7cc573961d1599f66df4c566548545cf', 'size_bytes': 9691, 'role': 'normative'}, {'path': 'staging/ent-0016/r0001/verify.py', 'sha256': 'f06e8a76da5f2c9005934d47b0f439b4b8751a0bc50a921bd773bbbd6305967f', 'size_bytes': 11917, 'role': 'normative'}, {'path': 'staging/ent-0016/r0001/usage.md', 'sha256': '3dccac0b1705a6a9723d8d72228733010c710a2e3a012ad84c1412b3e6210251', 'size_bytes': 12738, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0015', 'revision': 'r0001'}}]}
+
+    def test_exact_trial_reader_composition(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        entity=next(e for e in registry['entities'] if e['entity_id']=='ENT-0016')
+        self.assertEqual(len(entity['revisions']),1)
+        revision=entity['revisions'][0]
+        for key,value in self.EXPECTED.items():self.assertEqual(revision[key],value)
+        for artifact in revision['artifacts']:artifact_bytes(artifact)
+        decision=json.loads(artifact_bytes(revision['approval']['reference']))
+        self.assertEqual(decision['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0016',revision='r0001'))
+        self.assertEqual(decision['statement_form'],'summary')
+        self.assertEqual(decision['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in revision['artifacts']])
+
+    def test_exact_trial_reader_dependency_pins(self):
+        import runpy
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        revision=next(e for e in registry['entities'] if e['entity_id']=='ENT-0015')['revisions'][0]
+        expected={a['path']:{k:a[k] for k in ['sha256','size_bytes']} for a in revision['artifacts']}
+        module=runpy.run_path(str(BASE/'staging/ent-0016/r0001/read.py'))
+        self.assertEqual(module['PINS'],expected)
+        self.assertEqual(len(expected),3)
 
 
 if __name__ == '__main__':
