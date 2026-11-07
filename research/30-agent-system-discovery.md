@@ -3953,3 +3953,337 @@ if __name__ == '__main__':
 registry, свидетельства и утверждённые версии не менялись. Новый полный
 валидатор, выпуск, экспорт и активация не созданы. Следующее действие —
 решение A/B по §34.2, затем исправление/испытания без ослабления тестов молча.
+
+## 35. Проверка гипотезы: явные временные метки в именах
+
+Дата: 2026-11-07. Владелец предложил добавлять временные метки при создании
+сущностей, проверив наглядность, число действий/проверок, скорость индексации
+и другие эффекты. Выполнено исследование, **не принято изменение именования**.
+Утверждённые ENT/revision/пути/схемы/свидетельства не меняются. Ключевой выбор
+модели источника §34 остаётся открытым: эта гипотеза сама его не закрывает.
+
+### 35.1. Объект и границы эксперимента
+
+Различены: (а) содержимое имени как заявленная дата; (б) mtime/ctime файловой
+системы; (в) время регистрации/решения/выпуска; (г) неизменность байтов и дерева.
+Имя с датой задаётся создателем и может сохраняться при перезаписи. Поэтому
+больше видимой информации не означает больше гарантий её истинности.
+
+Основной синтетический эксперимент: 15 исполняемых проверок ожидаемых свойств
+и контрпримеров, затем микрозамеры на 2000 файлах по 64 байта для каждого из
+трёх вариантов: стабильное имя, UTC-метка в начале, метка created в конце.
+Два отдельных запуска, в каждом 9 повторов с перемешиванием порядка вариантов.
+Нагрузка: scan+sort, загрузка JSON-индекса, 20000 обращений по ID, чтение+SHA-256
+200 файлов. Все файлы созданы во временном каталоге, удалённом после эксперимента;
+не использовались пользовательские исходники и не нагружались целевые диски
+исходного проекта. Среда: Linux x86-64, Python 3.11.2. Кэш тёплый; синтетический
+плоский каталог не тождественен дереву текущего каталога agent_system.
+Это не статистический аудит всех FS, Windows, холодного диска или крупных файлов.
+
+### 35.2. Безопасность и корректность — реально исполненные случаи
+
+Основной скрипт в обоих запусках: **15/15** ожидаемых свойств/контрпримеров.
+Сами тесты проходят потому, что выявляют пределы гипотезы, а не потому,
+что временные метки решили исходную ошибку.
+
+Подтверждено на фикстурах:
+- Перезапись и замена файла могут оставить датированное имя прежним.
+- Метка может заявлять произвольную дату, не подтверждая фактическое создание.
+- Другая дата/имя при одинаковых байтах не создаёт другого содержимого.
+- Две операции с одной возвращённой меткой могут получить одинаковое имя:
+  это моделирование одинакового тика часов, не измерение частоты коллизий.
+- Два параллельных exclusive-create для одного имени: один создал, другой
+  получил коллизию. Защищает O_EXCL, не дата. При ID+r нужны согласованный
+  allocator/проверка уникальности; timestamp их не заменяет.
+- Модель отката часов нарушает соответствие сортировки имён порядку создания.
+- Единый фиксированный UTC-формат сортируется по заявленному времени;
+  смешанные часовые пояса могут дать другой лексикографический порядок.
+- Датированное имя symlink не закрепляет его цель.
+- Переименование сохраняет SHA-256 содержимого, но ломает точный путь в
+  свидетельстве; исправление этого пути меняет байты свидетельства.
+- Обращение по ID из индекса не требует разбирать имя или сканировать каталог.
+
+Дополнительно повторён именно сбой прототипа §34, а не только общий пример:
+кандидат reader.py извлечён из отчёта в отдельную временную среду; после
+закрепления файла фикстура пишет b'example\n' → b'mutated\n'. Три режима,
+по пять независимых файлов на режим:
+
+| Режим | Фактический исход |
+|---|---|
+| Стабильное имя, нет expected | 5/5 необнаруженных подмен |
+| Дата в имени, нет expected | 5/5 необнаруженных подмен |
+| Дата в имени + ожидаемый SHA-256/размер/путь | 5/5 ARTIFACT_MISMATCH |
+
+Это контрпример гипотезе о защите датированным именем, не оценка вероятности
+атаки. Проверка хэша закрывает отличие от известного состава, но не доказывает
+отсутствие всех промежуточных изменений или единый момент снимка дерева.
+Никакие отрицательные тесты §34 не смягчены, адаптер остаётся невнедрённым.
+
+### 35.3. Производительность и объём
+
+Все значения времени ниже — диапазон двух медиан (по 9 повторов), миллисекунды.
+Они не являются доверительными интервалами. Полные исходные измерения сохранены
+ниже. Сравнивается только эффект имён при одной и той же схеме доступа.
+
+| Операция | Без даты | Дата-префикс | created-суффикс |
+|---|---:|---:|---:|
+| Сканирование и сортировка 2000 имён | 0.7480–0.7482 | 0.7566–0.7930 | 0.7920–0.7980 |
+| Загрузка JSON-индекса | 0.2770–0.2894 | 0.3024–0.3098 | 0.3263–0.3394 |
+| 20000 обращений к индексу по ID | 4.9898–5.0058 | 4.9870–4.9914 | 4.9747–5.0272 |
+| Чтение и SHA-256 200 файлов | 2.2740–2.4223 | 2.3400–2.4964 | 2.3114–2.4037 |
+
+| Объём синтетических данных | Без даты | Дата-префикс | created-суффикс |
+|---|---:|---:|---:|
+| Имя одного файла, байт | 17 | 41 | 49 |
+| JSON-индекс на 2000 путей, байт | 66000 | 114000 | 130000 |
+
+Ускорение поиска по готовому ID-индексу не подтверждено: небольшие различия
+меняют направление и не дают основания объявлять преимущество. scan+sort и
+загрузка индекса в этих двух прогонах не ускорились. Увеличение объёма строк
+измерено непосредственно; это не оценка полного размера файловой системы.
+Длина имени не меняет количество обращений к данным в такой архитектуре.
+Чтение байтов и SHA-256 остаются теми же операциями; микрозамеры не доказывают
+универсальное замедление или ускорение дискового ввода-вывода.
+
+Дата-префикс может облегчить ручное хронологическое обозрение в обычном файловом
+менеджере и выбор диапазона дат, **если формат един и смысл даты определён**.
+Это функциональная возможность, не измеренный выигрыш времени пользователя.
+Для запросов по датам отдельный индекс/представление метаданных может быть
+полезнее сканирования имён; конкретный новый индекс здесь не реализован.
+Лексикографическая сортировка имён не становится порядком полномочий решений.
+
+### 35.4. Число действий и сущностей проверок
+
+Это анализ требований и операций, не замер человеческого времени:
+
+| Проверка/операция | Можно убрать из-за даты в имени? |
+|---|---|
+| Соответствие прочитанных байтов утверждённым SHA-256/размеру | Нет |
+| Уникальность catalog/entity/revision и точные зависимости | Нет |
+| Целостность/предмет свидетельства, отзывы и ограничения | Нет |
+| Граница корня, symlink-цепочка, циклы/подмены | Нет |
+| Согласованность известного состава/неизменность источника | Нет |
+| Наличие точного файла и безопасное чтение | Нет |
+| Ручное открытие карточки ради просмотра даты | Возможно реже; UX не измерен |
+| Новый обязательный timestamp в имени | Добавляет формирование/разбор/семантику |
+| Дата одновременно в имени и метаданных | Добавляет проверку согласованности, если оба нормативны |
+
+**Не выявлена ни одна обязательная проверка, которую допустимо удалить.**
+Число файлов-проверок — отдельный выбор организации кода: несколько проверок
+можно объединить в один набор и без изменения имён. Это не уменьшит число
+обязательных условий. Принятые ENT/revision и точные пути уже явны, а не
+являются неявной датой. Ускорять текущую систему рациональнее точным индексом
+и переиспользованием проверенных данных в пределах доказанно неизменного входа,
+а не предположением о неизменности на основании имени.
+
+### 35.5. Рекомендации и возможный следующий шаг
+
+1. **Не переименовывать существующие нормативные артефакты.** Ускорение не
+   подтверждено, гарантий не прибавилось, но точные ссылки/свидетельства
+   потребовали бы согласованной миграции. Старые свидетельства нельзя
+   переписать ради нового удобного имени.
+2. Сохранить catalog UUID + ENT + revision как идентичность. Время не заменяет
+   номер ревизии, уникальное решение и не разрешает latest-wins.
+3. Для наглядности предпочесть **одну явно именованную дату в метаданных и
+   производное представление** рядом с ID/r, без второй редактируемой нормы:
+   например «Дата регистрации», «Дата решения» или «Дата выпуска» — в зависимости
+   от реального события. Не называть любую из них неопределённым «created».
+   Поля регистрации требуют новой согласованной схемы; сейчас не добавлены.
+4. Для уже имеющихся сущностей можно показывать только известную decision_date;
+   точное время создания неизвестно и не восстанавливается из памяти/mtime.
+   Не приписывать старым сущностям выдуманные секунды или микросекунды.
+5. Если нужна дата в имени новых журналов/отчётов/человеческих экспортов,
+   она допустима как навигационная метка. Формат-кандидат UTC:
+   YYYYMMDDTHHMMSS.ffffffZ плюс устойчивый ID, без двоеточий. Точность записи
+   не доказывает точность часов; неизвестное время не дополнять нулями под
+   видом реально известного. Создание — exclusive, совпадение — явная коллизия,
+   не перезапись. Это рекомендация, не внедрённое правило.
+6. Не использовать метку как свидетельство, источник приоритета или право
+   пропустить хэширование. Временные метки могут раскрывать хронологию работы;
+   разрешённый состав переноса учитывает и такие метаданные.
+
+«Явное лучше неявного» здесь применимо к **ясному смыслу и происхождению даты**.
+Перенос значения в имя делает его видимым, но не делает истинным, уникальным
+или защищённым. Для текущей системы рекомендуемый баланс — стабильные имена,
+явные метаданные событий и удобное производное отображение. Исследование
+не является выбором A/B модели источника; метки не стали третьим способом
+обеспечить неизменность. Ключевое решение §34.2 остаётся за владельцем.
+
+### 35.6. Полный воспроизводимый эксперимент
+
+Скрипт только стандартной библиотеки, внешних зависимостей нет. Создаёт и
+удаляет только собственные временные данные. Он не является нормативным
+компонентом agent_system. SHA-256: `dc6e5d69a521c5bd23d6dfada91a3989d02629e8989d009a4ca84c503b2b1b7d`; размер 7372 байт.
+
+```python
+#!/usr/bin/env python3
+"""Synthetic naming experiment; does not modify the catalog or user data."""
+import concurrent.futures
+from datetime import datetime, timedelta, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import platform
+import random
+import statistics
+import tempfile
+import time
+
+CHECKS = []
+def check(name, condition):
+    assert condition, name
+    CHECKS.append(name)
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+def run():
+    with tempfile.TemporaryDirectory(prefix='agent-name-experiment-') as temp:
+        root = Path(temp)
+        date = '20261107T100000.123456Z'
+        dated = root / ('ent-0001-r0001-created-' + date + '.md')
+        dated.write_bytes(b'example\n')
+        old_hash = sha(dated.read_bytes())
+        old_name = dated.name
+        dated.write_bytes(b'mutated\n')
+        check('dated_name_unchanged_after_in_place_write', dated.name == old_name)
+        check('content_hash_detects_same_length_change', sha(dated.read_bytes()) != old_hash)
+        replacement = root / 'replacement'
+        replacement.write_bytes(b'replaced\n')
+        replacement.replace(dated)
+        check('replacement_keeps_dated_path', dated.name == old_name and dated.read_bytes() == b'replaced\n')
+        other = root / 'other-created-19000101T000000.000000Z.md'
+        other.write_bytes(b'not historical\n')
+        check('filename_can_claim_arbitrary_creation_date', other.exists())
+        clone = root / ('copy-created-' + date + '.md')
+        clone.write_bytes(dated.read_bytes())
+        check('different_dates_or_names_do_not_define_different_content', sha(clone.read_bytes()) == sha(dated.read_bytes()))
+        same_tick = [date, date]
+        check('timestamp_alone_can_collide', len(set(same_tick)) < len(same_tick))
+        exact = root / ('exclusive-' + date)
+        def create(_):
+            try:
+                with exact.open('xb') as f:
+                    f.write(b'x')
+                return 'created'
+            except FileExistsError:
+                return 'collision'
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+            outcomes = sorted(pool.map(create, [0, 1]))
+        check('exclusive_create_not_clock_resolves_collision', outcomes == ['collision', 'created'])
+        rollback = ['20261107T100000.000000Z', '20261107T090000.000000Z']
+        check('wall_clock_order_not_guaranteed_generation_order', sorted(rollback) != rollback)
+        fixed = ['20261107T090000.000000Z', '20261107T100000.000000Z']
+        check('fixed_utc_lexical_order_matches_claimed_time', sorted(fixed) == fixed)
+        offsets = ['2026-11-07T10:00:00+02:00', '2026-11-07T09:30:00+00:00']
+        chronological = sorted(offsets, key=datetime.fromisoformat)
+        check('mixed_offsets_lexical_order_can_be_wrong', sorted(offsets) != chronological)
+        link = root / ('link-created-' + date)
+        link.symlink_to(dated.name)
+        first = link.read_bytes()
+        link.unlink()
+        link.symlink_to(other.name)
+        check('dated_link_name_does_not_pin_its_target', link.name.endswith(date) and link.read_bytes() != first)
+        reference = {'path': dated.name, 'sha256': sha(dated.read_bytes())}
+        witness_hash = sha(json.dumps(reference, sort_keys=True).encode())
+        renamed = dated.with_name('new-name-created-' + date + '.md')
+        dated.rename(renamed)
+        check('renaming_breaks_exact_path_reference', not (root / reference['path']).exists())
+        check('rename_does_not_change_content_hash', sha(renamed.read_bytes()) == reference['sha256'])
+        updated = dict(reference, path=renamed.name)
+        check('updating_reference_changes_witness_bytes', sha(json.dumps(updated, sort_keys=True).encode()) != witness_hash)
+        idx = {'ENT-0001': renamed.name}
+        check('indexed_lookup_needs_no_directory_scan', (root / idx['ENT-0001']).read_bytes() == renamed.read_bytes())
+
+        count, repeats, read_count = 2000, 9, 200
+        ids = list(range(count))
+        random.Random(19).shuffle(ids)
+        start = datetime(2026, 11, 7, tzinfo=timezone.utc)
+        names = {kind: {} for kind in ['base', 'pref', 'suff']}
+        for n in range(count):
+            stamp = (start + timedelta(microseconds=n)).strftime('%Y%m%dT%H%M%S.%fZ')
+            stable = f'ent-{n+1:04d}-r0001'
+            names['base'][n] = stable + '.md'
+            names['pref'][n] = stamp + '-' + stable + '.md'
+            names['suff'][n] = stable + '-created-' + stamp + '.md'
+        payload = b'x' * 64
+        for kind in names:
+            (root / kind).mkdir()
+            for n in ids:
+                (root / kind / names[kind][n]).write_bytes(payload)
+        encoded = {k: json.dumps({f'ENT-{n+1:04d}': v for n, v in ns.items()}, sort_keys=True)
+                   for k, ns in names.items()}
+        picked = random.Random(52).sample(range(count), read_count)
+        measures = {k: {op: [] for op in ['scan_sort', 'load_index', 'lookup_20000', 'read_hash_200']}
+                    for k in names}
+        # Warm-cache microbenchmark, interleaved random variant order each round.
+        rng = random.Random(70)
+        for _ in range(repeats):
+            kinds = list(names)
+            rng.shuffle(kinds)
+            for kind in kinds:
+                directory = root / kind
+                t = time.perf_counter_ns()
+                with os.scandir(directory) as it:
+                    listed = sorted(entry.name for entry in it)
+                measures[kind]['scan_sort'].append(time.perf_counter_ns() - t)
+                assert len(listed) == count
+                t = time.perf_counter_ns()
+                index = json.loads(encoded[kind])
+                measures[kind]['load_index'].append(time.perf_counter_ns() - t)
+                t = time.perf_counter_ns()
+                for _j in range(10):
+                    for n in range(count):
+                        value = index[f'ENT-{n+1:04d}']
+                measures[kind]['lookup_20000'].append(time.perf_counter_ns() - t)
+                t = time.perf_counter_ns()
+                for n in picked:
+                    digest = sha((directory / names[kind][n]).read_bytes())
+                measures[kind]['read_hash_200'].append(time.perf_counter_ns() - t)
+                assert digest == sha(payload)
+        summary = {}
+        for kind, ops in measures.items():
+            summary[kind] = {
+                'filename_bytes': len(names[kind][0].encode()),
+                'index_json_bytes': len(encoded[kind].encode()),
+                'timings_ms': {op: {'median': round(statistics.median(values) / 1e6, 4),
+                                   'min': round(min(values) / 1e6, 4),
+                                   'max': round(max(values) / 1e6, 4)}
+                               for op, values in ops.items()}}
+        return {'environment': {'os': platform.system(), 'machine': platform.machine(),
+                                'python': platform.python_version()},
+                'checks_passed': len(CHECKS), 'checks': CHECKS,
+                'benchmark': {'files_per_variant': count, 'payload_bytes': 64,
+                              'repeats': repeats, 'warm_cache': True,
+                              'raw_nanoseconds': measures, 'summary': summary}}
+
+if __name__ == '__main__':
+    print(json.dumps(run(), ensure_ascii=False, indent=2))
+```
+
+### 35.7. Исходные измерения и повтор сбоя
+
+JSON ниже фиксирует оба запуска целиком (включая исходные наносекунды),
+а также все 15 результатов отдельного воспроизведения прототипа. Выборки
+синтетические; выводы не экстраполируются на непроверенные платформы.
+
+```json
+{"runs":[{"environment":{"os":"Linux","machine":"x86_64","python":"3.11.2"},"checks_passed":15,"checks":["dated_name_unchanged_after_in_place_write","content_hash_detects_same_length_change","replacement_keeps_dated_path","filename_can_claim_arbitrary_creation_date","different_dates_or_names_do_not_define_different_content","timestamp_alone_can_collide","exclusive_create_not_clock_resolves_collision","wall_clock_order_not_guaranteed_generation_order","fixed_utc_lexical_order_matches_claimed_time","mixed_offsets_lexical_order_can_be_wrong","dated_link_name_does_not_pin_its_target","renaming_breaks_exact_path_reference","rename_does_not_change_content_hash","updating_reference_changes_witness_bytes","indexed_lookup_needs_no_directory_scan"],"benchmark":{"files_per_variant":2000,"payload_bytes":64,"repeats":9,"warm_cache":true,"raw_nanoseconds":{"base":{"scan_sort":[808422,722344,748209,770263,743585,726385,715847,749171,769888],"load_index":[273374,277050,285051,272097,276988,298952,300337,277016,259894],"lookup_20000":[5111107,4902161,4932370,5101781,5017099,5003619,5010416,5005758,4999718],"read_hash_200":[2742660,2490071,2494312,2422318,2362445,2649714,2366011,2345193,2362143]},"pref":{"scan_sort":[910152,734711,756642,757329,740415,1139206,748906,770275,746781],"load_index":[396529,334569,297021,302657,309812,334450,287098,331577,299223],"lookup_20000":[4945051,4924338,4986954,5017573,5039225,5291838,4924352,5216941,4972099],"read_hash_200":[2658648,2535173,2372402,2561815,2291198,2501983,2404603,2469233,2496409]},"suff":{"scan_sort":[884249,776061,799711,833965,781122,778285,786817,794889,792013],"load_index":[359361,329226,365014,315602,326272,348085,305935,310357,306372],"lookup_20000":[5063655,5027190,5123994,4984014,5191336,4960299,5041053,5003193,4945305],"read_hash_200":[2668293,2500456,2250946,2329813,2403675,2487536,2355433,2356950,2405988]}},"summary":{"base":{"filename_bytes":17,"index_json_bytes":66000,"timings_ms":{"scan_sort":{"median":0.7482,"min":0.7158,"max":0.8084},"load_index":{"median":0.277,"min":0.2599,"max":0.3003},"lookup_20000":{"median":5.0058,"min":4.9022,"max":5.1111},"read_hash_200":{"median":2.4223,"min":2.3452,"max":2.7427}}},"pref":{"filename_bytes":41,"index_json_bytes":114000,"timings_ms":{"scan_sort":{"median":0.7566,"min":0.7347,"max":1.1392},"load_index":{"median":0.3098,"min":0.2871,"max":0.3965},"lookup_20000":{"median":4.987,"min":4.9243,"max":5.2918},"read_hash_200":{"median":2.4964,"min":2.2912,"max":2.6586}}},"suff":{"filename_bytes":49,"index_json_bytes":130000,"timings_ms":{"scan_sort":{"median":0.792,"min":0.7761,"max":0.8842},"load_index":{"median":0.3263,"min":0.3059,"max":0.365},"lookup_20000":{"median":5.0272,"min":4.9453,"max":5.1913},"read_hash_200":{"median":2.4037,"min":2.2509,"max":2.6683}}}}}},{"environment":{"os":"Linux","machine":"x86_64","python":"3.11.2"},"checks_passed":15,"checks":["dated_name_unchanged_after_in_place_write","content_hash_detects_same_length_change","replacement_keeps_dated_path","filename_can_claim_arbitrary_creation_date","different_dates_or_names_do_not_define_different_content","timestamp_alone_can_collide","exclusive_create_not_clock_resolves_collision","wall_clock_order_not_guaranteed_generation_order","fixed_utc_lexical_order_matches_claimed_time","mixed_offsets_lexical_order_can_be_wrong","dated_link_name_does_not_pin_its_target","renaming_breaks_exact_path_reference","rename_does_not_change_content_hash","updating_reference_changes_witness_bytes","indexed_lookup_needs_no_directory_scan"],"benchmark":{"files_per_variant":2000,"payload_bytes":64,"repeats":9,"warm_cache":true,"raw_nanoseconds":{"base":{"scan_sort":[797577,732310,740768,756900,734198,701320,748038,751271,759179],"load_index":[282994,328715,335190,300110,280433,289362,346158,264806,264166],"lookup_20000":[4936731,5006957,4998022,4988544,5004973,4989794,5002063,4964834,4931271],"read_hash_200":[2705449,2377432,2213148,2216609,2275390,2221167,2211953,2274035,2309347]},"pref":{"scan_sort":[820725,812392,765951,792995,752961,809587,817726,763149,767091],"load_index":[467599,326281,300920,302381,340656,297984,296361,298695,315687],"lookup_20000":[4951734,4975899,5024833,4990340,5018816,4991381,4972309,5000899,4999009],"read_hash_200":[2607462,2416508,2264560,2302947,2340035,2305960,2272352,2364567,2365686]},"suff":{"scan_sort":[770380,761610,810129,828598,797998,831959,774248,848292,779086],"load_index":[369033,369361,339396,337402,332174,373200,338586,316399,341173],"lookup_20000":[4965852,4948924,5022198,4974707,5039443,4998989,5026973,4930049,4938884],"read_hash_200":[2549257,2396080,2267228,2270356,2257924,2327725,2194943,2311393,2320272]}},"summary":{"base":{"filename_bytes":17,"index_json_bytes":66000,"timings_ms":{"scan_sort":{"median":0.748,"min":0.7013,"max":0.7976},"load_index":{"median":0.2894,"min":0.2642,"max":0.3462},"lookup_20000":{"median":4.9898,"min":4.9313,"max":5.007},"read_hash_200":{"median":2.274,"min":2.212,"max":2.7054}}},"pref":{"filename_bytes":41,"index_json_bytes":114000,"timings_ms":{"scan_sort":{"median":0.793,"min":0.753,"max":0.8207},"load_index":{"median":0.3024,"min":0.2964,"max":0.4676},"lookup_20000":{"median":4.9914,"min":4.9517,"max":5.0248},"read_hash_200":{"median":2.34,"min":2.2646,"max":2.6075}}},"suff":{"filename_bytes":49,"index_json_bytes":130000,"timings_ms":{"scan_sort":{"median":0.798,"min":0.7616,"max":0.8483},"load_index":{"median":0.3394,"min":0.3164,"max":0.3732},"lookup_20000":{"median":4.9747,"min":4.93,"max":5.0394},"read_hash_200":{"median":2.3114,"min":2.1949,"max":2.5493}}}}}}],"reader_replay":[{"case":"stable_name","trial":0,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"stable_name","trial":1,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"stable_name","trial":2,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"stable_name","trial":3,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"stable_name","trial":4,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"dated_name","trial":0,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"dated_name","trial":1,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"dated_name","trial":2,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"dated_name","trial":3,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"dated_name","trial":4,"outcome":"undetected_mutation","unchanged_stat_times":true},{"case":"dated_name_with_expected","trial":0,"outcome":"blocked:ARTIFACT_MISMATCH","unchanged_stat_times":true},{"case":"dated_name_with_expected","trial":1,"outcome":"blocked:ARTIFACT_MISMATCH","unchanged_stat_times":true},{"case":"dated_name_with_expected","trial":2,"outcome":"blocked:ARTIFACT_MISMATCH","unchanged_stat_times":true},{"case":"dated_name_with_expected","trial":3,"outcome":"blocked:ARTIFACT_MISMATCH","unchanged_stat_times":true},{"case":"dated_name_with_expected","trial":4,"outcome":"blocked:ARTIFACT_MISMATCH","unchanged_stat_times":true}]}
+```
+
+### 35.8. Проверка фиксации и границы внедрения
+
+Полный скрипт независимо извлечён из сохранённого отчёта и побайтово сопоставлен
+с исполненным оригиналом — PASS. Оба запуска: 15/15 ожидаемых проверок; отдельный
+повтор исходного пробела: датированное имя не устранило ни один из пяти случаев.
+Регрессионная проверка прежней системы: **21/21**, diffcheck чисто.
+Первый вызов общего runner не стартовал (код 127): изолированная среда не
+пережила восстановление workspace. Она пересоздана вне репозитория строго
+по уже разрешённому hash-lock; pip check успешен, затем общий прогон выполнен.
+Новых зависимостей/версий/разрешений не добавлялось.
+
+Восстановленные 59 путей совпали с fetched HEAD; stash сохранён без применения.
+Изменён только исследовательский отчёт, не naming policy, каталог, события
+подтверждений или действующие нормативные тексты. Исследовательский вывод
+не выдаётся за доказанное улучшение UX или универсальный benchmark.
