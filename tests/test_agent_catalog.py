@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004'})
-        self.assertEqual(len(self.registry['entities']), 4)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005'})
+        self.assertEqual(len(self.registry['entities']), 5)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -122,7 +122,7 @@ class ValidationContractTests(unittest.TestCase):
         self.decision = json.loads(artifact_bytes(self.rev['approval']['reference']))
 
     def test_exact_revision_and_dependency(self):
-        self.assertEqual([r['revision'] for r in self.entity['revisions']], ['r0002'])
+        self.assertEqual([r['revision'] for r in self.entity['revisions']], ['r0002', 'r0003'])
         self.assertFalse((BASE / 'catalog/contracts/agent_system/ent-0002/r0001.md').exists())
         self.assertEqual(self.rev['kind'], 'contract')
         self.assertEqual(self.rev['relations'], [dict(type='depends_on', target=dict(
@@ -183,7 +183,7 @@ class BaseSchemaArtifactTests(unittest.TestCase):
     def setUp(self):
         self.registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
         entity = next(e for e in self.registry['entities'] if e['entity_id'] == 'ENT-0003')
-        self.assertEqual(len(entity['revisions']), 1)
+        self.assertEqual([r['revision'] for r in entity['revisions']], ['r0001', 'r0002'])
         self.rev = entity['revisions'][0]
         self.decision = json.loads(artifact_bytes(self.rev['approval']['reference']))
 
@@ -274,7 +274,7 @@ class StructuralCheckDeploymentTests(unittest.TestCase):
     def setUp(self):
         self.registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
         entity = next(e for e in self.registry['entities'] if e['entity_id'] == 'ENT-0004')
-        self.assertEqual(len(entity['revisions']), 1)
+        self.assertEqual([r['revision'] for r in entity['revisions']], ['r0001', 'r0002'])
         self.rev = entity['revisions'][0]
         self.decision = json.loads(artifact_bytes(self.rev['approval']['reference']))
 
@@ -314,6 +314,61 @@ class StructuralCheckDeploymentTests(unittest.TestCase):
         for a in self.rev['artifacts'] + [self.rev['approval']['reference']]:
             with self.subTest(path=a['path']), self.assertRaises(ValueError):
                 artifact_bytes(dict(a, sha256='0' * 64))
+
+
+class MutableTreeDeploymentTests(unittest.TestCase):
+    EXPECTED = {'ENT-0002': {'revision': 'r0003', 'kind': 'contract', 'artifacts': [{'path': 'catalog/contracts/agent_system/ent-0002/r0003.md', 'sha256': 'bfdea24314d9f5b26cd54ddaa41fe9aea9843c0f669417c040c1c80991188a1a', 'size_bytes': 17780, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0001', 'revision': 'r0001'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0002', 'revision': 'r0002'}}]}, 'ENT-0003': {'revision': 'r0002', 'kind': 'schema', 'artifacts': [{'path': 'specification/ent-0003/r0002/catalog-base.schema.json', 'sha256': '42fab3c453930ad9128b2b422837b82d84db9ed6092872765bd7fe1ffaf9a820', 'size_bytes': 8696, 'role': 'normative'}, {'path': 'specification/ent-0003/r0002/usage.md', 'sha256': 'a8e6c818ec4bda9eb4d38b3b9abb8ec9e3d694a42329771109931bbc8c5c6ceb', 'size_bytes': 9053, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0001', 'revision': 'r0001'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0002', 'revision': 'r0003'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0003', 'revision': 'r0001'}}]}, 'ENT-0004': {'revision': 'r0002', 'kind': 'check', 'artifacts': [{'path': 'validation/ent-0004/r0002/verify.py', 'sha256': '1523ca399a9aee8f89656591b62e1d776504385fe025131c818c694ebb32aedf', 'size_bytes': 10872, 'role': 'normative'}, {'path': 'validation/ent-0004/r0002/requirements-linux-cp311.lock', 'sha256': '4f0eda8261647c9bc18d2f013ef914737290e20c6a82de15f476108b6a528e71', 'size_bytes': 746, 'role': 'normative'}, {'path': 'validation/ent-0004/r0002/usage.md', 'sha256': '78807c10e4ad843472a1413df661c27cdbbd92a889446a000fbc1e9566e1d369', 'size_bytes': 7567, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0003', 'revision': 'r0002'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0004', 'revision': 'r0001'}}]}, 'ENT-0005': {'revision': 'r0002', 'kind': 'adapter', 'artifacts': [{'path': 'adapters/ent-0005/r0002/reader.py', 'sha256': '03a47fab9301222c3bf9b4304c8595aaeb2fa88d2aa72c5ea96c6702433cdb8c', 'size_bytes': 8623, 'role': 'normative'}, {'path': 'adapters/ent-0005/r0002/verify.py', 'sha256': '325d7aac88492ca75ceefb919383a2ecec4bb3f8e10b97088247f255418952af', 'size_bytes': 13470, 'role': 'normative'}, {'path': 'adapters/ent-0005/r0002/usage.md', 'sha256': '522e3223737e1fe901b7c94cc85ba58c2f10b0d538e274e85f6d3f4d076bf835', 'size_bytes': 8728, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0002', 'revision': 'r0003'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0003', 'revision': 'r0002'}}]}}
+
+    def setUp(self):
+        self.registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+
+    def revisions(self):
+        for entity_id, expected in self.EXPECTED.items():
+            entity = next(e for e in self.registry['entities'] if e['entity_id'] == entity_id)
+            revision = next(r for r in entity['revisions'] if r['revision'] == expected['revision'])
+            yield entity_id, expected, revision
+
+    def test_exact_deployment_and_conditional_evidence(self):
+        for entity_id, expected, revision in self.revisions():
+            for key in expected:
+                self.assertEqual(revision[key], expected[key])
+            for artifact in revision['artifacts']:
+                artifact_bytes(artifact)
+                self.assertNotIn('created-', artifact['path'])
+            decision = json.loads(artifact_bytes(revision['approval']['reference']))
+            self.assertEqual(decision['subject'], dict(catalog_id=CATALOG_ID,
+                                                     entity_id=entity_id, revision=revision['revision']))
+            self.assertEqual(decision['statement_form'], 'summary')
+            self.assertIn('Владелец явно выбрал B', decision['statement'])
+            self.assertEqual(decision['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                                   for a in revision['artifacts']])
+
+    def test_new_dependency_closure_does_not_pull_old_contract(self):
+        by_key = {(e['entity_id'], r['revision']): r
+                  for e in self.registry['entities'] for r in e['revisions']}
+        seen = set()
+        def visit(key):
+            if key in seen:
+                return
+            seen.add(key)
+            for relation in by_key[key]['relations']:
+                if relation['type'] == 'depends_on':
+                    target = relation['target']
+                    self.assertEqual(target['catalog_id'], CATALOG_ID)
+                    visit((target['entity_id'], target['revision']))
+        visit(('ENT-0005', 'r0002'))
+        visit(('ENT-0004', 'r0002'))
+        self.assertEqual(seen, {('ENT-0001', 'r0001'), ('ENT-0002', 'r0003'),
+                                ('ENT-0003', 'r0002'), ('ENT-0004', 'r0002'),
+                                ('ENT-0005', 'r0002')})
+
+    def test_new_contract_states_the_narrow_guarantee(self):
+        text = (BASE / 'catalog/contracts/agent_system/ent-0002/r0003.md').read_text()
+        self.assertIn('до чтения задаются ожидаемые', text)
+        self.assertIn('Он не гарантирует отсутствие всех изменений', text)
+        self.assertIn('атомарный снимок дерева', text)
+        self.assertIn('Обнаруженная подмена', text)
+        self.assertIn('Безопасная граница чтения обязательна', text)
 
 
 if __name__ == '__main__':

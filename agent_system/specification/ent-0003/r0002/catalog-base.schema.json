@@ -1,0 +1,400 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:schema:catalog-base:1",
+  "title": "Base catalog and approve_revision structural schema",
+  "description": "Partial structural layer only; not permission, graph, filesystem or event validation.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/registry"
+    },
+    {
+      "$ref": "#/$defs/approve_revision"
+    }
+  ],
+  "$defs": {
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*[\\\\:])(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)(?!.*\\/$)[^\\u0000-\\u001f\\u007f]+$(?![\\s\\S])"
+    },
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$(?![\\s\\S])"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$(?![\\s\\S])"
+    },
+    "entity_id": {
+      "type": "string",
+      "pattern": "^ENT-[0-9]{4,}$(?![\\s\\S])"
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^r[0-9]{4,}$(?![\\s\\S])"
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "catalog_id": {
+          "$ref": "#/$defs/uuid"
+        },
+        "entity_id": {
+          "$ref": "#/$defs/entity_id"
+        },
+        "revision": {
+          "$ref": "#/$defs/revision_id"
+        }
+      },
+      "required": [
+        "catalog_id",
+        "entity_id",
+        "revision"
+      ],
+      "additionalProperties": false
+    },
+    "link": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "link_type": {
+          "const": "symbolic_link"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path",
+        "link_type",
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "artifact": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          },
+          "minItems": 1
+        },
+        "resolved_path": {
+          "$ref": "#/$defs/path"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "links": [
+          "resolved_path"
+        ],
+        "resolved_path": [
+          "links"
+        ]
+      }
+    },
+    "indexed_artifact": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          },
+          "minItems": 1
+        },
+        "resolved_path": {
+          "$ref": "#/$defs/path"
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "role"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "links": [
+          "resolved_path"
+        ],
+        "resolved_path": [
+          "links"
+        ]
+      }
+    },
+    "reference": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "relation": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "depends_on",
+            "implements",
+            "validated_by",
+            "derived_from",
+            "supersedes"
+          ]
+        },
+        "target": {
+          "$ref": "#/$defs/subject"
+        }
+      },
+      "required": [
+        "type",
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "revision": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "$ref": "#/$defs/revision_id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "rule",
+            "protocol",
+            "policy",
+            "pattern",
+            "contract",
+            "prompt",
+            "schema",
+            "adapter",
+            "check",
+            "architecture"
+          ]
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/indexed_artifact"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relation"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "approval": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "approved"
+            },
+            "reference": {
+              "$ref": "#/$defs/reference"
+            }
+          },
+          "required": [
+            "status",
+            "reference"
+          ],
+          "additionalProperties": false
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "summary"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "revision",
+        "title",
+        "kind",
+        "scopes",
+        "artifacts",
+        "relations",
+        "approval",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "entity": {
+      "type": "object",
+      "properties": {
+        "entity_id": {
+          "$ref": "#/$defs/entity_id"
+        },
+        "revisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/revision"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "entity_id",
+        "revisions"
+      ],
+      "additionalProperties": false
+    },
+    "registry": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1"
+        },
+        "catalog_id": {
+          "$ref": "#/$defs/uuid"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entity"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_version",
+        "catalog_id",
+        "entities"
+      ],
+      "additionalProperties": false
+    },
+    "approve_revision": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1"
+        },
+        "decision_id": {
+          "$ref": "#/$defs/uuid"
+        },
+        "decision_type": {
+          "const": "approve_revision"
+        },
+        "subject": {
+          "$ref": "#/$defs/subject"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifact"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "actor_role": {
+          "const": "owner"
+        },
+        "recorded_by": {
+          "const": "agent"
+        },
+        "decision_date": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$(?![\\s\\S])"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement_form": {
+          "enum": [
+            "quote",
+            "summary"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "decision_id",
+        "decision_type",
+        "subject",
+        "artifacts",
+        "actor_role",
+        "recorded_by",
+        "decision_date",
+        "statement",
+        "statement_form",
+        "basis"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

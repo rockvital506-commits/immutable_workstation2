@@ -76,6 +76,51 @@
           "provenance": {
             "summary": "Новая разработка по принятым решениям о версиях, байтах, зависимостях и свидетельствах; после уточнения владельца включена поддержка символических ссылок с первой реализации. Полный текст r0002 отдельно предъявлен и принят."
           }
+        },
+        {
+          "revision": "r0003",
+          "title": "Контракт проверки каталога и границ результата",
+          "kind": "contract",
+          "scopes": [
+            "agent_system.validation",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "catalog/contracts/agent_system/ent-0002/r0003.md",
+              "sha256": "bfdea24314d9f5b26cd54ddaa41fe9aea9843c0f669417c040c1c80991188a1a",
+              "size_bytes": 17780,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0001",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0002",
+                "revision": "r0002"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/eb7fd04c-e709-4d74-9135-f13db983d78d.json",
+              "sha256": "c877203a192c4e1569c5ca173ac17bba2b5d22a96a3d5d948018be0c3f2769eb"
+            }
+          },
+          "provenance": {
+            "summary": "Новая точная ревизия по явному выбору владельцем изменяемого дерева (B) и условному разрешению внедрения после проверок. Исторические зависимости сохранены; время в имена не добавлено."
+          }
         }
       ]
     },
@@ -133,6 +178,65 @@
           "provenance": {
             "summary": "Первая формальная схема принятой модели индекса и approve_revision, с метаданными символических ссылок по ENT-0002 r0002. Полный двухфайловый состав отдельно предъявлен и принят владельцем; общий допуск и исполнение схемы движком этим не подтверждены."
           }
+        },
+        {
+          "revision": "r0002",
+          "title": "Базовая структурная схема каталога",
+          "kind": "schema",
+          "scopes": [
+            "agent_system.validation",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "specification/ent-0003/r0002/catalog-base.schema.json",
+              "sha256": "42fab3c453930ad9128b2b422837b82d84db9ed6092872765bd7fe1ffaf9a820",
+              "size_bytes": 8696,
+              "role": "normative"
+            },
+            {
+              "path": "specification/ent-0003/r0002/usage.md",
+              "sha256": "a8e6c818ec4bda9eb4d38b3b9abb8ec9e3d694a42329771109931bbc8c5c6ceb",
+              "size_bytes": 9053,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0001",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0002",
+                "revision": "r0003"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0003",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/309b5a29-dc2b-463a-b1b8-3b9ee37534b0.json",
+              "sha256": "d0a1a33029e8dfa6983cd4ac8e9d88c442da5958fe20573b07a64e5cad3c36e7"
+            }
+          },
+          "provenance": {
+            "summary": "Новая точная ревизия по явному выбору владельцем изменяемого дерева (B) и условному разрешению внедрения после проверок. Исторические зависимости сохранены; время в имена не добавлено."
+          }
         }
       ]
     },
@@ -186,6 +290,125 @@
           },
           "provenance": {
             "summary": "Исполнение утверждённой схемы ENT-0003 r0001 сторонним jsonschema в отдельно разрешённой изолированной среде. Точный состав внедрён агентом по условному разрешению владельца после положительных и отрицательных испытаний; предел проверенности — структурный слой Linux x86-64 / CPython 3.11."
+          }
+        },
+        {
+          "revision": "r0002",
+          "title": "Структурные регрессионные испытания базовой схемы",
+          "kind": "check",
+          "scopes": [
+            "agent_system.validation",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "validation/ent-0004/r0002/verify.py",
+              "sha256": "1523ca399a9aee8f89656591b62e1d776504385fe025131c818c694ebb32aedf",
+              "size_bytes": 10872,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0004/r0002/requirements-linux-cp311.lock",
+              "sha256": "4f0eda8261647c9bc18d2f013ef914737290e20c6a82de15f476108b6a528e71",
+              "size_bytes": 746,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0004/r0002/usage.md",
+              "sha256": "78807c10e4ad843472a1413df661c27cdbbd92a889446a000fbc1e9566e1d369",
+              "size_bytes": 7567,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0003",
+                "revision": "r0002"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0004",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/a425e4f3-051e-4b73-819f-73e8ec81ab4c.json",
+              "sha256": "db3dd27435889376392b0f68dc9f4b43be8b84a686e714969dff202297b2fd6b"
+            }
+          },
+          "provenance": {
+            "summary": "Новая точная ревизия по явному выбору владельцем изменяемого дерева (B) и условному разрешению внедрения после проверок. Исторические зависимости сохранены; время в имена не добавлено."
+          }
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0005",
+      "revisions": [
+        {
+          "revision": "r0002",
+          "title": "Чтение объявленных артефактов изменяемого дерева — Linux",
+          "kind": "adapter",
+          "scopes": [
+            "agent_system.validation",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "adapters/ent-0005/r0002/reader.py",
+              "sha256": "03a47fab9301222c3bf9b4304c8595aaeb2fa88d2aa72c5ea96c6702433cdb8c",
+              "size_bytes": 8623,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0005/r0002/verify.py",
+              "sha256": "325d7aac88492ca75ceefb919383a2ecec4bb3f8e10b97088247f255418952af",
+              "size_bytes": 13470,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0005/r0002/usage.md",
+              "sha256": "522e3223737e1fe901b7c94cc85ba58c2f10b0d538e274e85f6d3f4d076bf835",
+              "size_bytes": 8728,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0002",
+                "revision": "r0003"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0003",
+                "revision": "r0002"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/f942dc8a-d050-4d00-9242-b956003c0735.json",
+              "sha256": "306c045c336b9c17c0927cb2d76e9e329e1f903a3a87cef391c4fc43c85a9755"
+            }
+          },
+          "provenance": {
+            "summary": "Новая точная ревизия по явному выбору владельцем изменяемого дерева (B) и условному разрешению внедрения после проверок. Исторические зависимости сохранены; время в имена не добавлено."
           }
         }
       ]
