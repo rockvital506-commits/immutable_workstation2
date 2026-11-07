@@ -3471,3 +3471,485 @@ stash сохранён без применения/удаления.
 на проверенной среде. Непокрытые слои не отмечены выполненными, право выпуска
 или активации не выводилось из успешных тестов. Новых запросов подтверждения
 нет: ключевой выбор сторонней зависимости уже разрешён владельцем.
+
+## 34. Прототип чтения ссылок: реальный блокирующий отрицательный тест
+
+Дата: 2026-11-07. В делегированном режиме подготовлен прототип Linux x86-64
+чтения артефакта с ссылками и 20 изолированных файловых тестов. Условие
+внедрения по умолчанию **не выполнено**: результат **19/20**, один FAIL.
+Прототип не внедрён, запись индекса и approve_revision не созданы. ENT-0005
+зарезервирован как кандидат адаптера; r0001 не одобрен. Источник — требования
+ENT-0002 r0002 и формат метаданных ENT-0003 r0001. Планируемая точная зависимость
+на обе эти версии того же namespace. Ограничение платформы явно Linux x86-64;
+новых сторонних пакетов не добавлялось.
+
+### 34.1. Что реально проверялось и что обнаружено
+
+Прототип использует Linux openat2 (syscall 437 только x86-64) с
+RESOLVE_BENEATH/NO_SYMLINKS/NO_XDEV и O_PATH/O_NOFOLLOW. Каждый узел открывается
+от дескриптора выбранного корня; текст ссылки читается от её закреплённого
+дескриптора, не через предварительный resolve+обычный open. Обычный файл
+читается через собственный закреплённый дескриптор /proc/self/fd; каталоги,
+FIFO и иные не-обычные файлы не разыменовываются для чтения данных. Фиксируются
+метаданные, повторно разрешается путь и сопоставляются inode/статистики.
+
+Прошли изолированные случаи: обычный файл, файл-ссылка, каталог-ссылка,
+цепочка, выбранный корень-ссылка, внутренняя абсолютная/относительная цель,
+общая цель без ложного цикла, циклы/оборванная ссылка, внешний переход с
+возвратом (без чтения внешних данных), лимиты, неверные метаданные, замена
+ссылки/файла/каталога, отсутствие платформенной возможности. Все входы
+синтетические; исходный пользовательский каталог не обходился.
+
+**FAIL: test_file_write_during_read.** После закрепления файла, но перед его
+чтением, фикстура заменяет b'example\n' на b'mutated\n' в том же inode.
+Обе строки по 8 байт. Прототип ошибочно возвратил новые байты как успешное
+чтение при отсутствии expected. Повторная диагностика показала одинаковые
+наблюдаемые st_size, st_mtime_ns и st_ctime_ns до и после этой записи:
+8, 1794071745165859597, 1794071745165859597. Точная причина поведения временных
+меток не установлена; нельзя объявлять это универсальным свойством Linux.
+
+Двойная проверка stat не доказала неизменность. Нельзя исправлять тест сменой
+длины строки, sleep или искусственным utime: это спрятало бы реальный пробел.
+Обязательный ожидаемый SHA-256 обнаружил бы изменившееся содержимое относительно
+утверждённого состава, но сам по себе не доказывает отсутствие временной
+подмены/возврата исходных данных и единый момент снимка всех решений/файлов.
+Один предварительный или повторный resolve также не закрывает эту границу.
+
+### 34.2. Ключевое ещё не согласованное решение
+
+Нужно выбрать модель источника для строгой проверки, не ослаблять ENT-0002 молча.
+
+**Рекомендация A: сохраняем строгий контракт; чтение для полного результата
+выполняется из гарантированно неизменяемого снимка/источника.** Способ получения
+и подтверждения такого источника предстоит выбрать и испытать отдельно.
+Обычная копия, chmod или read-only представление поверх изменяемого источника
+не объявляются автоматически неизменяемым снимком. Текущее рабочее дерево
+без такой гарантии может исследоваться, но строгий переход не получает PASS.
+Плюсы: сохраняется принятое требование и известный набор решений не смешивается
+между моментами. Минусы: отдельная стадия/средства, ресурсные и платформенные
+ограничения. В этой среде способ пока не доказан и снимок не создавался.
+
+**Альтернатива B: согласованно изменить контракт для изменяемого дерева.**
+Обязательны ожидаемые хэши/метаданные, безопасная граница чтения и обнаружение
+наблюдаемых подмен; результат гарантирует соответствие прочитанных артефактов
+конкретному составу, но не отсутствие всех изменений между наблюдениями и не
+атомарность всего дерева. Плюсы: проще работа с обычным checkout. Минусы:
+это сознательное сужение обещания; нужна новая редакция ENT-0002 и уточнение
+процедур, а не тихое исправление прототипа. Новую редакцию агент не утвердил.
+
+Поддержка symlink с первой реализации остаётся принятой в обоих вариантах.
+Ни один вариант не разрешает читать внешние цели, исполнять входы, автоматически
+экспортировать абсолютные пути или выдавать выпуск/активацию. Эта точка требует
+решения владельца, поскольку затрагивает гарантию, а не имя технического файла.
+
+### 34.3. Полный невнедрённый прототип и воспроизводящий тест
+
+Тексты ниже сохранены для диагностики и доработки, **не являются действующими
+сущностями agent_system**. Пути обозначают первоначальное место разработки,
+из системного дерева файлы убраны после сбоя. Копии для текущего исполнения —
+временные; постоянный источник истории прототипа — эти блоки.
+
+#### agent_system/adapters/ent-0005/r0001/reader.py
+
+Размер: 7098 байт. SHA-256: `283feb3f3c28a8577acfe0bf09a5f84feaafb6a38d49aa033d6d3f69ffa31646`.
+
+```python
+#!/usr/bin/env python3
+"""Linux x86-64 bounded artifact reader, not catalog admission or export."""
+import ctypes
+import hashlib
+import os
+from pathlib import Path
+import platform
+import stat
+
+
+class ReadBlocked(Exception):
+    """Stable code only: never copy private paths, link targets or contents."""
+
+    def __init__(self, code):
+        self.code = code
+        super().__init__(code)
+
+
+class _OpenHow(ctypes.Structure):
+    _fields_ = [('flags', ctypes.c_uint64), ('mode', ctypes.c_uint64),
+                ('resolve', ctypes.c_uint64)]
+
+
+def _fingerprint(fd):
+    s = os.fstat(fd)
+    return (s.st_dev, s.st_ino, s.st_mode, s.st_nlink, s.st_size,
+            s.st_mtime_ns, s.st_ctime_ns)
+
+
+def _open_node(rootfd, parts):
+    # Linux x86-64 syscall number; never guess on other architectures.
+    how = _OpenHow(os.O_PATH | os.O_NOFOLLOW | os.O_CLOEXEC, 0, 0x01 | 0x04 | 0x08)
+    # NO_XDEV | NO_SYMLINKS | BENEATH; final O_PATH|NOFOLLOW may return a link fd.
+    libc = ctypes.CDLL(None, use_errno=True)
+    result = libc.syscall(437, rootfd, os.fsencode('/'.join(parts) or '.'),
+                          ctypes.byref(how), ctypes.sizeof(how))
+    if result < 0:
+        raise ReadBlocked('PATH_UNAVAILABLE_OR_UNSAFE')
+    return result
+
+
+def _read_data(fd, maximum):
+    # Reopen the already-pinned, type-checked regular inode, not a source pathname.
+    try:
+        readfd = os.open('/proc/self/fd/' + str(fd), os.O_RDONLY | os.O_CLOEXEC)
+    except OSError:
+        raise ReadBlocked('READ_UNAVAILABLE') from None
+    try:
+        if _fingerprint(readfd) != _fingerprint(fd):
+            raise ReadBlocked('INPUT_CHANGED')
+        chunks = []
+        count = 0
+        while True:
+            chunk = os.read(readfd, min(65536, maximum + 1 - count))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            count += len(chunk)
+            if count > maximum:
+                raise ReadBlocked('BYTE_LIMIT')
+        return b''.join(chunks)
+    finally:
+        os.close(readfd)
+
+
+def _logical_parts(path):
+    if (not isinstance(path, str) or not path or path.startswith('/')
+            or '\\' in path or ':' in path
+            or any(ord(c) < 32 or ord(c) == 127 for c in path)
+            or any(p in ('', '.', '..') for p in path.split('/'))):
+        raise ReadBlocked('INVALID_LOGICAL_PATH')
+    return path.split('/')
+
+
+def _resolve(rootfd, physical, pending, opened, maxlinks, maxsteps):
+    prefix = []
+    links = []
+    seen = set()
+    steps = 0
+    while pending:
+        steps += 1
+        if steps > maxsteps:
+            raise ReadBlocked('STEP_LIMIT')
+        state = (tuple(prefix), tuple(pending))
+        if state in seen:
+            raise ReadBlocked('LINK_CYCLE')
+        seen.add(state)
+        part, pending = pending[0], pending[1:]
+        if part in ('', '.'):
+            continue
+        if part == '..':
+            if not prefix:
+                raise ReadBlocked('OUTSIDE_ROOT')
+            prefix.pop()
+            continue
+        parts = prefix + [part]
+        fd = _open_node(rootfd, parts)
+        opened.append((fd, _fingerprint(fd)))
+        mode = os.fstat(fd).st_mode
+        if stat.S_ISLNK(mode):
+            if len(links) >= maxlinks:
+                raise ReadBlocked('LINK_LIMIT')
+            # Empty-path readlink reads the pinned symlink inode, not a racy name.
+            target = os.readlink('', dir_fd=fd)
+            links.append({'path': '/'.join(parts), 'link_type': 'symbolic_link',
+                          'target': target})
+            if target.startswith('/'):
+                # Do not normalize '..' or resolve an external path and return inside.
+                boundary = physical.rstrip('/') + '/'
+                if target == physical:
+                    remainder = ''
+                elif target.startswith(boundary):
+                    remainder = target[len(boundary):]
+                else:
+                    raise ReadBlocked('OUTSIDE_ROOT')
+                prefix = []
+                pending = remainder.split('/') + pending
+            else:
+                pending = target.split('/') + pending
+            continue
+        prefix.append(part)
+        if pending and not stat.S_ISDIR(mode):
+            raise ReadBlocked('NOT_A_DIRECTORY')
+        if not pending:
+            if not stat.S_ISREG(mode):
+                raise ReadBlocked('NOT_A_REGULAR_FILE')
+            return fd, links, '/'.join(prefix)
+    raise ReadBlocked('NOT_A_REGULAR_FILE')
+
+
+def read_artifact(root, path, expected=None, *, max_bytes=16 * 1024 * 1024,
+                  max_links=40, max_steps=1024):
+    """Return (bytes, artifact metadata); no execution, traversal, export or writes.
+
+    Requires a trusted local Linux namespace without privileged mount/proc/clock
+    manipulation. Detected mutation aborts; not an immutable snapshot primitive.
+    """
+    if platform.system() != 'Linux' or platform.machine() != 'x86_64':
+        raise ReadBlocked('UNSUPPORTED_PLATFORM')
+    if any(type(v) is not int or v < 1 for v in (max_bytes, max_links, max_steps)):
+        raise ReadBlocked('INVALID_LIMIT')
+    parts = _logical_parts(path)
+    opened = []
+    try:
+        physical = os.path.realpath(root, strict=True)
+        rootfd = os.open(physical, os.O_PATH | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
+        opened.append((rootfd, _fingerprint(rootfd)))
+        if os.readlink('/proc/self/fd/' + str(rootfd)) != physical:
+            raise ReadBlocked('ROOT_CHANGED')
+        fd, links, resolved = _resolve(rootfd, physical, parts, opened, max_links, max_steps)
+        if os.fstat(fd).st_size > max_bytes:
+            raise ReadBlocked('BYTE_LIMIT')
+        data = _read_data(fd, max_bytes)
+        # Re-resolve from the pinned root and verify path-to-inode mapping as well
+        # as every retained directory/link/file inode and metadata fingerprint.
+        fd2, links2, resolved2 = _resolve(rootfd, physical, parts, opened, max_links, max_steps)
+        if (links2 != links or resolved2 != resolved
+                or _fingerprint(fd2) != _fingerprint(fd)):
+            raise ReadBlocked('INPUT_CHANGED')
+        if os.readlink('/proc/self/fd/' + str(rootfd)) != physical:
+            raise ReadBlocked('ROOT_CHANGED')
+        if any(_fingerprint(f) != before for f, before in opened):
+            raise ReadBlocked('INPUT_CHANGED')
+        record = {'path': path, 'sha256': hashlib.sha256(data).hexdigest(),
+                  'size_bytes': len(data)}
+        if links:
+            record.update(links=links, resolved_path=resolved)
+        if expected is not None:
+            # role is catalog metadata, not part of the approval artifact tuple.
+            expected = {k: v for k, v in expected.items() if k != 'role'}
+            if expected != record:
+                raise ReadBlocked('ARTIFACT_MISMATCH')
+        return data, record
+    except ReadBlocked:
+        raise
+    except (OSError, ValueError, TypeError, RuntimeError):
+        raise ReadBlocked('INPUT_UNAVAILABLE') from None
+    finally:
+        for fd, _ in reversed(opened):
+            os.close(fd)
+```
+
+#### tests/test_agent_reader.py
+
+Размер: 8658 байт. SHA-256: `e8f261744a0715aa9425a22deeb2eb878979db741d24f91acacca1c694b9fddc`.
+
+```python
+#!/usr/bin/env python3
+"""Isolated filesystem tests. No real private source is used."""
+import hashlib
+import os
+from pathlib import Path
+import platform
+import runpy
+import tempfile
+import unittest
+from unittest.mock import patch
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+os.chdir(ROOT)
+READER_PATH = Path(ROOT) / 'agent_system/adapters/ent-0005/r0001/reader.py'
+module = runpy.run_path(str(READER_PATH))
+read_artifact = module['read_artifact']
+ReadBlocked = module['ReadBlocked']
+# Functions created by runpy retain their own globals dictionary.
+GLOBALS = read_artifact.__globals__
+
+
+class ReaderTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.base = Path(self.temp.name)
+        self.root = self.base / 'root'
+        self.root.mkdir()
+        (self.root / 'dir').mkdir()
+        (self.root / 'dir/file.md').write_bytes(b'example\n')
+        self.outside = self.base / 'outside'
+        self.outside.mkdir()
+        (self.outside / 'private').write_bytes(b'never read\n')
+
+    def read(self, path, **kwargs):
+        return read_artifact(self.root, path, **kwargs)
+
+    def blocked(self, path, code=None, **kwargs):
+        with self.assertRaises(ReadBlocked) as ctx:
+            self.read(path, **kwargs)
+        if code:
+            self.assertEqual(ctx.exception.code, code)
+        self.assertNotIn(str(self.base), str(ctx.exception))
+        return ctx.exception.code
+
+    def test_platform_is_explicit(self):
+        self.assertEqual((platform.system(), platform.machine()), ('Linux', 'x86_64'))
+        with patch('platform.system', return_value='Windows'):
+            self.blocked('dir/file.md', 'UNSUPPORTED_PLATFORM')
+
+    def test_plain_file_and_expected_bytes(self):
+        data, record = self.read('dir/file.md')
+        self.assertEqual(data, b'example\n')
+        self.assertEqual(record, dict(path='dir/file.md', size_bytes=8,
+                                     sha256=hashlib.sha256(data).hexdigest()))
+        self.assertEqual(self.read('dir/file.md', expected=dict(record, role='normative'))[0], data)
+
+    def test_file_link_and_exact_target(self):
+        (self.root / 'link').symlink_to('dir/./file.md')
+        data, r = self.read('link')
+        self.assertEqual(data, b'example\n')
+        self.assertEqual(r['resolved_path'], 'dir/file.md')
+        self.assertEqual(r['links'], [dict(path='link', link_type='symbolic_link', target='dir/./file.md')])
+        self.assertEqual(self.read('link', expected=r)[0], data)
+
+    def test_directory_link_and_chain(self):
+        (self.root / 'alias').symlink_to('dir', target_is_directory=True)
+        (self.root / 'dir/link').symlink_to('file.md')
+        (self.root / 'start').symlink_to('alias/link')
+        data, r = self.read('start')
+        self.assertEqual(data, b'example\n')
+        self.assertEqual([x['path'] for x in r['links']], ['start', 'alias', 'dir/link'])
+        self.assertEqual(r['resolved_path'], 'dir/file.md')
+
+    def test_root_link(self):
+        alias = self.base / 'selected'
+        alias.symlink_to(self.root, target_is_directory=True)
+        self.assertEqual(read_artifact(alias, 'dir/file.md')[0], b'example\n')
+
+    def test_internal_absolute_target(self):
+        (self.root / 'link').symlink_to(self.root / 'dir/file.md')
+        self.assertEqual(self.read('link')[1]['links'][0]['target'], str(self.root / 'dir/file.md'))
+
+    def test_internal_parent_target(self):
+        (self.root / 'dir/link').symlink_to('../dir/file.md')
+        self.assertEqual(self.read('dir/link')[1]['resolved_path'], 'dir/file.md')
+
+    def test_shared_target_is_not_cycle(self):
+        (self.root / 'a').symlink_to('dir/file.md')
+        (self.root / 'b').symlink_to('dir/file.md')
+        self.assertEqual(self.read('a')[0], self.read('b')[0])
+        (self.root / 'dir/up').symlink_to('..', target_is_directory=True)
+        self.assertEqual(self.read('dir/up/dir/file.md')[0], b'example\n')
+
+    def test_external_and_return_inside_block_before_read(self):
+        (self.outside / 'back').symlink_to(self.root, target_is_directory=True)
+        (self.root / 'absolute').symlink_to(self.outside / 'back/dir/file.md')
+        (self.root / 'relative').symlink_to('../outside/back/dir/file.md')
+        with patch.dict(GLOBALS, _read_data=lambda *a: self.fail('Data read before rejection')):
+            self.blocked('absolute', 'OUTSIDE_ROOT')
+            self.blocked('relative', 'OUTSIDE_ROOT')
+
+    def test_outside_then_parent_back_not_normalized_away(self):
+        (self.root / 'link').symlink_to(str(self.root) + '/../root/dir/file.md')
+        self.blocked('link', 'OUTSIDE_ROOT')
+
+    def test_cycles_and_dangling(self):
+        (self.root / 'a').symlink_to('b')
+        (self.root / 'b').symlink_to('a')
+        self.blocked('a', 'LINK_CYCLE')
+        (self.root / 'broken').symlink_to('missing')
+        self.blocked('broken')
+        (self.root / 'self').symlink_to('self')
+        self.blocked('self', 'LINK_CYCLE')
+
+    def test_limits(self):
+        self.blocked('dir/file.md', 'BYTE_LIMIT', max_bytes=4)
+        (self.root / 'a').symlink_to('b')
+        (self.root / 'b').symlink_to('dir/file.md')
+        self.blocked('a', 'LINK_LIMIT', max_links=1)
+        self.blocked('dir/file.md', 'STEP_LIMIT', max_steps=1)
+        self.blocked('dir/file.md', 'INVALID_LIMIT', max_bytes=True)
+
+    def test_invalid_logical_paths(self):
+        for value in ['', '/file', '../file', 'dir/../file', 'dir//file',
+                      'dir/./file', 'dir\\file', 'C:/file', 'dir/file.md\n']:
+            with self.subTest(value=repr(value)):
+                self.blocked(value, 'INVALID_LOGICAL_PATH')
+
+    def test_no_directory_fifo_or_socket_read(self):
+        os.mkfifo(self.root / 'fifo')
+        with patch.dict(GLOBALS, _read_data=lambda *a: self.fail('Special data read')):
+            self.blocked('dir', 'NOT_A_REGULAR_FILE')
+            self.blocked('fifo', 'NOT_A_REGULAR_FILE')
+
+    def test_hidden_or_changed_link_metadata_mismatch(self):
+        (self.root / 'link').symlink_to('dir/file.md')
+        _, record = self.read('link')
+        hidden = {k: v for k, v in record.items() if k not in ('links', 'resolved_path')}
+        self.blocked('link', 'ARTIFACT_MISMATCH', expected=hidden)
+        wrong = dict(record, sha256='0' * 64)
+        self.blocked('link', 'ARTIFACT_MISMATCH', expected=wrong)
+        links = [dict(record['links'][0], target='different')]
+        self.blocked('link', 'ARTIFACT_MISMATCH', expected=dict(record, links=links))
+        self.blocked('link', 'ARTIFACT_MISMATCH', expected=dict(record, size_bytes=9))
+
+    def test_link_swap_during_read(self):
+        link = self.root / 'link'
+        link.symlink_to('dir/file.md')
+        original = GLOBALS['_read_data']
+        def changed(fd, maximum):
+            link.unlink()
+            link.symlink_to(self.outside / 'private')
+            return original(fd, maximum)
+        with patch.dict(GLOBALS, _read_data=changed):
+            self.blocked('link')
+
+    def test_file_replacement_during_read(self):
+        original = GLOBALS['_read_data']
+        def changed(fd, maximum):
+            new = self.root / 'dir/new'
+            new.write_bytes(b'replacement\n')
+            new.replace(self.root / 'dir/file.md')
+            return original(fd, maximum)
+        with patch.dict(GLOBALS, _read_data=changed):
+            self.blocked('dir/file.md', 'INPUT_CHANGED')
+
+    def test_file_write_during_read(self):
+        original = GLOBALS['_read_data']
+        def changed(fd, maximum):
+            (self.root / 'dir/file.md').write_bytes(b'mutated\n')
+            return original(fd, maximum)
+        with patch.dict(GLOBALS, _read_data=changed):
+            self.blocked('dir/file.md', 'INPUT_CHANGED')
+
+    def test_directory_swap_between_open_calls(self):
+        original = GLOBALS['_open_node']
+        calls = []
+        def changed(rootfd, parts):
+            if parts == ['dir', 'file.md'] and not calls:
+                calls.append(True)
+                (self.root / 'dir').rename(self.root / 'saved')
+                (self.root / 'dir').symlink_to(self.outside, target_is_directory=True)
+            return original(rootfd, parts)
+        with patch.dict(GLOBALS, _open_node=changed):
+            self.blocked('dir/file.md', 'PATH_UNAVAILABLE_OR_UNSAFE')
+
+    def test_kernel_unavailable_is_blocked_not_fallback(self):
+        with patch('ctypes.CDLL', side_effect=OSError('unavailable')):
+            self.blocked('dir/file.md', 'INPUT_UNAVAILABLE')
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
+```
+
+### 34.4. Фиксация результата и сохранность внедрённого состава
+
+Независимое извлечение обоих блоков из сохранённого отчёта в отдельный
+временный корень и повторный запуск воспроизвели тот же FAIL
+`test_file_write_during_read`: **19/20**, код 1. Ошибка не исправлена.
+Порог по условному разрешению не пройден, поэтому прототип/тест не включены
+в нормативный каталог и общий runner. Это не удаление проваленного теста
+ради PASS: полный тест и два фактических неуспешных прогона сохранены как
+блокирующая находка, ожидающая решения по модели источника.
+
+Существующий внедрённый состав отдельно проверен в разрешённой среде:
+**21/21**, `git diff --check` — без замечаний. Изменён только отчёт;
+registry, свидетельства и утверждённые версии не менялись. Новый полный
+валидатор, выпуск, экспорт и активация не созданы. Следующее действие —
+решение A/B по §34.2, затем исправление/испытания без ослабления тестов молча.
