@@ -5503,3 +5503,117 @@ approve_revision компонента и закреплён отдельно д�
 Итоговая проверка после регистрации и практики: **31/31 наборов PASS**,
 pip check без нарушений, git diff --check чистый. Все 57 normative pins целы;
 207 md / 86 README / 31 research / 31 test module, local evidence игнорируется Git.
+
+## 47. Private local trial staging неполного комплекта
+
+### 47.1. Внедрённый механизм и границы
+
+ENT-0015 r0001 — protocol, depends_on ENT-0014 r0001; normative
+`staging/ent-0015/r0001/{stage.py,verify.py,usage.md}`. По условному делегированию
+после проверок зарегистрирован approve_revision
+`7ed039c3-a5bb-4ed9-9bbc-5ca63e799d7a`: summary основания, не отдельная прямая цитата
+о конкретных bytes и не разрешение выпуска/export/activation. Индекс теперь:
+15 сущностей / 21 ревизия / 60 normative artifacts / 21 approve_revision.
+Реальные release/restrict/revoke/lift/correct/activate события не создавались.
+
+`stage_trial(candidate_bytes, expected_candidate, registry_blob, decisions,
+payloads)` принимает уже явно полученные bytes, не source/destination paths.
+Перед output проверяются candidate pin, ENT13 consistency/точный payload/closure,
+known validate/candidate scope и отдельно stage_trial/agent_system.trial scope.
+Staging — ограниченное подготовительное испытание ядра §6, не переименование
+export ради обхода blocked результата ENT14. Release/export/activation/transition
+остаются false, overall_admission=not_evaluated. Положительный release manager,
+G04/exporter, G05/G07 и consumer произвольного чужого trial не завершены.
+
+Вывод только в доверенный installed BASE/local/trials/new UUID. Object store:
+objects/sha256 + trial.json; logical paths — только metadata. Не воссоздаются
+source symlink/hardlink/permissions и исполняемая структура. Включены ровно
+34 selected payload artifacts, descriptor envelope, registry и весь переданный
+known ledger; частное дерево/связки/исторические невыбранные normative files
+не копируются. Совпадающие bytes дедуплицируются, разные bytes с одним digest
+отвергаются. Тексты ядра не дублируются как новые правила.
+
+### 47.2. Безопасность записи и сохранённые ограничения
+
+Linux x86-64, без Windows/junction/fallback. Доверенная установка отдельно от
+недоверенного source: pins 4 artifacts ENT14 и прежние transitive loaders,
+новых библиотек нет. Собственный approval не self-hash; writable противником
+installation/check→runpy TOCTOU по-прежнему не поддержана.
+
+local owned euid/non-group-or-other-writable; trials/private children owned euid,
+без group/other permissions. Несоответствующие старые права не исправляются.
+Directory fds/O_DIRECTORY/O_NOFOLLOW, одинаковый st_dev для дочерних directories;
+UUID mkdir и files O_EXCL, directories 700/files 600. Произвольные paths со входа
+не используются для записи. Existing runs/objects не перезаписываются/не продолжаются.
+Partial writes обрабатываются циклом; fsync/readback/hash/size/type/uid/mode/nlink,
+stable fingerprints, inventory и directory name↔fd bindings проверяются.
+
+Нужен private namespace без одновременного hostile same-uid/root изменения.
+Другой st_dev отвергается, но same-device bind mount не доказан отсутствующим:
+нет заявления openat2 NO_XDEV для destination. Readback не доказывает атомарность,
+отсутствие всех промежуточных подмен или неизменность после возврата. fsync не
+обещает полную crash/power-loss durability. Source authentication/полнота known
+ledger/истинность claims/поведение/целевая среда не проверены.
+
+При ошибке после mkdir — failed_partial, остаток сохранён для диагностики,
+без удаления/resume/автоотката. Manifest может существовать и при позднем отказе:
+нет completion marker и утверждения успеха по одному наличию файла. Успешный
+receipt/manifest pin сохраняется caller **снаружи** run, не нарушая его inventory.
+Safe consumer/материализатор, защита от replay старых ограничений и публикация
+потребуют отдельной реализации/проверок, а не снятия текущих false gates.
+
+Object store выбран вместо зеркала untrusted paths: проще destination path logic,
+есть dedup, состав явный. Цена — повторный readback/hashing и будущий consumer;
+дерево не готово к прямому исполнению. Произвольный destination/публикация отложены.
+Это обоснование эффективности ограниченного механизма, не benchmark альтернатив.
+Само изменение ENT15 подчиняется тому же immutable учёту/согласованию/проверкам.
+
+### 47.3. Тесты и фактическая локальная сборка
+
+До регистрации **32/32 собственных теста и 32/32 наборов репозитория PASS**.
+Реальные temporary filesystem/fds, не подмена file type/stat: exact bytes/manifest/
+private modes; fresh UUID/inodes; corrupt/missing/extra inputs и Python bytes без
+исполнения; known trial-only revoke; symlink local/trials/objects/отдельного object;
+FIFO; hardlink; чужие существующие object/run без overwrite; unsafe permissions
+без chmod; partial/zero writes, write/fsync/manifest failures, extra inventory,
+equal-length corruption с восстановленным mtime, directory rebind и fd count
+после повторных ошибок. Временный fixture cleanup — не автооткат рабочего trial.
+После регистрации deployment 43/43 PASS.
+
+Практика из доверенного checkout: 60 normative files + 21 known decisions + registry
+(82 объявленных inputs). Ожидания caller_supplied_not_authenticated. ENT5 read_set
+под одним root fd — 21.900 ms; отдельный ENT9 validate/agent_system.staging для
+ENT15 — passed_known_inputs, **15 closure / 45 checked artifacts**, 415.318 ms.
+Это контроль учёта компонентов, не общий допуск. Caller передал в stage ровно
+прежние selected 34 payload bytes с captured registry/decisions/candidate.
+
+Впервые этим механизмом **фактически создана локальная копия**:
+`agent_system/local/trials/97a55952-eaf3-406e-b43f-b1e082bfce7a/`.
+Результат staged_trial_only, 57 objects / 570835 stored bytes + manifest 10955 bytes,
+931.609 ms. Дополнительное наблюдение caller подтвердило hash/size всех refs
+в собственном новом доверенном namespace; это не safe foreign-store collector.
+Измерения единичные, не сравнительный benchmark. Сам stage source не читает,
+не потребляет ENT9 report и ничего не публикует; связь с планом ручная,
+automatic_binding=false. Release/export/activation false, новая среда/связка не затронуты.
+
+Manifest SHA-256:
+`72b3142fa041abc079a3c4efd53f5ba4bab5dc62af8c9df3c4b7582282d8ea90`.
+Registry: 50541 bytes, SHA-256
+`c2c3aed360a6bd99e7cd51a9386c31dd62217aa9e311f0a9233dd1859b9343db`.
+Plan: 15621 bytes, SHA-256
+`88fdec3604c54fc9a3f7875271087c71f8fe8dbcfd830f86a976fcce31a5ef2d`.
+Отдельные receipt/plan/acquisition/validation/documents/journal:
+`agent_system/local/trial-evidence/97a55952-eaf3-406e-b43f-b1e082bfce7a/`.
+Внутрь законченного run evidence не добавлялся; обе local области игнорируются Git.
+20 прежних revision records совпадают, 77 прежних artifact+approval файлов
+побайтно совпадают с HEAD 8c47498; selected candidate не переписан.
+
+Следующий bounded этап — безопасное независимое чтение/проверка trial по внешнему
+manifest pin, без исполнения содержимого и без source. Архивная согласованность
+и актуальные известные ограничения при дальнейшем применении должны различаться;
+сам локальный снимок не даёт разрешения переноса/публикации/активации.
+
+Итог после практической записи и оформления: **32/32 наборов PASS**, pip check
+без нарушений, git diff --check чистый; все 60 normative pins целы. Публичные
+счётчики: 208 md / 86 README / 31 research / 32 test modules. Обе local области
+исключены из Git; прежняя история сохранена, публикация/активация не выполнялись.

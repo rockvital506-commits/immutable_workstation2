@@ -1,0 +1,33 @@
+{
+  "schema_version": "1",
+  "decision_id": "7ed039c3-a5bb-4ed9-9bbc-5ca63e799d7a",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0015",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "staging/ent-0015/r0001/stage.py",
+      "sha256": "2cf729cc03e65a4b28e5dbf1afac99de305c75b3422a08181b48c43392f3b9a0",
+      "size_bytes": 9215
+    },
+    {
+      "path": "staging/ent-0015/r0001/verify.py",
+      "sha256": "46c3101cc2b6dd57b879e5e7aa1f9441943b74619ab6875f34bc5cc6d7a20a71",
+      "size_bytes": 13661
+    },
+    {
+      "path": "staging/ent-0015/r0001/usage.md",
+      "sha256": "6e0bb1c173921c269d11da522e1ef290b6995e27cfc6857e16b849445151c14a",
+      "size_bytes": 14234
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-07",
+  "statement_form": "summary",
+  "statement": "Условное внедрение private local trial staging для неполного кандидата по ранее данному делегированию после проверок. Это summary основания, не новая прямая цитата о конкретных bytes и не разрешение выпуска, экспорта в новую среду или активации.",
+  "basis": "До регистрации 32/32 собственных теста и 32/32 наборов репозитория PASS. Подтверждены exact preflight/known stage scope, запись только fixed local/trials/new UUID, object-store без восстановления source paths/links, exclusive files/dirs, private modes, readback/hash/inventory/binding, сохранение failed_partial без overwrite/resume/автоотката. Реальные symlink/FIFO/hardlink, ошибки writes/fsync, metadata/content changes и fd leaks проверены на Linux x86-64. Не обещаются hostile same-uid namespace, атомарность/crash durability, source authentication/global completeness или safe consumer/publisher. Новых библиотек нет; переиспользуются прежние loaders и binding. Эффективность обоснована сокращением destination path logic/dedup, не benchmark скорости. Все release/export/activation gates false."
+}
