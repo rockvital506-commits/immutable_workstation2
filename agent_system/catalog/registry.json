@@ -928,6 +928,60 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Базовая методология исследования, решения, действия и проверки",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.work",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "protocols/ent-0011/r0001/work.md",
+              "sha256": "06923c52d5e7311556e8276cea473af71284f985476f970dced83d085a70cbb4",
+              "size_bytes": 22549,
+              "role": "normative"
+            },
+            {
+              "path": "protocols/ent-0011/r0001/scenarios.json",
+              "sha256": "441d2505e822cdbf37d534a17b4b89c32a54853ff4442d9e019104c0b3ea5f50",
+              "size_bytes": 12480,
+              "role": "normative"
+            },
+            {
+              "path": "protocols/ent-0011/r0001/verify.py",
+              "sha256": "3984ddb43a4ac7b45694608b891ac17e331bfc3fb8a624bc716bbd0ded834348",
+              "size_bytes": 6777,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0001",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/7a93ff6d-61f7-4b0f-9cda-21ca8b27db35.json",
+              "sha256": "19d939116e7b1e5f9a826580eecacf905a957469f3b173f68892ed3e0cf818ec"
+            }
+          },
+          "provenance": {
+            "summary": "Новая обобщённая разработка по заданию владельца, контракту обязательного ядра и условному делегированию. Самоприменима; не копирует частную архитектуру или скрытые платформенные инструкции. Проверка текста/моделей не равна доказательству поведения агента."
+          }
+        }
+      ]
     }
   ]
 }

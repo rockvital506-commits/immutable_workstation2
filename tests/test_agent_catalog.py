@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010'})
-        self.assertEqual(len(self.registry['entities']), 10)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011'})
+        self.assertEqual(len(self.registry['entities']), 11)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -525,6 +525,32 @@ class BundleVerifierDeploymentTests(unittest.TestCase):
         installed = runpy.run_path(str(BASE / 'validation/ent-0010/r0001/bundle.py'))['ENTRY_PINS']
         self.assertEqual(installed, expected)
         self.assertEqual(len(installed), 3)
+
+
+class WorkProtocolDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'kind': 'protocol', 'artifacts': [{'path': 'protocols/ent-0011/r0001/work.md', 'sha256': '06923c52d5e7311556e8276cea473af71284f985476f970dced83d085a70cbb4', 'size_bytes': 22549, 'role': 'normative'}, {'path': 'protocols/ent-0011/r0001/scenarios.json', 'sha256': '441d2505e822cdbf37d534a17b4b89c32a54853ff4442d9e019104c0b3ea5f50', 'size_bytes': 12480, 'role': 'normative'}, {'path': 'protocols/ent-0011/r0001/verify.py', 'sha256': '3984ddb43a4ac7b45694608b891ac17e331bfc3fb8a624bc716bbd0ded834348', 'size_bytes': 6777, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0001', 'revision': 'r0001'}}]}
+
+    def test_exact_work_protocol_composition(self):
+        registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0011')
+        self.assertEqual(len(entity['revisions']), 1)
+        rev = entity['revisions'][0]
+        for key, value in self.EXPECTED.items():
+            self.assertEqual(rev[key], value)
+        for artifact in rev['artifacts']:
+            artifact_bytes(artifact)
+        decision = json.loads(artifact_bytes(rev['approval']['reference']))
+        self.assertEqual(decision['subject'], dict(catalog_id=CATALOG_ID, entity_id='ENT-0011', revision='r0001'))
+        self.assertEqual(decision['statement_form'], 'summary')
+        self.assertEqual(decision['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                               for a in rev['artifacts']])
+
+    def test_scenarios_do_not_claim_behavior_or_authority(self):
+        data = json.loads((BASE / 'protocols/ent-0011/r0001/scenarios.json').read_bytes())
+        self.assertEqual(data['verification_level'], 'model_review')
+        self.assertIs(data['agent_behavior_verified'], False)
+        self.assertEqual(data['overall_admission'], 'not_evaluated')
+        self.assertIs(data['transition_allowed'], False)
 
 
 if __name__ == '__main__':
