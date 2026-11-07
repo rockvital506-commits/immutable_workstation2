@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "decision_id": "d94537df-15ff-4db8-aed9-8fdb270ca13c",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0013",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "candidates/ent-0013/r0001/candidate.json",
+      "sha256": "3a9231b668cc63b1d4a60d032dfe49fb61223a3b2c81b3fd79a42a1ee1b7f428",
+      "size_bytes": 69062
+    },
+    {
+      "path": "candidates/ent-0013/r0001/check.py",
+      "sha256": "f185875d034bc61697d926c45eedbb4764d281ccb96a8dca8cc7488dea42a660",
+      "size_bytes": 12871
+    },
+    {
+      "path": "candidates/ent-0013/r0001/verify.py",
+      "sha256": "0292c5c700714d7db0cbf27b2e76a56d9d0f1e69e3f19d3488527313dda8a86e",
+      "size_bytes": 8484
+    },
+    {
+      "path": "candidates/ent-0013/r0001/usage.md",
+      "sha256": "080abfa5143db3920ed9eec80380e21e31ac43f99fb8236dc678fd4c009cafca",
+      "size_bytes": 15101
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-07",
+  "statement": "Условное внедрение точного неполного candidate descriptor и ограниченной проверки traceability по ранее данному делегированию владельца после проверок. Summary основания, не отдельная прямая цитата одобрения конкретных байтов. Не утверждает полноту ядра, выпуск, экспорт или активацию.",
+  "statement_form": "summary",
+  "basis": "До регистрации 32/32 собственных теста и 30/30 наборов репозитория PASS. Зафиксированы 12 выбранных revision records/34 артефакта, 16 capability и 9 condition rows с определениями checks и gaps. Проверены связывание/closure/наличие locators и постоянно закрытые gates; claim truth, поведение, целевая среда и общий допуск не проверены. Повторно использованы доверенный loader ENT9 и binding ENT6, без новых библиотек. Snapshot records избегает self-hash cycle, но не второй индекс и не release-формат; индекс/ledger фиксируются заново на run. Результативность подтверждена в пределах metadata consistency, не относительно всего жизненного цикла; преимущества архитектуры не выданы за benchmark."
+}

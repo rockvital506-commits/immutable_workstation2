@@ -1051,6 +1051,74 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0013",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Точный неполный кандидат и версионированная таблица покрытия ядра",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.candidate",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "candidates/ent-0013/r0001/candidate.json",
+              "sha256": "3a9231b668cc63b1d4a60d032dfe49fb61223a3b2c81b3fd79a42a1ee1b7f428",
+              "size_bytes": 69062,
+              "role": "normative"
+            },
+            {
+              "path": "candidates/ent-0013/r0001/check.py",
+              "sha256": "f185875d034bc61697d926c45eedbb4764d281ccb96a8dca8cc7488dea42a660",
+              "size_bytes": 12871,
+              "role": "normative"
+            },
+            {
+              "path": "candidates/ent-0013/r0001/verify.py",
+              "sha256": "0292c5c700714d7db0cbf27b2e76a56d9d0f1e69e3f19d3488527313dda8a86e",
+              "size_bytes": 8484,
+              "role": "normative"
+            },
+            {
+              "path": "candidates/ent-0013/r0001/usage.md",
+              "sha256": "080abfa5143db3920ed9eec80380e21e31ac43f99fb8236dc678fd4c009cafca",
+              "size_bytes": 15101,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0012",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0010",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/d94537df-15ff-4db8-aed9-8fdb270ca13c.json",
+              "sha256": "58554da84d09e724d4181c56975850a437ec8b64e8939a2a43d0b0933253cc1f"
+            }
+          },
+          "provenance": {
+            "summary": "Универсальная разработка по заданию владельца B и условному делегированию после проверок. Производный immutable snapshot выбранных записей, не второй индекс или дубль ядра. Частная архитектура/built-in инструкции не перенесены; descriptor снаружи payload и без release/export/activation admission."
+          }
+        }
+      ]
     }
   ]
 }

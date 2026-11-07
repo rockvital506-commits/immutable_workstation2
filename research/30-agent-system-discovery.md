@@ -5294,3 +5294,108 @@ automatic_binding=false. Это положительный пример, не с
 Далее — точный неполный candidate и versioned таблица покрытия ядра с уровнями
 проверок/пробелами и blocked переходами; затем недостающие реализации/согласования.
 Не объявлять совместимый выпуск готовым по наличию ещё одного протокола.
+
+## 45. Точный неполный кандидат и версионированное покрытие ядра
+
+### 45.1. Внедрённый ограниченный результат
+
+По условному делегированию владельца после проверок зарегистрирован ENT-0013
+r0001 (`protocol`, depends_on ENT-0012 r0001 + ENT-0010 r0001).
+Четыре нормативных артефакта: `candidates/ent-0013/r0001/{candidate.json,
+check.py,verify.py,usage.md}` относительно `agent_system`.
+Approve_revision: `d94537df-15ff-4db8-aed9-8fdb270ca13c`, summary, не выдуманная
+новая цитата владельца. Индекс теперь: 13 сущностей / 19 ревизий /
+53 нормативных артефакта / 19 approve_revision. Реальных restrict/revoke/lift/
+correct/release/activate событий не добавлено (негативные события только fixtures).
+
+Candidate `c1b40248-848e-44c3-877b-0c943c245a49` фиксирует payload корней
+ENT-0012 r0001 + ENT-0010 r0001: **12 ревизий / 34 артефакта**.
+Выбор: 1r1,2r3,3r2,4r2,5r3,6r3,7r1,8r1,9r1,10r1,11r1,12r1.
+Полные selected records (subject/состав/relations/approval/provenance) — производный
+immutable snapshot для сравнения с единым индексом, не второй изменяемый индекс.
+Тексты правил не скопированы. Нельзя подставить latest или потерять корень.
+
+Descriptor ENT-0013 учитывается **снаружи собственного payload**. Hash всего
+registry не включён внутрь candidate, иначе его регистрация создала бы
+self-hash cycle. Полный registry/известный ledger закрепляются отдельно на каждый
+run прежним планом. Это пока не формат совместимого выпуска/envelope с допуском.
+Изменение состава/claims требует новой версии; старые версии не отозваны автоматически.
+
+### 45.2. Таблица и checker: что именно проверяется
+
+`candidate.json`: 16 G01–G07/W01–W09 rows для групп пункта 1 требований ядра и
+9 отдельных C02–C10 rows для пунктов 2–10. Каждая — exact subject/path/heading,
+check locator с уровнем/defined_only и непустой gap. Исходный core ENT-0001 r0001
+закреплён точным hash; labels/локальные IDs не переписывают ядро.
+G05/G07 specified_only; остальные G partial; W model_only; C partial.
+Ни complete, ни per-capability PASS нет.
+
+`check_candidate(candidate_bytes, expected_candidate, registry_blob, decisions,
+payloads)` принимает только явно переданные bytes/внешний pin, переиспользует
+доверенный ENT9 loader и ENT6 pure checker. Проверяет frozen records,
+точный состав payload/closure, binding approve_revision, известные scoped-блоки
+(validate/agent_system.candidate), row sets, ссылки/закрытые gates. Test locator
+означает наличие AST-definition, scenario locator — case_id модельного разбора,
+не исполнение. Даже заявленная семантическая связь/достаточность check для
+конкретной способности не доказана — coverage_claim_truth остаётся not_checked.
+
+Положительный статус `consistent_incomplete_candidate`, coverage=incomplete,
+overall_admission=not_evaluated. Release/export/activation/transition flags всегда
+false; неизвестный профиль/полнота/утверждённый PASS не превращаются в допуск.
+Нет source IO/writes/выполнения кода inputs и новых библиотек. Проверки installation
+имеют прежнее предположение о доверенном не изменяемом противником namespace.
+Source authentication/global ledger completeness/поведение/среда/полномочия
+остаются непроверенными. Caller отдельно связывает plan/ожидания и результаты;
+автоматический сквозной workflow не появился.
+
+Выбор snapshot records устраняет цикл/неявный latest и повторно использует
+проверенные механизмы. Цена: объём metadata и ручная содержательная оценка,
+сопровождение refs; stale ledger/ложные claims не устраняются hash-проверкой.
+Это архитектурное обоснование эффективности ограниченного решения, не benchmark
+и не доказательство полноты всех оптимизаций. Новый release-формат пока отложен.
+
+### 45.3. Проверки и практический пример
+
+До регистрации **32/32** собственных теста и **30/30** наборов репозитория PASS.
+Негативные случаи: missing/duplicate rows/conditions, wrong core item, complete/
+permission/PASS claims, потерянные gaps, неизвестные sections/tests/scenarios,
+внешние refs, изменение frozen metadata/revision, потеря/дубликат корня,
+порча/лишний payload, self-inclusion, известный scoped revoke и changed entry pins.
+Отдельный позитивный тест демонстрирует предел: изменение непроверенного
+описательного claim не делает его истинным, хотя consistency может сохраниться.
+После регистрации deployment 39/39 и собственные 32/32 PASS.
+
+Практический readonly прогон из доверенного checkout (ожидания caller_supplied,
+не authenticated): 53 нормативных файла + 19 известных решений + registry,
+73 payload files / 757109 bytes. ENT5 one-root-fd acquisition: 18.106 ms;
+отдельный ENT9 execute: passed_known_inputs, **13 closure / 38 checked artifacts**
+(включает descriptor и его четыре артефакта), 352.979 ms. Из явно captured bytes
+candidate checker получил ровно выбранные **12/34**, результат
+consistent_incomplete_candidate, 363.232 ms. ENT10 archived semantic replay:
+consistent_recorded_bundle, 369.540 ms. Это единичные наблюдения, не сравнение
+скорости альтернатив и не доказательство факта/истинности чужого исполнения.
+Новый checker и execute/replay не потребляют результаты друг друга как workflow;
+связь на общий план записал caller, automatic_binding=false.
+
+Candidate: 69062 bytes, SHA-256
+`3a9231b668cc63b1d4a60d032dfe49fb61223a3b2c81b3fd79a42a1ee1b7f428`.
+Registry: 45682 bytes, SHA-256
+`cdec3eed0b1748081f08f0efe823c15df8192b422db199cfc940987b183e2f08`.
+Plan: 13995 bytes, SHA-256
+`b338558f3cd811b13cb6698f3188b9c2de69894988523d8b320a185f432eb770`.
+Локальные plan/acquisition/validation/candidate-result/replay/journal/documents/
+архив captured bytes: `agent_system/local/candidate/4ce015b7-4746-4591-bcfa-8a8ca3b29b61/`,
+игнорируется Git, не является подготовленным/разрешённым экспортным пакетом.
+Исторический аудит: 18 прежних revision records совпадают, все 67 прежних
+artifact+approval ссылочных файлов побайтно совпадают с HEAD предыдущего этапа.
+Индекс изменён только добавлением новой сущности; экспорт/активация не выполнены.
+
+Следующий существенный пробел — отдельная модель разрешения конкретного выпуска/
+экспорта и блокирующие проверки её связи с точным составом/неполным покрытием.
+Наличие этого candidate не позволяет перескочить к публикации, реальной адаптации
+или активации. G04/G05/G07 и проверка поведения остаются незавершёнными.
+
+Итог после регистрации и оформления: **30/30 наборов PASS**, pip check без
+нарушений, git diff --check чистый; все 53 normative artifact pins сохранены.
+Публичные счётчики: 206 md / 86 README / 31 research / 30 test modules;
+454 относительные ссылки по публичному дереву, битых нет. Local evidence исключено.

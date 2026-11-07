@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012'})
-        self.assertEqual(len(self.registry['entities']), 12)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013'})
+        self.assertEqual(len(self.registry['entities']), 13)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -585,6 +585,32 @@ class GovernanceProtocolDeploymentTests(unittest.TestCase):
         self.assertEqual(module['PINS'], expected)
         self.assertEqual(set(module['COMPONENT']), {a['path'] for a in self.EXPECTED['artifacts']})
         self.assertEqual(len(module['PINS']), 8)
+
+
+class CandidateProtocolDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'kind': 'protocol', 'artifacts': [{'path': 'candidates/ent-0013/r0001/candidate.json', 'sha256': '3a9231b668cc63b1d4a60d032dfe49fb61223a3b2c81b3fd79a42a1ee1b7f428', 'size_bytes': 69062, 'role': 'normative'}, {'path': 'candidates/ent-0013/r0001/check.py', 'sha256': 'f185875d034bc61697d926c45eedbb4764d281ccb96a8dca8cc7488dea42a660', 'size_bytes': 12871, 'role': 'normative'}, {'path': 'candidates/ent-0013/r0001/verify.py', 'sha256': '0292c5c700714d7db0cbf27b2e76a56d9d0f1e69e3f19d3488527313dda8a86e', 'size_bytes': 8484, 'role': 'normative'}, {'path': 'candidates/ent-0013/r0001/usage.md', 'sha256': '080abfa5143db3920ed9eec80380e21e31ac43f99fb8236dc678fd4c009cafca', 'size_bytes': 15101, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0012', 'revision': 'r0001'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0010', 'revision': 'r0001'}}]}
+
+    def test_exact_candidate_protocol_composition(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        entity=next(e for e in registry['entities'] if e['entity_id']=='ENT-0013')
+        self.assertEqual(len(entity['revisions']),1)
+        revision=entity['revisions'][0]
+        for key,value in self.EXPECTED.items():
+            self.assertEqual(revision[key],value)
+        for artifact in revision['artifacts']:
+            artifact_bytes(artifact)
+        decision=json.loads(artifact_bytes(revision['approval']['reference']))
+        self.assertEqual(decision['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0013',revision='r0001'))
+        self.assertEqual(decision['artifacts'],[{k:a[k] for k in ('path','sha256','size_bytes')} for a in revision['artifacts']])
+        self.assertEqual(decision['statement_form'],'summary')
+
+    def test_descriptor_is_external_to_frozen_payload(self):
+        data=json.loads((BASE/'candidates/ent-0013/r0001/candidate.json').read_bytes())
+        self.assertIs(data['descriptor_in_payload'],False)
+        self.assertNotIn('ENT-0013',{c['subject']['entity_id'] for c in data['components']})
+        self.assertEqual(data['readiness'],'incomplete_candidate')
+        self.assertEqual(len(data['coverage']),16)
+        self.assertEqual(len(data['conditions']),9)
 
 
 if __name__ == '__main__':
