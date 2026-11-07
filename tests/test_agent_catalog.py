@@ -377,7 +377,7 @@ class GraphCheckDeploymentTests(unittest.TestCase):
     def test_exact_composition_dependency_and_summary(self):
         registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
         entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0006')
-        self.assertEqual([r['revision'] for r in entity['revisions']], ['r0001', 'r0002'])
+        self.assertEqual([r['revision'] for r in entity['revisions']], ['r0001', 'r0002', 'r0003'])
         revision = entity['revisions'][0]
         for key, value in self.EXPECTED.items():
             self.assertEqual(revision[key], value)
@@ -422,6 +422,29 @@ class EventProtocolDeploymentTests(unittest.TestCase):
         self.assertEqual(schema['$id'], 'urn:agent-system:schema:decision-events:1')
         self.assertEqual(set(schema['$defs']), {'restrict_use', 'revoke_use', 'lift_restriction', 'correct_record'})
         self.assertTrue((BASE / 'specification/ent-0003/r0002/catalog-base.schema.json').exists())
+
+
+class SourceAcquisitionDeploymentTests(unittest.TestCase):
+    EXPECTED = {'ENT-0005': {'revision': 'r0003', 'kind': 'adapter', 'artifacts': [{'path': 'adapters/ent-0005/r0003/reader.py', 'sha256': '0ddfb68d81eaf9e3ba56ca20b909462958b8e9de938d230a02d3a14e8b76fc7f', 'size_bytes': 15565, 'role': 'normative'}, {'path': 'adapters/ent-0005/r0003/verify.py', 'sha256': '3a8faf2098e99433223678f2dee92e94af3b511ccc946998024e98c943e55336', 'size_bytes': 22384, 'role': 'normative'}, {'path': 'adapters/ent-0005/r0003/usage.md', 'sha256': '489b9247257472d69ec0266a031edcac09d38e00c117de627a3a38d837262f14', 'size_bytes': 12063, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0002', 'revision': 'r0003'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0003', 'revision': 'r0002'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0005', 'revision': 'r0002'}}]}, 'ENT-0006': {'revision': 'r0003', 'kind': 'check', 'artifacts': [{'path': 'validation/ent-0006/r0003/check.py', 'sha256': 'd94e2c85c2bd40ff31b5d7edd2f0c9755cf5eb3ce6ab42488aeaff4feb8c275c', 'size_bytes': 12042, 'role': 'normative'}, {'path': 'validation/ent-0006/r0003/verify.py', 'sha256': '9a76cb7cb7d6bb5c5aefdba003cf9c57979ae2f3f9d626dd6e2aeb54ee674e51', 'size_bytes': 18332, 'role': 'normative'}, {'path': 'validation/ent-0006/r0003/usage.md', 'sha256': '89b80b152f5651bdf6ba1880b24f7175a0e7e2c9fa9915e2b306993204d9bff3', 'size_bytes': 13351, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0004', 'revision': 'r0002'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0005', 'revision': 'r0003'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0007', 'revision': 'r0001'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0006', 'revision': 'r0002'}}]}}
+
+    def test_exact_source_acquisition_composition(self):
+        registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
+        for entity_id, expected in self.EXPECTED.items():
+            entity = next(e for e in registry['entities'] if e['entity_id'] == entity_id)
+            revision = next(r for r in entity['revisions'] if r['revision'] == 'r0003')
+            for key, value in expected.items():
+                self.assertEqual(revision[key], value)
+            for artifact in revision['artifacts']:
+                artifact_bytes(artifact)
+            decision = json.loads(artifact_bytes(revision['approval']['reference']))
+            self.assertEqual(decision['subject'], dict(catalog_id=CATALOG_ID, entity_id=entity_id, revision='r0003'))
+            self.assertEqual(decision['statement_form'], 'summary')
+            self.assertEqual(decision['artifacts'], [{k: a[k] for k in ('path', 'sha256', 'size_bytes')}
+                                                   for a in revision['artifacts']])
+
+    def test_unchanged_semantic_algorithm(self):
+        directory = BASE / 'validation/ent-0006'
+        self.assertEqual((directory / 'r0002/check.py').read_bytes(), (directory / 'r0003/check.py').read_bytes())
 
 
 if __name__ == '__main__':

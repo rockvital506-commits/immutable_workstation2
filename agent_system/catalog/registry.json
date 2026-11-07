@@ -410,6 +410,71 @@
           "provenance": {
             "summary": "Новая точная ревизия по явному выбору владельцем изменяемого дерева (B) и условному разрешению внедрения после проверок. Исторические зависимости сохранены; время в имена не добавлено."
           }
+        },
+        {
+          "revision": "r0003",
+          "title": "Чтение объявленного набора под одним корнем и наблюдение ledger",
+          "kind": "adapter",
+          "scopes": [
+            "agent_system.validation",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "adapters/ent-0005/r0003/reader.py",
+              "sha256": "0ddfb68d81eaf9e3ba56ca20b909462958b8e9de938d230a02d3a14e8b76fc7f",
+              "size_bytes": 15565,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0005/r0003/verify.py",
+              "sha256": "3a8faf2098e99433223678f2dee92e94af3b511ccc946998024e98c943e55336",
+              "size_bytes": 22384,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0005/r0003/usage.md",
+              "sha256": "489b9247257472d69ec0266a031edcac09d38e00c117de627a3a38d837262f14",
+              "size_bytes": 12063,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0002",
+                "revision": "r0003"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0003",
+                "revision": "r0002"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0005",
+                "revision": "r0002"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/d75be70c-69be-4f47-984a-78fe9967d31f.json",
+              "sha256": "c5d3c8d0e9d680b07a4c50f1b704f3cfee49d2bc28687212f4e61565b11ee606"
+            }
+          },
+          "provenance": {
+            "summary": "Развитие модели B по условному делегированию владельца после проверок. Закреплённый набор с заранее доверенными ожиданиями; без общего допуска, глобальной полноты, выпуска и активации."
+          }
         }
       ]
     },
@@ -545,6 +610,79 @@
           },
           "provenance": {
             "summary": "Реализация принятой модели неизменяемых решений с точными ссылками, совместными ограничениями и явными пределами неполного слоя. Точный состав внедрён агентом по условному разрешению после проверок; реальные события над существующими сущностями не создавались."
+          }
+        },
+        {
+          "revision": "r0003",
+          "title": "Состав, граф и события с закреплённым получением входов",
+          "kind": "check",
+          "scopes": [
+            "agent_system.governance.decisions",
+            "agent_system.validation"
+          ],
+          "artifacts": [
+            {
+              "path": "validation/ent-0006/r0003/check.py",
+              "sha256": "d94e2c85c2bd40ff31b5d7edd2f0c9755cf5eb3ce6ab42488aeaff4feb8c275c",
+              "size_bytes": 12042,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0006/r0003/verify.py",
+              "sha256": "9a76cb7cb7d6bb5c5aefdba003cf9c57979ae2f3f9d626dd6e2aeb54ee674e51",
+              "size_bytes": 18332,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0006/r0003/usage.md",
+              "sha256": "89b80b152f5651bdf6ba1880b24f7175a0e7e2c9fa9915e2b306993204d9bff3",
+              "size_bytes": 13351,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0004",
+                "revision": "r0002"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0005",
+                "revision": "r0003"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0007",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0006",
+                "revision": "r0002"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/6254f54c-e5cc-439b-a5a1-4189eea12993.json",
+              "sha256": "493920b59046495246a29b6e3d5ef193e6780d3d90ec353368dc8003f67f05f1"
+            }
+          },
+          "provenance": {
+            "summary": "Развитие модели B по условному делегированию владельца после проверок. Закреплённый набор с заранее доверенными ожиданиями; без общего допуска, глобальной полноты, выпуска и активации."
           }
         }
       ]
