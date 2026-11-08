@@ -130,7 +130,7 @@ class EvidenceStore:
         return _verify_open(self.fds,self.run_id,expected,self.stage,self.reader)
 
 
-def _verify_open(fds,run_id,expected,stage,reader):
+def _verify_open(fds,run_id,expected,stage,reader,*,with_capture=False):
     _pin(expected)
     base,local,runs,run,store=fds
     for parent,fd,private in [(base,local,False),(local,runs,True),(runs,run,True),(run,store,True)]:
@@ -153,14 +153,17 @@ def _verify_open(fds,run_id,expected,stage,reader):
     if sum(r['size_bytes'] for r in rows)+len(raw)>TOTAL:raise EvidenceBlocked('EVIDENCE_BUDGET')
     names=[r['sha256'] for r in rows]
     if sorted(os.listdir(run))!=['index.json','objects'] or sorted(os.listdir(store))!=names:raise EvidenceBlocked('EVIDENCE_INVENTORY')
-    for row in rows:reader['_read'](store,row['sha256'],row,stage)
+    objects={}
+    for row in rows:
+        captured=reader['_read'](store,row['sha256'],row,stage)
+        if with_capture:objects[row['sha256']]=captured
     reader['_read'](run,'index.json',expected,stage)
     if sorted(os.listdir(run))!=['index.json','objects'] or sorted(os.listdir(store))!=names:raise EvidenceBlocked('EVIDENCE_INVENTORY')
     for parent,name,fd in [(base,'local',local),(local,'operator-runs',runs),(runs,run_id,run),(run,'objects',store)]:stage['_bound'](parent,name,fd)
-    return index
+    return (index,objects) if with_capture else index
 
 
-def verify_evidence(run_id,expected_index):
+def _read_evidence(run_id,expected_index,*,with_capture=False):
     """Read-only structural CAS verification; NOT journal/child semantic replay."""
     fds=[];stage=None
     try:
@@ -169,7 +172,9 @@ def verify_evidence(run_id,expected_index):
         base=os.open(BASE,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_CLOEXEC);fds.append(base)
         for name,private in [('local',False),('operator-runs',True),(run_id,True),('objects',True)]:
             fds.append(stage['_directory'](fds[-1],name,private,False))
-        index=_verify_open(fds,run_id,dict(expected_index),stage,reader)
+        verified=_verify_open(fds,run_id,dict(expected_index),stage,reader,with_capture=with_capture)
+        if with_capture:return verified
+        index=verified
         return dict(status='consistent_private_evidence',run_id=run_id,index=dict(expected_index),
                     objects_count=len(index['objects']),overall_admission='not_evaluated',transition_allowed=False,
                     not_checked=['execution_authentication','journal_semantics','child_semantic_replay','current_permissions','freshness','global_completeness'])
@@ -181,3 +186,8 @@ def verify_evidence(run_id,expected_index):
         raise EvidenceBlocked('EVIDENCE_INVALID') from None
     finally:
         for fd in reversed(fds):os.close(fd)
+
+
+def verify_evidence(run_id,expected_index):
+    """Public structural-only checker; no raw maps, execution or journal proof."""
+    return _read_evidence(run_id,expected_index)

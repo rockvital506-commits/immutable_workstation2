@@ -150,3 +150,11 @@ source/candidate/trial handoff и child journal. Без зарегистриро
 ENT18 public entry останавливается до claim/source; synthetic approval есть
 только в disposable tests. Semantic replay/procedure+prompt/human report и I4
 пока не выполнены; registry/approvals не менялись.
+
+
+I3c: добавлены semantic replay successful journals, versioned procedure/prompt и
+closed human renderer. Structural verify_evidence не расширен молча до semantic
+PASS: новый replay API отдельный, failed journal остаётся partial/no full replay.
+Live ledger/source/trial не требуются replay; authenticity/freshness/permissions
+не доказаны. Кандидат ENT18 ещё не зарегистрирован. Далее I4/matrix/относящаяся
+практика и оценка conditional exact registration, не automatic activation.

@@ -9,7 +9,7 @@ import uuid
 
 BASE=Path(__file__).resolve().parents[3]
 HERE=Path(__file__).resolve().parent
-OWN={'session.py','session.schema.json','evidence.py','verify.py','usage.md','run.py','runner_verify.py'}
+OWN={'session.py','session.schema.json','evidence.py','verify.py','usage.md','run.py','runner_verify.py','replay.py','replay_verify.py','procedure.md','prompt.md'}
 DEPENDENCIES={('ENT-0009','r0002'),('ENT-0016','r0002'),('ENT-0013','r0001'),('ENT-0015','r0001'),('ENT-0017','r0001')}
 STEPS=['source_a','candidate','stage','reader','handoff','source_b','comparison']
 FLAGS=['transition_allowed','release_allowed','export_allowed','activation_allowed']
@@ -169,6 +169,11 @@ def _handoff(t,receipt,packet,candidate,source,payloads):
     if (result['payload_count']!=len(payloads) or result['decision_count']!=len(source['decisions'])
             or result['objects_count']!=len(objects) or receipt['objects_count']!=len(objects)
             or result['captured_bytes']!=sum(map(len,objects.values()))):raise OperatorBlocked('READER_COUNTS')
+    counts=[result['payload_count'],result['decision_count'],result['objects_count'],result['captured_bytes'],receipt['objects_count'],receipt['stored_bytes']]
+    if (any(type(c) is not int for c in counts) or receipt['stored_bytes']!=sum(map(len,objects.values()))
+            or _canonical(result['candidate'])!=_canonical(ref(candidate)) or _canonical(result['registry'])!=_canonical(ref(source['registry']))
+            or result['layer']!='archived_private_trial' or receipt['layer']!='private_trial_staging'):
+        raise OperatorBlocked('READER_METADATA_BINDING')
     return dict(manifest_bytes=cap['manifest_bytes'],objects=dict(cap['objects']))
 
 
@@ -191,7 +196,7 @@ def run_operator_trial(source_a_root,session_bytes,expected_session,documents,*,
         if 't' not in locals() or not isinstance(error,t['s']['SessionBlocked']):raise
         raise OperatorBlocked(error.code) from None
     session=prepared['session'];store=t['e']['EvidenceStore']()
-    result=dict(profile='operator-trial-linux-r0001',status='failed',task_id=session['task_id'],
+    result=dict(profile='operator-trial-linux-r0001',operator_run_id=store.run_id,status='failed',task_id=session['task_id'],
                 purpose='local_core_trial',overall_admission='not_evaluated',current_permissions='not_evaluated',
                 **{flag:False for flag in FLAGS},steps={step:dict(status='not_run') for step in STEPS},
                 query='not_requested' if source_b_root is None else 'not_run',
@@ -225,12 +230,17 @@ def run_operator_trial(source_a_root,session_bytes,expected_session,documents,*,
             bundle['inputs']=[dict(path=p,**store.put(b)) for p,b in sorted(inputs.items())]
         record(step,bundle,report['status'])
         result['steps'][step]['child_run_id']=report['run_id']
+        if step=='source_b' and result['steps']['source_a'].get('child_run_id')==report['run_id']:
+            raise OperatorBlocked('SOURCE_RUN_ID_REUSED')
         _passed(report,'passed_known_inputs')
         result['validated_captures']+=1
         return cap
     try:
         with store:
             session_ref=store.put(session_bytes)
+            protocol_refs={name:store.put(_installed('operator/ent-0018/r0001/'+name+'.md')) for name in ['procedure','prompt']}
+            profile_ref=put(dict(kind='operator_profile_snapshot',profile=profile,
+                records=[dict(subject=dict(catalog_id=profile['catalog_id'],entity_id=k[0],revision=k[1]),record=v) for k,v in sorted(records.items())],**protocol_refs))
             for raw in prepared['documents'].values():store.put(raw)
             try:
                 active='source_a';a=source(active,0,source_a_root)
@@ -275,7 +285,8 @@ def run_operator_trial(source_a_root,session_bytes,expected_session,documents,*,
                 state='unsupported' if isinstance(error,t['n']['PlanBlocked']) and error.unsupported else 'failed'
                 result.update(status=state,diagnostics=[dict(code='CHILD_INPUT_INVALID')])
                 if active:result['steps'][active]=dict(status=state,code='CHILD_INPUT_INVALID')
-            journal=dict(kind='operator_run_journal',session=session_ref,run_id=store.run_id,
+            human_ref=store.put(format_operator_result(result).encode('utf-8'))
+            journal=dict(kind='operator_run_journal',session=session_ref,profile=profile_ref,human_report=human_ref,run_id=store.run_id,
                          terminal_claim=copy.deepcopy(result),seal_confirmation='external_receipt_required')
             journal_ref=put(journal)
             receipt=store.seal(dict(kind='operator_run_index',journal=journal_ref))
@@ -285,3 +296,41 @@ def run_operator_trial(source_a_root,session_bytes,expected_session,documents,*,
         result.update(status='evidence_write_failed',evidence_sealed=False,diagnostics=[dict(code=error.code)],
                       partial_evidence_ref='local/operator-runs/'+store.run_id)
     return result
+
+
+def format_operator_result(value):
+    """Render only closed labels/IDs/counters; never copy child free text or paths."""
+    terminal={'trial_checked_no_query','trial_checked_with_known_query_no_admission',
+              'failed','unsupported','blocked_known_scope','failed_partial','evidence_write_failed'}
+    states={'not_run','passed','passed_known_inputs','consistent_incomplete_candidate',
+            'staged_trial_only','consistent_archived_trial','compared_known_views_no_admission',
+            'failed','unsupported','blocked_known_scope','failed_partial'}
+    if (type(value) is not dict or value.get('status') not in terminal or value.get('purpose')!='local_core_trial'
+            or value.get('profile')!='operator-trial-linux-r0001' or value.get('not_checked')!=NOT_CHECKED
+            or value.get('current_permissions')!='not_evaluated' or value.get('overall_admission')!='not_evaluated'
+            or any(value.get(f) is not False for f in FLAGS) or set(value.get('steps',{}))!=set(STEPS)):
+        raise OperatorBlocked('HUMAN_REPORT_INPUT')
+    for key in ['task_id','operator_run_id']:
+        try:
+            if type(value.get(key)) is not str or str(uuid.UUID(value[key]))!=value[key]:raise OperatorBlocked('HUMAN_REPORT_INPUT')
+        except ValueError:raise OperatorBlocked('HUMAN_REPORT_INPUT') from None
+    counts=[]
+    for key in ['capture_invocations','completed_source_reports','validated_captures','source_acquisition_calls']:
+        number=value.get(key)
+        if not ((type(number) is int and 0<=number<=2) or (key=='source_acquisition_calls' and number is None)):
+            raise OperatorBlocked('HUMAN_REPORT_INPUT')
+        counts.append(key+': '+('unknown' if number is None else str(number)))
+    rows=[]
+    for step in STEPS:
+        status=value['steps'][step].get('status')
+        if status not in states:raise OperatorBlocked('HUMAN_REPORT_INPUT')
+        rows.append(step+': '+status)
+    next_step=('Следующий шаг: отдельно проверить receipt/semantic replay; это не выпуск.'
+               if value['status'].startswith('trial_checked_') else
+               'Следующий шаг: остановка, сохранить partial и проверить private refs; исправление только новым run.')
+    return ('Operator trial: local_core_trial\nTask: '+value['task_id']+'\nСтатус: '+value['status']+
+            '\nEvidence: local/operator-runs/'+value['operator_run_id']+'\n'+
+            '\n'.join(counts+rows)+'\nПричину отказа уточнять по private step refs; свободный текст не печатается.\n'+
+            'Seal подтверждается отдельно успешным receipt и external index pin.\n'+
+            'Общий допуск/current permissions: not_evaluated. Release/export/activation/transition: false.\n'+
+            'Не проверены: '+', '.join(NOT_CHECKED)+'.\n'+next_step+'\n')

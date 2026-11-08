@@ -1,6 +1,6 @@
 # M1: проект сквозного операторского trial и byte-handoff
 
-> §§1–10 сохраняют проектный срез до реализации. Результат I1 — §11, результат I2 — §12; I3a — §13; текущий I3b — §14.
+> §§1–10 сохраняют проектный срез до реализации. Результат I1 — §11, результат I2 — §12; I3a — §13; I3b — §14; текущий I3c — §15.
 
 ## 1. Статус, основание и результат этого этапа
 
@@ -448,3 +448,24 @@ packet даёт acquisition_calls=None, не ложную точность. Unkn
 success: реальный gate пока закономерно закрыт. I3c — semantic journal replay,
 procedure/versioned prompt и human report; затем I4/относящаяся практика и только
 после проверки exact состава — условная регистрация. I3/R2/M1 целиком не закрыты.
+
+
+## 15. I3c — replay/procedure/prompt/human candidate
+
+Добавлены pinned offline journal replay, versioned procedure/prompt и безопасный
+renderer. Journal включает profile snapshot/protocol refs/session/human binding;
+source bundles перепроверяются ENT10, candidate — ENT13, handoff/derived query —
+ENT17 и точными links/counts. Full success replay без source/trial/live ledger;
+failed journals остаются partial, а coherent copy не даёт execution authenticity.
+Public structural CAS checker и новый semantic API различаются. Source/read/helper
+коды из evidence не исполняются. Детали/границы — usage и исследование30 §56.
+
+17 replay methods дополняют35foundation/26runner. Кандидат содержит11ownfiles,
+prospective source closure20revisions/68artifacts; эти числа не описывают реальный
+approved registry (по-прежнему17entities/25revisions). Никакой ENT18 approval или
+новый compatible payload этим checkpoint не создан. Public gate остаётся закрыт.
+
+Следующий I4: T01–T30 traceability/негативные и ресурсные проверки/ограниченная
+практика/коррекция и оценка готовности conditional registration. Полного T30
+реального зарегистрированного entry ещё нет. M1/R2, R3–R8 и release/export/
+activation не закрыты реализацией replay. Старые97 normative/approval refs сохранены.

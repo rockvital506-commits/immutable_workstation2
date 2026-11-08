@@ -4,7 +4,7 @@
 пока рабочий кандидат. Регистрация exact состава/approve_revision намеренно не
 выполняется до реализации runner и относящихся проверок. Никаких grants.
 
-> Актуальный runner status — раздел I3b в конце. Foundation-разделы ниже
+> Актуальный статус — раздел I3c в конце. Foundation-разделы ниже
 > сохраняют срез I3a и не отменяют его последующие уточнения.
 
 ## Реализованные границы
@@ -144,3 +144,61 @@ I3 целиком не закрыт: нет semantic journal replay, versioned p
 consistency; наличие runner этого обещания не расширяет. ENT18 не зарегистрирована,
 новые approvals/releases/активация не созданы. Следующий шаг — semantic replay и
 operator procedure/prompt с относящимися проверками, не обход registration gate.
+
+## I3c update — offline semantic replay, procedure/prompt и human report
+
+Актуальный срез — I3c. Добавлены replay.py/replay_verify.py,
+[procedure r0001](procedure.md), [prompt r0001](prompt.md) и format_operator_result.
+OWN draft composition теперь11files; expected source closure20revisions/68artifacts
+существует пока **только в prospective fixtures**, не в реальном approved registry.
+Foundation/I3b разделы выше — исторические срезы, не текущий список отсутствующего.
+
+Journal теперь связывает pinned protected-profile snapshot (records/refs), raw
+session, procedure/prompt refs и воспроизводимый UTF-8 human report. Human renderer
+выводит только closed labels/canonical UUID/counts/step states, relative operator
+ref, false gates, not_checked и статический следующий шаг. Raw maps/root paths/
+свободные diagnostics/task/decision тексты не копируются. Это не secret detector;
+opaque IDs/публикация результатов всё равно требуют caller policy. Seal отделён
+от terminal claim: подтверждается только отдельным receipt/external index pin.
+
+Evidence internal readonly capture возвращает первые object bytes после полного
+CAS контроля и fd cleanup. Public verify_evidence **по-прежнему только structural**.
+Новый replay_operator_run(run_id,expected_index) отдельно проверяет:
+- exact journal/profile/session/criteria/procedure/prompt и human-report binding;
+- source bundles/plan/report/docs/maps, selected closure/records и ENT10 replay;
+- candidate result через ENT13, scoped tool checks для stage/read/query;
+- receipt/reader/manifest/candidate/registry/ledger/object-set/count handoff;
+- literal derived comparison plan и ENT17 result, реальные связанные child IDs;
+- terminal counters/status/false gates и отсутствие unreferenced CAS objects.
+
+Никакой code из архива не исполняется. Загружаются только fixed immutable trusted
+installed helpers/own files; source/trial/live index/ledger не читаются. Bootstrap
+регистрации для **нового запуска** не обходится. Historical replay сравнивает own
+archive code refs с protected immutable r1; после регистрации in-place edits
+недопустимы, для другого состава нужен новый versioned профиль. Пока draft может
+меняться, старый draft journal не обещается совместимым с новым replay code.
+
+Full replay поддержан только для successful no-B/B journals:
+consistent_recorded_operator_run_no_admission. Failed/blocked/unsupported sealed
+journals получают recorded_partial_run_no_full_replay, full_replay=false после
+structural/profile/session/report проверки. Они не объявляются семантически
+доказанными ошибками/успехами; missing failed capture не восстанавливается.
+Не sealed/evidence_write_failed run не имеет пригодного replay receipt.
+
+Согласованная фабрикация/копия архива может пройти проверки: authentication,
+истинность наблюдений/факт внешнего исполнения, freshness/current permissions/
+полнота/поведение/совместимость не доказаны. Replay не публикует и не активирует.
+Все release/export/activation/transition gates false, даже при полном consistency.
+
+17 replay test methods (15 первоначально +2human/protocol cases), prospective temp
+fixtures only; это не17 новых owner-approved сценариев. Проверены no-B/B, no
+source/trial/live-ledger/writes, coherent rehash/reseal attacks на counters/IDs/
+steps/candidate/reader/query/profile/protocol/human и extra CAS object, failed
+journal partial status, wrong external pin и coherent copied archive NOT authentication.
+При review также усилен runner handoff: reader candidate/registry/layer, native
+counts и stored_bytes receipt связываются явно; два source child IDs не переиспользуются.
+
+I3 implementation candidate подготовлен, **не зарегистрирован**. Следующий этап
+I4: полная traceability T01–T30/относящиеся проверки и bounded lab, затем оценка
+выполнения условий exact registration. Нельзя автоматически считать 35+26+17
+методов полной matrix, переносом/совместимым выпуском/активацией или выполненным T30.

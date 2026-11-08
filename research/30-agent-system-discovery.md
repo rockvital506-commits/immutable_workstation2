@@ -6334,3 +6334,96 @@ selfhash и повторён repository check. Реальный registry пре�
 `7d433bbc7e8a1c069beabfbebe2c2d7a47b6cfe59a52b2b6732a7dffc26e80f3`;
 17entities/25revisions/72norm artifacts/25approvals, все97 refs unchanged.
 I3b runner checkpoint не является registration/закрытием I3/M1.
+
+## 56. I3c — semantic journal replay и versioned operator procedure
+
+Добавлены [procedure](../agent_system/operator/ent-0018/r0001/procedure.md) и
+[prompt](../agent_system/operator/ent-0018/r0001/prompt.md) r0001, replay.py/
+replay_verify.py, closed human renderer; расширен unregistered candidate ENT18.
+Точный current draft — usage/I3c. Registry/approvals не менялись, public gate не
+обходился. Новых сторонних dependencies или platform hidden instructions нет.
+
+### 56.1. Из CAS к связанным recorded claims
+
+Runner сохраняет protected profile snapshot/records, procedure+prompt refs и
+raw protocol documents, session/plans и reproducible human report. Evidence
+internal capture возвращает первые object bytes после readonly CAS guards и
+закрытия FDs; public verify_evidence остаётся structural-only. Новый отдельный
+replay_operator_run проверяет journal/profile/records/selected closure/protocol/
+session и human binding, source bundle plan/report/doc/maps через ENT10,
+candidate result через ENT13, tool scope, stage/read/manifest/payload/ledger/objects
+handoff и derived literal comparison/ENT17 result. Terminal counters/status/gates,
+child IDs и отсутствие unreferenced evidence objects проверяются отдельно.
+
+Хэши не подменяют semantics: в fault fixtures неверные claims coherently
+rehash/reseal'ятся и проходят structural CAS, но отвергаются semantic replay.
+На review усилены handoff проверки runner: native counts, receipt stored_bytes,
+reader candidate/registry/layer; source child run ID reuse останавливает run.
+Это усиление draft, не изменение старых нормативных r1/r2 или ослабление проверки.
+
+Replay не открывает source/trial/live registry/ledger и не выполняет input code.
+Он требует protected immutable installed profile/helpers, external index pin и
+совпадение archived own refs с installed own revision. Пока draft не заморожен,
+совместимость старых draft journals с изменённым in-place draft не обещается.
+После регистрации такие изменения запрещены, нужна новая immutable revision.
+
+Full replay — successful no-B/B journals, status
+consistent_recorded_operator_run_no_admission. Failed/blocked/unsupported sealed
+journal — recorded_partial_run_no_full_replay, full_replay=false после base
+structural/profile/session/report проверки. Их полная child failure semantics
+не доказана, missing raw failed capture не восстанавливается. Evidence-write-failed/
+interrupted run без successful receipt не становится replayable success.
+
+Coherent copied/fabricated archive может пройти проверки, что явно протестировано.
+Execution/source/caller authentication, truth of observations, freshness/current
+permissions/global completeness/поведение/новая среда не доказываются. Replay
+не опрашивает live ledger, не обновляет ожидания, не export/activate; все gatesfalse.
+
+### 56.2. Procedure, prompt и безопасный человеческий итог
+
+Versioned user-controlled procedure описывает trusted install/conditional
+registration, external source/session pins, exact profile/B pairing, один entry,
+STOP/failure/partial, отдельный receipt и отдельные CAS/semantic replay проверки.
+Prompt повторяет только разрешённую узкую задачу/stop/privacy boundaries; не
+служит hidden policy/новой активацией и не переносит частную архитектуру.
+
+format_operator_result выводит fixed purpose/task UUID, terminal и step states,
+actual counters (unknown остаётся unknown), relative operator ref, false gates,
+not_checked и статический следующий шаг. Свободные diagnostics/raw maps/absolute
+roots/task/decision texts не копируются. Текст воспроизводится при replay и
+связан hash ref в journal; seal подтверждается отдельно внешним receipt, не
+предварительной terminal claim. Secret detector не заявлен; opaque identifiers
+и публикация всё равно требуют caller policy.
+
+### 56.3. Проверки и граница завершения
+
+Первый replay run15/15 PASS; после composition/UUID/next-step review добавлены
+human/protocol binding cases,17/17 PASS без skips. В disposable prospective
+installation/source trees, synthetic ENT18 approval только там: no-B/B full replay,
+удалённые source/trial, запрет live index/ledger/write/mkdir/chmod/fsync, coherent
+copy НЕ authenticity, counter/step/childID/candidate/reader/profile/derived-query/
+protocol/human substitutions при валидном CAS, extra object, wrong pin,
+failed-journal partial result и safe renderer. Это17 methods, не вся T01–T30 matrix.
+
+Плюсы reuse: не повторяется семантика source/candidate/query, stored input bytes
+позволяют не перечитывать исходную mutable среду. Минусы: hash/JSON/memory/capture
+retention, повторная валидация/нагрузка и зависимость от protected immutable
+installation. Benchmark, global CPU/RAM quota/hostile same-uid/kernel защита не
+заявлены. Resource/namespace ограничения прежние; guard checks не сокращались.
+
+**I3 implementation candidate подготовлен; следующий I4 — full matrix/lab и
+оценка условной регистрации exact состава.** ENT18 не зарегистрирована; current
+real public gate закономерно COORDINATOR_NOT_REGISTERED. T30/native registered
+operator success, R2/M1 целиком, R3–R8 и release/export/activation не выполнены этим
+checkpoint. Prospective11-own-file/20-revision/68-artifact состав — fixture/draft,
+не новый утверждённый payload; ENT13r1 по-прежнему12/34.
+
+Свежий полный regression этого checkpoint — **39/39 PASS**: в том числе
+35foundation/26runner/17replay methods (не автоматически T01–T30 acceptance).
+Isolated pip check и git diff check — PASS. Public217Markdown/86README/33research,
+39test modules. После записи результата обновлён docs selfhash и повторён
+repository check. Реальный registry прежний59988bytes SHA
+`7d433bbc7e8a1c069beabfbebe2c2d7a47b6cfe59a52b2b6732a7dffc26e80f3`;
+17entities/25revisions/72norm artifacts/25approvals,97refs unchanged. Нативный
+registration gate остаётся COORDINATOR_NOT_REGISTERED до source/claim. Это не
+положительный native M1 run и не новая registration/release/activation.
