@@ -228,3 +228,6 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [40-agent-system-inactive-transfer-preparation.md](40-agent-system-inactive-transfer-preparation.md) — R5/I1: inactive exact composition/closure/prompt и historical gap basis для R6, не экспорт.
 
 [41-agent-system-inactive-binding-planner.md](41-agent-system-inactive-binding-planner.md) — declared environment/adapter resolution и private inactive lineage, не actual adaptation/activation.
+
+[42-agent-system-lossless-rule-adapter.md](42-agent-system-lossless-rule-adapter.md) — начатый lossless design; снят как основной курс уточнением владельца, implementation не зарегистрирована.
+[43-agent-system-rule-universality.md](43-agent-system-rule-universality.md) — действующее уточнение design: universality-driven preserve/generalize/exclude и semantic result verification.

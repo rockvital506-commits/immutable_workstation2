@@ -6602,3 +6602,18 @@ G05semantic adapter/observation interface и G07actual authority/actuator/result
 path ещё не квалифицированы. R6full compatible release/R4I2b actions/R5exporter
 и реальные R7/R8 не закрыты. Следом применимая observation/adapter verification
 qualification, не повышение historical coverage по новым файлам/названиям.
+
+## 66. Уточнение владельца: универсальность управляет передачей смысла
+
+[43](43-agent-system-rule-universality.md): high-universality meanings сохраняются
+строго со всеми условиями/исключениями/границами; менее universal — применимый
+обоснованный общий смысл; non-universal исключается из переносимых правил, source/
+history не удаляются. Unknown/mixed units не классифицируются молча. Анализ по
+смысловым единицам, не целым файлам/произвольному score. Semantic result verification
+в приоритете; перенос bytes лишь вспомогательная integrity проверка.
+
+[Начатый42](42-agent-system-lossless-rule-adapter.md) снят как основной курс.
+Прерванная unregistered implementation сохранена отдельно, outcome tests unknown,
+не PASS/не новая normative revision. Дальше unit-level trace preserve/generalize/
+exclude с проверкой полноты, отсутствия привнесённого, applicability и отсутствия
+private leakage; обязательный core/known constraints не ослабляются классификацией.
