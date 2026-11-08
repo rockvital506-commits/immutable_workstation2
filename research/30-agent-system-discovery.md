@@ -6634,3 +6634,24 @@ U01 сохраняется unknown, action flagsfalse; registry/approvals/immuta
 checks нового harness), исправлено; повторный полный47/47PASS. Все142refs SHA/
 size и registry bytes прежние. Это lab trace/oracle, не semantic equivalence;
 U01/полная closure/behavior checks открыты, никаких permissions не добавлено.
+
+
+## 68. Продолжение: связанное разложение U01
+
+Владелец подтвердил44 и продолжение. [45](45-agent-system-linked-meaning-decomposition.md)
+фиксирует критерии до code и новый proposal разбора всего ENT2r3§4:17связанных
+групп,14preserve/3generalize. Source spans покрывают всю исходную U01 без gaps/
+перестановок; смысловые исключения/условия связаны явно. Original44/hold и ENT2r3
+не переписаны, частные инструкции не выдумываются для «квоты исключений».
+
+39declared semantic scenarios различают traversal/alias/local-absolute/transfer/
+identity-change/observation-limit cases. Это finite model, не actual host/agent
+proof. Exact dependency boundary ENT2r3→ENT1r1 с registry/source/approval pins;
+соседние пункты ENT2 и полная semantic closure остаются gaps. Generalizations
+не отменяют выбранный source contract и не создают новое нормативное ядро.
+
+Итог45:20own methods/39scenario cases PASS, full48/48modules PASS. Первые19errors
+выявили несвязный meaning graph; исправлена P03↔P04 link без ослабления проверок.
+Все142refs и прежние registry/agent_system bytes сохранены. Структурный разбор U01
+предложен полностью, но self-review не independent semantic proof и не full closure;
+дальше остальные ENT2/methodology/governance units. Actions/approvals не добавлены.

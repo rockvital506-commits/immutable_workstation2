@@ -1,0 +1,892 @@
+{
+  "version": 1,
+  "status": "research_not_normative",
+  "predecessor": {
+    "path": "research/44-agent-system-universality-trace.json",
+    "sha256": "9ddbd974dc1cb691289d28ae2d48bc5a0bb4e4f9a8acda0807dcf4ee8e33dc82",
+    "unit": "U01"
+  },
+  "source": {
+    "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+    "sha256": "bfdea24314d9f5b26cd54ddaa41fe9aea9843c0f669417c040c1c80991188a1a",
+    "start_offset": 1471,
+    "end_offset": 5180,
+    "start_line": 27,
+    "end_line": 74,
+    "quote": "4. Пути артефактов и свидетельств в индексных записях относительны логическому\n   корню agent_system и однозначны. Абсолютные индексные пути, обратные слеши,\n   пустые сегменты, сегменты точки и двойной точки запрещены. До обхода явно\n   выбранный корень разрешается в физический каталог; он задаёт границу чтения,\n   даже если выбранный путь корня сам является символической ссылкой.\n   Символические ссылки на файлы и каталоги поддерживаются с первой реализации,\n   включая ссылки в промежуточных сегментах и цепочки ссылок. Каждый переход\n   разрешается явно; промежуточные и конечные цели должны оставаться внутри\n   физического корня. Выход наружу блокируется до чтения целевых данных, даже\n   если последующая ссылка могла бы вернуть разрешение внутрь. Относительная\n   цель ссылки разрешается от содержащего её каталога, а не от корня проверки.\n   Сегменты точки и двойной точки в тексте цели допустимы только при сохранении\n   этой границы: запрет индексного пути не подменяет семантику цели ссылки.\n   Циклы ссылок и обхода каталогов, оборванные ссылки, недоступные цели,\n   неподдержанные типы перенаправления и превышение объявленных пределов обхода\n   блокируют затронутый переход. Повторный доступ к общей цели по разным\n   разрешённым путям сам по себе не является циклом; логические пути сохраняются.\n   Для проверяемых файлов фиксируются логический путь, пройденные ссылки с их\n   типами и точным текстом целей, конечная цель относительно физического корня,\n   размер и SHA-256 реальных байтов. Хэш файла не заменяет проверку самой ссылки.\n   Метаданные ссылок учитываются точным составом и решением о нём; ранее\n   утверждённый состав без них не расширяется молча. Формат такого учёта\n   предъявляется отдельно со схемами, без изменения старых свидетельств.\n   Абсолютная цель внутри физического корня допускается при локальной проверке,\n   но не объявляется переносимой: перенос не копирует частные абсолютные пути\n   и не переписывает их без согласованного изменения. Ссылки не разыменовываются\n   в обычные файлы автоматически. Проверка целевой среды отдельно устанавливает\n   возможность сохранить нужные типы ссылок и права их создания; невозможность\n   не обходится молчаливой подменой. Junction и иные reparse points различаются\n   по типу: поддержка symlink не означает поддержку любого перенаправления.\n   Конфликты путей в заявленной целевой среде блокируют затронутый переход.\n   Чтение допускается из изменяемого рабочего дерева. Для каждого проверяемого\n   артефакта до чтения задаются ожидаемые путь, SHA-256, размер и полный набор\n   метаданных ссылок из выбранного точного состава. Отсутствие такого ожидания\n   не даёт результата проверки целостности; наблюдение новых данных не считается\n   их одобрением. Прочитанные байты и фактическая цепочка должны соответствовать\n   ожиданию. Обнаруженная подмена пути, ссылки, inode или наблюдаемых метаданных\n   блокирует затронутое применение, даже если содержимое совпало.\n   Результат подтверждает соответствие проверенных артефактов ожиданию в пределах\n   фактических наблюдений. Он не гарантирует отсутствие всех изменений между\n   наблюдениями, одновременность всех прочитанных файлов, атомарный снимок дерева\n   или полноту истории решений на единый момент времени. Совпавшие mtime/ctime\n   не доказывают неизменность. Для полного снимка требуется отдельное явно\n   обеспеченное основание; успешный проход изменяемого дерева им не является.\n   Безопасная граница чтения обязательна независимо от этой оговорки. Если среда\n   не позволяет её обеспечить, проверка объявляется невыполнимой, а не безопасной\n   по одному предварительному resolve. Целостность проверяется без исправления\n   кодировки, переводов строк или пробелов."
+  },
+  "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+  "review": "agent_self_review_not_independent",
+  "selection": "ENT2r3_requirement4_only",
+  "original_contract_retained": true,
+  "units": [
+    {
+      "id": "P01",
+      "title": "Логический индексный путь",
+      "start": 0,
+      "end": 220,
+      "source_quote": "4. Пути артефактов и свидетельств в индексных записях относительны логическому\n   корню agent_system и однозначны. Абсолютные индексные пути, обратные слеши,\n   пустые сегменты, сегменты точки и двойной точки запрещены. ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "limited",
+      "route": "generalize",
+      "rationale": "Конкретный синтаксис/терминология не универсальны; общий смысл сохраняется при обязательном соблюдении выбранного source protocol.",
+      "meaning": [
+        "Индексные пути однозначны относительно логического корня.",
+        "Точный синтаксис определяется выбранным форматом каталога, не универсальной ОС."
+      ],
+      "linked_units": [
+        "P04"
+      ],
+      "output": "Индексные ссылки на артефакты и свидетельства должны однозначно соотноситься с логическим корнем каталога. Применяется точный согласованный формат выбранного каталога; общий принцип не устанавливает синтаксис путей для любой ОС и не отменяет ограничения этого формата."
+    },
+    {
+      "id": "P02",
+      "title": "Физическая граница и root-symlink",
+      "start": 220,
+      "end": 388,
+      "source_quote": "До обхода явно\n   выбранный корень разрешается в физический каталог; он задаёт границу чтения,\n   даже если выбранный путь корня сам является символической ссылкой.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Выбранный физический каталог задаёт границу чтения, даже при root-symlink."
+      ],
+      "linked_units": [
+        "P04"
+      ],
+      "output": "До обхода явно\n   выбранный корень разрешается в физический каталог; он задаёт границу чтения,\n   даже если выбранный путь корня сам является символической ссылкой.\n   "
+    },
+    {
+      "id": "P03",
+      "title": "Поддержка ссылок",
+      "start": 388,
+      "end": 527,
+      "source_quote": "Символические ссылки на файлы и каталоги поддерживаются с первой реализации,\n   включая ссылки в промежуточных сегментах и цепочки ссылок. ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Поддержка file/directory/intermediate/chained symlinks обязательна для этого контракта."
+      ],
+      "linked_units": [
+        "P09",
+        "P04"
+      ],
+      "output": "Символические ссылки на файлы и каталоги поддерживаются с первой реализации,\n   включая ссылки в промежуточных сегментах и цепочки ссылок. "
+    },
+    {
+      "id": "P04",
+      "title": "Каждый переход и target semantics",
+      "start": 527,
+      "end": 1011,
+      "source_quote": "Каждый переход\n   разрешается явно; промежуточные и конечные цели должны оставаться внутри\n   физического корня. Выход наружу блокируется до чтения целевых данных, даже\n   если последующая ссылка могла бы вернуть разрешение внутрь. Относительная\n   цель ссылки разрешается от содержащего её каталога, а не от корня проверки.\n   Сегменты точки и двойной точки в тексте цели допустимы только при сохранении\n   этой границы: запрет индексного пути не подменяет семантику цели ссылки.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Каждый hop остаётся внутри границы.",
+        "Escape с возвратом блокируется до чтения.",
+        "Relative target разрешается от содержащего каталога.",
+        "Dot segments в target допустимы внутри границы, не путать с индексным путём."
+      ],
+      "linked_units": [
+        "P01",
+        "P02",
+        "P03",
+        "P05",
+        "P06",
+        "P16"
+      ],
+      "output": "Каждый переход\n   разрешается явно; промежуточные и конечные цели должны оставаться внутри\n   физического корня. Выход наружу блокируется до чтения целевых данных, даже\n   если последующая ссылка могла бы вернуть разрешение внутрь. Относительная\n   цель ссылки разрешается от содержащего её каталога, а не от корня проверки.\n   Сегменты точки и двойной точки в тексте цели допустимы только при сохранении\n   этой границы: запрет индексного пути не подменяет семантику цели ссылки.\n   "
+    },
+    {
+      "id": "P05",
+      "title": "Блокировки и допустимый alias",
+      "start": 1011,
+      "end": 1319,
+      "source_quote": "Циклы ссылок и обхода каталогов, оборванные ссылки, недоступные цели,\n   неподдержанные типы перенаправления и превышение объявленных пределов обхода\n   блокируют затронутый переход. Повторный доступ к общей цели по разным\n   разрешённым путям сам по себе не является циклом; логические пути сохраняются.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Cycle/broken/unavailable/unsupported/limit блокируют затронутое.",
+        "Общая цель по разным разрешённым путям не обязательно cycle."
+      ],
+      "linked_units": [
+        "P04"
+      ],
+      "output": "Циклы ссылок и обхода каталогов, оборванные ссылки, недоступные цели,\n   неподдержанные типы перенаправления и превышение объявленных пределов обхода\n   блокируют затронутый переход. Повторный доступ к общей цели по разным\n   разрешённым путям сам по себе не является циклом; логические пути сохраняются.\n   "
+    },
+    {
+      "id": "P06",
+      "title": "Состав evidence, не только hash",
+      "start": 1319,
+      "end": 1559,
+      "source_quote": "Для проверяемых файлов фиксируются логический путь, пройденные ссылки с их\n   типами и точным текстом целей, конечная цель относительно физического корня,\n   размер и SHA-256 реальных байтов. Хэш файла не заменяет проверку самой ссылки.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Evidence фиксирует logical path, chain types/text, final target, size/hash.",
+        "Hash файла не заменяет проверку ссылки."
+      ],
+      "linked_units": [
+        "P04",
+        "P07",
+        "P17"
+      ],
+      "output": "Для проверяемых файлов фиксируются логический путь, пройденные ссылки с их\n   типами и точным текстом целей, конечная цель относительно физического корня,\n   размер и SHA-256 реальных байтов. Хэш файла не заменяет проверку самой ссылки.\n   "
+    },
+    {
+      "id": "P07",
+      "title": "Согласованный link metadata состав",
+      "start": 1559,
+      "end": 1778,
+      "source_quote": "Метаданные ссылок учитываются точным составом и решением о нём; ранее\n   утверждённый состав без них не расширяется молча. Формат такого учёта\n   предъявляется отдельно со схемами, без изменения старых свидетельств.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Link metadata включаются в точное согласование.",
+        "Старый approved состав не расширяется молча; отдельная схема без изменения старых evidence."
+      ],
+      "linked_units": [
+        "P06",
+        "P12"
+      ],
+      "output": "Метаданные ссылок учитываются точным составом и решением о нём; ранее\n   утверждённый состав без них не расширяется молча. Формат такого учёта\n   предъявляется отдельно со схемами, без изменения старых свидетельств.\n   "
+    },
+    {
+      "id": "P08",
+      "title": "Локальный absolute target и перенос",
+      "start": 1778,
+      "end": 2048,
+      "source_quote": "Абсолютная цель внутри физического корня допускается при локальной проверке,\n   но не объявляется переносимой: перенос не копирует частные абсолютные пути\n   и не переписывает их без согласованного изменения. Ссылки не разыменовываются\n   в обычные файлы автоматически. ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Внутренний absolute target допустим локально.",
+        "Private absolute paths не копируются и не переписываются без согласованного изменения.",
+        "Не разыменовывать ссылки автоматически в regular files."
+      ],
+      "linked_units": [
+        "P09",
+        "P10"
+      ],
+      "output": "Абсолютная цель внутри физического корня допускается при локальной проверке,\n   но не объявляется переносимой: перенос не копирует частные абсолютные пути\n   и не переписывает их без согласованного изменения. Ссылки не разыменовываются\n   в обычные файлы автоматически. "
+    },
+    {
+      "id": "P09",
+      "title": "Возможности целевой среды",
+      "start": 2048,
+      "end": 2210,
+      "source_quote": "Проверка целевой среды отдельно устанавливает\n   возможность сохранить нужные типы ссылок и права их создания; невозможность\n   не обходится молчаливой подменой. ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Target capabilities и права создания нужных типов проверяются отдельно.",
+        "Невозможность не обходится молчаливой подменой."
+      ],
+      "linked_units": [
+        "P03",
+        "P08",
+        "P10",
+        "P11"
+      ],
+      "output": "Проверка целевой среды отдельно устанавливает\n   возможность сохранить нужные типы ссылок и права их создания; невозможность\n   не обходится молчаливой подменой. "
+    },
+    {
+      "id": "P10",
+      "title": "Различение типов перенаправления",
+      "start": 2210,
+      "end": 2332,
+      "source_quote": "Junction и иные reparse points различаются\n   по типу: поддержка symlink не означает поддержку любого перенаправления.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "limited",
+      "route": "generalize",
+      "rationale": "Конкретный синтаксис/терминология не универсальны; общий смысл сохраняется при обязательном соблюдении выбранного source protocol.",
+      "meaning": [
+        "Типы перенаправления различаются; поддержка одного не означает поддержку всех."
+      ],
+      "linked_units": [
+        "P08",
+        "P09"
+      ],
+      "output": "Типы перенаправления различаются по их семантике. Поддержка одного типа не означает поддержку всех остальных."
+    },
+    {
+      "id": "P11",
+      "title": "Конфликты target paths",
+      "start": 2332,
+      "end": 2408,
+      "source_quote": "Конфликты путей в заявленной целевой среде блокируют затронутый переход.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Конфликт путей в target среде блокирует затронутое."
+      ],
+      "linked_units": [
+        "P09"
+      ],
+      "output": "Конфликты путей в заявленной целевой среде блокируют затронутый переход.\n   "
+    },
+    {
+      "id": "P12",
+      "title": "Ожидания до чтения и подмена identity",
+      "start": 2408,
+      "end": 2954,
+      "source_quote": "Чтение допускается из изменяемого рабочего дерева. Для каждого проверяемого\n   артефакта до чтения задаются ожидаемые путь, SHA-256, размер и полный набор\n   метаданных ссылок из выбранного точного состава. Отсутствие такого ожидания\n   не даёт результата проверки целостности; наблюдение новых данных не считается\n   их одобрением. Прочитанные байты и фактическая цепочка должны соответствовать\n   ожиданию. Обнаруженная подмена пути, ссылки, inode или наблюдаемых метаданных\n   блокирует затронутое применение, даже если содержимое совпало.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Mutable tree разрешено читать.",
+        "Expected path/hash/size/full link metadata задаются до чтения; без них нет integrity.",
+        "Наблюдение не одобрение.",
+        "Detected path/link/inode/metadata replacement блокирует даже при совпавших bytes."
+      ],
+      "linked_units": [
+        "P07",
+        "P13"
+      ],
+      "output": "Чтение допускается из изменяемого рабочего дерева. Для каждого проверяемого\n   артефакта до чтения задаются ожидаемые путь, SHA-256, размер и полный набор\n   метаданных ссылок из выбранного точного состава. Отсутствие такого ожидания\n   не даёт результата проверки целостности; наблюдение новых данных не считается\n   их одобрением. Прочитанные байты и фактическая цепочка должны соответствовать\n   ожиданию. Обнаруженная подмена пути, ссылки, inode или наблюдаемых метаданных\n   блокирует затронутое применение, даже если содержимое совпало.\n   "
+    },
+    {
+      "id": "P13",
+      "title": "Предел observed correspondence",
+      "start": 2954,
+      "end": 3249,
+      "source_quote": "Результат подтверждает соответствие проверенных артефактов ожиданию в пределах\n   фактических наблюдений. Он не гарантирует отсутствие всех изменений между\n   наблюдениями, одновременность всех прочитанных файлов, атомарный снимок дерева\n   или полноту истории решений на единый момент времени. ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Результат ограничен фактическими observations.",
+        "Нет гарантии всех межнаблюдательных изменений, simultaneous files, atomic snapshot или полной истории."
+      ],
+      "linked_units": [
+        "P12",
+        "P14",
+        "P15",
+        "P16"
+      ],
+      "output": "Результат подтверждает соответствие проверенных артефактов ожиданию в пределах\n   фактических наблюдений. Он не гарантирует отсутствие всех изменений между\n   наблюдениями, одновременность всех прочитанных файлов, атомарный снимок дерева\n   или полноту истории решений на единый момент времени. "
+    },
+    {
+      "id": "P14",
+      "title": "Наблюдаемые timestamps",
+      "start": 3249,
+      "end": 3302,
+      "source_quote": "Совпавшие mtime/ctime\n   не доказывают неизменность. ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "limited",
+      "route": "generalize",
+      "rationale": "Конкретный синтаксис/терминология не универсальны; общий смысл сохраняется при обязательном соблюдении выбранного source protocol.",
+      "meaning": [
+        "Совпавшие наблюдаемые метки изменения не доказывают неизменность."
+      ],
+      "linked_units": [
+        "P13"
+      ],
+      "output": "Совпадение наблюдаемых временных меток изменения файла не доказывает его неизменность."
+    },
+    {
+      "id": "P15",
+      "title": "Отдельное основание snapshot",
+      "start": 3302,
+      "end": 3427,
+      "source_quote": "Для полного снимка требуется отдельное явно\n   обеспеченное основание; успешный проход изменяемого дерева им не является.\n   ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Полный snapshot требует отдельного обеспеченного основания.",
+        "Mutable-tree success не является этим основанием."
+      ],
+      "linked_units": [
+        "P13"
+      ],
+      "output": "Для полного снимка требуется отдельное явно\n   обеспеченное основание; успешный проход изменяемого дерева им не является.\n   "
+    },
+    {
+      "id": "P16",
+      "title": "Безопасная граница без fallback",
+      "start": 3427,
+      "end": 3626,
+      "source_quote": "Безопасная граница чтения обязательна независимо от этой оговорки. Если среда\n   не позволяет её обеспечить, проверка объявляется невыполнимой, а не безопасной\n   по одному предварительному resolve. ",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Граница безопасности обязательна несмотря на ограниченные observations.",
+        "Невозможность обеспечить границу — невыполнимая проверка, не resolve-only success."
+      ],
+      "linked_units": [
+        "P13",
+        "P04"
+      ],
+      "output": "Безопасная граница чтения обязательна независимо от этой оговорки. Если среда\n   не позволяет её обеспечить, проверка объявляется невыполнимой, а не безопасной\n   по одному предварительному resolve. "
+    },
+    {
+      "id": "P17",
+      "title": "Точные исходные bytes",
+      "start": 3626,
+      "end": 3709,
+      "source_quote": "Целостность проверяется без исправления\n   кодировки, переводов строк или пробелов.",
+      "scope": "## Область применения\nКонтракт применяется к проверкам каталога при его изменении и подготовке\nпереноса, выпуска или подключения, включая изменения самой agent_system.\nОдиночный регрессионный тест не считается полной проверкой каталога.",
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Применимый переносимый safety/governance/evidence смысл в области чтения каталога agent_system; не частная реализация ОС.",
+      "meaning": [
+        "Нельзя исправлять encoding/newlines/spaces при проверке integrity."
+      ],
+      "linked_units": [
+        "P06"
+      ],
+      "output": "Целостность проверяется без исправления\n   кодировки, переводов строк или пробелов."
+    }
+  ],
+  "baseline": {
+    "index_kind": "canonical",
+    "root": "physical_directory",
+    "chain": "inside",
+    "target": "relative_plain",
+    "relative_base": "containing_directory",
+    "actual_cycle": false,
+    "shared_target": false,
+    "targets_available": true,
+    "redirect_type_supported": true,
+    "traversal_within_limits": true,
+    "path_conflict": false,
+    "expected_tuple": true,
+    "observations_match": true,
+    "identity_replaced": false,
+    "metadata_replaced": false,
+    "link_chain_replaced": false,
+    "safe_boundary": true,
+    "same_timestamps": false,
+    "intermediate_change_return": false,
+    "snapshot_basis_declared": false,
+    "link_type_preservable": true,
+    "link_creation_permitted": true,
+    "replace_with_regular": false,
+    "copy_private_absolute": false,
+    "bytes_normalized": false,
+    "link_metadata_approved": true,
+    "symlink_support": true
+  },
+  "scenarios": [
+    {
+      "name": "baseline",
+      "patch": {},
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "declared_gates_satisfied",
+      "meaning_units": [
+        "P01",
+        "P02",
+        "P03",
+        "P06",
+        "P07",
+        "P12",
+        "P17"
+      ]
+    },
+    {
+      "name": "index_absolute",
+      "patch": {
+        "index_kind": "absolute"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P01",
+        "P04"
+      ]
+    },
+    {
+      "name": "index_backslash",
+      "patch": {
+        "index_kind": "backslash"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P01",
+        "P04"
+      ]
+    },
+    {
+      "name": "index_empty_segment",
+      "patch": {
+        "index_kind": "empty_segment"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P01",
+        "P04"
+      ]
+    },
+    {
+      "name": "index_dot_segment",
+      "patch": {
+        "index_kind": "dot_segment"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P01",
+        "P04"
+      ]
+    },
+    {
+      "name": "index_parent_segment",
+      "patch": {
+        "index_kind": "parent_segment"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P01",
+        "P04"
+      ]
+    },
+    {
+      "name": "root_symlink_allowed",
+      "patch": {
+        "root": "root_symlink"
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "declared_gates_satisfied",
+      "meaning_units": [
+        "P02"
+      ]
+    },
+    {
+      "name": "root_unavailable",
+      "patch": {
+        "root": "unavailable"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P02"
+      ]
+    },
+    {
+      "name": "chain_outside",
+      "patch": {
+        "chain": "outside"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P04",
+        "P16"
+      ]
+    },
+    {
+      "name": "chain_escape_return",
+      "patch": {
+        "chain": "escape_return"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P04",
+        "P16"
+      ]
+    },
+    {
+      "name": "relative_dot_inside_allowed",
+      "patch": {
+        "target": "relative_dot"
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "declared_gates_satisfied",
+      "meaning_units": [
+        "P01",
+        "P04"
+      ]
+    },
+    {
+      "name": "relative_dot_escape_return_blocked",
+      "patch": {
+        "target": "relative_dot",
+        "chain": "escape_return"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P04"
+      ]
+    },
+    {
+      "name": "wrong_relative_resolution_base",
+      "patch": {
+        "relative_base": "incorrect_root"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P04"
+      ]
+    },
+    {
+      "name": "shared_target_not_cycle",
+      "patch": {
+        "shared_target": true
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "declared_gates_satisfied",
+      "meaning_units": [
+        "P05"
+      ]
+    },
+    {
+      "name": "shared_target_actual_cycle",
+      "patch": {
+        "shared_target": true,
+        "actual_cycle": true
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P05"
+      ]
+    },
+    {
+      "name": "missing_targets_available",
+      "patch": {
+        "targets_available": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P05"
+      ]
+    },
+    {
+      "name": "missing_redirect_type_supported",
+      "patch": {
+        "redirect_type_supported": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P10"
+      ]
+    },
+    {
+      "name": "missing_traversal_within_limits",
+      "patch": {
+        "traversal_within_limits": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P05"
+      ]
+    },
+    {
+      "name": "missing_expected_tuple",
+      "patch": {
+        "expected_tuple": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P12"
+      ]
+    },
+    {
+      "name": "missing_observations_match",
+      "patch": {
+        "observations_match": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P12"
+      ]
+    },
+    {
+      "name": "missing_safe_boundary",
+      "patch": {
+        "safe_boundary": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P16"
+      ]
+    },
+    {
+      "name": "missing_link_metadata_approved",
+      "patch": {
+        "link_metadata_approved": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P07"
+      ]
+    },
+    {
+      "name": "missing_symlink_support",
+      "patch": {
+        "symlink_support": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P03"
+      ]
+    },
+    {
+      "name": "detected_path_conflict",
+      "patch": {
+        "path_conflict": true
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P11"
+      ]
+    },
+    {
+      "name": "detected_identity_replaced",
+      "patch": {
+        "identity_replaced": true
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P12"
+      ]
+    },
+    {
+      "name": "detected_metadata_replaced",
+      "patch": {
+        "metadata_replaced": true
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P12"
+      ]
+    },
+    {
+      "name": "detected_link_chain_replaced",
+      "patch": {
+        "link_chain_replaced": true
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P12"
+      ]
+    },
+    {
+      "name": "detected_bytes_normalized",
+      "patch": {
+        "bytes_normalized": true
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P17"
+      ]
+    },
+    {
+      "name": "internal_absolute_local_allowed",
+      "patch": {
+        "target": "internal_absolute"
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "declared_gates_satisfied",
+      "meaning_units": [
+        "P08"
+      ]
+    },
+    {
+      "name": "internal_absolute_copy_blocked",
+      "patch": {
+        "target": "internal_absolute",
+        "copy_private_absolute": true
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P08"
+      ]
+    },
+    {
+      "name": "external_absolute_blocked",
+      "patch": {
+        "target": "external_absolute",
+        "chain": "outside"
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P04",
+        "P08"
+      ]
+    },
+    {
+      "name": "no_type_preservation",
+      "patch": {
+        "link_type_preservable": false
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P09"
+      ]
+    },
+    {
+      "name": "no_creation_rights",
+      "patch": {
+        "link_creation_permitted": false
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P09"
+      ]
+    },
+    {
+      "name": "silent_conversion_to_regular",
+      "patch": {
+        "replace_with_regular": true
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P08",
+        "P09"
+      ]
+    },
+    {
+      "name": "same_times_no_snapshot",
+      "patch": {
+        "same_timestamps": true
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "declared_gates_satisfied",
+      "meaning_units": [
+        "P13",
+        "P14",
+        "P15"
+      ]
+    },
+    {
+      "name": "change_return_not_guaranteed_detected",
+      "patch": {
+        "intermediate_change_return": true,
+        "same_timestamps": true
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "declared_gates_satisfied",
+      "meaning_units": [
+        "P13",
+        "P14"
+      ]
+    },
+    {
+      "name": "snapshot_claim_not_verified",
+      "patch": {
+        "snapshot_basis_declared": true
+      },
+      "expected_local": "declared_gates_satisfied",
+      "expected_transfer": "declared_gates_satisfied",
+      "meaning_units": [
+        "P15"
+      ]
+    },
+    {
+      "name": "evidence_limit_does_not_relax_boundary",
+      "patch": {
+        "intermediate_change_return": true,
+        "safe_boundary": false
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P13",
+        "P16"
+      ]
+    },
+    {
+      "name": "same_bytes_replaced_identity",
+      "patch": {
+        "observations_match": true,
+        "identity_replaced": true
+      },
+      "expected_local": "blocked",
+      "expected_transfer": "blocked",
+      "meaning_units": [
+        "P12"
+      ]
+    }
+  ],
+  "dependency_boundary": {
+    "registry": {
+      "path": "agent_system/catalog/registry.json",
+      "sha256": "fe8683b40e359d1074c166ef7cec0e18b770f8b4c3d4aa2673ab7d93bf148883"
+    },
+    "selected": {
+      "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+      "entity_id": "ENT-0002",
+      "revision": "r0003"
+    },
+    "required_targets": [
+      {
+        "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+        "entity_id": "ENT-0001",
+        "revision": "r0001"
+      }
+    ],
+    "core_coverage_units": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09",
+      "C10"
+    ],
+    "other_requirement_gaps": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "registry_binding": "frozen_declared_only_not_current_authority"
+  }
+}
