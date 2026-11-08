@@ -5735,3 +5735,121 @@ Stage receipt/reader result/plan/acquisition/validation/documents/journal отд
 pip check без нарушений, git diff --check чистый; все 63 normative pins целы.
 Публичные счётчики: 209 md / 86 README / 31 research / 33 test modules.
 Local trial/evidence игнорируются Git; публикация/активация не выполнялись.
+
+## 49. Архивный состав и новое явно закреплённое known view
+
+### 49.1. Внедрённый компонент и контракт
+
+ENT-0017 r0001 — protocol, depends_on ENT-0016 r0001. Три normative артефакта:
+`validation/ent-0017/r0001/{compare.py,verify.py,usage.md}`. Условная регистрация
+после проверок по делегированию владельца, approve_revision от 2026-11-08
+`51a51c5e-0e94-454b-93a6-13717af203c9` — summary основания, не новая прямая цитата
+о конкретных bytes/разрешение экспорта. Теперь 17 сущностей / 23 ревизии /
+66 normative artifacts / 23 approve_revision. Реальные restrict/revoke/lift/
+correct/release/activate события не созданы; отрицательные решения только fixtures.
+
+`compare_views(plan_bytes, expected_plan, manifest_bytes, objects,
+current_registry, current_decisions)` — pure byte API. План с внешним pin содержит
+UUID, exact archive manifest/new registry/полный объявленный new-known ledger и
+literal operation/area. Archive objects переданы digest→bytes; source/trial paths
+не принимаются/не открываются. Это отдельная семантическая проверка двух views,
+не новый physical collector: ENT16 и ENT5/9 acquisition вызываются отдельно;
+связь raw refs фиксирует caller. Код inputs не исполняется, archive не обновляется.
+
+После strict closed plan/ENT15 manifest/object/hash/size проверки прежний ENT13
+проверяет archive candidate. **Все** archived decisions (включая unreferenced
+negative) должны сохраниться по тем же paths/bytes в new view. Все archived
+revision records, включая невыбранную историю, сохраняются semantic-exact с
+различением numeric types; object key order/whitespace не меняют record.
+Whole registry bytes отдельно pinned, catalog ID тот же. Новые records/events
+можно добавлять, archive нельзя обрезать/переписывать для прохождения проверки.
+
+Тот же exact payload (12 selected revisions / 34 artifacts) проверяется на
+новом index/ledger. Два scope queries вычисляются по прежним ENT6/7 правилам.
+Новый lift может снять конкретный archived запрет, сохраняя его оригинал;
+снятие одного не снимает второй. Approval/date/order не заменяют lift. Известный
+validation/candidate block может остановить preflight раньше requested query,
+без попытки обойти этот запрет.
+
+Успех **compared_known_views_no_admission**, а не permission. Metadata показывает
+archive_query/declared_query, added_decisions и declared_extension. Все gates/
+performed=false, overall_admission/current_permissions=not_evaluated. При blocked
+new-declared requested scope — blocked_known_scope; unsupported/invalid не фильтруется.
+Слово current в API — заявление caller, не доказательство freshness: повторный
+старый view может пройти. Global completeness/source/plan authentication/physical
+acquisition/истинность claims/поведение/среда/positive grants остаются not_checked.
+
+### 49.2. Обоснование, пределы и проверки
+
+Загрузка pinned 3 artifacts ENT16 и прежнего transitive trusted стека; новых
+библиотек нет. Собственный approval не self-hash; сохраняются требования к
+недоступной противнику для concurrent записи установке/check-runpy TOCTOU.
+Pure implementation не читает live/source/trial, не пишет данные и не объявляет
+готовым exporter/activation manager. Лимиты: отдельный документ/object до 16 MiB,
+archive objects до 10001 / 80 MiB; new registry+ledger+тот же payload до 64 MiB/
+10000 entries; manifest/plan отдельно. Это не общий CPU/RAM quota.
+
+Выбран frozen two-view plan вместо auto-latest discovery/перезаписи archive.
+Плюсы: explicit context, сохранение известных negative/истории, reuse semantics;
+минусы: память/повторные проверки/общий trusted стек, свежесть и непредъявленные
+события не доказываются. Это обоснование узкой эффективности, не benchmark
+превосходства. Миграция/compaction истории и positive authorization не реализованы.
+
+До регистрации **32/32 собственных теста и 34/34 наборов репозитория PASS**.
+Synthetic byte fixtures: новый revoke, удержание archived negative bytes,
+точный lift и оставшийся второй block, other operation/wildcard restrictions,
+wrong pins/missing/duplicate refs/native sizes/порча/лишние/недостающие objects,
+no permission claim, metadata changes/removal в selected и historical records,
+безвредный key reorder, catalog mismatch, unsupported event, changed tools/limits,
+input immutability/no output writes и Python input bytes без исполнения.
+Старый view под именем current намеренно может пройти с freshness not_checked.
+После регистрации deployment **47/47 PASS**. Реальных отрицательных событий ради
+тестов не записано; ни один зелёный тест не означает текущего права на действие.
+
+### 49.3. Практика на двух разных реальных snapshots
+
+После полного preapproval PASS сначала штатным approved ENT15 создан новый trial,
+**пока full declared view ещё содержит 22 известных решения/63 normative files**.
+ENT5 one-root-fd acquisition и отдельный ENT9/ENT16 прошли; archive был сформирован
+не отбрасыванием новых известных событий. Trial:
+`agent_system/local/trials/8438017d-ba84-4c31-b0fc-72e71c47e548/`.
+Stage 770.560 ms; read16 consistent_archived_trial. В compare переданы объекты
+из того же initial captured byte set, сверенные по exact manifest refs; функция
+не выдавала небезопасное path-чтение за новый collector. Caller manual binding.
+
+Затем **однократно** зарегистрирован ENT17 по уже прошедшим проверкам. Новый
+known view отдельно получен ENT5/9 с полным inventory: 23 решения / 66 normative
+files + registry (90 inputs), selection ENT17 — passed_known_inputs,
+**17 closure / 51 checked artifacts**. Разница — реальный approve_revision нового
+компонента, не разрешение release/export. Общий source — доверенный checkout,
+expectations caller_supplied_not_authenticated, не cryptographic authentication.
+
+Новый comparison plan запрашивает scope export/agent_system.transfer, но ничего
+не экспортирует. Результат **compared_known_views_no_admission**, archive_query
+и declared_query passed_known_inputs, added_decisions=1; 1351.021 ms. Это единичное
+наблюдение, не benchmark. Все release/export/activation false. Старый manifest
+остался побайтно тем же; physical archive↔byte views↔планы связаны caller вручную,
+automatic_binding=false. Это не сквозной authorization workflow.
+
+Archive registry: 52690 bytes, SHA-256
+`2dfb708c5e62bb053e4113512f364c47a562300f564968d9accb20c909f73cc7`.
+New-declared registry: 54876 bytes, SHA-256
+`d404148bc236ae294d25e1d62106924fcacd0fec375185e0393f264fe4ec1919`.
+Manifest: 11154 bytes, SHA-256
+`6a168584507fc56fa805f6b0fbf8d07d547edd8055855dcfaa21fc3b10879020`.
+Comparison plan: 5079 bytes, SHA-256
+`7731891a48381bf800381b260520ed50e5dce89c461bb932d821d6a28909c278`.
+Plan/result/archive stage+read evidence/old+new acquisition+validation/journal:
+`agent_system/local/known-view-evidence/a72a3982-bd99-45db-ab1c-70be25ea737a/`,
+вне Git. 22 прежних revision records и 85 прежних artifact+approval файлов
+сохранены без изменений относительно HEAD 8d653e7. Публикация/активация не выполнены.
+
+Далее нужен консолидированный аудит оставшихся core gaps и приоритетов реализации:
+какие действия теперь действительно исполняются, какие остаются proposal/model/
+not_checked. Не выдавать растущий стек byte checks за полноту самоуправления,
+методологии, положительных полномочий или готовность переносимого выпуска.
+
+Итог после регистрации, практики и оформления: **34/34 наборов PASS**,
+pip check без нарушений, git diff --check чистый; все 66 normative pins целы.
+Публичные счётчики: 210 md / 86 README / 31 research / 34 test modules.
+Local trial/evidence игнорируются Git; 22 прежних records/85 refs сохранены.

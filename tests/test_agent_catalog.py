@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013', 'ENT-0014', 'ENT-0015', 'ENT-0016'})
-        self.assertEqual(len(self.registry['entities']), 16)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013', 'ENT-0014', 'ENT-0015', 'ENT-0016', 'ENT-0017'})
+        self.assertEqual(len(self.registry['entities']), 17)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -686,6 +686,31 @@ class TrialReaderDeploymentTests(unittest.TestCase):
         revision=next(e for e in registry['entities'] if e['entity_id']=='ENT-0015')['revisions'][0]
         expected={a['path']:{k:a[k] for k in ['sha256','size_bytes']} for a in revision['artifacts']}
         module=runpy.run_path(str(BASE/'staging/ent-0016/r0001/read.py'))
+        self.assertEqual(module['PINS'],expected)
+        self.assertEqual(len(expected),3)
+
+
+class KnownViewDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'kind': 'protocol', 'artifacts': [{'path': 'validation/ent-0017/r0001/compare.py', 'sha256': '65cee528ca1e9ab3594f43476ad21c89ac1ce44d40e6511724ec3c7555dcc95c', 'size_bytes': 9453, 'role': 'normative'}, {'path': 'validation/ent-0017/r0001/verify.py', 'sha256': 'eaeeafe2f135f5a325ee4f1dd6d49cc9fd80707aaff74ba6efee1193d1208aa3', 'size_bytes': 10622, 'role': 'normative'}, {'path': 'validation/ent-0017/r0001/usage.md', 'sha256': '401ff21a4d3a449ccb81bc865701a4f84abcb8232527e10a230c83e5a9306ad9', 'size_bytes': 11698, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0016', 'revision': 'r0001'}}]}
+
+    def test_exact_known_view_composition(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        entity=next(e for e in registry['entities'] if e['entity_id']=='ENT-0017')
+        self.assertEqual(len(entity['revisions']),1)
+        revision=entity['revisions'][0]
+        for key,value in self.EXPECTED.items():self.assertEqual(revision[key],value)
+        for artifact in revision['artifacts']:artifact_bytes(artifact)
+        decision=json.loads(artifact_bytes(revision['approval']['reference']))
+        self.assertEqual(decision['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0017',revision='r0001'))
+        self.assertEqual(decision['statement_form'],'summary')
+        self.assertEqual(decision['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in revision['artifacts']])
+
+    def test_exact_known_view_dependency_pins(self):
+        import runpy
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        revision=next(e for e in registry['entities'] if e['entity_id']=='ENT-0016')['revisions'][0]
+        expected={a['path']:{k:a[k] for k in ['sha256','size_bytes']} for a in revision['artifacts']}
+        module=runpy.run_path(str(BASE/'validation/ent-0017/r0001/compare.py'))
         self.assertEqual(module['PINS'],expected)
         self.assertEqual(len(expected),3)
 

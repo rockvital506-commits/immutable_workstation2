@@ -28,6 +28,7 @@
 - [ENT-0014 r0001 — предложения разрешения выпуска/экспорта, только blocked-путь](permissions/ent-0014/r0001/usage.md).
 - [ENT-0015 r0001 — private local trial staging, не публикация](staging/ent-0015/r0001/usage.md).
 - [ENT-0016 r0001 — read-only проверка pinned private trial](staging/ent-0016/r0001/usage.md).
+- [ENT-0017 r0001 — archived/new-declared known views, без допуска](validation/ent-0017/r0001/usage.md).
 - [Версионированный промпт подготовки переноса](transfer/ent-0012/r0001/prompt.md).
 
 Артефакт читается только с заранее заданными ожидаемыми SHA-256, размером,
@@ -111,3 +112,8 @@ ENT-0016 читает fixed local trial по внешнему manifest pin, бе
 файлов и выполнения содержимого. consistent_archived_trial проверяет captured bytes
 и archived ledger, не факт stage execution и не текущие решения/полномочия.
 Новый live ledger не обнаруживается автоматически; current_permissions=not_evaluated.
+
+ENT-0017 сравнивает два явно pinned byte views для literal operation/area.
+Все archived решения/records сохраняются, новые blocks/lifts вычисляются отдельно.
+Старый view под именем current не доказывает свежесть: current_permissions остаётся
+not_evaluated, даже если известного запрета не найдено; archive не переписывается.

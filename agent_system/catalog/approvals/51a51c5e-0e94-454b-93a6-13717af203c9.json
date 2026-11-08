@@ -1,0 +1,33 @@
+{
+  "schema_version": "1",
+  "decision_id": "51a51c5e-0e94-454b-93a6-13717af203c9",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0017",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "validation/ent-0017/r0001/compare.py",
+      "sha256": "65cee528ca1e9ab3594f43476ad21c89ac1ce44d40e6511724ec3c7555dcc95c",
+      "size_bytes": 9453
+    },
+    {
+      "path": "validation/ent-0017/r0001/verify.py",
+      "sha256": "eaeeafe2f135f5a325ee4f1dd6d49cc9fd80707aaff74ba6efee1193d1208aa3",
+      "size_bytes": 10622
+    },
+    {
+      "path": "validation/ent-0017/r0001/usage.md",
+      "sha256": "401ff21a4d3a449ccb81bc865701a4f84abcb8232527e10a230c83e5a9306ad9",
+      "size_bytes": 11698
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-08",
+  "statement_form": "summary",
+  "statement": "Условное внедрение pure двух-view known comparison по ранее данному делегированию после проверок. Summary основания, не отдельная прямая цитата одобрения конкретных bytes и не разрешение выпуска/export/activation.",
+  "basis": "До регистрации 32/32 собственных теста и 34/34 наборов репозитория PASS. Exact pinned plan/context/archive objects/new-declared index+ledger, сохранение всех archived decision bytes и revision records, прежние candidate binding/scope/lift checks. Новые synthetic blocks/lifts только fixtures; positive known-scope не даёт admission. Freshness/global completeness/source acquisition/поведение/owner permissions не доказаны; старый view может быть предъявлен повторно. Pure bytes без source IO/output writes, новые библиотеки не добавлены. Повторно используются trusted helpers ENT16 и старый стек; эффективность обоснована reuse/bounded surface, не benchmark."
+}
