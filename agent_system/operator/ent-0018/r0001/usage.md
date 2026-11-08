@@ -1,204 +1,153 @@
-# M1/I3 — основа coordinator, незарегистрированный implementation draft
+# ENT-0018 r0001 — bounded operator trial coordinator без допуска
 
-**Не нормативная внедрённая ENT18r1 и не законченный coordinator.** Каталог r0001
-пока рабочий кандидат. Регистрация exact состава/approve_revision намеренно не
-выполняется до реализации runner и относящихся проверок. Никаких grants.
+## Полный состав, источник и статус
 
-> Актуальный статус — раздел I3c в конце. Foundation-разделы ниже
-> сохраняют срез I3a и не отменяют его последующие уточнения.
+Protocol, scope agent_system.operator_trial. Полный immutable состав13files:
+session.py, session.schema.json, evidence.py, verify.py, run.py, runner_verify.py,
+replay.py, replay_verify.py, acceptance_verify.py, lab.py, usage.md, procedure.md,
+prompt.md. Точные hashes/approval/status — только в едином registry; этот текст
+не self-approval и не разрешение выпуска. Источники — задание B/восьмиблочный
+маршрут владельца/условное делегирование после проверок и дизайн M1 D01–D18.
+Partial implementation history — исследования30/32; версия не редактируется
+in-place после exact регистрации. Старые normative r1/r2 не переписаны.
 
-## Реализованные границы
+Depends_on ровно ENT9r2/ENT16r2/ENT13r1/ENT15r1/ENT17r1. Транзитивная fixed
+installed dependency closure19revisions/57artifacts. С own13:20revisions/70artifacts,
+но payload trial по-прежнему ENT13r1 **12/34**, coordinator/tools вне payload.
+Новые releases/activation events этот protocol не создаёт. Никаких libraries
+сверх stdlib и прежнего isolated hash-locked jsonschema/base dependencies.
 
-session.py/session.schema.json: внутренний validate_session проверяет внешний
-session pin, strict JSON/LF/closed fields, фиксированные purpose/criteria/profile,
-task UUID, candidate pin, plan A/optional B и literal query pairing. Raw task text
-не принимается. Documents ровно referenced plans, без retrieval/extra entries;
-нужны native integer sizes, bytes, обязательные external refs. Совпадающие A/B
-plan refs допустимы (один document), но будущий runner всё равно обязан сделать
-две отдельные acquisitions. Наличие B context не назначает A current.
+## API и closed preflight
 
-Plans проверяются прежним ENT9r2 _plan/ENT8r1 schema и пределами, затем exact
-catalog/selection/artifact metadata и validate/agent_system.operator_trial context.
-Точный profile (catalog_id/selection/artifacts/candidate) — **доверенный внутренний
-аргумент**, не вход session и не произвольная source-derived политика. Future
-coordinator должен получить его из проверенного installed состава с собственными
-артефактами; этот bootstrap ещё НЕ реализован. validate_session сам не читает
-source/не claim evidence/не stage и не доказывает permissions или полноту ledger.
+```python
+installed_profile()
+run_operator_trial(source_a_root, session_bytes, expected_session, documents,
+                   *, source_b_root=None)
+format_operator_result(result)
+replay_operator_run(run_id, expected_index)
+```
 
-Loader закрепляет 57 dependency artifacts/19 revisions будущего dependency
-closure ENT9r2/ENT16r2/ENT13r1/ENT15r1/ENT17r1; сверяет bounded bytes до runpy.
-Это installed expectation map как в старых tools, не второй registry и не
-доказательство authenticity. Сам draft/schema/evidence.py должны быть доверенно
-установлены caller; пока нет registry approval этих файлов. Writable hostile
-installation/самоподмена защищённого caller не покрываются.
+Session по session.schema.json — strict UTF-8/LF closed JSON с external SHA/native
+size, task UUID, fixed purpose=local_core_trial/criteria/profile, exact candidate
+pin, plan A/optional B refs и literal B/query context. Raw task text/commands/
+URI retrieval/callbacks/reports не принимаются. Documents — ровно referenced
+plan SHA→immutable bytes (при одинаковом A/B pin один document). Native int sizes,
+не float/bool. Profile внутренний, из protected installed index/ledger, **не**
+source-derived policy. Actual root strings/native Paths вне сериализованной session.
 
-## Private CAS foundation, не общий журнал исполнения
+Bootstrap сверяет 57 fixed dependency pins, exact own composition/5roots,
+protected approval и полную closure/known validate scope. Без registration
+COORDINATOR_NOT_REGISTERED до source/claim; никакого draft bypass/auto-registration.
+Hash-before-runpy не защищает от противника с записью trusted installation:
+caller обязан обеспечить неизменяемый от source installed namespace/interpreter.
 
-EvidenceStore — single-use private local/operator-runs/new UUID. Relative paths
-служебные, пользовательских filenames/destinations нет. Directories открываются
-через directory FDs/NOFOLLOW, claims и file writes exclusive, no overwrite/resume/
-auto-delete/rollback. Private operator-runs/run/objects 0700, files0600; общий
-legacy local ancestor допускает owner-only write/без group/other write и может
-быть 0755. Уже unsafe ancestor не исправляется chmod. Same-device/owner/filetype/
-single-link/fingerprint и bindings используют pinned ENT15/ENT16 helpers.
+Plans — прежние ENT8r1/ENT9r2 limits/schema, exact catalog/selection/artifact refs,
+context validate/agent_system.operator_trial. Нельзя переиспользовать E12
+export/agent_system.transfer preparation как generic trial preflight. Source
+registry/весь известный ledger закрепляются извне; unknown inventory останавливает,
+но глобальная полнота/свежесть/аутентификация таким pin не доказывается.
 
-put(bytes) — SHA-keyed immutable object, dedup после повторной проверки точных
-bytes; seal(metadata) — один index.json с отсортированными refs и private JSON
-metadata. Limits: 16 MiB/document, 128 MiB aggregate unique objects **и index**,
-20064 files включая index. Duplicates не расходуют budget второй раз. Нарушение
-лимита/записи/readback/fsync/final binding poisons store; позднейшее seal/put
-запрещено. Partial files сохраняются, no retry overwrite. Финальная ошибка может
-оставить index на диске: существование файла НЕ является успешным receipt.
+## Порядок и byte handoff
 
-verify_evidence(run_id,expected_index) — readonly exact pinned index/object
-inventory/metadata/hashes/bindings check. Не создаёт отсутствующие dirs/файлы,
-не chmod/fsync/write. Внешний pin обязателен, без автообновления из unknown файла.
-consistent_private_evidence — согласованность CAS, **не** semantic journal/child
-replay и не доказательство исполнения. Даже metadata со словом success само по
-себе не подтверждает работу агента. Raw objects/metadata не печатаются функцией.
+Preflight → exclusive evidence claim → capture A → candidate subset → scoped
+stage → guarded reader → exact handoff → optional отдельный capture B/derived
+query → journal/human report → seal receipt. Public entry не принимает внешние
+child packets; tools грузятся только из protected installation, не source/archive.
 
-Защита от hostile same-uid/root/privileged mount не заявлена; trusted namespace,
-Linux/kernel/interpreter/installation обязательны. Наблюдения не атомарны,
-временные исчезнувшие изменения могут быть не замечены; fsync не является полной
-моделью crash recovery. RAM/CPU не квотируются; caps не обещают, что максимальные
-A/B plus reports одновременно поместятся. Секреты автоматически не распознаются,
-данные private и не коммитятся/экспортируются. Owner задаёт допустимые данные.
+Report/plan/doc refs и exact source byte maps проверяются; full successful bundle
+перепроверяется ENT10. Selected revision records должны совпадать с protected
+profile: подмена source graph не исключает tool checks. Перед stage/read/query
+проверяются known scoped blocks всего tool profile. ENT13 проверяет subset только
+из A bytes; ENT15 не читает source заново. Reader ENT16r2 выдаёт первые captured
+manifest/objects после всех late guards. Receipt/UUID/manifest/reader metadata,
+candidate/registry/ledger/payload/objects/native counts/stored_bytes связываются.
 
-## Историческая граница I3a (уточнена разделом I3b ниже)
+Без B query=not_requested, A не считается current. При B делается отдельный
+capture, даже если root/plan тот же. Derived plan строится из session literal
+query и verified archive/B refs, не неизвестного filesystem manifest. Block/failed/
+unsupported на любом requested downstream закрывает общий run; partial trial
+не удаляется/не откатывается. Старые consumer pins остаются прежними.
 
-run_operator_trial, trusted own-profile bootstrap, state machine/child journals,
-полная candidate/handoff проверка, общий human report, procedure/versioned prompt,
-semantic evidence replay по ENT10/17 и единый практический operator entry. Ни
-source acquisition, stage, query, release/export/activation этот draft не запускает.
-Полная T01–T30 matrix не исполнена; R2/M1 и I3 целиком не закрыты.
-
-## Альтернативы, оптимизация и проверка
-
-Выбрана небольшая основа над прежними pinned helpers вместо нового storage/
-workflow framework. Плюсы: ограничения до write/source execution, без повторения
-архивной семантики/дополнительных libraries, CAS dedup. Минусы: raw memory/privacy,
-новый private persistence path, повторный hash/readback, необходимость отдельно
-доказать orchestration/семантику. Эффективность пока подтверждена узко тестами
-caps/dedup/no writes и storage lab, не benchmark coordinator.
-
-verify.py/tests wrapper проверяют session errors/closed profile, mappings,
-plan pins/context/limits, dedup/quotas, collisions/unsafe namespace, disk-full/
-fsync/late binding/permissions failures, no resume/overwrite, readonly corruption/
-FIFO/symlink/hardlink/inventory refusals, FD cleanup. Синтетические варианты внутри
-subTests не считаются независимыми end-to-end scenarios. Окружение — прежний
-hash-locked jsonschema с обязательными dependencies, без новых библиотек.
-
-## I3b update — runner реализован как fail-closed candidate
-
-Этот раздел уточняет исторический foundation срез выше: run.py/runner_verify.py
-теперь существуют. Реализован run_operator_trial(source_a_root,session_bytes,
-expected_session,documents,*,source_b_root=None) и installed_profile(). **В текущем
-реальном registry ENT18 нет, поэтому public entry останавливается кодом
-COORDINATOR_NOT_REGISTERED до claim/source I/O. Никакого draft bypass флага нет.**
-
-Bootstrap использует только protected installed index/ledger, проверенные 57
-fixed dependency pins, exact own r1 artifact set/пять dependency roots и known
-validate scope. Own artifacts включаются в точный source profile, даже когда они
-не входят в старый trial payload. Проверяются native refs и полная closure,
-без self-hash cycle/второго registry/source-derived approval. Пока список own
-artifacts — 7 draft files; procedure/prompt и semantic replay ещё предстоит
-реализовать/включить в будущий exact composition до регистрации.
-
-Runner: preflight → private claim → capture A → candidate subset → stage → reader
-→ exact handoff → optional отдельный capture B/derived literal comparison → journal
-object → CAS seal/receipt. Не принимает child reports/callbacks от пользователя.
-Exact source packet maps/docs/report/plan сверяются, успешный bundle перепроверяется
-ENT10; selected revision records должны совпадать с protected installed profile.
-Это не позволяет silently исключить tools из closure через подмену source graph.
-Перед stage/read/query проверяются известные scoped blocks всего tool profile,
-не только payload. Candidate payload остаётся ENT13r1 12 revisions/34 files.
-
-Handoff сверяет fresh stage receipt, UUID/manifest, reader metadata/candidate/
-registry/ledger/payload refs, полный exact object set/bytes и counts. B не заменяется
-на A. Query/reader/stage отказ закрывает requested run, не стирает существующий
-trial. Полные child documents/raw successful source bundles сохраняются только
-private CAS. Failed binding не выдаёт отсутствующий payload как replayable.
-Journal хранит настоящие child run IDs и отдельную terminal claim; seal подтверждён
-только внешним receipt после final guards. Index не включён в свой hash-cycle.
-
-Return — безопасные codes/status/counts/relative refs без raw maps/absolute roots.
-Это структурированный operator result, не завершённый отдельный human report.
 Counters разделены: capture_invocations/completed_source_reports/validated_captures.
-source_acquisition_calls для completed validated envelopes отражает one-read_set
-контракт ENT9r2; если capture не вернулся/packet malformed — None (unknown), не
-выдуманный 0/1. После unknown error/interruption completed receipt не фабрикуется;
-partial evidence/trial сохраняются. Evidence failure — evidence_write_failed,
-не sealed success. Release/export/activation/transition=false во всех результатах.
+source_acquisition_calls отражает one-read_set контракт проверенных ENT9 envelopes;
+если capture не вернулся или packet malformed, total=None/unknown, не ложный0/1.
+Success no-B1, сB2; source calls не включают отдельные archive guard readbacks.
+Это не атомарный snapshot/транзакция двух roots. Child run IDs связываются и не
+переиспользуются для A/B. Unknown error/interruption не получает fabricated receipt.
 
-26 runner test methods на disposable prospective installation/source fixtures.
-Synthetic approval ENT18 находится только в temp tree, не реальном ledger. Есть
-physical stage/read/evidence, no-B/B positive, реальный known tool stage/query block,
-source change после capture, forged packets/docs/records, late reader/permission/
-seal failures, B failure/no fallback, неизвестный counter при exception, unknown
-error без sealed receipt, повторные UUID и private result. Отдельные fault tests
-меняют child outputs, не выдаются за полное событие/поведение production среды.
-Тест public gate на реальном незарегистрированном каталоге ожидает отказ.
+## Private evidence и человекочитаемый итог
 
-I3 целиком не закрыт: нет semantic journal replay, versioned procedure/prompt,
-полного human report и I4 matrix/practice. verify_evidence по-прежнему только CAS
-consistency; наличие runner этого обещания не расширяет. ENT18 не зарегистрирована,
-новые approvals/releases/активация не созданы. Следующий шаг — semantic replay и
-operator procedure/prompt с относящимися проверками, не обход registration gate.
+Fixed local/operator-runs/new UUID; private dirs0700/files0600, directory FDs,
+NOFOLLOW/exclusive writes, no overwrite/resume/delete/auto-rollback. Legacy local
+ancestor может быть0755 без group/other write; unsafe не chmod'ится автоматически.
+Same-device/owner/regular-file/single-link/fingerprint/bindings и readback reuse
+ENT15/16 helpers. Строгие limits16MiB/document,128MiB aggregate unique objects+
+final index,20064files включая index. Dedup сверяет сохранённые bytes; budget не
+расходуется дважды. Limit/write/fsync/readback/binding failure poisons store.
+Partial files/index сохраняются; существующий index НЕ completion proof.
 
-## I3c update — offline semantic replay, procedure/prompt и human report
+Journal связывает protected profile snapshot/records, session/plans/procedure/
+prompt refs, raw successful source bundles/child docs, receipt/archive/query,
+real child IDs и terminal claim. Human report воспроизводится по closed labels/
+UUID/counts/step states/relative refs, false gates/not_checked/статический next step.
+Raw maps/absolute roots/free diagnostics/task/decision texts не печатаются.
+Секреты автоматически не классифицируются; caller проверяет допустимость данных.
 
-Актуальный срез — I3c. Добавлены replay.py/replay_verify.py,
-[procedure r0001](procedure.md), [prompt r0001](prompt.md) и format_operator_result.
-OWN draft composition теперь11files; expected source closure20revisions/68artifacts
-существует пока **только в prospective fixtures**, не в реальном approved registry.
-Foundation/I3b разделы выше — исторические срезы, не текущий список отсутствующего.
+Terminal claim ещё не seal: внешний receipt/index pin выдаётся после final
+readback/bindings/fsync. Evidence failure — evidence_write_failed, не success;
+unknown авария может оставить только partial без index. Ничего автоматически
+не экспортируется/не коммитится. Crash durability/hostile same-uid/root/kernel/
+privileged same-device mount/необнаруженные временные события не покрыты.
 
-Journal теперь связывает pinned protected-profile snapshot (records/refs), raw
-session, procedure/prompt refs и воспроизводимый UTF-8 human report. Human renderer
-выводит только closed labels/canonical UUID/counts/step states, relative operator
-ref, false gates, not_checked и статический следующий шаг. Raw maps/root paths/
-свободные diagnostics/task/decision тексты не копируются. Это не secret detector;
-opaque IDs/публикация результатов всё равно требуют caller policy. Seal отделён
-от terminal claim: подтверждается только отдельным receipt/external index pin.
+## Structural и semantic replay — разные результаты
 
-Evidence internal readonly capture возвращает первые object bytes после полного
-CAS контроля и fd cleanup. Public verify_evidence **по-прежнему только structural**.
-Новый replay_operator_run(run_id,expected_index) отдельно проверяет:
-- exact journal/profile/session/criteria/procedure/prompt и human-report binding;
-- source bundles/plan/report/docs/maps, selected closure/records и ENT10 replay;
-- candidate result через ENT13, scoped tool checks для stage/read/query;
-- receipt/reader/manifest/candidate/registry/ledger/object-set/count handoff;
-- literal derived comparison plan и ENT17 result, реальные связанные child IDs;
-- terminal counters/status/false gates и отсутствие unreferenced CAS objects.
+verify_evidence — readonly pinned CAS index/inventory/refs/metadata/bindings,
+consistent_private_evidence. Это не journal semantics/execution proof.
+Internal capture сохраняет первые bytes, закрывает FDs, не reread'ит pathname
+для передачи. Public structural checker не возвращает raw maps.
 
-Никакой code из архива не исполняется. Загружаются только fixed immutable trusted
-installed helpers/own files; source/trial/live index/ledger не читаются. Bootstrap
-регистрации для **нового запуска** не обходится. Historical replay сравнивает own
-archive code refs с protected immutable r1; после регистрации in-place edits
-недопустимы, для другого состава нужен новый versioned профиль. Пока draft может
-меняться, старый draft journal не обещается совместимым с новым replay code.
+replay_operator_run отдельно проверяет full successful no-B/B journal: profile/
+records/closure/procedure/prompt/session/human, ENT10 source bundles, ENT13 candidate,
+scopes/receipt/reader/handoff, derived plan/ENT17, child IDs/counters/gates/refs и
+unreferenced objects. Source/trial/live index/ledger не открываются; code из
+архива не исполняется. Нужны protected immutable installed own revision/helpers и
+external pinned receipt. consistent_recorded_operator_run_no_admission означает
+согласованность записанных claims, **не** факт их внешнего исполнения.
 
-Full replay поддержан только для successful no-B/B journals:
-consistent_recorded_operator_run_no_admission. Failed/blocked/unsupported sealed
-journals получают recorded_partial_run_no_full_replay, full_replay=false после
-structural/profile/session/report проверки. Они не объявляются семантически
-доказанными ошибками/успехами; missing failed capture не восстанавливается.
-Не sealed/evidence_write_failed run не имеет пригодного replay receipt.
+Failed/blocked/unsupported sealed journal получает recorded_partial_run_no_full_replay
+после structural/profile/session/report checks, full_replay=false; missing failed
+capture не восстанавливается, полная failure semantics не заявлена. Coherent copied/
+fabricated archive может пройти проверки; execution/source/caller authentication,
+truth of observations, freshness/current permissions/global completeness/поведение/
+target environment не доказаны. Replay не обновляет sealed journal/live permission.
 
-Согласованная фабрикация/копия архива может пройти проверки: authentication,
-истинность наблюдений/факт внешнего исполнения, freshness/current permissions/
-полнота/поведение/совместимость не доказаны. Replay не публикует и не активирует.
-Все release/export/activation/transition gates false, даже при полном consistency.
+## Один ограниченный lab client
 
-17 replay test methods (15 первоначально +2human/protocol cases), prospective temp
-fixtures only; это не17 новых owner-approved сценариев. Проверены no-B/B, no
-source/trial/live-ledger/writes, coherent rehash/reseal attacks на counters/IDs/
-steps/candidate/reader/query/profile/protocol/human и extra CAS object, failed
-journal partial status, wrong external pin и coherent copied archive NOT authentication.
-При review также усилен runner handoff: reader candidate/registry/layer, native
-counts и stored_bytes receipt связываются явно; два source child IDs не переиспользуются.
+lab.py/процедура: run_trusted_lab(trust_this_checkout=True,with_query=True|False).
+Только явно trusted installed checkout как source; foreign roots/discovery не
+поддерживаются этим client. Без explicit flag отказ; нет auto approval. Создаёт
+closed plans/session из protected trusted namespace, вызывает один entry и отдельный
+replay, возвращает safe human/receipt/replay summary. CLI пример в procedure.md.
+Для недоверенного source использовать отдельно закреплённые ожидания/entry, не
+lab pin derivation. Query export не выполняет export. T30 относится только к
+этому bounded lab, не к новой agent platform/активации/совместимому выпуску.
 
-I3 implementation candidate подготовлен, **не зарегистрирован**. Следующий этап
-I4: полная traceability T01–T30/относящиеся проверки и bounded lab, затем оценка
-выполнения условий exact registration. Нельзя автоматически считать 35+26+17
-методов полной matrix, переносом/совместимым выпуском/активацией или выполненным T30.
+## Обоснование, проверки и независимость состояний
+
+Выбран thin coordinator/shared byte handoffs вместо manual recipes или workflow
+framework. Плюсы: один источник bytes между слоями, явные stops/counts/refs,
+reuse прежней semantics и CAS dedup. Минусы: raw privacy/memory retention,
+новая persistence/code surface, hash/readback/replay overhead и trusted namespace.
+Однократный lab и call counts подтверждают узкое улучшение traceability/reuse,
+не универсальный performance benchmark. RAM/CPU не квотируются; максимальные A/B
+плюс reports не обязаны одновременно помещаться в128MiB. Проверки ради скорости
+не сокращаются, новые dependencies требуют отдельного решения.
+
+Own tests:35foundation/26runner/17replay/19acceptance methods. SubTests не являются
+дополнительными end-to-end сценариями; prospective approvals только в temp
+fixtures, не реальные owner events. T01–T30 traceability/results — локальный
+acceptance report, не второй нормативный core/registry и не release coverage.
+Точная регистрация отдельно от implementation/tests/native practice/release/
+activation. Overall/current permissions not_evaluated; release/export/activation/
+transition false во всех результатах. Один запуск не снимает incomplete ENT13
+coverage и не подтверждает фактическое соблюдение всех правил агентом.

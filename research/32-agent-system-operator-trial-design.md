@@ -469,3 +469,15 @@ approved registry (по-прежнему17entities/25revisions). Никакой 
 практика/коррекция и оценка готовности conditional registration. Полного T30
 реального зарегистрированного entry ещё нет. M1/R2, R3–R8 и release/export/
 activation не закрыты реализацией replay. Старые97 normative/approval refs сохранены.
+
+
+## 16. I4 — implementation acceptance и отдельная native verification
+
+[Матрица T01–T30](33-agent-system-operator-trial-acceptance.md) различает уровни
+physical/fault/reused lower semantics/prospective client/реальный registered CLI.
+13ownfiles frozen; conditional summary approval после40/40prequalification.
+Native lab с явным trusted-checkout acknowledgment с B и без B — PASS,2/1source
+acquisitions, private CAS и отдельный full semantic replay. M1/R2 bounded область
+закрыта; payload12/34 и no-admission gates не расширены. R3–R8 остаются отдельно.
+Результат не execution authentication/current permissions/global completeness/
+новая среда/activation. Старые97references и immutable revision records сохранены.

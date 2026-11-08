@@ -22,6 +22,9 @@ class RunnerTests(unittest.TestCase):
         tmp=tempfile.TemporaryDirectory();self.addCleanup(tmp.cleanup)
         self.root=Path(tmp.name);self.install=self.root/'installed';self.source=self.root/'source'
         self.install.mkdir();registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        # Isolate the synthetic coordinator from any real deployment; never clone
+        # an actual ENT18 approval into its disposable bootstrap fixture.
+        registry['entities']=[e for e in registry['entities'] if e['entity_id']!='ENT-0018']
         for entity in registry['entities']:
             for rev in entity['revisions']:
                 for a in [*rev['artifacts'],rev['approval']['reference']]:
@@ -87,9 +90,11 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(len(calls),2);self.assertEqual(value['validated_captures'],2)
         self.assertNotEqual(value['steps']['source_a']['child_run_id'],value['steps']['source_b']['child_run_id'])
 
-    def test_real_catalog_not_registered_stops_before_claim(self):
-        with patch.dict(G,BASE=BASE):
-            with self.assertRaises(Blocked) as error:self.invoke()
+    def test_unregistered_installation_stops_before_claim(self):
+        path=self.install/'catalog/registry.json';registry=json.loads(path.read_bytes())
+        registry['entities']=[e for e in registry['entities'] if e['entity_id']!='ENT-0018']
+        path.write_bytes(enc(registry))
+        with self.assertRaises(Blocked) as error:self.invoke()
         self.assertEqual(error.exception.code,'COORDINATOR_NOT_REGISTERED')
         self.assertFalse((self.install/'local').exists())
 

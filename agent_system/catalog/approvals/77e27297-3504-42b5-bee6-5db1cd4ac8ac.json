@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "decision_id": "77e27297-3504-42b5-bee6-5db1cd4ac8ac",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0018",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "operator/ent-0018/r0001/acceptance_verify.py",
+      "sha256": "479dcc4a54d3ca5d2f7cf5a8a844d987ce6b90050955a66abfcea4b66c94aae9",
+      "size_bytes": 11722
+    },
+    {
+      "path": "operator/ent-0018/r0001/evidence.py",
+      "sha256": "255bffc084d40ce598248ddda687249dcf548992ab4bc386a12cdaeb997f972f",
+      "size_bytes": 9453
+    },
+    {
+      "path": "operator/ent-0018/r0001/lab.py",
+      "sha256": "b14bebf61d26e2e2f6291db9c4d7d2a982b907488682c06a4acb7675cb98cc0f",
+      "size_bytes": 4182
+    },
+    {
+      "path": "operator/ent-0018/r0001/procedure.md",
+      "sha256": "54f41439a8399f89e6d11dd7fd8ac95569e0bfce96667df5c3bb7bb4e2d0ccbd",
+      "size_bytes": 7077
+    },
+    {
+      "path": "operator/ent-0018/r0001/prompt.md",
+      "sha256": "87f5ca9e72f58442981602d7910178c13b49f80ab931333d373f4f20c58be378",
+      "size_bytes": 2307
+    },
+    {
+      "path": "operator/ent-0018/r0001/replay.py",
+      "sha256": "95ce2ad08944b1a8fe6d74b27a30f97f087b12b6ff159397b8b1876144fe5e37",
+      "size_bytes": 12615
+    },
+    {
+      "path": "operator/ent-0018/r0001/replay_verify.py",
+      "sha256": "b2ecd0a50dfb99452ffc910f89954f17a0e4700f61c198895a3dffcb5051a864",
+      "size_bytes": 8421
+    },
+    {
+      "path": "operator/ent-0018/r0001/run.py",
+      "sha256": "68d3251e7b212b673b6705b32855f554829d76147467a18262e208635b4b1c00",
+      "size_bytes": 23614
+    },
+    {
+      "path": "operator/ent-0018/r0001/runner_verify.py",
+      "sha256": "d7451bdf77d030f11811472f83ccc3d43e1fb05004832b181a6029a05fa2df6e",
+      "size_bytes": 17076
+    },
+    {
+      "path": "operator/ent-0018/r0001/session.py",
+      "sha256": "789a60c5b09744f804bfb3e9685eb63796fbfdeb561376aace5fc2bca8e82aad",
+      "size_bytes": 12464
+    },
+    {
+      "path": "operator/ent-0018/r0001/session.schema.json",
+      "sha256": "76a3030a1f107a92e24cc80af978b0b1c9a0c5c0f16718829b8907a51a66e76f",
+      "size_bytes": 2856
+    },
+    {
+      "path": "operator/ent-0018/r0001/usage.md",
+      "sha256": "13eeeab847fa30e15e6cce444a1b2cdd9982cf5147035aed8dfa25aadac12679",
+      "size_bytes": 12012
+    },
+    {
+      "path": "operator/ent-0018/r0001/verify.py",
+      "sha256": "444b7ea06dd237a1720573ff0cb9e88d12a3b97cd30e7987372c7d931a71ee3a",
+      "size_bytes": 13735
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-08",
+  "statement_form": "summary",
+  "statement": "Условное внедрение exact bounded coordinator по ранее данному делегированию после проверок. Summary основания, не новая прямая цитата владельца об этих bytes и не разрешение выпуска/export/activation.",
+  "basis": "Prequalification: 40/40 modules PASS (isolated interpreter), own35foundation+26runner+17replay+19acceptance=97methods; pip/repo/manifest/diff checks PASS. T01–T30 traceability distinguishes physical/fault/lower/prospective. Prospective installed native lab without loader/child injection:2observedread_set/full replay, synthetic approval only temp. Real registered T30 is necessarily POSTregistration and still pending at this decision: before registration actual lab returned COORDINATOR_NOT_REGISTERED. This event approves implementation only, not M1 completion. Exact13ownfiles, dependency19/57, source20/70, payload unchanged12/34; old97refs unchanged. Byte handoffs/call counts confirm bounded reuse/traceability, no universal speed benchmark. No new dependencies, auto export, registration from source, activation or permission. Protected installed namespace required; observation truth/authentication/freshness/global completeness/current permissions/behavior/new environment not proven. Failure of postregistration practice must be recorded, not concealed or patched in-place."
+}

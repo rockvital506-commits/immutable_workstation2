@@ -2,9 +2,9 @@
 
 ## Статус и основание
 
-Рабочий кандидат ENT18r1, не зарегистрирован/не активирован автоматически.
-Эта процедура и prompt.md войдут в exact normative состав только после проверок
-и условной регистрации. Не переносит hidden platform instructions/частную
+ENT18r1: точное состояние согласования — в registry, не в этой процедуре.
+Procedure и prompt версионируются в exact normative составе; запуск не создаёт
+регистрацию или активацию автоматически. Не переносит hidden platform instructions/частную
 архитектуру. Не предоставляет release/export/activation permissions.
 
 ## Операторский порядок
@@ -17,7 +17,7 @@
    прежнюю isolated hash-locked jsonschema среду и допустимость private данных.
    Для настоящего запуска требуется уже зарегистрированный exact ENT18r1.
    installed_profile() не выбирает latest и не создаёт собственный approval.
-   Сейчас нормальный реальный результат — COORDINATOR_NOT_REGISTERED; не обходить.
+   Если регистрации нет — COORDINATOR_NOT_REGISTERED; не обходить.
 3. Из отдельного доверенного основания закрепить source registry, весь известный
    ledger и exact artifacts returned profile. Сформировать ENT8r1 plan A с точными
    selection/context validate/agent_system.operator_trial. Не вычислять новые
@@ -54,3 +54,27 @@
 
 Нет auto activation/export/reinstall; conditional registration отдельно от
 lab execution. Public success в реальной новой среде этим draft не заявлен.
+
+
+## Один documented lab client (только явно trusted own checkout)
+
+После проверки exact installation/registry вызвать из approved isolated Python:
+
+```sh
+/home/user/.venv/immutable-agent-system/bin/python agent_system/operator/ent-0018/r0001/lab.py --trust-this-checkout
+```
+
+Путь к interpreter — пример локальной изолированной установки, не portable
+абсолютный путь требования. Можно использовать свой verified isolated interpreter
+с тем же hash-lock. Для no-B добавить --without-query. API:
+run_trusted_lab(trust_this_checkout=True,with_query=True|False). Никакого /tmp
+recipe как обязательной части интерфейса. CLI возвращает safe human report и
+receipt/replay summary, не raw input maps; ошибки без автоматического traceback.
+
+Flag — явное признание этого protected checkout доверенным input для lab,
+**не** аутентификация произвольной новой директории/permission. Client не принимает
+foreign source/root и не является discovery/pin generator для неизвестных данных.
+Строятся closed A/B/session pins из выбранного доверенного namespace; caller
+остаётся expectation authority. Выполняются один run entry и отдельный replay.
+Кандидат ENT13r1 остаётся incomplete12/34; query export — только scoped query,
+никакого экспорта/совместимого выпуска/активации. Без flag клиент останавливается.

@@ -136,7 +136,7 @@ bytes доступны после всех late guards и cleanup. Следую�
 Полная acceptance matrix ещё не исполнена; M1 целиком не закрыт.
 
 
-### I3 в работе: unregistered coordinator foundation
+### История I3a–I3c: unregistered coordinator foundation
 
 [Рабочий кандидат основы](operator/ent-0018/r0001/usage.md): strict session/plans
 и private bounded evidence CAS/read-only structural verification. Это не
@@ -158,3 +158,16 @@ PASS: новый replay API отдельный, failed journal остаётся 
 Live ledger/source/trial не требуются replay; authenticity/freshness/permissions
 не доказаны. Кандидат ENT18 ещё не зарегистрирован. Далее I4/matrix/относящаяся
 практика и оценка conditional exact registration, не automatic activation.
+
+
+### I4 — exact implementation и bounded native practice
+
+[ENT18r1](operator/ent-0018/r0001/usage.md) зарегистрирована по conditional summary
+после prequalification40/40modules.13ownfiles/source20revisions70artifacts,
+exact dependencies9r2/16r2/13r1/15r1/17r1; прежние97references без изменений.
+[Процедура](operator/ent-0018/r0001/procedure.md) содержит один lab client с
+explicit --trust-this-checkout, а не обязательный одноразовый recipe. Реальные
+installed CLI с B и без B:2/1acquisitions, CAS и отдельный full semantic replay
+PASS. [Матрица T01–T30 и pins](../research/33-agent-system-operator-trial-acceptance.md).
+Это закрывает bounded M1, не agent behavior/новую среду/совместимый выпуск или
+activation; payload ENT13r1 остаётся incomplete12/34, все grants false.

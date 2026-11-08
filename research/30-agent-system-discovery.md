@@ -6437,3 +6437,21 @@ registration gate остаётся COORDINATOR_NOT_REGISTERED до source/claim.
 COORDINATOR_NOT_REGISTERED, наблюдённых source/action/claim calls0. Код/порог
 проверки или зависимости не ослаблялись; дополнительная установка в system
 Python не выполнялась. Различие окружений/исходная ошибка запуска не скрыты.
+
+
+## 57. I4 — интеграция и ограниченная практика M1
+
+[Acceptance report](33-agent-system-operator-trial-acceptance.md): T01–T30 с
+physical/fault/lower/prospective/native evidence уровнями.40/40prequalification
+modules;97ownmethods (35+26+17+19),53catalog deployment tests после регистрации.
+Summary approval77e27297-3504-42b5-bee6-5db1cd4ac8ac фиксирует реализацию13files,
+не отдельную прямую цитату владельца и не grant. До registration native CLI
+правильно STOP; после — actual documented lab с B/no-B и отдельный CAS/full replay
+PASS. Source20/70, payload12/34;18entities26revisions85norm26approvals.
+
+M1/R2 закрыт только в согласованной bounded laboratory области. R3–R8 впереди:
+реальная содержательная методология, positive permissions, portable closure,
+coverage/отдельное решение release, одна новая среда/inactive binding, отдельная
+activation. Не считать same trusted Linux checkout доказательством universal
+совместимости/свежести/соблюдения всех правил/permission. Native receipts/pins и
+ограничения — в acceptance report; private raw CAS вне Git. Старые97refs сохранены.

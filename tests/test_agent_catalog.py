@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013', 'ENT-0014', 'ENT-0015', 'ENT-0016', 'ENT-0017'})
-        self.assertEqual(len(self.registry['entities']), 17)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013', 'ENT-0014', 'ENT-0015', 'ENT-0016', 'ENT-0017', 'ENT-0018'})
+        self.assertEqual(len(self.registry['entities']), 18)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -764,6 +764,33 @@ class TrialCaptureDeploymentTests(unittest.TestCase):
         self.assertEqual(new['PROFILE'],'ent-0016-r0002-private-trial-capture')
         compare=runpy.run_path(str(BASE/'validation/ent-0017/r0001/compare.py'))
         self.assertTrue(all('r0001' in p for p in compare['PINS']))
+
+
+
+class OperatorTrialDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'title': 'Ограниченный operator trial с byte handoff и отдельным semantic replay', 'kind': 'protocol', 'scopes': ['agent_system.operator_trial'], 'artifacts': [{'path': 'operator/ent-0018/r0001/acceptance_verify.py', 'sha256': '479dcc4a54d3ca5d2f7cf5a8a844d987ce6b90050955a66abfcea4b66c94aae9', 'size_bytes': 11722, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/evidence.py', 'sha256': '255bffc084d40ce598248ddda687249dcf548992ab4bc386a12cdaeb997f972f', 'size_bytes': 9453, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/lab.py', 'sha256': 'b14bebf61d26e2e2f6291db9c4d7d2a982b907488682c06a4acb7675cb98cc0f', 'size_bytes': 4182, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/procedure.md', 'sha256': '54f41439a8399f89e6d11dd7fd8ac95569e0bfce96667df5c3bb7bb4e2d0ccbd', 'size_bytes': 7077, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/prompt.md', 'sha256': '87f5ca9e72f58442981602d7910178c13b49f80ab931333d373f4f20c58be378', 'size_bytes': 2307, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/replay.py', 'sha256': '95ce2ad08944b1a8fe6d74b27a30f97f087b12b6ff159397b8b1876144fe5e37', 'size_bytes': 12615, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/replay_verify.py', 'sha256': 'b2ecd0a50dfb99452ffc910f89954f17a0e4700f61c198895a3dffcb5051a864', 'size_bytes': 8421, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/run.py', 'sha256': '68d3251e7b212b673b6705b32855f554829d76147467a18262e208635b4b1c00', 'size_bytes': 23614, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/runner_verify.py', 'sha256': 'd7451bdf77d030f11811472f83ccc3d43e1fb05004832b181a6029a05fa2df6e', 'size_bytes': 17076, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/session.py', 'sha256': '789a60c5b09744f804bfb3e9685eb63796fbfdeb561376aace5fc2bca8e82aad', 'size_bytes': 12464, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/session.schema.json', 'sha256': '76a3030a1f107a92e24cc80af978b0b1c9a0c5c0f16718829b8907a51a66e76f', 'size_bytes': 2856, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/usage.md', 'sha256': '13eeeab847fa30e15e6cce444a1b2cdd9982cf5147035aed8dfa25aadac12679', 'size_bytes': 12012, 'role': 'normative'}, {'path': 'operator/ent-0018/r0001/verify.py', 'sha256': '444b7ea06dd237a1720573ff0cb9e88d12a3b97cd30e7987372c7d931a71ee3a', 'size_bytes': 13735, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0009', 'revision': 'r0002'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0013', 'revision': 'r0001'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0015', 'revision': 'r0001'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0016', 'revision': 'r0002'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0017', 'revision': 'r0001'}}], 'approval': {'status': 'approved', 'reference': {'path': 'catalog/approvals/77e27297-3504-42b5-bee6-5db1cd4ac8ac.json', 'sha256': '5b1d80f01fc2ee2e5fe9c5c23c0f15532f7ab23cd4c022a475ad0587b6e39a7e'}}, 'provenance': {'summary': 'M1/I3–I4 по заданию B, дизайну D01–D18 и условному делегированию владельца. Exact implementation после prequalification; actual native practice отдельно после bootstrap registration. Local bounded trial/replay, не permission/release/activation.'}}
+
+    def test_exact_revision_and_conditional_summary_approval(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        actual=next(e for e in registry['entities'] if e['entity_id']=='ENT-0018')['revisions'][0]
+        self.assertEqual(actual,self.EXPECTED)
+        self.assertEqual(len(actual['artifacts']),13)
+        for a in actual['artifacts']:artifact_bytes(a)
+        decision=json.loads(artifact_bytes(actual['approval']['reference']))
+        self.assertEqual(decision['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0018',revision='r0001'))
+        self.assertEqual(decision['decision_type'],'approve_revision')
+        self.assertEqual(decision['statement_form'],'summary')
+        self.assertEqual(decision['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in actual['artifacts']])
+
+    def test_exact_installed_profile_and_coexisting_revisions(self):
+        import runpy
+        runner=runpy.run_path(str(BASE/'operator/ent-0018/r0001/run.py'))
+        profile,records=runner['_bootstrap'](runner['_load']())
+        self.assertEqual(profile['selection'],[dict(catalog_id=CATALOG_ID,entity_id='ENT-0018',revision='r0001')])
+        self.assertEqual((len(records),len(profile['artifacts']),len(runner['OWN'])),(20,70,13))
+        self.assertEqual(runner['DEPENDENCIES'],{('ENT-0009','r0002'),('ENT-0016','r0002'),('ENT-0013','r0001'),('ENT-0015','r0001'),('ENT-0017','r0001')})
+        for entity in ['ENT-0009','ENT-0016']:
+            self.assertIn((entity,'r0001'),records);self.assertIn((entity,'r0002'),records)
 
 
 if __name__ == '__main__':

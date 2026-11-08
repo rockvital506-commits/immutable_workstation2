@@ -1,4 +1,4 @@
-"""I3 runner candidate. Fail closed until the exact coordinator is registered."""
+"""Bounded operator trial. Exact registered installation required; never admission."""
 import copy
 import json
 import os
@@ -9,7 +9,7 @@ import uuid
 
 BASE=Path(__file__).resolve().parents[3]
 HERE=Path(__file__).resolve().parent
-OWN={'session.py','session.schema.json','evidence.py','verify.py','usage.md','run.py','runner_verify.py','replay.py','replay_verify.py','procedure.md','prompt.md'}
+OWN={'session.py','session.schema.json','evidence.py','verify.py','usage.md','run.py','runner_verify.py','replay.py','replay_verify.py','procedure.md','prompt.md','acceptance_verify.py','lab.py'}
 DEPENDENCIES={('ENT-0009','r0002'),('ENT-0016','r0002'),('ENT-0013','r0001'),('ENT-0015','r0001'),('ENT-0017','r0001')}
 STEPS=['source_a','candidate','stage','reader','handoff','source_b','comparison']
 FLAGS=['transition_allowed','release_allowed','export_allowed','activation_allowed']
@@ -72,7 +72,7 @@ def _bootstrap(t):
         try:s['_pin'](payloads[p],r)
         except s['SessionBlocked']:raise OperatorBlocked('INSTALLED_PROFILE_CHANGED') from None
     names=sorted(os.listdir(BASE/'catalog/approvals'))
-    if len(names)>10000 or any(re.fullmatch('[0-9a-f-]{36}\.json',n) is None for n in names):raise OperatorBlocked('INSTALLED_LEDGER_SET')
+    if len(names)>10000 or any(re.fullmatch(r'[0-9a-f-]{36}\.json',n) is None for n in names):raise OperatorBlocked('INSTALLED_LEDGER_SET')
     decisions={'catalog/approvals/'+name:_installed('catalog/approvals/'+name) for name in names}
     subject=dict(catalog_id=cid,entity_id=key[0],revision=key[1])
     bound=t['binding'](raw,decisions,payloads,[subject],operation='validate',area='agent_system.operator_trial')

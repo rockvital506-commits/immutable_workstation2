@@ -210,3 +210,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 | [31-agent-system-core-audit.md](31-agent-system-core-audit.md) | Сводный аудит ядра после ENT17: реальные механизмы, 16 способностей/9 условий, пробелы и очередь R1–R8/M1; не normative release coverage |
 
 [32-agent-system-operator-trial-design.md](32-agent-system-operator-trial-design.md) — проект M1: один worker/capture API, роли, состояния и план acceptance; не реализованный coordinator.
+
+[33-agent-system-operator-trial-acceptance.md](33-agent-system-operator-trial-acceptance.md) — I4: T01–T30, уровни evidence, prequalification и отдельная installed practice; не разрешение выпуска.
