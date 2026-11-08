@@ -226,3 +226,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [39-agent-system-action-claim-model.md](39-agent-system-action-claim-model.md) — I2b: исполнимая модель reservation/terminal outcomes, не durable claim/readiness/actuator.
 
 [40-agent-system-inactive-transfer-preparation.md](40-agent-system-inactive-transfer-preparation.md) — R5/I1: inactive exact composition/closure/prompt и historical gap basis для R6, не экспорт.
+
+[41-agent-system-inactive-binding-planner.md](41-agent-system-inactive-binding-planner.md) — declared environment/adapter resolution и private inactive lineage, не actual adaptation/activation.

@@ -6580,3 +6580,25 @@ applicable capability mechanisms/evidence для missing adaptation/activation/
 readiness и R4 durable claim/exporter integration. Actual single new environment
 R7 и activation R8 отдельно; G05/G07 capability prerequisites не повод включать
 unknown environment. R5actual exporter/R4I2b/R6full release не закрыты этим срезом.
+
+
+## 65. Inactive binding planner/history — bounded G05/G07 construct
+
+[41](41-agent-system-inactive-binding-planner.md), критерии07a7b2c до code,
+ENT19r1 six-file protocol depends12r2+18r1,26own methods и full46module
+prequalification PASS. Summary approval8e2ed5aa-58cc-4743-b08d-0348d1edb4ad —
+implementation only, не реальная среда/activation grant. Registry19/31/111/31;
+old135refs/records/bytes/consumers unchanged.
+
+Declared resolver разделяет host.* и binding.*; unknown/constraints/cycles не
+превращаются в available. Private immutable history с predecessor pins/forks
+(no current selection), сохранённые assessments вычислительно replayed. Actual
+CLI: новый source composition25revisions/96norm/31known decisions и2inactive
+**demo** nodes (declared satisfied→survey changed unknown→blocked), readback+
+independent module inspect PASS. Ни host survey, ни actual activation/context
+change/export не выполнялись. Activation proposal только5missing gates/flagsfalse.
+
+G05semantic adapter/observation interface и G07actual authority/actuator/result
+path ещё не квалифицированы. R6full compatible release/R4I2b actions/R5exporter
+и реальные R7/R8 не закрыты. Следом применимая observation/adapter verification
+qualification, не повышение historical coverage по новым файлам/названиям.

@@ -210,3 +210,12 @@ positive readiness/full compatible release и отдельные R7/R8 environme
 mechanisms и применимая evidence qualification (capability G05/G07), затем
 связать qualified coverage/current views/claims. Не активировать неизвестную
 среду и не обходить incomplete guard ради продвижения номера этапа.
+
+
+## 8. Продолжение prerequisites, не discharge gaps
+
+[ENT19 checkpoint41](41-agent-system-inactive-binding-planner.md) добавляет
+неактивный declared planner/private immutable history. Новая R5 preparation
+explicitly выбирает дополнительный root19r1:25/96/31, старый24/90record не меняется.
+G05/G07 actual semantics/authority/actuator/result и R6coverage всё ещё open;
+никакие historical25rows не получили ready от этого расширения.

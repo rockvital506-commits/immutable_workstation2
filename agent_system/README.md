@@ -236,3 +236,17 @@ ENT18 evidence. Actual practice24revisions/90norm artifacts/30entity decisions,
 [Отчёт40](../research/40-agent-system-inactive-transfer-preparation.md) содержит
 pre-code criteria/25own methods/actual pins и R6 gap→check map. R4 durable claims,
 exporter, positive readiness, capability adaptation/activation остаются отдельно.
+
+
+### ENT19r1 — declared inactive binding planner/history
+
+[Контракт/API](adapters/ent-0019/r0001/usage.md),
+[процедура](adapters/ent-0019/r0001/procedure.md) и
+[versioned prompt](adapters/ent-0019/r0001/prompt.md): exact environment/adapter
+inputs, mandatory blockers/optional limitations, no host fact from adapter claim,
+private immutable successor/fork lineage и protected declared-resolution replay.
+Ни active pointer, ни actual activation/adapter execution. Declared satisfied
+не ready; G05/G07 целиком не qualified. [Отчёт41](../research/41-agent-system-inactive-binding-planner.md):
+26own methods/pre46module PASS; actual installed composition25revisions96artifacts/
+31known decisions+2inactive **declared demo** nodes, no host survey. Старые consumers
+не переключены, history не экспортируется/не активируется автоматически.

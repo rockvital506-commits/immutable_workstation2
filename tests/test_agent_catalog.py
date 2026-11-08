@@ -52,8 +52,8 @@ class FirstCatalogTests(unittest.TestCase):
         self.assertEqual(self.registry['schema_version'], '1')
         self.assertEqual(str(uuid.UUID(self.registry['catalog_id'])), CATALOG_ID)
         self.assertEqual({e['entity_id'] for e in self.registry['entities']},
-                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013', 'ENT-0014', 'ENT-0015', 'ENT-0016', 'ENT-0017', 'ENT-0018'})
-        self.assertEqual(len(self.registry['entities']), 18)
+                         {'ENT-0001', 'ENT-0002', 'ENT-0003', 'ENT-0004', 'ENT-0005', 'ENT-0006', 'ENT-0007', 'ENT-0008', 'ENT-0009', 'ENT-0010', 'ENT-0011', 'ENT-0012', 'ENT-0013', 'ENT-0014', 'ENT-0015', 'ENT-0016', 'ENT-0017', 'ENT-0018', 'ENT-0019'})
+        self.assertEqual(len(self.registry['entities']), 19)
         self.assertEqual(self.entity['entity_id'], 'ENT-0001')
         self.assertEqual(self.rev['revision'], 'r0001')
         self.assertEqual(self.rev['kind'], 'contract')
@@ -910,6 +910,33 @@ class InactivePreparationDeploymentTests(unittest.TestCase):
         profile,records=runner['_bootstrap'](runner['_load']())
         self.assertEqual((len(records),len(profile['artifacts'])),(20,70))
         self.assertNotIn(('ENT-0012','r0002'),records)
+
+
+
+class InactiveBindingDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0001', 'title': 'Планировщик неактивной локальной связки и immutable private lineage', 'kind': 'protocol', 'scopes': ['agent_system.connection', 'agent_system.governance'], 'artifacts': [{'path': 'adapters/ent-0019/r0001/binding.py', 'sha256': '6ab63d6f9bf467a8aaeb77c88c29663214df54486407f8e402ab4d690ae9687f', 'size_bytes': 20854, 'role': 'normative'}, {'path': 'adapters/ent-0019/r0001/binding.schema.json', 'sha256': '8574b6e627b213c2931553bf1cb28ad7b9935c3f62193deedd3e3f20e1f24560', 'size_bytes': 5899, 'role': 'normative'}, {'path': 'adapters/ent-0019/r0001/procedure.md', 'sha256': '535af257111ab3e558adddd8da0f96d44592aaeb2cf19482c5ec18a2b38d60fe', 'size_bytes': 4219, 'role': 'normative'}, {'path': 'adapters/ent-0019/r0001/prompt.md', 'sha256': '14bc47aaedce77955facdf4d611b1dba5bbc4c61025170e8c6870a5b525a588b', 'size_bytes': 2065, 'role': 'normative'}, {'path': 'adapters/ent-0019/r0001/usage.md', 'sha256': '3672b797aed065648ddd800c8a442b246db622fe4a8b64768b93000382a864e9', 'size_bytes': 4294, 'role': 'normative'}, {'path': 'adapters/ent-0019/r0001/verify.py', 'sha256': '9b059d40f0a8c29fa394c806933a1b7ada3e8d0de011ddca9a8051128b67d92c', 'size_bytes': 13587, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0012', 'revision': 'r0002'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0018', 'revision': 'r0001'}}], 'approval': {'status': 'approved', 'reference': {'path': 'catalog/approvals/8e2ed5aa-58cc-4743-b08d-0348d1edb4ad.json', 'sha256': '317cc5e35051e581eb97eb7c55d41dea52dfb59f315a1f2be4bb3c3a10fb4f12'}}, 'provenance': {'summary': 'B/P1ред2 и continuation: новая универсальная B2 planner/history capability, reuse exact governance/R5/native private evidence; не копия core и не actual activation/semantic adaptation. Declared observations не execution truth; forks не active selection. Existing consumers/истории не переключены.'}}
+
+    def test_exact_new_binding_component_and_partial_summary(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        entity=next(e for e in registry['entities'] if e['entity_id']=='ENT-0019')
+        self.assertEqual(entity['revisions'],[self.EXPECTED])
+        for a in self.EXPECTED['artifacts']:artifact_bytes(a)
+        d=json.loads(artifact_bytes(self.EXPECTED['approval']['reference']))
+        self.assertEqual(d['decision_type'],'approve_revision');self.assertEqual(d['statement_form'],'summary')
+        self.assertEqual(d['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0019',revision='r0001'))
+        self.assertEqual(d['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in self.EXPECTED['artifacts']])
+
+    def test_pins_dependency_reuse_and_no_legacy_switch(self):
+        import runpy
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        versions={(e['entity_id'],v['revision']):v for e in registry['entities'] for v in e['revisions']}
+        module=runpy.run_path(str(BASE/'adapters/ent-0019/r0001/binding.py'))
+        for key in [('ENT-0012','r0002'),('ENT-0018','r0001')]:
+            for a in versions[key]['artifacts']:self.assertEqual(module['PINS'][a['path']],{k:a[k] for k in ['sha256','size_bytes']})
+        module['_load']()
+        runner=runpy.run_path(str(BASE/'operator/ent-0018/r0001/run.py'))
+        profile,records=runner['_bootstrap'](runner['_load']())
+        self.assertEqual((len(records),len(profile['artifacts'])),(20,70));self.assertNotIn(('ENT-0019','r0001'),records)
 
 
 if __name__ == '__main__':

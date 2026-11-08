@@ -1924,6 +1924,86 @@
           }
         }
       ]
+    },
+    {
+      "entity_id": "ENT-0019",
+      "revisions": [
+        {
+          "revision": "r0001",
+          "title": "Планировщик неактивной локальной связки и immutable private lineage",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.connection",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "adapters/ent-0019/r0001/binding.py",
+              "sha256": "6ab63d6f9bf467a8aaeb77c88c29663214df54486407f8e402ab4d690ae9687f",
+              "size_bytes": 20854,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0019/r0001/binding.schema.json",
+              "sha256": "8574b6e627b213c2931553bf1cb28ad7b9935c3f62193deedd3e3f20e1f24560",
+              "size_bytes": 5899,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0019/r0001/procedure.md",
+              "sha256": "535af257111ab3e558adddd8da0f96d44592aaeb2cf19482c5ec18a2b38d60fe",
+              "size_bytes": 4219,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0019/r0001/prompt.md",
+              "sha256": "14bc47aaedce77955facdf4d611b1dba5bbc4c61025170e8c6870a5b525a588b",
+              "size_bytes": 2065,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0019/r0001/usage.md",
+              "sha256": "3672b797aed065648ddd800c8a442b246db622fe4a8b64768b93000382a864e9",
+              "size_bytes": 4294,
+              "role": "normative"
+            },
+            {
+              "path": "adapters/ent-0019/r0001/verify.py",
+              "sha256": "9b059d40f0a8c29fa394c806933a1b7ada3e8d0de011ddca9a8051128b67d92c",
+              "size_bytes": 13587,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0012",
+                "revision": "r0002"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0018",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/8e2ed5aa-58cc-4743-b08d-0348d1edb4ad.json",
+              "sha256": "317cc5e35051e581eb97eb7c55d41dea52dfb59f315a1f2be4bb3c3a10fb4f12"
+            }
+          },
+          "provenance": {
+            "summary": "B/P1ред2 и continuation: новая универсальная B2 planner/history capability, reuse exact governance/R5/native private evidence; не копия core и не actual activation/semantic adaptation. Declared observations не execution truth; forks не active selection. Existing consumers/истории не переключены."
+          }
+        }
+      ]
     }
   ]
 }

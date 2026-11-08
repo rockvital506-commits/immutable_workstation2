@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:inactive-binding:1",
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ]
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "inactive_binding_request"
+        },
+        "request_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "environment": {
+          "$ref": "#/$defs/ref"
+        },
+        "composition": {
+          "$ref": "#/$defs/ref"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "existing_context": {
+          "$ref": "#/$defs/ref"
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "capability": {
+                "type": "string",
+                "pattern": "^(host|binding)\\.[a-z][a-z0-9_.-]{0,63}$"
+              },
+              "mandatory": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "capability",
+              "mandatory"
+            ]
+          },
+          "maxItems": 128
+        },
+        "adapters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ref"
+          },
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "kind",
+        "request_id",
+        "environment",
+        "composition",
+        "scope",
+        "existing_context",
+        "requirements",
+        "adapters"
+      ]
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "environment_snapshot"
+        },
+        "environment_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "observation_level": {
+          "enum": [
+            "declared_demo",
+            "declared_observations"
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^host\\.[a-z][a-z0-9_.-]{0,63}$"
+              },
+              "state": {
+                "enum": [
+                  "available",
+                  "unavailable",
+                  "unknown"
+                ]
+              },
+              "evidence": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/ref"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "state",
+              "evidence"
+            ]
+          },
+          "maxItems": 128
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "kind",
+        "environment_id",
+        "revision",
+        "observation_level",
+        "capabilities",
+        "constraints"
+      ]
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "adapter_declaration"
+        },
+        "adapter_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "verification_level": {
+          "const": "declaration_only"
+        },
+        "rule": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "size_bytes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 16777216
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "size_bytes"
+          ]
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(host|binding)\\.[a-z][a-z0-9_.-]{0,63}$"
+          },
+          "maxItems": 128
+        },
+        "provides": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^binding\\.[a-z][a-z0-9_.-]{0,63}$"
+          },
+          "maxItems": 128
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "kind",
+        "adapter_id",
+        "revision",
+        "verification_level",
+        "rule",
+        "requires",
+        "provides",
+        "conflicts"
+      ]
+    }
+  }
+}

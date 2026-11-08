@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "decision_id": "8e2ed5aa-58cc-4743-b08d-0348d1edb4ad",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0019",
+    "revision": "r0001"
+  },
+  "artifacts": [
+    {
+      "path": "adapters/ent-0019/r0001/binding.py",
+      "sha256": "6ab63d6f9bf467a8aaeb77c88c29663214df54486407f8e402ab4d690ae9687f",
+      "size_bytes": 20854
+    },
+    {
+      "path": "adapters/ent-0019/r0001/binding.schema.json",
+      "sha256": "8574b6e627b213c2931553bf1cb28ad7b9935c3f62193deedd3e3f20e1f24560",
+      "size_bytes": 5899
+    },
+    {
+      "path": "adapters/ent-0019/r0001/procedure.md",
+      "sha256": "535af257111ab3e558adddd8da0f96d44592aaeb2cf19482c5ec18a2b38d60fe",
+      "size_bytes": 4219
+    },
+    {
+      "path": "adapters/ent-0019/r0001/prompt.md",
+      "sha256": "14bc47aaedce77955facdf4d611b1dba5bbc4c61025170e8c6870a5b525a588b",
+      "size_bytes": 2065
+    },
+    {
+      "path": "adapters/ent-0019/r0001/usage.md",
+      "sha256": "3672b797aed065648ddd800c8a442b246db622fe4a8b64768b93000382a864e9",
+      "size_bytes": 4294
+    },
+    {
+      "path": "adapters/ent-0019/r0001/verify.py",
+      "sha256": "9b059d40f0a8c29fa394c806933a1b7ada3e8d0de011ddca9a8051128b67d92c",
+      "size_bytes": 13587
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-10-07",
+  "statement_form": "summary",
+  "statement": "Условное внедрение inactive binding planner/history по продолжению и прежнему делегированию после проверок. Summary основания, не прямая цитата owner о bytes/новая среда/activation grant.",
+  "basis": "Критерии07a7b2c до code;26own physical/declaration/replay tests и46repository modules prequalification PASS; pip/repo/manifest/diff PASS;135oldrefs/records/bytes unchanged.6own artifacts, exact ENT12r2+ENT18r1 dependencies; host facts separate from binding adapter declarations, unknown/conflicts/cycles fail closed. Private immutable successor/fork history with protected declared-resolution replay, external parent/index pins, no current/active pointer/autoexport. Production revision type/observed own-component gates fixed, fixture loader failure retained in report. This is B2 declared planner and B4 proposal scaffolding, NOT actual host survey/semantic adaptation/G05 complete/G07 actuator/R6 admission. All actions/performed/compatible release/activation flags false. No activation authority from actor/ready boolean, release/export event, implementation approval or continue. Native installed composition+declared demo still pending after registration; no real environment chosen. No new third-party deps or old consumers switched."
+}
