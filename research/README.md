@@ -216,3 +216,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [34-agent-system-methodology-practice.md](34-agent-system-methodology-practice.md) — R3: предварительные критерии W01–W09, самоприменение и выбор независимой задачи; не выполненная практика.
 
 [35-agent-system-workshop-practice.md](35-agent-system-workshop-practice.md) — R3/D: frozen учебное условие, отказ A0/коррекция A1, проверенный выбор и ограничения; не покупка.
+
+[36-agent-system-positive-permissions-design.md](36-agent-system-positive-permissions-design.md) — R4: проект exact release/export decisions, trust boundary и P01–P20; выбор authority ещё впереди, не grant.

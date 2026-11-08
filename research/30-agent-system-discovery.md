@@ -6488,3 +6488,22 @@ Summary approval5ba39be0-7106-4df0-8ed9-08305f6a3bda после prequalification
 области, не независимо/вслепую/на новой платформе. owner_review результата pending,
 не выдуман из согласия на начало. R4 positive decisions далее; R5–R8/release/
 export/activation и полная coverage не выполнены. Никаких новых packages/frameworks.
+
+
+## 60. R4 — exact positive decision model до выбора authority
+
+[Проект36](36-agent-system-positive-permissions-design.md): разделены decision
+validity/authority/readiness/scoped eligibility/actuation. Текущий ENT13 остаётся
+incomplete12/34 даже с явным owner intent; approve_revision/proposal не grants.
+Exact release subject и отдельный export с parent/allowlist/destination/procedure,
+конфликты/отзыв/нет latest-wins, защита от самоссылки, old-view/current-state и
+single-use actuator boundary описаны до реализации. P01–P20 — ожидаемые checks,
+не выполненные positive tests.116старых refs/registry не меняются.
+
+Ключевой ещё не подтверждённый выбор: owner-controlled protected local authority
+(рекомендуется для bounded профиля без новых deps) либо подписи/ключевая политика
+с отдельно согласуемой инфраструктурой; можно пока ограничиться trust contract.
+Hash/actor_role/flag из недоверенного input не аутентифицируют владельца. Source
+approval stream ENT7 не расширяется молча; permission events не подмешиваются
+в catalog/approvals старого ENT18. Никаких новых grants/выпуска/export/activation
+этим design не создано, R4 не закрыт.
