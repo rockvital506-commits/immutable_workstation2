@@ -1,6 +1,6 @@
 # M1: проект сквозного операторского trial и byte-handoff
 
-> §§1–10 сохраняют проектный срез до реализации. Актуальный результат I1 — §11.
+> §§1–10 сохраняют проектный срез до реализации. Результат I1 — §11, актуальный результат I2 — §12.
 
 ## 1. Статус, основание и результат этого этапа
 
@@ -375,3 +375,28 @@ Evidence/private run refs и checks — исследование 30 §52.
 использует тот же ENT8r1/21-pin reader/checker closure. Старые pinned consumers
 не перенаправляются, payload ENT13r1 остаётся 12/34. Следующий шаг — I2/ENT16r2,
 затем I3 coordinator/I4 integration. M1/R2 и выпуск/экспорт/активация не закрыты.
+
+
+## 12. Реализация I2 — guarded trial capture
+
+ENT16r2 реализован/зарегистрирован; полный контракт —
+[usage](../agent_system/staging/ent-0016/r0002/usage.md).
+read_trial и capture_trial проецируют общий worker; raw manifest/objects выдаются
+после поздних guard readbacks, bindings и закрытия FDs. Используются первые
+captured bytes, не readback outputs. Failure/blocked/unsupported — capture=None.
+Новый metadata profile r2; on-disk ENT15 profile/старые ENT17r1 pins неизменны.
+Прямой depends_on ENT16r1 — только parity verifier, не вызов r1 из worker.
+
+94 own tests: 41 metadata, их 41 capture mirror и 12 handoff, не 94 уникальных
+сценария. Pre-registration regression — 36/36 PASS. Manual integration harness
+выполнил ENT9r2 A → ENT15 stage → ENT16r2 capture → отдельный ENT9r2 B → ENT17r1.
+До и после регистрации reader consistent_archived_trial, comparison
+compared_known_views_no_admission. Две отдельные source acquisitions того же
+явно declared registry; это не freshness proof и не A fallback as current.
+Evidence/точные counts/решение — исследование 30 §53.
+
+93 старых normative/approval файла сохранены, payload ENT13r1 всё ещё 12/34.
+**I2 завершён; следующий шаг I3/coordinator**, затем I4/full integration cases.
+Ручной harness не заменяет будущие session preflight/state machine/private
+journal/resource-manager/handoff checks; полная T01–T30 matrix не исполнена.
+M1/R2 целиком, R3–R8 и разрешения release/export/activation не закрыты.

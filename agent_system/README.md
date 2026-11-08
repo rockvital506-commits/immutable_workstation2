@@ -28,7 +28,8 @@
 - [Версионированная таблица и frozen component records](candidates/ent-0013/r0001/candidate.json).
 - [ENT-0014 r0001 — предложения разрешения выпуска/экспорта, только blocked-путь](permissions/ent-0014/r0001/usage.md).
 - [ENT-0015 r0001 — private local trial staging, не публикация](staging/ent-0015/r0001/usage.md).
-- [ENT-0016 r0001 — read-only проверка pinned private trial](staging/ent-0016/r0001/usage.md).
+- [ENT-0016 r0001 — исторический read-only reader](staging/ent-0016/r0001/usage.md).
+- [ENT-0016 r0002 — guarded capture pinned private trial](staging/ent-0016/r0002/usage.md).
 - [ENT-0017 r0001 — archived/new-declared known views, без допуска](validation/ent-0017/r0001/usage.md).
 - [Версионированный промпт подготовки переноса](transfer/ent-0012/r0001/prompt.md).
 
@@ -130,5 +131,6 @@ registry/approval/release. Проект сквозного operator trial заф
 [Проект M1 operator trial и byte-handoff](../research/32-agent-system-operator-trial-design.md)
 задаёт ENT9r2/ENT16r2 и coordinator без изменения r1. I1/ENT9r2 реализован и
 зарегистрирован: capture_plan/metadata projection через один worker, raw maps
-только при полном success. Следующий шаг — I2/ENT16r2. Coordinator и полная
-acceptance matrix ещё не реализованы/не исполнены; M1 целиком не закрыт.
+только при полном success. I2/ENT16r2 также зарегистрирован: первые manifest/objects
+bytes доступны после всех late guards и cleanup. Следующий шаг — I3/coordinator.
+Полная acceptance matrix ещё не исполнена; M1 целиком не закрыт.

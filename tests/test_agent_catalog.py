@@ -671,7 +671,7 @@ class TrialReaderDeploymentTests(unittest.TestCase):
     def test_exact_trial_reader_composition(self):
         registry=json.loads((BASE/'catalog/registry.json').read_bytes())
         entity=next(e for e in registry['entities'] if e['entity_id']=='ENT-0016')
-        self.assertEqual(len(entity['revisions']),1)
+        self.assertEqual([r['revision'] for r in entity['revisions']],['r0001','r0002'])
         revision=entity['revisions'][0]
         for key,value in self.EXPECTED.items():self.assertEqual(revision[key],value)
         for artifact in revision['artifacts']:artifact_bytes(artifact)
@@ -740,6 +740,30 @@ class CaptureWorkerDeploymentTests(unittest.TestCase):
         tree = ast.parse((BASE/'validation/ent-0009/r0002/execute.py').read_text())
         acquisitions = [n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Subscript) and isinstance(n.func.slice,ast.Constant) and n.func.slice.value == 'read_set']
         self.assertEqual(len(acquisitions), 1)
+
+
+class TrialCaptureDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0002', 'title': 'Read-only private trial capture после всех guards', 'kind': 'protocol', 'scopes': ['agent_system.trial'], 'artifacts': [{'path': 'staging/ent-0016/r0002/read.py', 'sha256': '3d5377fa1884631e88e3da51abb44222639809be95695f74ca9fa912543b1e33', 'size_bytes': 10620, 'role': 'normative'}, {'path': 'staging/ent-0016/r0002/verify.py', 'sha256': '3738c49bf88078c5b1e2215e6f107fd1efd00c7da0b7b7bc52281424404035ea', 'size_bytes': 18927, 'role': 'normative'}, {'path': 'staging/ent-0016/r0002/usage.md', 'sha256': '6b189d32946b6fa33ac8fcf74546262cb703602e9244a5f8a461b6425e382d15', 'size_bytes': 7007, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0015', 'revision': 'r0001'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0016', 'revision': 'r0001'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0016', 'revision': 'r0001'}}], 'approval': {'status': 'approved', 'reference': {'path': 'catalog/approvals/8efe7a35-25fb-4a42-9900-b16a99af8700.json', 'sha256': '992aa71966c3605b4c2c524ae3aec3f5c70de7def564becbc7bca25274d1098c'}}, 'provenance': {'summary': 'I2 проекта M1 D08–D09 по заданию B и условному делегированию после проверок. Общий guarded worker/metadata projection; первые bytes только после late readback/bindings/cleanup. Старые r1/ENT17 pins сохранены; не current permissions/atomicity/новый формат архива.'}}
+
+    def test_exact_revision_and_summary_approval(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        entity=next(e for e in registry['entities'] if e['entity_id']=='ENT-0016')
+        actual=next(r for r in entity['revisions'] if r['revision']=='r0002')
+        self.assertEqual(actual,self.EXPECTED)
+        for artifact in actual['artifacts']:artifact_bytes(artifact)
+        decision=json.loads(artifact_bytes(actual['approval']['reference']))
+        self.assertEqual(decision['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0016',revision='r0002'))
+        self.assertEqual(decision['statement_form'],'summary')
+        self.assertEqual(decision['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in actual['artifacts']])
+
+    def test_runtime_pins_and_consumer_coexistence(self):
+        import runpy
+        old=runpy.run_path(str(BASE/'staging/ent-0016/r0001/read.py'))
+        new=runpy.run_path(str(BASE/'staging/ent-0016/r0002/read.py'))
+        self.assertEqual(old['PINS'],new['PINS']);self.assertEqual(len(new['PINS']),3)
+        self.assertEqual(new['PROFILE'],'ent-0016-r0002-private-trial-capture')
+        compare=runpy.run_path(str(BASE/'validation/ent-0017/r0001/compare.py'))
+        self.assertTrue(all('r0001' in p for p in compare['PINS']))
 
 
 if __name__ == '__main__':

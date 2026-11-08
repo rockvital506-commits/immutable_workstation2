@@ -6062,3 +6062,99 @@ coordinator evidence caps/полный journal/privacy controls не реали�
 no broken requirements; `git diff --check` — PASS. 213 public Markdown/86 README/
 33 research, 35 test modules. После записи итога обновлён docs selfhash и повторён
 repository check. Полная coordinator acceptance matrix этим прогоном не исполнена.
+
+## 53. I2 — ENT16r2 capture_trial после всех поздних проверок
+
+По продолжению задания/условному делегированию реализована новая immutable
+ревизия ENT16r2: [полный текст/API](../agent_system/staging/ent-0016/r0002/usage.md),
+read.py/verify.py/usage.md. Прямые depends_on ENT15r1 и ENT16r1 (вторая только для
+compatibility parity verifier). Старые r1/ENT17 pins не перенаправлены.
+Источник — M1 D08–D09 и прежний secure reader; новых сторонних libraries нет.
+
+### 53.1. Контракт и проверки
+
+read_trial возвращает metadata projection общего worker. capture_trial возвращает
+result metadata + capture={manifest_bytes,objects}, только при полном success.
+Возвращаются первые inputs после semantic replay, archived scope checks,
+readbacks/inventories/final bindings и fd cleanup. Нет вызова r1 и pathname
+reread после завершённого reader ради получения maps. Failed/blocked/unsupported
+дают capture=None, interruptions/unknown failures могут не вернуть результат.
+Metadata profile новый r2, ENT15 archive format прежний. Ни одного разрешающего
+перехода/новых прав; overall/current permissions not_evaluated. Raw maps нельзя
+печатать/экспортировать автоматически, private caller policy остаётся обязательной.
+
+94/94 own tests: 41 прежний metadata case, их 41 capture mirror с точными maps/
+withholding assertions и 12 дополнительных handoff cases. Не 94 разных сценария.
+Проверены parity кроме profile, одинаковое число secure reads на обе поверхности
+(первые чтения и необходимые guard readbacks), first-input retention, независимость
+maps, отсутствие stale reuse, late binding/readback failure без capture,
+unknown error/interruption, FD cleanup, exact refs и no writes/chmod/fsync.
+Test hook first-input retention маркирует только возвращаемое значение второго
+чтения после реального guard, не подменяет filesystem metadata/security checks.
+Первый pre-registration full run — **36/36 PASS**, без исправления production FAIL.
+`pip check`/diff check — PASS; версия jsonschema и hash-lock прежние.
+
+Плюсы общей реализации: нет дополнительной acquisition между проверкой и handoff,
+прежний стек/consumer pins сохранены. Минусы: raw surface, более долгое удержание
+bytes, dict allocation, необходимость внешнего handoff/privacy policy. Эффективность
+подтверждена ограниченно single-worker/read-count тестами и практикой интеграции,
+не benchmark/проверкой максимальной нагрузки или глобальной resource quota.
+
+### 53.2. Реальная ручная интеграция, не готовый coordinator
+
+Harness: native ENT9r2 capture A с external plan pin → payload subset ENT13r1
+только из захваченных bytes → ENT15 stage → ENT16r2 capture с manifest pin receipt
+→ отдельная acquisition B/plan B → ENT17r1 сравнение raw captured manifest/objects
+и captured B registry/ledger. Входы/refs сверены. Никакого unsafe reread для
+получения payload после source validation/reader; guard readbacks остаются.
+A и B содержат тот же явно declared registry; отдельное получение B не доказывает
+свежесть, global completeness или новые права. Два read_set наблюдены внешним
+sys.setprofile, не callback injection в public API. Собственный trusted checkout,
+не hostile source/новая платформа/практика поведения агента.
+
+До регистрации: registry 57457 bytes SHA
+`ee258c447bfa4f2ad93fc1ff921c78281e335d1d9d9562fea5f6382e31a69cf4`;
+source closure 18 revisions/54 artifacts/24 decisions. Trial
+`496d0f27-2540-48cf-9caa-597febfee408`, evidence
+`3dd119ef-38b5-4871-ad96-8789f419378e`. 34 payload files/60 objects/584405
+captured object bytes, manifest SHA
+`53238c1082bfd708fa283944dbbd05f1cc26ab8363374f0199706fa0787f6953`.
+
+После регистрации добавлен reader r2 в selection: closure 19 revisions/
+57 artifacts/25 decisions. Trial `003cc160-b3f8-49e6-b23b-00d097bd5eba`,
+evidence `32bfd893-d0b9-46ce-83dc-58714236decf`; 34 payload files/61 objects/
+588967 captured object bytes. Manifest 11751 bytes SHA
+`e1d3bcb84752e4f5a7bc0d043c113dfef8d1f9b43e023234ce4ecb937c4e086e`.
+Оба reader результата consistent_archived_trial; оба comparison результата
+compared_known_views_no_admission; все release/export/activation/transition=false.
+
+Private evidence — ignored local/trial-capture-runs/UUID с private leaf0700/
+files0600/exclusive writes: 90 objects до регистрации, 94 после; trial отдельно
+в local/trials/UUID. Сохранялись также source validation documents/payloads,
+receipt/query/metadata для связности. Это private harness persistence, **не**
+новый coordinator journal/API; доступность ignored файлов после environment
+restore/переноса не обещается. Факт согласованности bytes не аутентифицирует writer.
+
+### 53.3. Регистрация и следующий шаг
+
+Единственное новое approve_revision `8efe7a35-25fb-4a42-9900-b16a99af8700`,
+statement_form=summary по условному делегированию после проверок, не новая прямая
+цитата одобрения exact bytes/выпуска владельцем. Prospective registry/ledger и
+новый subject проверены ENT6r3 перед записью, passed_known_inputs.
+Registry: 17 entities/25 revisions/72 normative artifacts/25 approvals;
+59988 bytes SHA `7d433bbc7e8a1c069beabfbebe2c2d7a47b6cfe59a52b2b6732a7dffc26e80f3`.
+93 прежних normative/approval файла побайтно сохранены, старые records не заменены.
+51 deployment case проверяет exact old/new records, pins и coexistence.
+
+**I2 завершён. Следующее действие — I3: минимальный coordinator по проекту32.**
+У него ещё нет implementation/schema/prompt/procedure/approval; 94 reader tests
+не считаются выполнением полной T01–T30 matrix. Ручной harness не заменяет session
+preflight, state machine, resource caps и private journal. M1/R2 целиком, R3–R8,
+positive permissions/compatible release/export/activation всё ещё не закрыты.
+
+Итоговый post-registration full regression — **36/36 PASS**, включая 94 reader
+capture tests и 51 catalog deployment case. Isolated pip check/diff check — PASS.
+214 public Markdown/86 README/33 research, 36 test modules. После записи итога
+обновлён docs selfhash, repository checks повторены. Все 93 old refs и 24 old
+revision records сохранены, все 97 current refs валидны. Полная M1 acceptance
+matrix, behaviour/freshness/permission checks этим прогоном не подменяются.

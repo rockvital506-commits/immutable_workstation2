@@ -1,0 +1,33 @@
+{
+  "schema_version": "1",
+  "decision_id": "8efe7a35-25fb-4a42-9900-b16a99af8700",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0016",
+    "revision": "r0002"
+  },
+  "artifacts": [
+    {
+      "path": "staging/ent-0016/r0002/read.py",
+      "sha256": "3d5377fa1884631e88e3da51abb44222639809be95695f74ca9fa912543b1e33",
+      "size_bytes": 10620
+    },
+    {
+      "path": "staging/ent-0016/r0002/verify.py",
+      "sha256": "3738c49bf88078c5b1e2215e6f107fd1efd00c7da0b7b7bc52281424404035ea",
+      "size_bytes": 18927
+    },
+    {
+      "path": "staging/ent-0016/r0002/usage.md",
+      "sha256": "6b189d32946b6fa33ac8fcf74546262cb703602e9244a5f8a461b6425e382d15",
+      "size_bytes": 7007
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-08",
+  "statement_form": "summary",
+  "statement": "Условное внедрение ENT16r2 по ранее данному делегированию после проверок и продолжения I2. Summary основания, не отдельная прямая цитата одобрения exact bytes и не release/export/activation.",
+  "basis": "94/94 tests: 41 metadata, их 41 capture mirror, 12 handoff; 36/36 repository sets PASS. Ручная интеграция ENT9r2 A → ENT15 stage → ENT16r2 capture → отдельный ENT9r2 B → ENT17: consistent_archived_trial и compared_known_views_no_admission, 2 source acquisitions. Один guarded worker с first-capture retention, без дополнительного reread; legacy metadata кроме нового profile сохранены. Эффективность обоснована reuse и отсутствием отдельной acquisition ради handoff, не benchmark. 93 прежних refs неизменны; новых libraries нет. Coordinator/полная M1 matrix/поведение/freshness/permissions не подтверждены."
+}
