@@ -6455,3 +6455,18 @@ coverage/отдельное решение release, одна новая сред
 activation. Не считать same trusted Linux checkout доказательством universal
 совместимости/свежести/соблюдения всех правил/permission. Native receipts/pins и
 ограничения — в acceptance report; private raw CAS вне Git. Старые97refs сохранены.
+
+
+## 58. R3 — подготовка содержательной практики
+
+После подтверждения продолжения подготовлен [план R3](34-agent-system-methodology-practice.md):
+пара «изменение методологии самой системы + независимая предметная задача»,
+предварительные наблюдения W01–W09, safe controlled input failure и различение
+self-review/owner review. Рекомендуется учебный план оснащения по безопасным
+данным; альтернативы — учебная загрузка команды или задача владельца. Конкретный
+предмет D ещё требует выбора, затем exact inputs/checks фиксируются до выполнения.
+
+Не новая integrity suite вместо поведения; не новый evaluator/framework и не
+возврат к отложенным предметным задачам. ENT11r2 только возможный предмет S,
+не реализован/не зарегистрирован. Registry/111normative+approval refs неизменны,
+R3 не закрыт, R4–R8/release/export/activation не выполнялись этим планом.

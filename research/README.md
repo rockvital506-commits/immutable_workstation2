@@ -212,3 +212,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [32-agent-system-operator-trial-design.md](32-agent-system-operator-trial-design.md) — проект M1: один worker/capture API, роли, состояния и план acceptance; не реализованный coordinator.
 
 [33-agent-system-operator-trial-acceptance.md](33-agent-system-operator-trial-acceptance.md) — I4: T01–T30, уровни evidence, prequalification и отдельная installed practice; не разрешение выпуска.
+
+[34-agent-system-methodology-practice.md](34-agent-system-methodology-practice.md) — R3: предварительные критерии W01–W09, самоприменение и выбор независимой задачи; не выполненная практика.
