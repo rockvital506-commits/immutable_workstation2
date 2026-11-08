@@ -1,0 +1,1599 @@
+{
+  "version": 1,
+  "status": "research_composition_not_release",
+  "predecessors": [
+    {
+      "path": "research/44-agent-system-universality-trace.json",
+      "sha256": "9ddbd974dc1cb691289d28ae2d48bc5a0bb4e4f9a8acda0807dcf4ee8e33dc82",
+      "size_bytes": 52841
+    },
+    {
+      "path": "research/45-agent-system-linked-meaning-decomposition.json",
+      "sha256": "89656b5ad0f319d3f433120ad7c48e977301f23ebe1319dc5f9dada1aa65c3c7",
+      "size_bytes": 54049
+    },
+    {
+      "path": "research/47-agent-system-mixed-governance-resolution.json",
+      "sha256": "c2b86e8a6658491af120dfef4bdbf8d390725ac9f70cd16abd7272f90b2fe789",
+      "size_bytes": 43423
+    }
+  ],
+  "registry": {
+    "path": "agent_system/catalog/registry.json",
+    "sha256": "fe8683b40e359d1074c166ef7cec0e18b770f8b4c3d4aa2673ab7d93bf148883",
+    "size_bytes": 81383
+  },
+  "roles": [
+    {
+      "entity_id": "ENT-0001",
+      "revision": "r0001",
+      "reference": {
+        "path": "catalog/contracts/agent_system/ent-0001/r0001.md",
+        "sha256": "684e18cc01dc6b1ffd66899615df03b01e756f40f1354f3ac82a81563a944773",
+        "size_bytes": 7564,
+        "role": "normative"
+      },
+      "role": "rule_source",
+      "composition": "retain_exact_reference",
+      "rule_view": "selected_mapping",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0002",
+      "revision": "r0003",
+      "reference": {
+        "path": "catalog/contracts/agent_system/ent-0002/r0003.md",
+        "sha256": "bfdea24314d9f5b26cd54ddaa41fe9aea9843c0f669417c040c1c80991188a1a",
+        "size_bytes": 17780,
+        "role": "normative"
+      },
+      "role": "rule_source",
+      "composition": "retain_exact_reference",
+      "rule_view": "selected_mapping",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0003",
+      "revision": "r0002",
+      "reference": {
+        "path": "specification/ent-0003/r0002/catalog-base.schema.json",
+        "sha256": "42fab3c453930ad9128b2b422837b82d84db9ed6092872765bd7fe1ffaf9a820",
+        "size_bytes": 8696,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0003",
+      "revision": "r0002",
+      "reference": {
+        "path": "specification/ent-0003/r0002/usage.md",
+        "sha256": "a8e6c818ec4bda9eb4d38b3b9abb8ec9e3d694a42329771109931bbc8c5c6ceb",
+        "size_bytes": 9053,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0004",
+      "revision": "r0002",
+      "reference": {
+        "path": "validation/ent-0004/r0002/verify.py",
+        "sha256": "1523ca399a9aee8f89656591b62e1d776504385fe025131c818c694ebb32aedf",
+        "size_bytes": 10872,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0004",
+      "revision": "r0002",
+      "reference": {
+        "path": "validation/ent-0004/r0002/requirements-linux-cp311.lock",
+        "sha256": "4f0eda8261647c9bc18d2f013ef914737290e20c6a82de15f476108b6a528e71",
+        "size_bytes": 746,
+        "role": "normative"
+      },
+      "role": "environment_lock",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0004",
+      "revision": "r0002",
+      "reference": {
+        "path": "validation/ent-0004/r0002/usage.md",
+        "sha256": "78807c10e4ad843472a1413df661c27cdbbd92a889446a000fbc1e9566e1d369",
+        "size_bytes": 7567,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0005",
+      "revision": "r0003",
+      "reference": {
+        "path": "adapters/ent-0005/r0003/reader.py",
+        "sha256": "0ddfb68d81eaf9e3ba56ca20b909462958b8e9de938d230a02d3a14e8b76fc7f",
+        "size_bytes": 15565,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0005",
+      "revision": "r0003",
+      "reference": {
+        "path": "adapters/ent-0005/r0003/verify.py",
+        "sha256": "3a8faf2098e99433223678f2dee92e94af3b511ccc946998024e98c943e55336",
+        "size_bytes": 22384,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0005",
+      "revision": "r0003",
+      "reference": {
+        "path": "adapters/ent-0005/r0003/usage.md",
+        "sha256": "489b9247257472d69ec0266a031edcac09d38e00c117de627a3a38d837262f14",
+        "size_bytes": 12063,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0006",
+      "revision": "r0003",
+      "reference": {
+        "path": "validation/ent-0006/r0003/check.py",
+        "sha256": "d94e2c85c2bd40ff31b5d7edd2f0c9755cf5eb3ce6ab42488aeaff4feb8c275c",
+        "size_bytes": 12042,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0006",
+      "revision": "r0003",
+      "reference": {
+        "path": "validation/ent-0006/r0003/verify.py",
+        "sha256": "9a76cb7cb7d6bb5c5aefdba003cf9c57979ae2f3f9d626dd6e2aeb54ee674e51",
+        "size_bytes": 18332,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0006",
+      "revision": "r0003",
+      "reference": {
+        "path": "validation/ent-0006/r0003/usage.md",
+        "sha256": "89b80b152f5651bdf6ba1880b24f7175a0e7e2c9fa9915e2b306993204d9bff3",
+        "size_bytes": 13351,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0007",
+      "revision": "r0001",
+      "reference": {
+        "path": "specification/ent-0007/r0001/decision-events.schema.json",
+        "sha256": "4cce54eaff0d12e1e59a4aeb0eb1dd9f0f0b951f43968317c70adb7c714005c1",
+        "size_bytes": 12322,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0007",
+      "revision": "r0001",
+      "reference": {
+        "path": "specification/ent-0007/r0001/events.py",
+        "sha256": "26a7dee29f5f5196fd458da90246f343035f2843bed5434f2e71340abb0eaabe",
+        "size_bytes": 11016,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0007",
+      "revision": "r0001",
+      "reference": {
+        "path": "specification/ent-0007/r0001/verify.py",
+        "sha256": "fca460f867777250da0348845bbedc1cc6804a57988abfb1c50f6db32dc18378",
+        "size_bytes": 13994,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0007",
+      "revision": "r0001",
+      "reference": {
+        "path": "specification/ent-0007/r0001/usage.md",
+        "sha256": "ddaa2074aa5dfe6595f95b24f0e937871a2430be84f9a2c416f87d5d2974b4df",
+        "size_bytes": 10376,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0008",
+      "revision": "r0001",
+      "reference": {
+        "path": "specification/ent-0008/r0001/validation-plan.schema.json",
+        "sha256": "e53e11315ebe54566edc5a395e7c4eee57cb82bdac86f9573feed57a0602664b",
+        "size_bytes": 3590,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0008",
+      "revision": "r0001",
+      "reference": {
+        "path": "specification/ent-0008/r0001/validation-run-report.schema.json",
+        "sha256": "7dece17f75d695484b2814c89f17f4e1623f6fec033d24c92953c740540da8bc",
+        "size_bytes": 15972,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0008",
+      "revision": "r0001",
+      "reference": {
+        "path": "specification/ent-0008/r0001/verify.py",
+        "sha256": "7196efe0f6b59f74ba791f80f497ce827d517d344e2c84556991db2f7f54a026",
+        "size_bytes": 14770,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0008",
+      "revision": "r0001",
+      "reference": {
+        "path": "specification/ent-0008/r0001/usage.md",
+        "sha256": "f775530264c1fa0a76b368a264ce4b343405b6b7b6b0e1a39002e97ea3ea0c65",
+        "size_bytes": 14765,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0009/r0001/execute.py",
+        "sha256": "1a4340e4dfe4b01841702ffcb88a65caa0f8ccc05d6adce03c1e4b3d2e6ebdf9",
+        "size_bytes": 12955,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0009/r0001/verify.py",
+        "sha256": "a082eeb938a62f4005d83f3664d027c403055c1f7851ff73a3a6517a09f41268",
+        "size_bytes": 11721,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0009/r0001/usage.md",
+        "sha256": "6c9ed888e4d5538a53521fa4406ce6df50e287718d2c5cc4545882432173425f",
+        "size_bytes": 11256,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revision": "r0002",
+      "reference": {
+        "path": "validation/ent-0009/r0002/execute.py",
+        "sha256": "e28329880072ce4a13b4306bfa5c423860ad8e959147b9653f9ed13650be20ba",
+        "size_bytes": 14202,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revision": "r0002",
+      "reference": {
+        "path": "validation/ent-0009/r0002/verify.py",
+        "sha256": "54a77f771b518a8af9a0d430b03c49e4f32182a180ee71981970ca550dd74296",
+        "size_bytes": 19812,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revision": "r0002",
+      "reference": {
+        "path": "validation/ent-0009/r0002/usage.md",
+        "sha256": "9e8c100d8126c1cda232ddd169a90a95844e62f896bac9b415102c0deb0522c0",
+        "size_bytes": 7482,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0010",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0010/r0001/bundle.py",
+        "sha256": "edfe812458cce41dbcbcdffa6bd568a57ac287506969cc315e2d8a8a999eba08",
+        "size_bytes": 10655,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0010",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0010/r0001/verify.py",
+        "sha256": "6056350c72c9b94a76d9a7c86cff9890947ea9261f3e5e4936ef4053ca05e544",
+        "size_bytes": 10526,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0010",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0010/r0001/usage.md",
+        "sha256": "8b9d39a9824ce41bb68e3aeecb2bffad2b272d556c95c2148ac8ded6cf19d6d1",
+        "size_bytes": 12047,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0001",
+      "reference": {
+        "path": "protocols/ent-0011/r0001/work.md",
+        "sha256": "06923c52d5e7311556e8276cea473af71284f985476f970dced83d085a70cbb4",
+        "size_bytes": 22549,
+        "role": "normative"
+      },
+      "role": "rule_source",
+      "composition": "retain_exact_reference",
+      "rule_view": "selected_mapping",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0001",
+      "reference": {
+        "path": "protocols/ent-0011/r0001/scenarios.json",
+        "sha256": "441d2505e822cdbf37d534a17b4b89c32a54853ff4442d9e019104c0b3ea5f50",
+        "size_bytes": 12480,
+        "role": "normative"
+      },
+      "role": "scenario_fixture",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0001",
+      "reference": {
+        "path": "protocols/ent-0011/r0001/verify.py",
+        "sha256": "3984ddb43a4ac7b45694608b891ac17e331bfc3fb8a624bc716bbd0ded834348",
+        "size_bytes": 6777,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0002",
+      "reference": {
+        "path": "protocols/ent-0011/r0002/work.md",
+        "sha256": "93a3c228c82db2e0af531804388871f222004aa85f3ddbfdeb8c0b1accee6c3d",
+        "size_bytes": 25060,
+        "role": "normative"
+      },
+      "role": "rule_source",
+      "composition": "retain_exact_reference",
+      "rule_view": "selected_mapping",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0002",
+      "reference": {
+        "path": "protocols/ent-0011/r0002/scenarios.json",
+        "sha256": "2e4697a26e6e7484b5ee5e94f65feb986b44e72bb93ec9ada10e68853d8e61df",
+        "size_bytes": 12480,
+        "role": "normative"
+      },
+      "role": "scenario_fixture",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0002",
+      "reference": {
+        "path": "protocols/ent-0011/r0002/verify.py",
+        "sha256": "032a7626aef61300b6c2b2f6b0d9834d855d4e102ed993c2d850fd0e3ce61b69",
+        "size_bytes": 9127,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0002",
+      "reference": {
+        "path": "protocols/ent-0011/r0002/practice.md",
+        "sha256": "2cf74ac39c81a74db85196051f836a5f78797bc60c735aa733970a3a8d56e256",
+        "size_bytes": 5493,
+        "role": "normative"
+      },
+      "role": "rule_source",
+      "composition": "retain_exact_reference",
+      "rule_view": "selected_mapping",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0001",
+      "reference": {
+        "path": "protocols/ent-0012/r0001/governance.md",
+        "sha256": "2402346a739436871ba22b90306cf86c3836eb54f3ddb3801bbfa78398bbc0f9",
+        "size_bytes": 21236,
+        "role": "normative"
+      },
+      "role": "rule_source",
+      "composition": "retain_exact_reference",
+      "rule_view": "selected_mapping",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0001",
+      "reference": {
+        "path": "transfer/ent-0012/r0001/prompt.md",
+        "sha256": "8ce3983ed99058bfa1d1c559142fd884c60bb92b27331b58d2759e47b6e5866a",
+        "size_bytes": 4825,
+        "role": "normative"
+      },
+      "role": "component_prompt",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0001",
+      "reference": {
+        "path": "transfer/ent-0012/r0001/prepare.py",
+        "sha256": "ec2f904f93b15ed234f19b21a87d6a0e8cebc02c538c693c268241dd2420785a",
+        "size_bytes": 5468,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0001",
+      "reference": {
+        "path": "protocols/ent-0012/r0001/verify.py",
+        "sha256": "82acb918e2b4f99171bc421b3fd028fbb0d0eefef68626fd7adccf65399d9d8c",
+        "size_bytes": 8946,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0002",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/prepare.py",
+        "sha256": "fc0db8b9063b35d926b0240984fcde9d6bb90dbde470a25864727294d8d4c344",
+        "size_bytes": 19657,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0002",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/preparation.schema.json",
+        "sha256": "4bb5139908226a3ae7894df60dc5092a7f35c5dad3bb0c6623ea1bd90017ea4f",
+        "size_bytes": 1289,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0002",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/procedure.md",
+        "sha256": "566c5ba67ce471e881d131d5273718c49c9a1e35ba9c8bf122c565b4b3ed0f7b",
+        "size_bytes": 3879,
+        "role": "normative"
+      },
+      "role": "component_procedure",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0002",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/prompt.md",
+        "sha256": "1c5e7a9300e964812c755ecbd187984db0faa818371b19cd93ea67777dfc4917",
+        "size_bytes": 2706,
+        "role": "normative"
+      },
+      "role": "component_prompt",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0002",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/usage.md",
+        "sha256": "4773ba46e35c51559ace42590eff5de988c9abab67fe4421d4f4df134b6cca41",
+        "size_bytes": 4762,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0002",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/verify.py",
+        "sha256": "f1b4bcf30a52818cbc5eb59699981d5f94b60ee84abeea3681891d5f759e8169",
+        "size_bytes": 14322,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0013",
+      "revision": "r0001",
+      "reference": {
+        "path": "candidates/ent-0013/r0001/candidate.json",
+        "sha256": "3a9231b668cc63b1d4a60d032dfe49fb61223a3b2c81b3fd79a42a1ee1b7f428",
+        "size_bytes": 69062,
+        "role": "normative"
+      },
+      "role": "candidate_descriptor",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0013",
+      "revision": "r0001",
+      "reference": {
+        "path": "candidates/ent-0013/r0001/check.py",
+        "sha256": "f185875d034bc61697d926c45eedbb4764d281ccb96a8dca8cc7488dea42a660",
+        "size_bytes": 12871,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0013",
+      "revision": "r0001",
+      "reference": {
+        "path": "candidates/ent-0013/r0001/verify.py",
+        "sha256": "0292c5c700714d7db0cbf27b2e76a56d9d0f1e69e3f19d3488527313dda8a86e",
+        "size_bytes": 8484,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0013",
+      "revision": "r0001",
+      "reference": {
+        "path": "candidates/ent-0013/r0001/usage.md",
+        "sha256": "080abfa5143db3920ed9eec80380e21e31ac43f99fb8236dc678fd4c009cafca",
+        "size_bytes": 15101,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0001",
+      "reference": {
+        "path": "permissions/ent-0014/r0001/proposal.schema.json",
+        "sha256": "142a2a628ed5125229ac48a9e1d6768f62cf21ff138cc12a83fa1c220369ac39",
+        "size_bytes": 4320,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0001",
+      "reference": {
+        "path": "permissions/ent-0014/r0001/check.py",
+        "sha256": "18d47b251a0709ebd021a9473553c7faeb12b8e977d90ed41b20899dde9df1d2",
+        "size_bytes": 7333,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0001",
+      "reference": {
+        "path": "permissions/ent-0014/r0001/verify.py",
+        "sha256": "d94ce36432537ce5e13f4d059fc6f0a0772c0e8fc6cbfb19734aa59e1937ed1e",
+        "size_bytes": 8170,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0001",
+      "reference": {
+        "path": "permissions/ent-0014/r0001/usage.md",
+        "sha256": "3ba366a47b00d576bfb1254dee15404b6e3c245437f3097be301907326eb2fd1",
+        "size_bytes": 15107,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0002",
+      "reference": {
+        "path": "permissions/ent-0014/r0002/authority.py",
+        "sha256": "02965181c4cee21ae022df069fdc08dfad4718e47fe2494e87e3a523859505d3",
+        "size_bytes": 15528,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0002",
+      "reference": {
+        "path": "permissions/ent-0014/r0002/permissions.schema.json",
+        "sha256": "fad42d9a79676dd2458a2412493328a55064dc66505d5696751a5643e6fa0941",
+        "size_bytes": 7335,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0002",
+      "reference": {
+        "path": "permissions/ent-0014/r0002/verify.py",
+        "sha256": "e00d39a00e29217aaf008842e644fbfac3b7e7e158617bb07e31fb86715b14ab",
+        "size_bytes": 18918,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0002",
+      "reference": {
+        "path": "permissions/ent-0014/r0002/usage.md",
+        "sha256": "d6d0df0887849a6ea51dc76beff3fddd650e5408b038c28eb8320c0383fac29b",
+        "size_bytes": 12562,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0002",
+      "reference": {
+        "path": "permissions/ent-0014/r0002/procedure.md",
+        "sha256": "f9fd0753480732468fd16373dd0237c0435ccedc523dff57a429e2b5096ef256",
+        "size_bytes": 4294,
+        "role": "normative"
+      },
+      "role": "component_procedure",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0003",
+      "reference": {
+        "path": "permissions/ent-0014/r0003/state.py",
+        "sha256": "51f767a4bde782cca20e106c597b3fdfeda66a4831e3b2308cb81dff907f0426",
+        "size_bytes": 24745,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0003",
+      "reference": {
+        "path": "permissions/ent-0014/r0003/state.schema.json",
+        "sha256": "21f2ec5fdd3743f2224bd034297bb2067ab4e1d3f4191228f2b4ff63ec8f247c",
+        "size_bytes": 4731,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0003",
+      "reference": {
+        "path": "permissions/ent-0014/r0003/verify.py",
+        "sha256": "07906f34d8a033be45eaf2b6e8e5fcc3330f6b06c5323f0bbddecf4c3e4af6e3",
+        "size_bytes": 23574,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0003",
+      "reference": {
+        "path": "permissions/ent-0014/r0003/usage.md",
+        "sha256": "f522d990a43da8498546bd9a7b1adc1c068b5492735ea9d0b0514b7f5c6bbf96",
+        "size_bytes": 13239,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0003",
+      "reference": {
+        "path": "permissions/ent-0014/r0003/procedure.md",
+        "sha256": "f6cb7ca1916a1dd671583a6e8cfac81dcacc99db85cc945efc929dcf408a6949",
+        "size_bytes": 4972,
+        "role": "normative"
+      },
+      "role": "component_procedure",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0015",
+      "revision": "r0001",
+      "reference": {
+        "path": "staging/ent-0015/r0001/stage.py",
+        "sha256": "2cf729cc03e65a4b28e5dbf1afac99de305c75b3422a08181b48c43392f3b9a0",
+        "size_bytes": 9215,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0015",
+      "revision": "r0001",
+      "reference": {
+        "path": "staging/ent-0015/r0001/verify.py",
+        "sha256": "46c3101cc2b6dd57b879e5e7aa1f9441943b74619ab6875f34bc5cc6d7a20a71",
+        "size_bytes": 13661,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0015",
+      "revision": "r0001",
+      "reference": {
+        "path": "staging/ent-0015/r0001/usage.md",
+        "sha256": "6e0bb1c173921c269d11da522e1ef290b6995e27cfc6857e16b849445151c14a",
+        "size_bytes": 14234,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revision": "r0001",
+      "reference": {
+        "path": "staging/ent-0016/r0001/read.py",
+        "sha256": "942839d7e292cd7f744346f27693cd4e7cc573961d1599f66df4c566548545cf",
+        "size_bytes": 9691,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revision": "r0001",
+      "reference": {
+        "path": "staging/ent-0016/r0001/verify.py",
+        "sha256": "f06e8a76da5f2c9005934d47b0f439b4b8751a0bc50a921bd773bbbd6305967f",
+        "size_bytes": 11917,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revision": "r0001",
+      "reference": {
+        "path": "staging/ent-0016/r0001/usage.md",
+        "sha256": "3dccac0b1705a6a9723d8d72228733010c710a2e3a012ad84c1412b3e6210251",
+        "size_bytes": 12738,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revision": "r0002",
+      "reference": {
+        "path": "staging/ent-0016/r0002/read.py",
+        "sha256": "3d5377fa1884631e88e3da51abb44222639809be95695f74ca9fa912543b1e33",
+        "size_bytes": 10620,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revision": "r0002",
+      "reference": {
+        "path": "staging/ent-0016/r0002/verify.py",
+        "sha256": "3738c49bf88078c5b1e2215e6f107fd1efd00c7da0b7b7bc52281424404035ea",
+        "size_bytes": 18927,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revision": "r0002",
+      "reference": {
+        "path": "staging/ent-0016/r0002/usage.md",
+        "sha256": "6b189d32946b6fa33ac8fcf74546262cb703602e9244a5f8a461b6425e382d15",
+        "size_bytes": 7007,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0017",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0017/r0001/compare.py",
+        "sha256": "65cee528ca1e9ab3594f43476ad21c89ac1ce44d40e6511724ec3c7555dcc95c",
+        "size_bytes": 9453,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0017",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0017/r0001/verify.py",
+        "sha256": "eaeeafe2f135f5a325ee4f1dd6d49cc9fd80707aaff74ba6efee1193d1208aa3",
+        "size_bytes": 10622,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0017",
+      "revision": "r0001",
+      "reference": {
+        "path": "validation/ent-0017/r0001/usage.md",
+        "sha256": "401ff21a4d3a449ccb81bc865701a4f84abcb8232527e10a230c83e5a9306ad9",
+        "size_bytes": 11698,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/acceptance_verify.py",
+        "sha256": "479dcc4a54d3ca5d2f7cf5a8a844d987ce6b90050955a66abfcea4b66c94aae9",
+        "size_bytes": 11722,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/evidence.py",
+        "sha256": "255bffc084d40ce598248ddda687249dcf548992ab4bc386a12cdaeb997f972f",
+        "size_bytes": 9453,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/lab.py",
+        "sha256": "b14bebf61d26e2e2f6291db9c4d7d2a982b907488682c06a4acb7675cb98cc0f",
+        "size_bytes": 4182,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/procedure.md",
+        "sha256": "54f41439a8399f89e6d11dd7fd8ac95569e0bfce96667df5c3bb7bb4e2d0ccbd",
+        "size_bytes": 7077,
+        "role": "normative"
+      },
+      "role": "component_procedure",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/prompt.md",
+        "sha256": "87f5ca9e72f58442981602d7910178c13b49f80ab931333d373f4f20c58be378",
+        "size_bytes": 2307,
+        "role": "normative"
+      },
+      "role": "component_prompt",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/replay.py",
+        "sha256": "95ce2ad08944b1a8fe6d74b27a30f97f087b12b6ff159397b8b1876144fe5e37",
+        "size_bytes": 12615,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/replay_verify.py",
+        "sha256": "b2ecd0a50dfb99452ffc910f89954f17a0e4700f61c198895a3dffcb5051a864",
+        "size_bytes": 8421,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/run.py",
+        "sha256": "68d3251e7b212b673b6705b32855f554829d76147467a18262e208635b4b1c00",
+        "size_bytes": 23614,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/runner_verify.py",
+        "sha256": "d7451bdf77d030f11811472f83ccc3d43e1fb05004832b181a6029a05fa2df6e",
+        "size_bytes": 17076,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/session.py",
+        "sha256": "789a60c5b09744f804bfb3e9685eb63796fbfdeb561376aace5fc2bca8e82aad",
+        "size_bytes": 12464,
+        "role": "normative"
+      },
+      "role": "implementation",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/session.schema.json",
+        "sha256": "76a3030a1f107a92e24cc80af978b0b1c9a0c5c0f16718829b8907a51a66e76f",
+        "size_bytes": 2856,
+        "role": "normative"
+      },
+      "role": "schema",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/usage.md",
+        "sha256": "13eeeab847fa30e15e6cce444a1b2cdd9982cf5147035aed8dfa25aadac12679",
+        "size_bytes": 12012,
+        "role": "normative"
+      },
+      "role": "component_contract",
+      "composition": "retain_exact_reference",
+      "rule_view": "semantic_review_required",
+      "meaning_classification": "not_inferred_from_file_role"
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "reference": {
+        "path": "operator/ent-0018/r0001/verify.py",
+        "sha256": "444b7ea06dd237a1720573ff0cb9e88d12a3b97cd30e7987372c7d931a71ee3a",
+        "size_bytes": 13735,
+        "role": "normative"
+      },
+      "role": "verification",
+      "composition": "retain_exact_reference",
+      "rule_view": "not_literal_rule_text",
+      "meaning_classification": "not_inferred_from_file_role"
+    }
+  ],
+  "known_decisions": [
+    {
+      "path": "agent_system/catalog/approvals/178f1a57-f829-4245-8ea8-bba6386f3da2.json",
+      "sha256": "822d312048b5619d40d3c4a38fd73236dd6362137d8cf988e7a74de883b7f20b",
+      "size_bytes": 2328
+    },
+    {
+      "path": "agent_system/catalog/approvals/1c111816-4db9-452c-b389-ebc24cf3f6f3.json",
+      "sha256": "ab23f7d758770cca284040e798fd0864228b6c1f8049916f3b357fd15f970ded",
+      "size_bytes": 1286
+    },
+    {
+      "path": "agent_system/catalog/approvals/23877997-03d6-434e-b368-e48d92971b76.json",
+      "sha256": "7f864bdd65ec880e27cb4c5a3f6938ffedc773741f015ccc467ce5c2901401e7",
+      "size_bytes": 2625
+    },
+    {
+      "path": "agent_system/catalog/approvals/309b5a29-dc2b-463a-b1b8-3b9ee37534b0.json",
+      "sha256": "d0a1a33029e8dfa6983cd4ac8e9d88c442da5958fe20573b07a64e5cad3c36e7",
+      "size_bytes": 2163
+    },
+    {
+      "path": "agent_system/catalog/approvals/31457a0e-2fe7-41ca-a6c4-dab12960fe57.json",
+      "sha256": "fc3809c03afc42e9abc5d412d4783f28c5ac730b20c564e7b944c51699171da2",
+      "size_bytes": 2018
+    },
+    {
+      "path": "agent_system/catalog/approvals/40d34fbe-c255-4330-b9de-c56bacaeb4bd.json",
+      "sha256": "7ba4df7d8ffe110e6c90cc7de5960a3461f8054a847a1f6f3b3b0b9a5f23f356",
+      "size_bytes": 2796
+    },
+    {
+      "path": "agent_system/catalog/approvals/4c73d55a-5109-488d-8374-d0607e6b4e7c.json",
+      "sha256": "1619ede975e8d919f334777b509dd1a4e1579331ae3d252527f397786ab1e15d",
+      "size_bytes": 2464
+    },
+    {
+      "path": "agent_system/catalog/approvals/4e032693-1b15-41c4-81bd-cc7bf460fa91.json",
+      "sha256": "e1300fd01f6a0aa5e195e3a0305b9ef45818dace7b8f14c8126a3e171f580ac4",
+      "size_bytes": 2257
+    },
+    {
+      "path": "agent_system/catalog/approvals/51a51c5e-0e94-454b-93a6-13717af203c9.json",
+      "sha256": "1c411c88ebce7d36346302c78dc11f9a0291e428037b88fe7f27f51c806d069f",
+      "size_bytes": 2179
+    },
+    {
+      "path": "agent_system/catalog/approvals/5ba39be0-7106-4df0-8ed9-08305f6a3bda.json",
+      "sha256": "bf5e45c7048b9c261c49bef669a26989375bfa61bfdce5fce7ecf7f92e3391e0",
+      "size_bytes": 2910
+    },
+    {
+      "path": "agent_system/catalog/approvals/5c2010e5-281d-473d-9414-02c3e0f54cc9.json",
+      "sha256": "bd88da27ee51eb6bd3ca97b7f088ba6de868ee5ea0668464731dc6d94cc6d7d9",
+      "size_bytes": 2457
+    },
+    {
+      "path": "agent_system/catalog/approvals/6254f54c-e5cc-439b-a5a1-4189eea12993.json",
+      "sha256": "493920b59046495246a29b6e3d5ef193e6780d3d90ec353368dc8003f67f05f1",
+      "size_bytes": 2364
+    },
+    {
+      "path": "agent_system/catalog/approvals/6688f15c-116e-4c91-bb01-944272df4b88.json",
+      "sha256": "d11628d8b7e40c70c4cb67a2d6e437aa8fb7c455dc7d857167e92976640ac8e2",
+      "size_bytes": 2627
+    },
+    {
+      "path": "agent_system/catalog/approvals/77e27297-3504-42b5-bee6-5db1cd4ac8ac.json",
+      "sha256": "5b1d80f01fc2ee2e5fe9c5c23c0f15532f7ab23cd4c022a475ad0587b6e39a7e",
+      "size_bytes": 4121
+    },
+    {
+      "path": "agent_system/catalog/approvals/7a93ff6d-61f7-4b0f-9cda-21ca8b27db35.json",
+      "sha256": "19d939116e7b1e5f9a826580eecacf905a957469f3b173f68892ed3e0cf818ec",
+      "size_bytes": 2740
+    },
+    {
+      "path": "agent_system/catalog/approvals/7ed039c3-a5bb-4ed9-9bbc-5ca63e799d7a.json",
+      "sha256": "64286bb4c20983f77ea472bb22ece4e23f40a8f0f214c6a95fa1e179491b9a74",
+      "size_bytes": 2408
+    },
+    {
+      "path": "agent_system/catalog/approvals/88d77161-d2f0-4017-96f4-1ea31d74abb0.json",
+      "sha256": "85fc1b590857a118d65d1f50bc41be8799adb4baa44415d124e22ba154071413",
+      "size_bytes": 2123
+    },
+    {
+      "path": "agent_system/catalog/approvals/89660162-2b9a-4abe-83aa-df98e5561e4e.json",
+      "sha256": "baad7a863580b707c6818f0b28f4495b32a57d342a7603e306c582f4e305ef3d",
+      "size_bytes": 3045
+    },
+    {
+      "path": "agent_system/catalog/approvals/8c39449d-2df6-4c43-a2eb-19da91a865e0.json",
+      "sha256": "b73522ab001ea798a74975e0cdfef3c73c793e2ad731f372c4b606ebd06ed526",
+      "size_bytes": 2766
+    },
+    {
+      "path": "agent_system/catalog/approvals/8c68d9f9-c096-46a5-a601-4195a4e0d6ce.json",
+      "sha256": "088c6307d8ab87875dbf6984b6f2b690c3eadaca0078d1d798721d623dae91a3",
+      "size_bytes": 983
+    },
+    {
+      "path": "agent_system/catalog/approvals/8e2ed5aa-58cc-4743-b08d-0348d1edb4ad.json",
+      "sha256": "317cc5e35051e581eb97eb7c55d41dea52dfb59f315a1f2be4bb3c3a10fb4f12",
+      "size_bytes": 2815
+    },
+    {
+      "path": "agent_system/catalog/approvals/8efe7a35-25fb-4a42-9900-b16a99af8700.json",
+      "sha256": "992aa71966c3605b4c2c524ae3aec3f5c70de7def564becbc7bca25274d1098c",
+      "size_bytes": 2031
+    },
+    {
+      "path": "agent_system/catalog/approvals/92eab047-e423-4e9a-addd-c4571d9eece7.json",
+      "sha256": "62331fdadc62343a229949654b83f5855989bda02d5a2b37f19fd766d16c76b4",
+      "size_bytes": 2545
+    },
+    {
+      "path": "agent_system/catalog/approvals/940b70a1-ceb1-47fa-aaec-ce7076462c5f.json",
+      "sha256": "4287bd131847dc4a328605806b8fbb9fa2014e36f248ed65ca250d509d596ea3",
+      "size_bytes": 2509
+    },
+    {
+      "path": "agent_system/catalog/approvals/94df86c2-8803-4665-8425-3db650806134.json",
+      "sha256": "f43e25d0ab94e3b589d4bdab46c00cf786b0cb11557b05372590bf909c06dadf",
+      "size_bytes": 2904
+    },
+    {
+      "path": "agent_system/catalog/approvals/a425e4f3-051e-4b73-819f-73e8ec81ab4c.json",
+      "sha256": "db3dd27435889376392b0f68dc9f4b43be8b84a686e714969dff202297b2fd6b",
+      "size_bytes": 2337
+    },
+    {
+      "path": "agent_system/catalog/approvals/be885bac-20c4-42ef-8e1c-9487cd42a543.json",
+      "sha256": "b76c183263087457aec4f6d84f0c4b66442836f4122ed1cdad67e9fb3bb7fa2e",
+      "size_bytes": 1082
+    },
+    {
+      "path": "agent_system/catalog/approvals/d75be70c-69be-4f47-984a-78fe9967d31f.json",
+      "sha256": "c5d3c8d0e9d680b07a4c50f1b704f3cfee49d2bc28687212f4e61565b11ee606",
+      "size_bytes": 2359
+    },
+    {
+      "path": "agent_system/catalog/approvals/d94537df-15ff-4db8-aed9-8fdb270ca13c.json",
+      "sha256": "58554da84d09e724d4181c56975850a437ec8b64e8939a2a43d0b0933253cc1f",
+      "size_bytes": 2711
+    },
+    {
+      "path": "agent_system/catalog/approvals/eb7fd04c-e709-4d74-9135-f13db983d78d.json",
+      "sha256": "c877203a192c4e1569c5ca173ac17bba2b5d22a96a3d5d948018be0c3f2769eb",
+      "size_bytes": 1982
+    },
+    {
+      "path": "agent_system/catalog/approvals/f942dc8a-d050-4d00-9242-b956003c0735.json",
+      "sha256": "306c045c336b9c17c0927cb2d76e9e329e1f903a3a87cef391c4fc43c85a9755",
+      "size_bytes": 2312
+    }
+  ],
+  "core_source": {
+    "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+    "sha256": "684e18cc01dc6b1ffd66899615df03b01e756f40f1354f3ac82a81563a944773",
+    "size_bytes": 7564
+  },
+  "core_scope": {
+    "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+    "start": 208,
+    "end": 451
+  },
+  "core_units": [
+    {
+      "id": "C01",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 467,
+        "end": 938
+      }
+    },
+    {
+      "id": "C02",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 939,
+        "end": 1157
+      }
+    },
+    {
+      "id": "C03",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 1158,
+        "end": 1373
+      }
+    },
+    {
+      "id": "C04",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 1374,
+        "end": 1589
+      }
+    },
+    {
+      "id": "C05",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 1590,
+        "end": 1795
+      }
+    },
+    {
+      "id": "C06",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 1796,
+        "end": 2068
+      }
+    },
+    {
+      "id": "C07",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 2069,
+        "end": 2294
+      }
+    },
+    {
+      "id": "C08",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 2295,
+        "end": 2523
+      }
+    },
+    {
+      "id": "C09",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 2524,
+        "end": 2679
+      }
+    },
+    {
+      "id": "C10",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 2680,
+        "end": 2896
+      }
+    },
+    {
+      "id": "C-purpose",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 52,
+        "end": 206
+      }
+    },
+    {
+      "id": "C-application",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 2898,
+        "end": 3299
+      }
+    },
+    {
+      "id": "C-check",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 3301,
+        "end": 3700
+      }
+    },
+    {
+      "id": "C-uncertainty",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0001/r0001.md",
+        "start": 3702,
+        "end": 4138
+      }
+    }
+  ],
+  "path_group": {
+    "id": "D04",
+    "source": {
+      "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+      "start": 1471,
+      "end": 5180
+    },
+    "source_sha256": "bfdea24314d9f5b26cd54ddaa41fe9aea9843c0f669417c040c1c80991188a1a",
+    "unit_ids": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P15",
+      "P16",
+      "P17"
+    ]
+  },
+  "role_review": "declared_component_purpose_not_semantic_completion",
+  "original_contracts_retained": true
+}

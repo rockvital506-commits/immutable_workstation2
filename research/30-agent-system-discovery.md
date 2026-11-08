@@ -6695,3 +6695,22 @@ assembly+verify PASS; все142refs/registry/source/44–46версии сохр
 source-role разбор среза, не G05full semantics: external D04 и85artifact inventory
 gaps остаются. Следом D04 + role-aware semantic coverage (не весь код/история в prompt,
 не удаление actual implementation deps). Release/export/activation flagsfalse.
+
+
+## 71. Role-aware composition и предъявляемый rule preview
+
+Владелец подтвердил47/продолжение. [48](48-agent-system-role-aware-composition.md):
+D04 связан с exact source/17группами45; ENT1r1 включает10requirements+4supporting
+norm sections. Derived preview86bodies/5contexts — предмет semantic review, не
+новое нормативное ядро/active profile. Все90artifact references24revisions сохранены.
+Functional role не universality grade:26component docs остаются semantic-review
+queue, code/schema/runtime behavior отдельными gaps; ни whole code в prompt, ни
+удаление actual dependencies не разрешены. Сохранены31known decision references,
+без фильтра неизвестных имён и без claims global freshness/owner authentication.
+
+Итог48:20own methods/full51/51modules PASS; fresh assembly/verify/derived preview
+PASS. Unresolved D04reference закрыт связыванием с45, не новым semantic approval.
+86bodies/5contexts;90exact artifact roles/24selected revisions;31known catalog
+refs/26component-doc semantic review queue. Все142refs и прежние source/registry/
+44–47versions сохранены. Предмет review — actual generated preview; полная
+semantic qualification/поведение/authority и actual release/export/activation открыты.
