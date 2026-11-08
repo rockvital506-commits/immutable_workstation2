@@ -1044,6 +1044,69 @@
           "provenance": {
             "summary": "Новая обобщённая разработка по заданию владельца, контракту обязательного ядра и условному делегированию. Самоприменима; не копирует частную архитектуру или скрытые платформенные инструкции. Проверка текста/моделей не равна доказательству поведения агента."
           }
+        },
+        {
+          "revision": "r0002",
+          "title": "Методология с соразмерной процедурой наблюдаемой практической оценки",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.work",
+            "agent_system.governance"
+          ],
+          "artifacts": [
+            {
+              "path": "protocols/ent-0011/r0002/work.md",
+              "sha256": "93a3c228c82db2e0af531804388871f222004aa85f3ddbfdeb8c0b1accee6c3d",
+              "size_bytes": 25060,
+              "role": "normative"
+            },
+            {
+              "path": "protocols/ent-0011/r0002/scenarios.json",
+              "sha256": "2e4697a26e6e7484b5ee5e94f65feb986b44e72bb93ec9ada10e68853d8e61df",
+              "size_bytes": 12480,
+              "role": "normative"
+            },
+            {
+              "path": "protocols/ent-0011/r0002/verify.py",
+              "sha256": "032a7626aef61300b6c2b2f6b0d9834d855d4e102ed993c2d850fd0e3ce61b69",
+              "size_bytes": 9127,
+              "role": "normative"
+            },
+            {
+              "path": "protocols/ent-0011/r0002/practice.md",
+              "sha256": "2cf74ac39c81a74db85196051f836a5f78797bc60c735aa733970a3a8d56e256",
+              "size_bytes": 5493,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0001",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0011",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/5ba39be0-7106-4df0-8ed9-08305f6a3bda.json",
+              "sha256": "bf5e45c7048b9c261c49bef669a26989375bfa61bfdce5fce7ecf7f92e3391e0"
+            }
+          },
+          "provenance": {
+            "summary": "Универсальное расширение W09 по согласованному R3 и conditional delegation, не новый core/agent evaluator. Предварительно frozen S/D, открытая учебная практика и self-review с явными ограничениями; старые consumers не переключены."
+          }
         }
       ]
     },

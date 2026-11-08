@@ -533,7 +533,7 @@ class WorkProtocolDeploymentTests(unittest.TestCase):
     def test_exact_work_protocol_composition(self):
         registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
         entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0011')
-        self.assertEqual(len(entity['revisions']), 1)
+        self.assertEqual([v['revision'] for v in entity['revisions']], ['r0001','r0002'])
         rev = entity['revisions'][0]
         for key, value in self.EXPECTED.items():
             self.assertEqual(rev[key], value)
@@ -791,6 +791,40 @@ class OperatorTrialDeploymentTests(unittest.TestCase):
         self.assertEqual(runner['DEPENDENCIES'],{('ENT-0009','r0002'),('ENT-0016','r0002'),('ENT-0013','r0001'),('ENT-0015','r0001'),('ENT-0017','r0001')})
         for entity in ['ENT-0009','ENT-0016']:
             self.assertIn((entity,'r0001'),records);self.assertIn((entity,'r0002'),records)
+
+
+
+class WorkPracticeDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0002', 'title': 'Методология с соразмерной процедурой наблюдаемой практической оценки', 'kind': 'protocol', 'scopes': ['agent_system.work', 'agent_system.governance'], 'artifacts': [{'path': 'protocols/ent-0011/r0002/work.md', 'sha256': '93a3c228c82db2e0af531804388871f222004aa85f3ddbfdeb8c0b1accee6c3d', 'size_bytes': 25060, 'role': 'normative'}, {'path': 'protocols/ent-0011/r0002/scenarios.json', 'sha256': '2e4697a26e6e7484b5ee5e94f65feb986b44e72bb93ec9ada10e68853d8e61df', 'size_bytes': 12480, 'role': 'normative'}, {'path': 'protocols/ent-0011/r0002/verify.py', 'sha256': '032a7626aef61300b6c2b2f6b0d9834d855d4e102ed993c2d850fd0e3ce61b69', 'size_bytes': 9127, 'role': 'normative'}, {'path': 'protocols/ent-0011/r0002/practice.md', 'sha256': '2cf74ac39c81a74db85196051f836a5f78797bc60c735aa733970a3a8d56e256', 'size_bytes': 5493, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0001', 'revision': 'r0001'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0011', 'revision': 'r0001'}}], 'approval': {'status': 'approved', 'reference': {'path': 'catalog/approvals/5ba39be0-7106-4df0-8ed9-08305f6a3bda.json', 'sha256': 'bf5e45c7048b9c261c49bef669a26989375bfa61bfdce5fce7ecf7f92e3391e0'}}, 'provenance': {'summary': 'Универсальное расширение W09 по согласованному R3 и conditional delegation, не новый core/agent evaluator. Предварительно frozen S/D, открытая учебная практика и self-review с явными ограничениями; старые consumers не переключены.'}}
+
+    def test_exact_full_revision_summary(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        actual=next(v for e in registry['entities'] if e['entity_id']=='ENT-0011' for v in e['revisions'] if v['revision']=='r0002')
+        self.assertEqual(actual,self.EXPECTED)
+        for a in actual['artifacts']:artifact_bytes(a)
+        decision=json.loads(artifact_bytes(actual['approval']['reference']))
+        self.assertEqual(decision['statement_form'],'summary')
+        self.assertEqual(decision['decision_type'],'approve_revision')
+        self.assertEqual(decision['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0011',revision='r0002'))
+        self.assertEqual(decision['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in actual['artifacts']])
+
+    def test_existing_consumers_not_switched(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        versions={(e['entity_id'],v['revision']):v for e in registry['entities'] for v in e['revisions']}
+        for e in ['ENT-0012','ENT-0013']:
+            closure=set();todo=[(e,'r0001')]
+            while todo:
+                key=todo.pop()
+                if key in closure:continue
+                closure.add(key)
+                todo += [(rel['target']['entity_id'],rel['target']['revision']) for rel in versions[key]['relations'] if rel['type']=='depends_on']
+            self.assertIn(('ENT-0011','r0001'),closure)
+            self.assertNotIn(('ENT-0011','r0002'),closure)
+        import runpy
+        runner=runpy.run_path(str(BASE/'operator/ent-0018/r0001/run.py'))
+        profile,records=runner['_bootstrap'](runner['_load']())
+        self.assertEqual((len(records),len(profile['artifacts'])),(20,70))
+        self.assertIn(('ENT-0011','r0001'),records);self.assertNotIn(('ENT-0011','r0002'),records)
 
 
 if __name__ == '__main__':

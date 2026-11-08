@@ -6470,3 +6470,21 @@ self-review/owner review. Рекомендуется учебный план о�
 возврат к отложенным предметным задачам. ENT11r2 только возможный предмет S,
 не реализован/не зарегистрирован. Registry/111normative+approval refs неизменны,
 R3 не закрыт, R4–R8/release/export/activation не выполнялись этим планом.
+
+
+## 59. R3 — согласованные S/D и bounded operator observation
+
+Владелец выбрал учебную мастерскую. [Условие/результат D](35-agent-system-workshop-practice.md):
+baseline до исполнения, A0 subtotal mismatch40 → affected stop; разрешённый A1
+980, C0 986, B0 неизвестен до доставки (порог бюджета140/ничья с A1 при120).
+Реальных закупок/рыночных claims нет. [S и W01–W09 observations](34-agent-system-methodology-practice.md):
+ENT11r2 с practice.md внутри существующего protocol; core/W00–W08/прежние111refs
+сохранены. Отказы registration metadata и deployment fixture описаны/перепроверены,
+не скрыты. Prequalification41/41;20own integrity/model tests, не20behavior cases.
+Summary approval5ba39be0-7106-4df0-8ed9-08305f6a3bda после prequalification;
+18entities27revisions89norm27approvals. Старые consumers остаются на r1.
+
+Практическая часть R3 выполнена на выбранных задачах в bounded operator/self-review
+области, не независимо/вслепую/на новой платформе. owner_review результата pending,
+не выдуман из согласия на начало. R4 positive decisions далее; R5–R8/release/
+export/activation и полная coverage не выполнены. Никаких новых packages/frameworks.

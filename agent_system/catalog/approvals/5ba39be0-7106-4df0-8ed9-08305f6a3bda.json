@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "decision_id": "5ba39be0-7106-4df0-8ed9-08305f6a3bda",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0011",
+    "revision": "r0002"
+  },
+  "artifacts": [
+    {
+      "path": "protocols/ent-0011/r0002/work.md",
+      "sha256": "93a3c228c82db2e0af531804388871f222004aa85f3ddbfdeb8c0b1accee6c3d",
+      "size_bytes": 25060
+    },
+    {
+      "path": "protocols/ent-0011/r0002/scenarios.json",
+      "sha256": "2e4697a26e6e7484b5ee5e94f65feb986b44e72bb93ec9ada10e68853d8e61df",
+      "size_bytes": 12480
+    },
+    {
+      "path": "protocols/ent-0011/r0002/verify.py",
+      "sha256": "032a7626aef61300b6c2b2f6b0d9834d855d4e102ed993c2d850fd0e3ce61b69",
+      "size_bytes": 9127
+    },
+    {
+      "path": "protocols/ent-0011/r0002/practice.md",
+      "sha256": "2cf74ac39c81a74db85196051f836a5f78797bc60c735aa733970a3a8d56e256",
+      "size_bytes": 5493
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-10-07",
+  "statement_form": "summary",
+  "statement": "Условное внедрение ENT11r2 по ранее данному делегированию после относящихся проверок. Summary основания, не новая прямая цитата владельца об exact bytes и не release/export/activation permission.",
+  "basis": "R3 продолжение подтверждено, предмет workshop выбран владельцем. S baseline65fbe36 и D baseline0518648 сохранены до действий. Безопасная аналитическая D: A0 mismatch/affected stop, разрешённый A1 и повторная проверка, неизвестный B отложен; никаких покупок. S: полная r2 операционализирует существующий W09, W00–W08/core не изменены; depends_on ENT1r1, не новый evaluator/core/framework. До регистрации20/20 integrity/model tests и41/41 repository modules PASS, pip/repo/manifest/diff checks PASS. Старые111refs/records unchanged. Эффективность ограниченно обоснована reuse одного protocol и существующих средств вместо нового framework; speedup/универсальный benchmark не заявлены. S/D observation self_review, owner_review pending/independent_review not_observed, не blind/evaluation любого поведения. Model scenarios остаются model_review/agent_behavior_verified=false. Current consumers ENT12/ENT13/ENT18 и payload12/34 закреплены на r1; supersedes не переключает/не отзывает r1. Никаких новых сторонних зависимостей, permissions, экспорта/activation."
+}

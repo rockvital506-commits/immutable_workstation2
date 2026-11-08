@@ -2,8 +2,8 @@
 
 ## 1. Статус, основание и границы
 
-**Статус: подготовлен план; конкретная пара задач ожидает выбора владельца.**
-R3 не выполнен и не закрыт. Последнее «подтверждаю, продолжай» разрешает продолжить
+**Исходный план до выбора; актуальные наблюдения — §8 и последующие результаты.**
+На момент исходного плана R3 не был выполнен. Последнее «подтверждаю, продолжай» разрешает продолжить
 маршрут после I4, но не выбирает за владельца независимую предметную задачу.
 Это локальная рабочая запись, не нормативная сущность/экспорт/активная связка.
 
@@ -126,7 +126,7 @@ Implementation по делегированию допустима только �
    Положительный итог — только для выбранных задач/условий. R4–R8, release и
    activation остаются отдельными. Не менять ENT13 coverage по факту этого плана.
 
-## 6. Выполнено сейчас / осталось
+## 6. Подготовительный срез до выбора / что оставалось
 
 Выполнены чтение исходной методологии/аудита, выбор минимального метода,
 проект пары задач и предварительная карта критериев. Нормативные111refs и
@@ -149,7 +149,7 @@ inventory219md/86README/35research/40modules,516relative links/0broken.
 ## 7. Выбранная пара и baseline самоприменения S
 
 Владелец выбрал workshop. D: условия/criteria сохранены до исполнения в commit
-619a486, результаты — в отдельном отчёте35. Нового выбора того же предмета не нужно.
+0518648, результаты — в отдельном отчёте35. Нового выбора того же предмета не нужно.
 
 До реализации S фиксируются следующие критерии:
 
@@ -171,3 +171,93 @@ subject checks; минус — ещё один текст и необходим�
 Риск формального checklist ограничен запретом считать integrity tests практикой.
 Действующие consumers остаются на r1: большее покрытие r2 не наследуется ими.
 Новые parties/packages/экспортные механизмы не требуются. Core не ослабляется.
+
+## 8. Практика S/D — наблюдения до решения о внедрении
+
+Выбор workshop получен, [предметная практика D](35-agent-system-workshop-practice.md)
+выполнена на frozen данных. S baseline65fbe36; подготовлена full ENT11r2 с4files,
+depends_on только ENT1r1; r1 сравнивается immutable baseline hashes, не runtime
+чтением необъявленной зависимости. work/scenarios/verify сохраняют14model cases,
+practice.md операционализирует W09;20own integrity tests PASS, это не20behavior cases.
+
+| W | S: наблюдение | D: наблюдение | Предварительная оценка и граница |
+|---|---|---|---|
+| W01 | Прочитаны E11/E12, аудит и exact sources; reuse без нового evaluator | Источник — явное учебное условие, не рынок/поставщики | observed_supported в этих sources; внешнее исследование неприменимо |
+| W02 | Protocol tests не заявлены evaluator; consumers r1 отдельно | B delivery unknown; реальное качество/сроки не проверены | observed_supported в этих границах |
+| W03 | Сравнены model-only/operator/external; отдельный ENT19 отклонён как дубль | Сравнены subtotal/смешивание/full total; условия применимости | observed_supported для анализа; universal pattern не установлен |
+| W04 | S01–S08 frozen до r2; reuse/цена/риски указаны | D01–D08 frozen до расчёта, бюджет/полнота/порядок выбора не изменены | observed_supported; измерения скорости нет |
+| W05 | Draft/testing/implementation/consumers независимы | Рекомендация A1 не заказ; дефект учебный и виден заранее | observed_supported; не blind/real-world trial |
+| W06 | По делегированию готовится r2 без core/switch/grants | Запрошен и получен конкретный выбор workshop; разрешение A1 из baseline | observed_supported в имеющемся полномочии |
+| W07 | Сводный shell вызов вернул1 при20OK в log; причина не установлена, отдельный повтор20/20 exit0; первоначальный код не принят как PASS | A0 exit1, affected stop; A1 ограниченная коррекция, exit0 | observed_supported в этих отказах; не crash/race proof |
+| W08 | ENT12/13/18 остаются exact r1, переход не выполнен | B отложен: новая доставка → пересчёт, без автоматического заказа | observed_supported; возвращение после реальной новой цены not_observed |
+| W09 |20tests проверяют integrity; полный suite/111refs отдельно до регистрации | Пересчёт940/860/836,980/986,остатки20/14,threshold140/120 | observed_supported в указанных checks; независимый review отсутствует |
+
+Все оценки — **operator_observation / self_review**, предварительный результат
+данного агента по открытым критериям. owner_review=review_pending;
+independent_review=not_observed. Не измерялись устойчивость к скрытому тесту,
+поведение другой модели/новой среды/любой задачи и выполнение всех возможных W
+ветвей. Таблица не меняет false agent_behavior_verified в model scenarios.
+
+Пересоздан прежний isolated interpreter по ENT4r2 hash-lock, system packages не
+менялись. Данных/критериев при восстановлении ancestry не меняли; stash сохранён,
+две pre-execution фиксации rebased поверх3e9f7c9 без force push. Полный suite и
+условное implementation решение следуют отдельно; пока этот срез их не заявляет.
+
+
+## 9. Implementation и коррекции S
+
+Prequalification:41/41modules PASS,20own integrity/model methods PASS, pip check,
+repo38/0warnings/0errors, manifest/diff checks. Перед регистрацией все111старых
+normative/approval refs/bytes проверены против ad24d88; их revision records не менялись.
+Approval5ba39be0-7106-4df0-8ed9-08305f6a3bda — conditional summary implementation,
+не новая прямая цитата владельца о bytes и не review практического результата.
+Registered ENT11r2:4normative files, depends_on ENT1r1, supersedes ENT11r1;
+оба прежних scopes сохранены: agent_system.work / agent_system.governance.
+
+Два дополнительных отказа сохранены, не скрыты:
+
+1. Registration helper предложил только scope work; guard сравнения со старой
+   revision остановил append в index (AssertionError). Approval file уже был
+   записан, поэтому он сохранён с тем же UUID/байтами; исправлен metadata candidate
+   на оба прежних scopes, новая лишняя decision не создавалась. Нормативные4files
+   не правились. Retry завершил index registration. Это исправление ошибочного
+   сокращения metadata, не ослабление guard или новый grant.
+2. Новый deployment test предположил прямую зависимость ENT13→ENT11:54/55 PASS,
+   refs=[] в этом assertion. Фактическая зависимость транзитивная через ENT12.
+   Исправлена проверка на точный depends_on closure (r1 присутствует/r2 отсутствует),
+   не production metadata и не старые EXPECTED pins. Повтор:55/55 PASS.
+
+Итог registry:18entities/27revisions/89norm artifacts/27approvals,68244bytes,
+SHA256 `36870624be4c8cc5436cb44ac6f97eb169b27db1b22910d8994fe8ae9d3219b5`.
+116artifact/approval refs. ENT12/ENT13/ENT18 продолжают exact r1, M1 source20/70,
+payload12/34. Смена r1→r2 consumers/bindings не выполнялась и не отзывается r1.
+Использование нового protocol в дальнейшем выбирается явно; registry approval
+не изменяет платформенный prompt или активную связку автоматически.
+
+Все S01–S08 выполнены в заявленной области с указанными отказами/коррекциями.
+Эффект ограничен явной операционализацией предметной проверки и reviewer level,
+reuse существующего protocol вместо дополнительного слоя/авто-evaluator.
+Самооценка не независимый review/benchmark. Два случая не доказывают все возможные
+ветви W. Практическая часть R3 выполнена для согласованной пары; оценки bounded,
+owner_review всё ещё review_pending, independent_review not_observed.
+
+
+## 10. Финальная проверка
+
+После регистрации/коррекций полный suite повторён:41/41modules PASS,
+55catalog deployment methods и20r2 integrity/model methods PASS. pip check —
+no broken requirements; repo-validate38checks/0warnings/0errors; manifest/
+self-hash/diff checks PASS. public222md/86README/36research/41modules,
+525relative links/0broken. Старые111refs/байты и все прежние revision records
+сохранены;4новых artifacts совпадают с freeze до approval.116refs проверены.
+
+Дополнительно реальный documented ENT18 no-B client после добавления r2:
+trial_checked_no_query,1capture/full semantic replay PASS. Receipt UUID
+feef47ff-7389-40c1-a194-d2add74b2beb, index14038bytes,
+SHA256 `9b331c921c3b81d760b04f8f6ba336844cc76b8ea62aae1a7567595dff22afe1`.
+Это regression прежнего M1, **не** дополнительный evaluator W/предметной задачи.
+Evidence local вне Git, его наличие при следующем восстановлении не обещано.
+
+Никаких release/export/activation решений/переключения платформы. Следующий
+блок — R4 positive decisions: точный предмет/полномочие/доверие/конфликты и отзыв,
+не автоматическое разрешение неполного payload. R5–R8 остаются отдельными.

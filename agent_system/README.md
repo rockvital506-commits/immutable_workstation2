@@ -171,3 +171,17 @@ installed CLI с B и без B:2/1acquisitions, CAS и отдельный full s
 PASS. [Матрица T01–T30 и pins](../research/33-agent-system-operator-trial-acceptance.md).
 Это закрывает bounded M1, не agent behavior/новую среду/совместимый выпуск или
 activation; payload ENT13r1 остаётся incomplete12/34, все grants false.
+
+
+### R3 — наблюдаемая методология на двух согласованных задачах
+
+[ENT11r2](protocols/ent-0011/r0002/work.md) добавляет соразмерную
+[процедуру практической оценки](protocols/ent-0011/r0002/practice.md), не evaluator.
+Самоприменение: новая immutable revision без смены core/старых consumers; предметная
+задача: учебный план мастерской, affected stop A0/разрешённая A1, B unknown.
+[Наблюдения W01–W09](../research/34-agent-system-methodology-practice.md) и
+[предметный результат](../research/35-agent-system-workshop-practice.md).
+Это operator observation/self-review, не blind/independent behavior guarantee;
+owner review pending. Model tests остаются model_review. ENT12/13/18
+сохраняют прежние exact pins; payload остаётся12versions/34artifacts, без
+release/export/activation или автоматической смены связок.
