@@ -6676,3 +6676,22 @@ PR04 и external D04 unresolved; approvals/actions/full release не созда�
 registry/agent_system bytes и прежние44–45versions сохранены. Без actual export/
 activation. Следом6holds и exact semantic dependencies; generic equivalence и
 правильность реального поведения ещё не установлены.
+
+
+## 70. Mixed governance resolution без ложной capability готовности
+
+[47](47-agent-system-mixed-governance-resolution.md):6holds/9source gaps разобраны;
+аудит G03/G06 выявил ещё2local capability snapshots.17parents→41parts:
+14preserve/14generalize/13exclude. Source facts исключены из universal rule bodies/
+contexts, но exact component constraints и original contracts сохранены отдельно.
+PR04 evidence/reviewer meanings, G04freeze/tool pins/trust, G05before-copy/allowlist/
+permission/action distinction не ослаблены. Draft55bodies/4contexts/17qualification
+records;6holds/9gaps получили роли, не full semantic qualification. External D04 и
+85unselected artifact gaps остаются; actual actions/authority/behavior не подтверждены.
+
+Итог47:19own methods и full50/50modules PASS; corrected mutation oracle различает
+within-parent reorder и interleaving независимых parents. Fresh55body/4context
+assembly+verify PASS; все142refs/registry/source/44–46версии сохранены. Закрыт
+source-role разбор среза, не G05full semantics: external D04 и85artifact inventory
+gaps остаются. Следом D04 + role-aware semantic coverage (не весь код/история в prompt,
+не удаление actual implementation deps). Release/export/activation flagsfalse.

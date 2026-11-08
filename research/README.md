@@ -236,3 +236,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [45-agent-system-linked-meaning-decomposition.md](45-agent-system-linked-meaning-decomposition.md) — полный source-разбор U01 на17связанных групп,39finite semantic scenarios и exact dependency boundary; не готовый semantic adapter.
 
 [46-agent-system-core-meaning-coverage.md](46-agent-system-core-meaning-coverage.md) — remaining ENT2/W/governance coverage, условное делегирование без новой доверенности, exact-version aliases и сборка partial draft из pinned sources.
+
+[47-agent-system-mixed-governance-resolution.md](47-agent-system-mixed-governance-resolution.md) —6holds/9gaps и дополнительный G03/G06 audit: source facts вне rule text, retained limits, revised research draft и proposed обобщения.

@@ -1,0 +1,944 @@
+{
+  "version": 1,
+  "status": "research_resolution_not_normative",
+  "predecessor": {
+    "path": "research/46-agent-system-core-meaning-coverage.json",
+    "sha256": "c94a1b52e01e24339ebdb896b7c78f99ee12900df635c7a21c3ab13618ea5655"
+  },
+  "parents": [
+    {
+      "id": "PR04",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+        "start": 1826,
+        "end": 2645
+      }
+    },
+    {
+      "id": "G00",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 52,
+        "end": 1106
+      }
+    },
+    {
+      "id": "G04",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 4709,
+        "end": 6464
+      }
+    },
+    {
+      "id": "G05",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 6466,
+        "end": 8087
+      }
+    },
+    {
+      "id": "G08",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 10543,
+        "end": 11531
+      }
+    },
+    {
+      "id": "G09",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 11533,
+        "end": 12276
+      }
+    },
+    {
+      "id": "X01",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 0,
+        "end": 253,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "X02",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 489,
+        "end": 505,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "X03",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 7734,
+        "end": 9835,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "X04",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 0,
+        "end": 622,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "X05",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 10951,
+        "end": 12298,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "X06",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 0,
+        "end": 635,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "X07",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 11407,
+        "end": 13801,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "X08",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+        "start": 0,
+        "end": 52,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "X09",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 0,
+        "end": 52,
+        "status": "not_semantically_mapped"
+      }
+    },
+    {
+      "id": "G03",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 3194,
+        "end": 4707
+      }
+    },
+    {
+      "id": "G06",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 8089,
+        "end": 9562
+      }
+    }
+  ],
+  "parts": [
+    {
+      "id": "PR04.01",
+      "parent": "PR04",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+        "start": 1826,
+        "end": 2645
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+        "start": 52,
+        "end": 468
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Для каждого применимого требования указывать источник, ссылку на наблюдение или артефакт, предметную проверку, результат и границы вывода. Различать подтверждение только в наблюдавшейся части, неуспех, отсутствие наблюдения и неприменимость с причиной; частичное не повышать до полного. Эти состояния не являются статусом каталога или разрешением. Указывать фактический уровень доказательств: модель, локальное исполнение, наблюдение оператора или реальная среда, с областью выполнения. Самооценку, review владельца и независимую проверку указывать только по факту такого review; отсутствие review сохранять явно, не назначать вымышленного reviewer и не придумывать результат. Утверждение оператора не является аутентификацией исполнения.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "G00.01",
+      "parent": "G00",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 52,
+        "end": 650
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "exact_component_identity_and_dependencies_retained",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "G00.02",
+      "parent": "G00",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 650,
+        "end": 862
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G00.03",
+      "parent": "G00",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 862,
+        "end": 1060
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "preparation_only_not_export_release_adapter_activation",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "G00.04",
+      "parent": "G00",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 1060,
+        "end": 1106
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G04.01",
+      "parent": "G04",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 4709,
+        "end": 5158
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Подготовку переноса начинать через точную согласованную версию единой точки входа и её prompt, а не плавающую копию. Локальные прогоны, исходные данные, секреты, частные отчёты и история связок не включаются автоматически. Сама процедура подготовки, её prompt и инструменты учитываются как переносимые компоненты с версиями, зависимостями и согласованием.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "G04.02",
+      "parent": "G04",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 5158,
+        "end": 5551
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G04.03",
+      "parent": "G04",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 5551,
+        "end": 5866
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "preflight_only_no_source_acquisition_closure_decision_confirmation_or_export_allowlist_approval",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "G04.04",
+      "parent": "G04",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 5866,
+        "end": 6079
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Подготовительное свидетельство фиксирует объявленные входы, но само по себе не утверждает разрешённый allowlist экспорта. В нём должны быть закреплены точные байты применённых инструментов подготовки и проверок, а также профиль проверок.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "G04.05",
+      "parent": "G04",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 6079,
+        "end": 6161
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Инструмент подготовки должен доверенно устанавливаться вызывающей стороной; его самохэш не создаёт доверие к собственной установке.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "G04.06",
+      "parent": "G04",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 6161,
+        "end": 6464
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G05.01",
+      "parent": "G05",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 6466,
+        "end": 6922
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "После подготовки, но до копирования безопасно получить именно объявленные байты и полный известный набор решений; сопоставить инвентарь, проверить индекс, подтверждения, точное замыкание зависимостей и ограничения для выбранного контекста экспорта. Применять согласованный профиль проверок с его границей чтения, основанием доверия и пределами модели; успешная проверка не доказывает невидимых изменений.",
+      "retained_limit": "exact_checking_profile_not_retargeted",
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "G05.02",
+      "parent": "G05",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 6922,
+        "end": 7740
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G05.03",
+      "parent": "G05",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 7740,
+        "end": 7841
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G05.04",
+      "parent": "G05",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 7841,
+        "end": 8087
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "source_component_lacks_safe_publishing_actuator_release_coverage_and_export_readiness",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "G08.01",
+      "parent": "G08",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 10543,
+        "end": 10906
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G08.02",
+      "parent": "G08",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 10906,
+        "end": 11074
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "synthetic_preparation_checks_not_agent_behavior",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "G08.03",
+      "parent": "G08",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 11074,
+        "end": 11531
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Проверка свидетельства подготовки сама по себе не исполняет экспорт, адаптацию или активацию и не доказывает применение правил агентом. Пробел обязательного ядра блокирует выпуск; отсутствие необходимого механизма в новой среде блокирует затронутое применение и активацию. Новый кандидат не переключает прежний профиль. Новый запрет анализируется отдельно и не снимается новым подтверждением. Изменение плана или prompt после фиксации требует нового запуска, а не правки прежнего свидетельства.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "G09.01",
+      "parent": "G09",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 11533,
+        "end": 12045
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Единый соразмерный процесс для системы и других сущностей, версионированная процедура подготовки и точные ссылки вместо копий нормативных текстов могут уменьшать дублирование и дрейф. Цена — доверенная установка, внешнее основание ожидаемых данных и отдельное хранение локального. Метаданные и подготовка не доказывают исполнение; обозначение подготовительного состояния и запрещающие флаги не заменяют проверку поведения.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "G09.02",
+      "parent": "G09",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 12045,
+        "end": 12127
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "no_new_library_or_automatic_binding_change_claim_is_source_local",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "G09.03",
+      "parent": "G09",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 12127,
+        "end": 12276
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "X01.01",
+      "parent": "X01",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 0,
+        "end": 64
+      },
+      "context": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 253,
+        "end": 489
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "non_rule_title",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "X01.02",
+      "parent": "X01",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 64,
+        "end": 253
+      },
+      "context": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 253,
+        "end": 489
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "X02.01",
+      "parent": "X02",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 489,
+        "end": 505
+      },
+      "context": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 253,
+        "end": 489
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "non_rule_structure",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "X03.01",
+      "parent": "X03",
+      "source": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 7734,
+        "end": 9835
+      },
+      "context": {
+        "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+        "start": 253,
+        "end": 489
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "X04.01",
+      "parent": "X04",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 0,
+        "end": 465
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 622,
+        "end": 1161
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "source_provenance_not_new_delegation",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "X04.02",
+      "parent": "X04",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 465,
+        "end": 622
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 622,
+        "end": 1161
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "X05.01",
+      "parent": "X05",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 10951,
+        "end": 11543
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 622,
+        "end": 1161
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Сценарные тесты формы, связей и контрольных ответов являются моделированием, не исполнением агента и не доказательством соблюдения правил в произвольном ответе. Они не подтверждают работу в новой среде или активацию. Для проверки применения нужны наблюдаемая задача и оценка по критериям; общая совместимость и автоматическое соблюдение из этих тестов не следуют.",
+      "retained_limit": "scenario_checks_not_execution_authentication",
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "X05.02",
+      "parent": "X05",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 11543,
+        "end": 12298
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0001/work.md",
+        "start": 622,
+        "end": 1161
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Единый соразмерный процесс и пригодные источники могут уменьшать дублирование, потерю контекста и лишний сбор. Цена — суждение о применимости, а не механическое повторение checklist. Риск недооценки неизвестного ограничивается явными условиями остановки и запретом ослаблять обязательные проверки. Короткий ответ не требует фиктивного аудита; прежний результат не считается подходящим новой среде автоматически. Наличие текста не меняет поведение автоматически: нужны отдельные применение, проверка и активация. Зависимость от ядра не даёт циклического самоодобрения или нового метаслоя.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "X06.01",
+      "parent": "X06",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 0,
+        "end": 478
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 635,
+        "end": 1174
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "source_provenance_not_new_delegation",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "X06.02",
+      "parent": "X06",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 478,
+        "end": 635
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 635,
+        "end": 1174
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "X07.01",
+      "parent": "X07",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 11407,
+        "end": 11999
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 635,
+        "end": 1174
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Сценарные тесты формы, связей и контрольных ответов являются моделированием, не исполнением агента и не доказательством соблюдения правил в произвольном ответе. Они не подтверждают работу в новой среде или активацию. Для проверки применения нужны наблюдаемая задача и оценка по критериям; общая совместимость и автоматическое соблюдение из этих тестов не следуют.",
+      "retained_limit": "scenario_checks_not_execution_authentication",
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "X07.02",
+      "parent": "X07",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 11999,
+        "end": 12755
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 635,
+        "end": 1174
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Единый соразмерный процесс и пригодные источники могут уменьшать дублирование, потерю контекста и лишний сбор. Цена — суждение о применимости, а не механическое повторение checklist. Риск недооценки неизвестного ограничивается явными условиями остановки и запретом ослаблять обязательные проверки. Короткий ответ не требует фиктивного аудита; прежний результат не считается подходящим новой среде автоматически. Наличие текста не меняет поведение автоматически: нужны отдельные применение, проверка и активация. Зависимость от ядра не даёт циклического самоодобрения или нового метаслоя.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "X07.03",
+      "parent": "X07",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 12755,
+        "end": 13331
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 635,
+        "end": 1174
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Новая редакция выбирается явно как точная версия; если она содержит полный текст, её не подменяют неявным patch overlay. Статус определяется индексом и действительными решениями, не собственным описанием. Замещение версии само по себе не отзывает прежнюю, не переключает её точных пользователей и не перенаправляет их зависимости.",
+      "retained_limit": "exact_revision_identity_dependencies_and_full_revision_contract_retained",
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "X07.04",
+      "parent": "X07",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 13331,
+        "end": 13801
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0002/work.md",
+        "start": 635,
+        "end": 1174
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Дополнительная процедура предметной оценки требует операторского суждения; риск формализма и самообоснования сохраняется. Происхождение наблюдений не считается подтверждённым одной процедурой оценки. Один пример не доказывает универсальную эффективность; перенос текста не активирует его. Процедура оценки не второй источник правил и не гарантия поведения. История и частные данные задач не экспортируются автоматически.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    },
+    {
+      "id": "X08.01",
+      "parent": "X08",
+      "source": {
+        "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+        "start": 0,
+        "end": 52
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+        "start": 52,
+        "end": 468
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "non_rule_structure",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "X09.01",
+      "parent": "X09",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 0,
+        "end": 52
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "non_rule_structure",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "G03.01",
+      "parent": "G03",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 3194,
+        "end": 4398
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G03.02",
+      "parent": "G03",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 4398,
+        "end": 4707
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "exclude",
+      "universality": "nonuniversal",
+      "generated_body": null,
+      "retained_limit": "unsupported_release_events_and_no_release_actuator_in_source_component",
+      "rationale": "Структура, происхождение или факт конкретной версии не являются универсальным правилом; влияющее ограничение учитывается отдельно."
+    },
+    {
+      "id": "G06.01",
+      "parent": "G06",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 8089,
+        "end": 9460
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "preserve",
+      "universality": "high",
+      "generated_body": null,
+      "retained_limit": null,
+      "rationale": "Универсальный нормативный смысл в исходной области; точный текст с условиями/исключениями."
+    },
+    {
+      "id": "G06.02",
+      "parent": "G06",
+      "source": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 9460,
+        "end": 9562
+      },
+      "context": {
+        "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+        "start": 724,
+        "end": 861
+      },
+      "route": "generalize",
+      "universality": "limited",
+      "generated_body": "Процедурное описание жизненного цикла не является его инструментальной реализацией и не подтверждает фактическую активацию связки.",
+      "retained_limit": null,
+      "rationale": "Передаётся обоснованный общий смысл без привязанных терминов/пути/снимка реализации; выбранный исходный контракт сохраняется."
+    }
+  ],
+  "projected_governance_context": {
+    "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+    "start": 724,
+    "end": 861
+  },
+  "retained_original_contracts": true,
+  "qualification_scope": "source_declared_limits_not_runtime_observations",
+  "semantic_review": "agent_self_review_not_independent"
+}
