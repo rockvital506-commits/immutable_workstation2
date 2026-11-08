@@ -234,3 +234,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [44-agent-system-universality-trace.md](44-agent-system-universality-trace.md) — 17 реальных смысловых единиц: preserve/generalize/exclude/hold, bounded regression oracle и границы semantic review.
 
 [45-agent-system-linked-meaning-decomposition.md](45-agent-system-linked-meaning-decomposition.md) — полный source-разбор U01 на17связанных групп,39finite semantic scenarios и exact dependency boundary; не готовый semantic adapter.
+
+[46-agent-system-core-meaning-coverage.md](46-agent-system-core-meaning-coverage.md) — remaining ENT2/W/governance coverage, условное делегирование без новой доверенности, exact-version aliases и сборка partial draft из pinned sources.

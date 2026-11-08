@@ -6655,3 +6655,24 @@ proof. Exact dependency boundary ENT2r3→ENT1r1 с registry/source/approval pin
 Все142refs и прежние registry/agent_system bytes сохранены. Структурный разбор U01
 предложен полностью, но self-review не independent semantic proof и не full closure;
 дальше остальные ENT2/methodology/governance units. Actions/approvals не добавлены.
+
+
+## 69. Remaining core coverage, делегирование и version-bound aliases
+
+[46](46-agent-system-core-meaning-coverage.md):39групп remaining ENT2/W/governance,
+31preserve/1generalize/6hold/1external-reference. W06 local delegation не переносится
+как новый grant: общий условный принцип, отдельное применимое основание и все checks.
+13равных r1/r2 фрагментов имеют общий draft body с exact origins/contexts; ENT12r1
+по-прежнему зависит от ENT11r1, а не silently r2/latest. R2 practice extension не
+сливается/не удаляется. Похожие, но разные scoped смыслы остаются отдельными.
+
+Draft строится из однократно captured pinned source bytes, не из новых копий high
+texts в ledger. Metadata closure24revisions/90norm не semantic qualification:
+85unselected artifact gaps и unmapped supporting spans явны. G00/G04/G05/G08/G09,
+PR04 и external D04 unresolved; approvals/actions/full release не создаются.
+
+Итог46:18own methods и full49/49modules PASS; fresh assembly32bodies/13aliases,
+7unresolved/9unmapped supporting spans, source pins/readback PASS. Все142refs/
+registry/agent_system bytes и прежние44–45versions сохранены. Без actual export/
+activation. Следом6holds и exact semantic dependencies; generic equivalence и
+правильность реального поведения ещё не установлены.

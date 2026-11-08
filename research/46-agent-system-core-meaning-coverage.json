@@ -1,0 +1,1508 @@
+{
+  "version": 1,
+  "status": "research_coverage_not_normative",
+  "registry": {
+    "path": "agent_system/catalog/registry.json",
+    "sha256": "fe8683b40e359d1074c166ef7cec0e18b770f8b4c3d4aa2673ab7d93bf148883",
+    "size_bytes": 81383
+  },
+  "predecessors": [
+    {
+      "path": "research/44-agent-system-universality-trace.json",
+      "sha256": "9ddbd974dc1cb691289d28ae2d48bc5a0bb4e4f9a8acda0807dcf4ee8e33dc82",
+      "size_bytes": 52841
+    },
+    {
+      "path": "research/45-agent-system-linked-meaning-decomposition.json",
+      "sha256": "89656b5ad0f319d3f433120ad7c48e977301f23ebe1319dc5f9dada1aa65c3c7",
+      "size_bytes": 54049
+    }
+  ],
+  "sources": [
+    {
+      "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+      "sha256": "bfdea24314d9f5b26cd54ddaa41fe9aea9843c0f669417c040c1c80991188a1a",
+      "size_bytes": 17780
+    },
+    {
+      "path": "agent_system/protocols/ent-0011/r0001/work.md",
+      "sha256": "06923c52d5e7311556e8276cea473af71284f985476f970dced83d085a70cbb4",
+      "size_bytes": 22549
+    },
+    {
+      "path": "agent_system/protocols/ent-0011/r0002/work.md",
+      "sha256": "93a3c228c82db2e0af531804388871f222004aa85f3ddbfdeb8c0b1accee6c3d",
+      "size_bytes": 25060
+    },
+    {
+      "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+      "sha256": "2cf74ac39c81a74db85196051f836a5f78797bc60c735aa733970a3a8d56e256",
+      "size_bytes": 5493
+    },
+    {
+      "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+      "sha256": "2402346a739436871ba22b90306cf86c3836eb54f3ddb3801bbfa78398bbc0f9",
+      "size_bytes": 21236
+    }
+  ],
+  "units": [
+    {
+      "id": "D01",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 505,
+          "end": 816
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D02",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 817,
+          "end": 1117
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D03",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 1118,
+          "end": 1470
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D04",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 1471,
+          "end": 5180
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "previous_proposal",
+      "route": "external_reference",
+      "rationale": "Связанная смешанная группа разобрана отдельно в45; не переписывать/автоматически принимать прежний proposal.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D05",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 5181,
+          "end": 5553
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D06",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 5554,
+          "end": 6069
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D07",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 6070,
+          "end": 6520
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D08",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 6521,
+          "end": 6977
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D09",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 6978,
+          "end": 7362
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "D10",
+      "origins": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 7363,
+          "end": 7734
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/catalog/contracts/agent_system/ent-0002/r0003.md",
+          "start": 253,
+          "end": 489
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "W00",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 1163,
+          "end": 2138
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 1176,
+          "end": 2151
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W01",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 2140,
+          "end": 3486
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 2153,
+          "end": 3499
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W02",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 3488,
+          "end": 4219
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 3501,
+          "end": 4232
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W03",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 4221,
+          "end": 5032
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 4234,
+          "end": 5045
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W04",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 5034,
+          "end": 5832
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 5047,
+          "end": 5845
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W05",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 5834,
+          "end": 6596
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 5847,
+          "end": 6609
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W06a",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 6598,
+          "end": 6722
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 6611,
+          "end": 6735
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W06b",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 6722,
+          "end": 6929
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 6735,
+          "end": 6942
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "limited",
+      "route": "generalize",
+      "rationale": "Ранее данное локальное решение не универсальная доверенность. Передаётся общий условный принцип, не утверждение о наличии разрешения у получателя.",
+      "generated_body": "Если владелец отдельно предоставил применимое условное делегирование внедрения, действовать только в его точной области после подтверждения результата, эффективности и всех относящихся проверок. Ключевые ещё не согласованные ветвления предъявлять владельцу. Перенос этого принципа не создаёт делегирование в другой среде.",
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W06c",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 6929,
+          "end": 7703
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 6942,
+          "end": 7716
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W07",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 7705,
+          "end": 8501
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 7718,
+          "end": 8514
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W08",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 8503,
+          "end": 9182
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 8516,
+          "end": 9195
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "W09",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 9184,
+          "end": 10093
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 9197,
+          "end": 10106
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "WR",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 10095,
+          "end": 10951
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 10108,
+          "end": 10964
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0001/work.md",
+          "start": 622,
+          "end": 1161
+        },
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "same_body_and_applicability_not_same_revision"
+    },
+    {
+      "id": "WR2-practice",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 10966,
+          "end": 11407
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/work.md",
+          "start": 635,
+          "end": 1174
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "PR01",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 52,
+          "end": 468
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 52,
+          "end": 468
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "PR02",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 470,
+          "end": 939
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 52,
+          "end": 468
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "PR03",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 941,
+          "end": 1824
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 52,
+          "end": 468
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "PR04",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 1826,
+          "end": 2645
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 52,
+          "end": 468
+        }
+      ],
+      "universality": "unknown",
+      "route": "hold",
+      "rationale": "Смешаны общий принцип доказательности и labels выбранного формата; требуется отдельное обобщение с сохранением reviewer/evidence limits.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "PR05",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 2647,
+          "end": 3374
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0011/r0002/practice.md",
+          "start": 52,
+          "end": 468
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G00",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 52,
+          "end": 1106
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "unknown",
+      "route": "hold",
+      "rationale": "Общие нормы смешаны с точной versioned реализацией и её ограничениями. Пока explicit hold, не исключение и не readiness.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G01",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 1108,
+          "end": 1956
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G02",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 1958,
+          "end": 3192
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G03",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 3194,
+          "end": 4707
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G04",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 4709,
+          "end": 6464
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "unknown",
+      "route": "hold",
+      "rationale": "Общие нормы смешаны с точной versioned реализацией и её ограничениями. Пока explicit hold, не исключение и не readiness.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G05",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 6466,
+          "end": 8087
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "unknown",
+      "route": "hold",
+      "rationale": "Общие нормы смешаны с точной versioned реализацией и её ограничениями. Пока explicit hold, не исключение и не readiness.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G06",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 8089,
+          "end": 9562
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G07",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 9564,
+          "end": 10541
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "high",
+      "route": "preserve",
+      "rationale": "Переносимый нормативный смысл в явно сохранённой области; все условия и исключения сохраняются.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G08",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 10543,
+          "end": 11531
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "unknown",
+      "route": "hold",
+      "rationale": "Общие нормы смешаны с точной versioned реализацией и её ограничениями. Пока explicit hold, не исключение и не readiness.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    },
+    {
+      "id": "G09",
+      "origins": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 11533,
+          "end": 12276
+        }
+      ],
+      "contexts": [
+        {
+          "path": "agent_system/protocols/ent-0012/r0001/governance.md",
+          "start": 724,
+          "end": 1106
+        }
+      ],
+      "universality": "unknown",
+      "route": "hold",
+      "rationale": "Общие нормы смешаны с точной versioned реализацией и её ограничениями. Пока explicit hold, не исключение и не readiness.",
+      "generated_body": null,
+      "alias_review": "single_origin"
+    }
+  ],
+  "roots": [
+    {
+      "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+      "entity_id": "ENT-0012",
+      "revision": "r0002"
+    }
+  ],
+  "declared_closure": [
+    {
+      "entity_id": "ENT-0001",
+      "revision": "r0001",
+      "depends_on": []
+    },
+    {
+      "entity_id": "ENT-0002",
+      "revision": "r0003",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0001",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0003",
+      "revision": "r0002",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0001",
+          "revision": "r0001"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0002",
+          "revision": "r0003"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0004",
+      "revision": "r0002",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0003",
+          "revision": "r0002"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0005",
+      "revision": "r0003",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0002",
+          "revision": "r0003"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0003",
+          "revision": "r0002"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0006",
+      "revision": "r0003",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0004",
+          "revision": "r0002"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0005",
+          "revision": "r0003"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0007",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0007",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0004",
+          "revision": "r0002"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0008",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0004",
+          "revision": "r0002"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0005",
+          "revision": "r0003"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0006",
+          "revision": "r0003"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0008",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0009",
+      "revision": "r0002",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0008",
+          "revision": "r0001"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0009",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0010",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0009",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0001",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0011",
+      "revision": "r0002",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0001",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0011",
+          "revision": "r0001"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0009",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0012",
+      "revision": "r0002",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0012",
+          "revision": "r0001"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0011",
+          "revision": "r0002"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0014",
+          "revision": "r0003"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0018",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0013",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0012",
+          "revision": "r0001"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0010",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0013",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0002",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0014",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0014",
+      "revision": "r0003",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0014",
+          "revision": "r0002"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0015",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0015",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0014",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0015",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0016",
+      "revision": "r0002",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0015",
+          "revision": "r0001"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0016",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0017",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0016",
+          "revision": "r0001"
+        }
+      ]
+    },
+    {
+      "entity_id": "ENT-0018",
+      "revision": "r0001",
+      "depends_on": [
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0009",
+          "revision": "r0002"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0013",
+          "revision": "r0001"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0015",
+          "revision": "r0001"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0016",
+          "revision": "r0002"
+        },
+        {
+          "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+          "entity_id": "ENT-0017",
+          "revision": "r0001"
+        }
+      ]
+    }
+  ],
+  "unselected_artifact_gaps": [
+    "adapters/ent-0005/r0003/reader.py",
+    "adapters/ent-0005/r0003/usage.md",
+    "adapters/ent-0005/r0003/verify.py",
+    "candidates/ent-0013/r0001/candidate.json",
+    "candidates/ent-0013/r0001/check.py",
+    "candidates/ent-0013/r0001/usage.md",
+    "candidates/ent-0013/r0001/verify.py",
+    "catalog/contracts/agent_system/ent-0001/r0001.md",
+    "operator/ent-0018/r0001/acceptance_verify.py",
+    "operator/ent-0018/r0001/evidence.py",
+    "operator/ent-0018/r0001/lab.py",
+    "operator/ent-0018/r0001/procedure.md",
+    "operator/ent-0018/r0001/prompt.md",
+    "operator/ent-0018/r0001/replay.py",
+    "operator/ent-0018/r0001/replay_verify.py",
+    "operator/ent-0018/r0001/run.py",
+    "operator/ent-0018/r0001/runner_verify.py",
+    "operator/ent-0018/r0001/session.py",
+    "operator/ent-0018/r0001/session.schema.json",
+    "operator/ent-0018/r0001/usage.md",
+    "operator/ent-0018/r0001/verify.py",
+    "permissions/ent-0014/r0001/check.py",
+    "permissions/ent-0014/r0001/proposal.schema.json",
+    "permissions/ent-0014/r0001/usage.md",
+    "permissions/ent-0014/r0001/verify.py",
+    "permissions/ent-0014/r0002/authority.py",
+    "permissions/ent-0014/r0002/permissions.schema.json",
+    "permissions/ent-0014/r0002/procedure.md",
+    "permissions/ent-0014/r0002/usage.md",
+    "permissions/ent-0014/r0002/verify.py",
+    "permissions/ent-0014/r0003/procedure.md",
+    "permissions/ent-0014/r0003/state.py",
+    "permissions/ent-0014/r0003/state.schema.json",
+    "permissions/ent-0014/r0003/usage.md",
+    "permissions/ent-0014/r0003/verify.py",
+    "protocols/ent-0011/r0001/scenarios.json",
+    "protocols/ent-0011/r0001/verify.py",
+    "protocols/ent-0011/r0002/scenarios.json",
+    "protocols/ent-0011/r0002/verify.py",
+    "protocols/ent-0012/r0001/verify.py",
+    "specification/ent-0003/r0002/catalog-base.schema.json",
+    "specification/ent-0003/r0002/usage.md",
+    "specification/ent-0007/r0001/decision-events.schema.json",
+    "specification/ent-0007/r0001/events.py",
+    "specification/ent-0007/r0001/usage.md",
+    "specification/ent-0007/r0001/verify.py",
+    "specification/ent-0008/r0001/usage.md",
+    "specification/ent-0008/r0001/validation-plan.schema.json",
+    "specification/ent-0008/r0001/validation-run-report.schema.json",
+    "specification/ent-0008/r0001/verify.py",
+    "staging/ent-0015/r0001/stage.py",
+    "staging/ent-0015/r0001/usage.md",
+    "staging/ent-0015/r0001/verify.py",
+    "staging/ent-0016/r0001/read.py",
+    "staging/ent-0016/r0001/usage.md",
+    "staging/ent-0016/r0001/verify.py",
+    "staging/ent-0016/r0002/read.py",
+    "staging/ent-0016/r0002/usage.md",
+    "staging/ent-0016/r0002/verify.py",
+    "transfer/ent-0012/r0001/prepare.py",
+    "transfer/ent-0012/r0001/prompt.md",
+    "transfer/ent-0012/r0002/preparation.schema.json",
+    "transfer/ent-0012/r0002/prepare.py",
+    "transfer/ent-0012/r0002/procedure.md",
+    "transfer/ent-0012/r0002/prompt.md",
+    "transfer/ent-0012/r0002/usage.md",
+    "transfer/ent-0012/r0002/verify.py",
+    "validation/ent-0004/r0002/requirements-linux-cp311.lock",
+    "validation/ent-0004/r0002/usage.md",
+    "validation/ent-0004/r0002/verify.py",
+    "validation/ent-0006/r0003/check.py",
+    "validation/ent-0006/r0003/usage.md",
+    "validation/ent-0006/r0003/verify.py",
+    "validation/ent-0009/r0001/execute.py",
+    "validation/ent-0009/r0001/usage.md",
+    "validation/ent-0009/r0001/verify.py",
+    "validation/ent-0009/r0002/execute.py",
+    "validation/ent-0009/r0002/usage.md",
+    "validation/ent-0009/r0002/verify.py",
+    "validation/ent-0010/r0001/bundle.py",
+    "validation/ent-0010/r0001/usage.md",
+    "validation/ent-0010/r0001/verify.py",
+    "validation/ent-0017/r0001/compare.py",
+    "validation/ent-0017/r0001/usage.md",
+    "validation/ent-0017/r0001/verify.py"
+  ],
+  "closure_semantics_qualified": false,
+  "related_not_merged": [
+    [
+      "D08",
+      "W00"
+    ],
+    [
+      "D09",
+      "W05"
+    ],
+    [
+      "W05",
+      "G01"
+    ],
+    [
+      "W06c",
+      "G06"
+    ],
+    [
+      "G02",
+      "G07"
+    ]
+  ],
+  "authority_guard": "text_is_not_a_grant",
+  "external_core_coverage": "44:C01-C10",
+  "external_path_coverage": "45:P01-P17"
+}
