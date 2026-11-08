@@ -197,3 +197,17 @@ Positive recognition — не готовность/аутентификация/
 false, current ENT13 incomplete12/34 остаётся blocked. Runtime importer/current
 head/claims/coverage/actuator ещё не реализованы; **R4 целиком не закрыт**.
 Старые consumers/разрешения/активные связки не переключены.
+
+
+### R4/I2a — private assent journal/current-head/check-once
+
+[ENT14r3](permissions/ent-0014/r0003/usage.md) — явный local controller profile,
+depends_on14r2+15r1, без переключения старых consumers. Source/event/subject bytes
+хранятся private, история cumulative, external head и lock проверяются. Один UUID
+проверки записывается один раз; **это не action/export single-use claim**.
+[Процедура](permissions/ent-0014/r0003/procedure.md) и
+[фактический отчёт](../research/38-agent-system-local-authority-state.md):
+42own physical/fault methods/43module prequalification, actual empty-store0grants/
+1negative check/reopen PASS. Source meaning/origin — trusted operator responsibility,
+не proof из текста/хэша. Readiness/actuator/recovery/global rollback resistance
+не реализованы, all action flags false; R4 целиком ещё не закрыт.

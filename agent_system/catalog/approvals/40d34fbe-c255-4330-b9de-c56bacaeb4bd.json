@@ -1,0 +1,43 @@
+{
+  "schema_version": "1",
+  "decision_id": "40d34fbe-c255-4330-b9de-c56bacaeb4bd",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0014",
+    "revision": "r0003"
+  },
+  "artifacts": [
+    {
+      "path": "permissions/ent-0014/r0003/state.py",
+      "sha256": "51f767a4bde782cca20e106c597b3fdfeda66a4831e3b2308cb81dff907f0426",
+      "size_bytes": 24745
+    },
+    {
+      "path": "permissions/ent-0014/r0003/state.schema.json",
+      "sha256": "21f2ec5fdd3743f2224bd034297bb2067ab4e1d3f4191228f2b4ff63ec8f247c",
+      "size_bytes": 4731
+    },
+    {
+      "path": "permissions/ent-0014/r0003/verify.py",
+      "sha256": "07906f34d8a033be45eaf2b6e8e5fcc3330f6b06c5323f0bbddecf4c3e4af6e3",
+      "size_bytes": 23574
+    },
+    {
+      "path": "permissions/ent-0014/r0003/usage.md",
+      "sha256": "f522d990a43da8498546bd9a7b1adc1c068b5492735ea9d0b0514b7f5c6bbf96",
+      "size_bytes": 13239
+    },
+    {
+      "path": "permissions/ent-0014/r0003/procedure.md",
+      "sha256": "f6cb7ca1916a1dd671583a6e8cfac81dcacc99db85cc945efc929dcf408a6949",
+      "size_bytes": 4972
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-10-07",
+  "statement_form": "summary",
+  "statement": "Условное внедрение bounded R4/I2a private assent/current-head/check recording по ранее данному делегированию после проверок. Summary основания, не прямая цитата owner о bytes и не реальный release/export/activation grant.",
+  "basis": "До регистрации42/42own physical/fault methods и43/43repository modules PASS, pip/repo/manifest/diff PASS; старые122refs/records unchanged. Baseline bf2ffcf. Fixed Linux profile/reuse ENT14r2+ENT15r1, private FDs/modes/readback, source/event/subject pins, cumulative negative retention, generation-parent/external-head binding и cooperative cross-process lock. Full recorded checks replay protected code; request UUID consumption ONLY check recording, NOT export/authorization claim. Synthetic assents only disposable fixtures; no actual owner grant imported. Postregistration empty-store actual demo still pending at decision, must create0events/0grants and record GRANT_REFERENCE. Explicit local operator attestation is not origin/NLP/crypto authentication, coherent rollback with old external pin can pass; external high-water, global completeness, actual readiness/actuation/action single-use/recovery not implemented. All action/performed/activation flags false. Narrow reuse/traceability effectiveness, no speed benchmark.5ownfiles; scopes/old consumers preserved. R4 whole/actual compatible-release not closed; no new third-party packages."
+}

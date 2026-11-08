@@ -128,3 +128,13 @@ index14160bytes, SHA256
 Это только regression старого byte-trial; не positive owner grant/ready release.
 Private evidence local вне Git; доступность после восстановления не обещана.
 I1 реализован/проверен; R4 целиком не закрыт и actual переходов не было.
+
+
+## Продолжение I2a
+
+[Private controller38](38-agent-system-local-authority-state.md) реализует
+assent byte retention/current-head/append-only history и check UUID consumption
+в новой ENT14r3, не меняя r2. Actual empty-store practice:0grants/1recorded denial/
+reopen PASS. Источник реального owner assent всё ещё устанавливает protected
+operator, не NLP/hash; external high-water/actual action claims/ready transitions
+не реализованы. Выбор A не запрашивался повторно и не стал grant. R4 ещё не закрыт.

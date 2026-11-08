@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:schema:local-authority-state:3",
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ]
+    },
+    "eventref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "event_id",
+        "sha256",
+        "size_bytes"
+      ]
+    },
+    "assent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1"
+        },
+        "kind": {
+          "const": "local_owner_assent"
+        },
+        "basis_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "source_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "statement_form": {
+          "enum": [
+            "quote",
+            "summary"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 65536
+        },
+        "event": {
+          "$ref": "#/$defs/eventref"
+        },
+        "attestation": {
+          "const": "exact_event_reviewed_by_local_operator"
+        }
+      },
+      "required": [
+        "schema_version",
+        "kind",
+        "basis_id",
+        "source_id",
+        "statement_form",
+        "statement",
+        "event",
+        "attestation"
+      ]
+    },
+    "head": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1"
+        },
+        "kind": {
+          "const": "owner_authority_generation"
+        },
+        "profile": {
+          "const": "local-owner-journal-linux-r0001"
+        },
+        "store_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "parent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "operation": {
+          "enum": [
+            "initialize",
+            "import",
+            "check"
+          ]
+        },
+        "context": {
+          "$ref": "#/$defs/ref"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "event": {
+                "$ref": "#/$defs/eventref"
+              },
+              "assent": {
+                "$ref": "#/$defs/ref"
+              },
+              "subject": {
+                "$ref": "#/$defs/ref"
+              }
+            },
+            "required": [
+              "event",
+              "assent",
+              "subject"
+            ]
+          },
+          "maxItems": 128
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "request_id": {
+                "type": "string",
+                "format": "uuid",
+                "pattern": "^[0-9a-f-]{36}$"
+              },
+              "request": {
+                "$ref": "#/$defs/ref"
+              },
+              "subject": {
+                "$ref": "#/$defs/ref"
+              },
+              "result": {
+                "$ref": "#/$defs/ref"
+              }
+            },
+            "required": [
+              "request_id",
+              "request",
+              "subject",
+              "result"
+            ]
+          },
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "schema_version",
+        "kind",
+        "profile",
+        "store_id",
+        "generation",
+        "parent",
+        "operation",
+        "context",
+        "sources",
+        "checks"
+      ]
+    }
+  }
+}

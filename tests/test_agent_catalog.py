@@ -619,7 +619,7 @@ class PermissionProtocolDeploymentTests(unittest.TestCase):
     def test_exact_permission_protocol_composition(self):
         registry=json.loads((BASE/'catalog/registry.json').read_bytes())
         entity=next(e for e in registry['entities'] if e['entity_id']=='ENT-0014')
-        self.assertEqual([v['revision'] for v in entity['revisions']],['r0001','r0002'])
+        self.assertEqual([v['revision'] for v in entity['revisions']],['r0001','r0002','r0003'])
         revision=entity['revisions'][0]
         for key,value in self.EXPECTED.items():self.assertEqual(revision[key],value)
         for artifact in revision['artifacts']:artifact_bytes(artifact)
@@ -854,6 +854,34 @@ class PermissionAuthorityDeploymentTests(unittest.TestCase):
         profile,records=runner['_bootstrap'](runner['_load']())
         self.assertEqual((len(records),len(profile['artifacts'])),(20,70))
         self.assertNotIn(('ENT-0014','r0002'),records)
+
+
+
+class AuthorityStateDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0003', 'title': 'Private owner assent/current-head/check-once controller без action claims', 'kind': 'protocol', 'scopes': ['agent_system.permissions', 'agent_system.release', 'agent_system.transfer'], 'artifacts': [{'path': 'permissions/ent-0014/r0003/state.py', 'sha256': '51f767a4bde782cca20e106c597b3fdfeda66a4831e3b2308cb81dff907f0426', 'size_bytes': 24745, 'role': 'normative'}, {'path': 'permissions/ent-0014/r0003/state.schema.json', 'sha256': '21f2ec5fdd3743f2224bd034297bb2067ab4e1d3f4191228f2b4ff63ec8f247c', 'size_bytes': 4731, 'role': 'normative'}, {'path': 'permissions/ent-0014/r0003/verify.py', 'sha256': '07906f34d8a033be45eaf2b6e8e5fcc3330f6b06c5323f0bbddecf4c3e4af6e3', 'size_bytes': 23574, 'role': 'normative'}, {'path': 'permissions/ent-0014/r0003/usage.md', 'sha256': 'f522d990a43da8498546bd9a7b1adc1c068b5492735ea9d0b0514b7f5c6bbf96', 'size_bytes': 13239, 'role': 'normative'}, {'path': 'permissions/ent-0014/r0003/procedure.md', 'sha256': 'f6cb7ca1916a1dd671583a6e8cfac81dcacc99db85cc945efc929dcf408a6949', 'size_bytes': 4972, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0014', 'revision': 'r0002'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0015', 'revision': 'r0001'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0014', 'revision': 'r0002'}}], 'approval': {'status': 'approved', 'reference': {'path': 'catalog/approvals/40d34fbe-c255-4330-b9de-c56bacaeb4bd.json', 'sha256': '7ba4df7d8ffe110e6c90cc7de5960a3461f8054a847a1f6f3b3b0b9a5f23f356'}}, 'provenance': {'summary': 'R4/I2a по выбранному A/conditional delegation: сохраняемый private source/finite history и одноразовая запись проверки, не самостоятельное доказательство owner assent/rollback-resistant state или разрешение actual действий. Старые версии/consumers не переключены.'}}
+
+    def test_exact_controller_revision_partial_summary(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        actual=next(v for e in registry['entities'] if e['entity_id']=='ENT-0014' for v in e['revisions'] if v['revision']=='r0003')
+        self.assertEqual(actual,self.EXPECTED)
+        for a in actual['artifacts']:artifact_bytes(a)
+        d=json.loads(artifact_bytes(actual['approval']['reference']))
+        self.assertEqual(d['decision_type'],'approve_revision');self.assertEqual(d['statement_form'],'summary')
+        self.assertEqual(d['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0014',revision='r0003'))
+        self.assertEqual(d['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in actual['artifacts']])
+
+    def test_exact_dependency_pins_no_legacy_switch(self):
+        import runpy
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        versions={(e['entity_id'],v['revision']):v for e in registry['entities'] for v in e['revisions']}
+        module=runpy.run_path(str(BASE/'permissions/ent-0014/r0003/state.py'))
+        expected={a['path']:{k:a[k] for k in ['sha256','size_bytes']} for key in [('ENT-0014','r0002'),('ENT-0015','r0001')] for a in versions[key]['artifacts']}
+        self.assertEqual(len(module['PINS']),9)
+        for p,v in expected.items():self.assertEqual(module['PINS'][p],v)
+        module['_tools']()
+        runner=runpy.run_path(str(BASE/'operator/ent-0018/r0001/run.py'))
+        profile,records=runner['_bootstrap'](runner['_load']())
+        self.assertEqual((len(records),len(profile['artifacts'])),(20,70));self.assertNotIn(('ENT-0014','r0003'),records)
 
 
 if __name__ == '__main__':

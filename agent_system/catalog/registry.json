@@ -1375,6 +1375,84 @@
           "provenance": {
             "summary": "R4/I1 после выбора A и conditional delegation: recognition exact intent в declared local owner context, не authentication/readiness/stateful actuation. Старая r1 не переписана и consumers не переключены; реальных owner grants не создано."
           }
+        },
+        {
+          "revision": "r0003",
+          "title": "Private owner assent/current-head/check-once controller без action claims",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.permissions",
+            "agent_system.release",
+            "agent_system.transfer"
+          ],
+          "artifacts": [
+            {
+              "path": "permissions/ent-0014/r0003/state.py",
+              "sha256": "51f767a4bde782cca20e106c597b3fdfeda66a4831e3b2308cb81dff907f0426",
+              "size_bytes": 24745,
+              "role": "normative"
+            },
+            {
+              "path": "permissions/ent-0014/r0003/state.schema.json",
+              "sha256": "21f2ec5fdd3743f2224bd034297bb2067ab4e1d3f4191228f2b4ff63ec8f247c",
+              "size_bytes": 4731,
+              "role": "normative"
+            },
+            {
+              "path": "permissions/ent-0014/r0003/verify.py",
+              "sha256": "07906f34d8a033be45eaf2b6e8e5fcc3330f6b06c5323f0bbddecf4c3e4af6e3",
+              "size_bytes": 23574,
+              "role": "normative"
+            },
+            {
+              "path": "permissions/ent-0014/r0003/usage.md",
+              "sha256": "f522d990a43da8498546bd9a7b1adc1c068b5492735ea9d0b0514b7f5c6bbf96",
+              "size_bytes": 13239,
+              "role": "normative"
+            },
+            {
+              "path": "permissions/ent-0014/r0003/procedure.md",
+              "sha256": "f6cb7ca1916a1dd671583a6e8cfac81dcacc99db85cc945efc929dcf408a6949",
+              "size_bytes": 4972,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0014",
+                "revision": "r0002"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0015",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0014",
+                "revision": "r0002"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/40d34fbe-c255-4330-b9de-c56bacaeb4bd.json",
+              "sha256": "7ba4df7d8ffe110e6c90cc7de5960a3461f8054a847a1f6f3b3b0b9a5f23f356"
+            }
+          },
+          "provenance": {
+            "summary": "R4/I2a по выбранному A/conditional delegation: сохраняемый private source/finite history и одноразовая запись проверки, не самостоятельное доказательство owner assent/rollback-resistant state или разрешение actual действий. Старые версии/consumers не переключены."
+          }
         }
       ]
     },

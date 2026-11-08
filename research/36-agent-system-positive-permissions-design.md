@@ -225,3 +225,13 @@ PASS. Conditional summary registration не является реальным ow
 реализованы. P15 cross-view generalization, P18 stateful claims, источник/trusted
 importer/current-head и readiness/actuator integration не объявляются готовыми.
 R4 целиком не закрыт. Реальный неполный ENT13r1 не выпущен/не экспортирован.
+
+
+## 11. I2a — local state, не одноразовая actual action
+
+[Отчёт38](38-agent-system-local-authority-state.md): ENT14r3, private source
+journal/cumulative generations/externally pinned head/cooperative lock/check-once.
+Сохраняется смысл typed operator attestation, не authentication/NLP source proof.
+Повтор request UUID блокируется; новый UUID может ещё проверить тот же grant,
+actual grant/export_id не расходуется. Это не выполненный P18 actuation claim.
+Empty-authority actual demo0grants/1отказ/reopen PASS; R4 целиком не закрыт.

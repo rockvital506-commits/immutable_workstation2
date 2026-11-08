@@ -6524,3 +6524,23 @@ Old116refs/records unchanged; registry18entities28revisions94norm28approvals.
 не сделаны; pure recognition не freshness/authentication. Current ENT13r1 blocked,
 payload12/34 unchanged. P15/P18 и remaining integrations сохранены, R4 целиком не
 закрыт. Следующий I2 — source/state/claim contract, не повторный выбор A/не grant.
+
+
+## 62. R4/I2a — сохранённые основания и проверяемое local состояние
+
+[Отчёт38](38-agent-system-local-authority-state.md): ENT14r3 (5files,
+depends_on14r2+15r1), private assent/event/subject CAS, cumulative generation chain,
+external-head pin, cooperative cross-process lock и single-use **check recording**.
+Source full quote/summary retained, но meaningful owner assent проверяет operator;
+код не аутентифицирует owner/не интерпретирует «продолжай» как grant.
+
+42own methods/43module prequalification PASS; исправлены resolver production
+bootstrap и known helper error translation, отказы сохранены. Summary approval
+40d34fbe-c255-4330-b9de-c56bacaeb4bd только implementation. Old122refs unchanged;
+registry18entities29revisions99norm29approvals. Actual documented empty-store demo:
+0grants/1GRANT_REFERENCE/check UUID consumed/reopen PASS. Consumers не переключены.
+
+Новый UUID может снова проверить intent; export grant/action не consumed и все
+flags false. External high-water/глобальная полнота/recovery/action claims/ready
+transitions остаются отдельно. R4/I2b/R5/R6/R7/R8 и actual release/export/
+activation не завершены этим контроллером. Выбор A повторно не запрашивался.
