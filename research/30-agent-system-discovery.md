@@ -6427,3 +6427,13 @@ repository check. Реальный registry прежний59988bytes SHA
 17entities/25revisions/72norm artifacts/25approvals,97refs unchanged. Нативный
 registration gate остаётся COORDINATOR_NOT_REGISTERED до source/claim. Это не
 положительный native M1 run и не новая registration/release/activation.
+
+Уточнение отдельного финального gate probe: вспомогательный вызов ошибочно
+запущен через system Python вместо approved isolated interpreter и ожидал
+неверный для того окружения код; получен INSTALLED_PROFILE_UNAVAILABLE
+(предусмотренный fail-closed отказ без нужного engine). Это не результат общего
+39/39 прогона, который выполнялся в правильной isolated среде. Probe повторён
+явно через /home/user/.venv/immutable-agent-system/bin/python: ожидаемый
+COORDINATOR_NOT_REGISTERED, наблюдённых source/action/claim calls0. Код/порог
+проверки или зависимости не ослаблялись; дополнительная установка в system
+Python не выполнялась. Различие окружений/исходная ошибка запуска не скрыты.
