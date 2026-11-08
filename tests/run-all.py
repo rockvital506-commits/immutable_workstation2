@@ -40,7 +40,8 @@ TESTS = ['test_repo.py', 'test_rules.py', 'test_stage42.py',
          'test_agent_known_views.py',
          'test_agent_capture.py',
          'test_agent_trial_capture.py',
-         'test_agent_operator_foundation.py']
+         'test_agent_operator_foundation.py',
+         'test_agent_operator_runner.py']
 
 
 def main() -> int:

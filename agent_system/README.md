@@ -143,3 +143,10 @@ bytes доступны после всех late guards и cleanup. Следую�
 зарегистрированная ENT18 и не run_operator_trial. Runner/state machine/own-profile
 bootstrap/семантический journal replay/procedure+prompt ещё не реализованы;
 I3/M1 целиком не закрыты. Registry и approvals этим подэтапом не меняются.
+
+
+I3b: добавлен runner candidate с protected installed-profile bootstrap,
+source/candidate/trial handoff и child journal. Без зарегистрированной exact
+ENT18 public entry останавливается до claim/source; synthetic approval есть
+только в disposable tests. Semantic replay/procedure+prompt/human report и I4
+пока не выполнены; registry/approvals не менялись.

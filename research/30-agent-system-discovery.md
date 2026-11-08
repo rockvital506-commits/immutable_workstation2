@@ -6243,3 +6243,94 @@ pip check и git diff check — PASS. Public215Markdown/86README/33research,
 17entities/25revisions/72artifacts/25approvals; все97 ссылочных файлов неизменны.
 После записи результата обновлён docs selfhash и повторён repository check.
 Это **I3a foundation checkpoint**, не регистрация/закрытие I3 или M1.
+
+## 55. I3b — runner candidate, source handoff и protected-profile gate
+
+Реализованы run.py/runner_verify.py в [кандидате ENT18](../agent_system/operator/ent-0018/r0001/usage.md).
+Это **незарегистрированный** implementation draft, не новый approval/release.
+Текущий реальный каталог не менялся. Bootstrap намеренно требует existing exact
+approved ENT18r1 в protected installed registry/ledger и не создаёт его сам.
+Public run_operator_trial без такой установки останавливается до claim/source.
+
+### 55.1. Реализованный порядок и ограничения
+
+Protected-profile bootstrap сверяет пять точных dependency roots, 57 fixed
+installed dependency artifacts, own exact composition и полную closure/known
+validate scope. Own artifacts берутся только из protected installation, не
+неизвестного source index. Проверяются hashes/native sizes, включая own code;
+self-index hash cycle отсутствует. Локальный trusted namespace остаётся обязательным:
+hash-before-load не защищает от attacking writer installation. Текущий own draft
+состоит из7files; procedure/prompt/replay ещё должны войти в будущий exact состав.
+
+Session preflight → private claim → capture A → candidate subset → scoped stage
+→ reader → exact handoff → optional distinct capture B/derived query → child
+journal object → CAS seal. Entry не принимает source-selected modules/callbacks/
+готовые child reports. Source packets проверяются по plan/report schema/refs,
+exact document/map sets, ENT10 semantic bundle replay и неизменным selected
+revision records trusted profile. Source graph нельзя подменить для silent
+исключения tool dependencies. Успешные raw bundles сохраняются private; отсутствующий
+failed binding capture не выдаётся за полный replayable bundle.
+
+Перед stage/read/query проверяются scoped known blocks всего selected tool
+profile, не только старого payload. Trial payload остаётся ENT13r1 12/34. Handoff
+сопоставляет fresh stage receipt/UUID/manifest/reader metadata и exact first bytes:
+candidate/registry/payloads/ledger/object set/counts. Никакого source reread ради
+нового payload и перенаправления старых pins. B optional, но не fallback на A.
+
+Journal связывает session/child documents и реальные child run IDs. Terminal claim
+требует внешнего successful seal receipt; index не содержит собственный pin.
+Evidence failure закрывает run как evidence_write_failed, partial/trial не
+удаляются. Unknown error/interruption не переводятся в sealed успех. Public
+result содержит фиксированные коды/статусы/relative refs, без raw maps/absolute
+roots; отдельный human report ещё не реализован.
+
+Counters разделены: capture_invocations, completed_source_reports,
+validated_captures. source_acquisition_calls следует one-read_set контракту
+полностью проверенного ENT9r2 envelope. При exception/no returned report/packet
+mismatch — None (unknown total), не выдуманный0/1; известная completed часть видна
+отдельными counters. На success безB1 acquisition, сB2, не атомарные snapshots.
+Freshness/current permissions/behavior/target environment не подтверждены;
+release/export/activation/transition=false независимо от соседних PASS.
+
+### 55.2. Проверки, fixture approval и native gate
+
+26/26 runner test methods PASS (первый21/21, затем добавлено5cases,26/26).
+Disposable protected install/source trees: synthetic ENT18 approve_revision
+**только в fixtures**, не реальный owner event. Физические stage/read/CAS и
+known-input replay используют прежний стек. Протестированы no-B/B positives,
+раздельные child IDs и два реально наблюдённых read_set при B; source mutation
+после A capture, malformed packet/doc/extra registry map, graph/record substitution,
+stage partial, late reader failure/swapped objects/permission claim, B failure
+без fallback, repeated UUID/no overwrite, safe result и evidence seal failure.
+Known typed unsupported сохраняется; no returned envelope имеет unknown count;
+unknown error не получает sealed receipt. Некоторые fault cases подменяют child
+outputs внутри test harness и не выдаются за реальные owner decisions.
+
+Отдельно реальные negative события в **fixture ledger**: known revoke_use
+ENT16r2 для stage_trial/agent_system.trial останавливает до stage; новый B revoke
+для export/agent_system.transfer даёт blocked requested query после двух
+прошедших captures. Нормативная event semantics/lift/retention остаётся прежней;
+это ещё не полная T01–T30 matrix/I4 и не фактическое соблюдение правил агентом.
+
+Native gate текущего реального каталога: code COORDINATOR_NOT_REGISTERED,
+source/action calls0, evidence claim отсутствует и inventory operator-runs не
+изменён. Вход этого gate probe минимальный, он не объявляется валидной session/
+положительной практикой workflow. Это проверка fail-closed gate, **не T30**.
+Никакие approvals/candidate payload не создавались/не изменялись ради обхода gate.
+
+### 55.3. Что остаётся
+
+I3c: semantic journal/child replay из pinned evidence (CAS consistency сама по
+себе недостаточна), versioned procedure/prompt, отдельный human report и их
+checks. Затем I4/полная интеграционная matrix/ограниченный operator lab. Не
+регистрировать ENT18 до проверки exact состава и относящихся требований. Этот
+checkpoint не закрывает I3/R2/M1, R3–R8 или release/export/activation permissions.
+Новых libraries нет; модель/лимиты/privacy/trust boundaries прежние.
+
+Свежий полный regression текущего checkpoint — **38/38 PASS**, включая26 runner
+и35 foundation test methods. pip check/diff check — PASS. Public215Markdown/
+86README/33research,38 test modules. После записи результата обновлён docs
+selfhash и повторён repository check. Реальный registry прежний59988bytes SHA
+`7d433bbc7e8a1c069beabfbebe2c2d7a47b6cfe59a52b2b6732a7dffc26e80f3`;
+17entities/25revisions/72norm artifacts/25approvals, все97 refs unchanged.
+I3b runner checkpoint не является registration/закрытием I3/M1.

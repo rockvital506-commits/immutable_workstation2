@@ -51,7 +51,7 @@ def validate_session(session_bytes,expected_session,documents,profile,*,has_sour
     """Internal foundation API; profile MUST come from trusted installed composition.
 
     Not an operator entry: no source roots, claims, writes, acquisition or grants.
-    The future coordinator, not the session, supplies exact profile metadata.
+    The coordinator, not the session, supplies exact profile metadata.
     """
     try:
         _pin(session_bytes,expected_session)

@@ -1,6 +1,6 @@
 # M1: проект сквозного операторского trial и byte-handoff
 
-> §§1–10 сохраняют проектный срез до реализации. Результат I1 — §11, результат I2 — §12; текущий I3a — §13.
+> §§1–10 сохраняют проектный срез до реализации. Результат I1 — §11, результат I2 — §12; I3a — §13; текущий I3b — §14.
 
 ## 1. Статус, основание и результат этого этапа
 
@@ -426,3 +426,25 @@ semantic journal/child replay или факт исполнения. Провер
 candidate/handoff binding, child journal, human report, procedure/versioned prompt
 и semantic replay. Затем интеграция I4 и только после относящихся PASS — решение
 о регистрации exact ENT18 состава по условному делегированию. I3/M1 не закрыты.
+
+
+## 14. I3b — fail-closed runner candidate
+
+run.py реализует entry и protected installed-profile bootstrap. В реальном
+каталоге ENT18 по-прежнему отсутствует: public entry возвращает preflight error
+COORDINATOR_NOT_REGISTERED до claim/source. Prospective approval для тестирования
+есть только в disposable install/source trees, не является решением владельца.
+
+Реализованы source packet+ENT10 semantic binding, exact installed revision records,
+candidate subset, scoped tool checks перед stage/read/query, exact trial handoff,
+optional B без fallback, derived plan, child IDs/private journal/CAS seal. Return
+не содержит raw maps/absolute roots. Source counters разделены; exception/invalid
+packet даёт acquisition_calls=None, не ложную точность. Unknown error не получает
+успешный receipt; partial artifacts не удаляются. Подробности — usage и §55
+основного обследования. Ни all-gates false, ни structural CAS не являются permission.
+
+26 runner test methods дополняют 35 foundation методов. Real stage/query negative
+события созданы только в fixtures. Не полная T01–T30 matrix и не T30 native public
+success: реальный gate пока закономерно закрыт. I3c — semantic journal replay,
+procedure/versioned prompt и human report; затем I4/относящаяся практика и только
+после проверки exact состава — условная регистрация. I3/R2/M1 целиком не закрыты.

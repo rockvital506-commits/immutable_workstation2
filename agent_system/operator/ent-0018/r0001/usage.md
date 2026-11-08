@@ -4,6 +4,9 @@
 пока рабочий кандидат. Регистрация exact состава/approve_revision намеренно не
 выполняется до реализации runner и относящихся проверок. Никаких grants.
 
+> Актуальный runner status — раздел I3b в конце. Foundation-разделы ниже
+> сохраняют срез I3a и не отменяют его последующие уточнения.
+
 ## Реализованные границы
 
 session.py/session.schema.json: внутренний validate_session проверяет внешний
@@ -61,7 +64,7 @@ Linux/kernel/interpreter/installation обязательны. Наблюдени
 A/B plus reports одновременно поместятся. Секреты автоматически не распознаются,
 данные private и не коммитятся/экспортируются. Owner задаёт допустимые данные.
 
-## Что ещё не реализовано
+## Историческая граница I3a (уточнена разделом I3b ниже)
 
 run_operator_trial, trusted own-profile bootstrap, state machine/child journals,
 полная candidate/handoff проверка, общий human report, procedure/versioned prompt,
@@ -84,3 +87,60 @@ fsync/late binding/permissions failures, no resume/overwrite, readonly corruptio
 FIFO/symlink/hardlink/inventory refusals, FD cleanup. Синтетические варианты внутри
 subTests не считаются независимыми end-to-end scenarios. Окружение — прежний
 hash-locked jsonschema с обязательными dependencies, без новых библиотек.
+
+## I3b update — runner реализован как fail-closed candidate
+
+Этот раздел уточняет исторический foundation срез выше: run.py/runner_verify.py
+теперь существуют. Реализован run_operator_trial(source_a_root,session_bytes,
+expected_session,documents,*,source_b_root=None) и installed_profile(). **В текущем
+реальном registry ENT18 нет, поэтому public entry останавливается кодом
+COORDINATOR_NOT_REGISTERED до claim/source I/O. Никакого draft bypass флага нет.**
+
+Bootstrap использует только protected installed index/ledger, проверенные 57
+fixed dependency pins, exact own r1 artifact set/пять dependency roots и known
+validate scope. Own artifacts включаются в точный source profile, даже когда они
+не входят в старый trial payload. Проверяются native refs и полная closure,
+без self-hash cycle/второго registry/source-derived approval. Пока список own
+artifacts — 7 draft files; procedure/prompt и semantic replay ещё предстоит
+реализовать/включить в будущий exact composition до регистрации.
+
+Runner: preflight → private claim → capture A → candidate subset → stage → reader
+→ exact handoff → optional отдельный capture B/derived literal comparison → journal
+object → CAS seal/receipt. Не принимает child reports/callbacks от пользователя.
+Exact source packet maps/docs/report/plan сверяются, успешный bundle перепроверяется
+ENT10; selected revision records должны совпадать с protected installed profile.
+Это не позволяет silently исключить tools из closure через подмену source graph.
+Перед stage/read/query проверяются известные scoped blocks всего tool profile,
+не только payload. Candidate payload остаётся ENT13r1 12 revisions/34 files.
+
+Handoff сверяет fresh stage receipt, UUID/manifest, reader metadata/candidate/
+registry/ledger/payload refs, полный exact object set/bytes и counts. B не заменяется
+на A. Query/reader/stage отказ закрывает requested run, не стирает существующий
+trial. Полные child documents/raw successful source bundles сохраняются только
+private CAS. Failed binding не выдаёт отсутствующий payload как replayable.
+Journal хранит настоящие child run IDs и отдельную terminal claim; seal подтверждён
+только внешним receipt после final guards. Index не включён в свой hash-cycle.
+
+Return — безопасные codes/status/counts/relative refs без raw maps/absolute roots.
+Это структурированный operator result, не завершённый отдельный human report.
+Counters разделены: capture_invocations/completed_source_reports/validated_captures.
+source_acquisition_calls для completed validated envelopes отражает one-read_set
+контракт ENT9r2; если capture не вернулся/packet malformed — None (unknown), не
+выдуманный 0/1. После unknown error/interruption completed receipt не фабрикуется;
+partial evidence/trial сохраняются. Evidence failure — evidence_write_failed,
+не sealed success. Release/export/activation/transition=false во всех результатах.
+
+26 runner test methods на disposable prospective installation/source fixtures.
+Synthetic approval ENT18 находится только в temp tree, не реальном ledger. Есть
+physical stage/read/evidence, no-B/B positive, реальный known tool stage/query block,
+source change после capture, forged packets/docs/records, late reader/permission/
+seal failures, B failure/no fallback, неизвестный counter при exception, unknown
+error без sealed receipt, повторные UUID и private result. Отдельные fault tests
+меняют child outputs, не выдаются за полное событие/поведение production среды.
+Тест public gate на реальном незарегистрированном каталоге ожидает отказ.
+
+I3 целиком не закрыт: нет semantic journal replay, versioned procedure/prompt,
+полного human report и I4 matrix/practice. verify_evidence по-прежнему только CAS
+consistency; наличие runner этого обещания не расширяет. ENT18 не зарегистрирована,
+новые approvals/releases/активация не созданы. Следующий шаг — semantic replay и
+operator procedure/prompt с относящимися проверками, не обход registration gate.
