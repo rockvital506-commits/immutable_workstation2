@@ -231,3 +231,4 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 
 [42-agent-system-lossless-rule-adapter.md](42-agent-system-lossless-rule-adapter.md) — начатый lossless design; снят как основной курс уточнением владельца, implementation не зарегистрирована.
 [43-agent-system-rule-universality.md](43-agent-system-rule-universality.md) — действующее уточнение design: universality-driven preserve/generalize/exclude и semantic result verification.
+[44-agent-system-universality-trace.md](44-agent-system-universality-trace.md) — 17 реальных смысловых единиц: preserve/generalize/exclude/hold, bounded regression oracle и границы semantic review.
