@@ -559,7 +559,7 @@ class GovernanceProtocolDeploymentTests(unittest.TestCase):
     def test_exact_governance_and_preparation_composition(self):
         registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
         entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0012')
-        self.assertEqual(len(entity['revisions']), 1)
+        self.assertEqual([v['revision'] for v in entity['revisions']], ['r0001','r0002'])
         rev = entity['revisions'][0]
         for key, value in self.EXPECTED.items():
             self.assertEqual(rev[key], value)
@@ -882,6 +882,34 @@ class AuthorityStateDeploymentTests(unittest.TestCase):
         runner=runpy.run_path(str(BASE/'operator/ent-0018/r0001/run.py'))
         profile,records=runner['_bootstrap'](runner['_load']())
         self.assertEqual((len(records),len(profile['artifacts'])),(20,70));self.assertNotIn(('ENT-0014','r0003'),records)
+
+
+
+class InactivePreparationDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0002', 'title': 'Неактивная подготовка точного состава переноса и historical gap basis', 'kind': 'protocol', 'scopes': ['agent_system.governance', 'agent_system.transfer', 'agent_system.connection'], 'artifacts': [{'path': 'transfer/ent-0012/r0002/prepare.py', 'sha256': 'fc0db8b9063b35d926b0240984fcde9d6bb90dbde470a25864727294d8d4c344', 'size_bytes': 19657, 'role': 'normative'}, {'path': 'transfer/ent-0012/r0002/preparation.schema.json', 'sha256': '4bb5139908226a3ae7894df60dc5092a7f35c5dad3bb0c6623ea1bd90017ea4f', 'size_bytes': 1289, 'role': 'normative'}, {'path': 'transfer/ent-0012/r0002/procedure.md', 'sha256': '566c5ba67ce471e881d131d5273718c49c9a1e35ba9c8bf122c565b4b3ed0f7b', 'size_bytes': 3879, 'role': 'normative'}, {'path': 'transfer/ent-0012/r0002/prompt.md', 'sha256': '1c5e7a9300e964812c755ecbd187984db0faa818371b19cd93ea67777dfc4917', 'size_bytes': 2706, 'role': 'normative'}, {'path': 'transfer/ent-0012/r0002/usage.md', 'sha256': '4773ba46e35c51559ace42590eff5de988c9abab67fe4421d4f4df134b6cca41', 'size_bytes': 4762, 'role': 'normative'}, {'path': 'transfer/ent-0012/r0002/verify.py', 'sha256': 'f1b4bcf30a52818cbc5eb59699981d5f94b60ee84abeea3681891d5f759e8169', 'size_bytes': 14322, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0012', 'revision': 'r0001'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0011', 'revision': 'r0002'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0014', 'revision': 'r0003'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0018', 'revision': 'r0001'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0012', 'revision': 'r0001'}}], 'approval': {'status': 'approved', 'reference': {'path': 'catalog/approvals/94df86c2-8803-4665-8425-3db650806134.json', 'sha256': 'f43e25d0ab94e3b589d4bdab46c00cf786b0cb11557b05372590bf909c06dadf'}}, 'provenance': {'summary': 'Полный explicit inactive preparation profile по B/P1ред2 и conditional delegation, не копия governance/core. Single native capture/known scope check/declared closure и metadata-only private evidence. Исторические gaps не discharged, actual export/activation/readiness не разрешаются. Старые consumers не переключены.'}}
+
+    def test_exact_inactive_revision_and_implementation_summary(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        actual=next(v for e in registry['entities'] if e['entity_id']=='ENT-0012' for v in e['revisions'] if v['revision']=='r0002')
+        self.assertEqual(actual,self.EXPECTED)
+        for a in actual['artifacts']:artifact_bytes(a)
+        d=json.loads(artifact_bytes(actual['approval']['reference']))
+        self.assertEqual(d['decision_type'],'approve_revision');self.assertEqual(d['statement_form'],'summary')
+        self.assertEqual(d['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0012',revision='r0002'))
+        self.assertEqual(d['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in actual['artifacts']])
+
+    def test_fixed_installed_pins_and_legacy_coordinator_not_switched(self):
+        import runpy
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        versions={(e['entity_id'],v['revision']):v for e in registry['entities'] for v in e['revisions']}
+        module=runpy.run_path(str(BASE/'transfer/ent-0012/r0002/prepare.py'))
+        for key in [('ENT-0009','r0002'),('ENT-0013','r0001'),('ENT-0018','r0001')]:
+            for a in versions[key]['artifacts']:self.assertEqual(module['PINS'][a['path']],{k:a[k] for k in ['sha256','size_bytes']})
+        module['_tools']()
+        runner=runpy.run_path(str(BASE/'operator/ent-0018/r0001/run.py'))
+        profile,records=runner['_bootstrap'](runner['_load']())
+        self.assertEqual((len(records),len(profile['artifacts'])),(20,70))
+        self.assertNotIn(('ENT-0012','r0002'),records)
 
 
 if __name__ == '__main__':

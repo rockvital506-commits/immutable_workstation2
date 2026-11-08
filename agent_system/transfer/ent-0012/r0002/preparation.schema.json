@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:inactive-transfer-request:2",
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "kind": {
+      "const": "inactive_transfer_request"
+    },
+    "request_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f-]{36}$"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "plan": {
+      "$ref": "#/$defs/ref"
+    },
+    "procedure": {
+      "$ref": "#/$defs/ref"
+    },
+    "prompt": {
+      "$ref": "#/$defs/ref"
+    },
+    "seed_candidate": {
+      "$ref": "#/$defs/ref"
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "request_id",
+    "purpose",
+    "plan",
+    "procedure",
+    "prompt",
+    "seed_candidate"
+  ]
+}

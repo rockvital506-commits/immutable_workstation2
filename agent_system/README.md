@@ -223,3 +223,16 @@ ENT13r1 остаётся incomplete. Durable claim/current entity coordination/r
 actual actuator ещё открыты. R5 inactive preparation и R6 coverage/verifier нужны
 для дальнейшей qualification positive actual path; ни export, ни activation
 не разрешаются порядком разработки.
+
+
+### R5/I1 — inactive composition и versioned prompt
+
+[ENT12r2](transfer/ent-0012/r0002/usage.md) — explicit new profile,
+[процедура](transfer/ent-0012/r0002/procedure.md)/
+[prompt](transfer/ent-0012/r0002/prompt.md), без switch r1 consumers. Native single
+capture/declared closure/full known decisions/export scope; metadata-only private
+ENT18 evidence. Actual practice24revisions/90norm artifacts/30entity decisions,
+25historical gap rows open. Это не physical kit/coverage/readiness/action grant.
+[Отчёт40](../research/40-agent-system-inactive-transfer-preparation.md) содержит
+pre-code criteria/25own methods/actual pins и R6 gap→check map. R4 durable claims,
+exporter, positive readiness, capability adaptation/activation остаются отдельно.

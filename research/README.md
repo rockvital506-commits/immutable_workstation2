@@ -224,3 +224,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [38-agent-system-local-authority-state.md](38-agent-system-local-authority-state.md) — R4/I2a: private source journal/current-head/check-once; не single-use export и не новый grant.
 
 [39-agent-system-action-claim-model.md](39-agent-system-action-claim-model.md) — I2b: исполнимая модель reservation/terminal outcomes, не durable claim/readiness/actuator.
+
+[40-agent-system-inactive-transfer-preparation.md](40-agent-system-inactive-transfer-preparation.md) — R5/I1: inactive exact composition/closure/prompt и historical gap basis для R6, не экспорт.

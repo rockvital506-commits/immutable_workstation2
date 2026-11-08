@@ -6560,3 +6560,23 @@ R4 positive actual path остаётся открытым. Дальше подг
 closure/versioned prompt и R6 Gap→check/readiness qualification; затем actual
 claim/actuator integration на qualified subject с отдельным exact owner grant.
 Это dependency ordering, не объявление R4 закрытым/автоматический экспорт/activation.
+
+
+## 64. R5/I1 — prepared inactive composition, не перенос
+
+[Отчёт40](40-agent-system-inactive-transfer-preparation.md): критерии8acf4d1 до
+code, ENT12r2 six-file profile depends12r1+11r2+14r3+18r1,25own methods/full45module
+prequalification PASS. Summary approval94df86c2-8803-4665-8425-3db650806134 только
+conditional implementation; не owner release/export. Старые128refs/records/
+consumers не менялись, registry18/30/105/30.
+
+Actual documented CLI: root12r2→24revisions/90artifacts/30known entity decisions,
+seed original12/34 native checked;25historical gaps open, current composition
+coverage not_evaluated. Private7metadata objects+index/readback PASS, не raw
+normative bundle/physical export. All action/performed/activation flags false.
+
+Полная R6 gap→check map:16capabilities+9conditions, no auto discharge. Следом
+applicable capability mechanisms/evidence для missing adaptation/activation/
+readiness и R4 durable claim/exporter integration. Actual single new environment
+R7 и activation R8 отдельно; G05/G07 capability prerequisites не повод включать
+unknown environment. R5actual exporter/R4I2b/R6full release не закрыты этим срезом.
