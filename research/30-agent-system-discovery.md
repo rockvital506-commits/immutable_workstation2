@@ -5909,3 +5909,65 @@ pip check без нарушений, git diff --check чистый. Публич
 не создавались, registry целиком совпадает с baseline. R1 закрыт; семь крупных
 work packages остаются. Следующий результат — проект M1 и byte-handoff контрактов,
 не утверждённый выпуск/активация и не формальное увеличение числа компонентов.
+
+## 51. Проект M1 operator trial и два byte-handoff интерфейса
+
+Проект — [32-agent-system-operator-trial-design.md](32-agent-system-operator-trial-design.md).
+Это research/design, не реализованный coordinator и не новая normative entity.
+Baseline 93bcf1d, registry полностью прежний:
+`d404148bc236ae294d25e1d62106924fcacd0fec375185e0393f264fe4ec1919`, 54876 bytes.
+17 entities/23 revisions/66 artifacts/23 approvals; все 89 artifact+approval
+ссылочных файлов сверены с Git побайтно. Проверены существующие сигнатуры/returns
+ENT9r1 и ENT16r1: capture API отсутствуют; исходный execute_plan вызывает read_set
+один раз и возвращает только report_bytes/documents. Новых решений не записано.
+
+Зафиксированы D01–D18, 30 **планируемых**, не выполненных acceptance cases,
+четыре implementation шага I1–I4. Роли: owner/оператор/агент/coordinator; точка
+ввода правил user-controlled, не hidden platform config и не новая active binding.
+Первый профиль bounded Linux operator trial; реальная новая agent platform/
+positive permissions/R3 поведение здесь не выбираются/не объявляются выполненными.
+
+Выбран thin coordinator вместо manual recipes (не закрывают handoff) или нового
+framework (лишние риски/dependencies без обоснования). Сначала ENT9r2 capture_plan
+и ENT16r2 capture_trial, каждый через один общий worker/metadata projection;
+старые r1 остаются неизменными и сосуществуют по pinned paths. Смена producer
+version обозначается отдельно; legacy report semantics не расширяются молча.
+Capture возвращается только после полного успешного контроля; при late failure
+None, не partial maps как основание следующего шага. Старый read_trial плюс
+небезопасный pathname reread или execute_plan плюс второй read_set не решение.
+
+Предлагаемый session input с внешним pin содержит plan A/optional B refs и literal
+query; document set передаётся явно, без URI retrieval/произвольных callbacks.
+Selection/артефакты — exact installed profile closure с descriptor/coordinator,
+а trial payload остаётся старый ENT13r1 12/34. Новые tools не объявляются частью
+payload автоматически. Новый comparison plan — derived document из verified
+refs/session context; internally computed pin не выдаётся за подпись владельца.
+
+В successful run один source acquisition A и optional отдельный B, не атомарная
+транзакция двух roots. Нет B — query not_requested, не A-as-current. Journal
+связывает фактические child IDs/raw refs, а не подменяет их общим UUID. Место
+private local/operator-runs/new UUID, отдельно от trial inventory; no overwrite/
+resume/auto rollback. Для offline replay successful run сохраняет полный объявленный
+validation bundle, в том числе tool artifacts вне trial payload — только private
+evidence, не export. Failed binding не предоставляет full capture, поэтому
+полный offline replay такого failed payload намеренно не обещается.
+
+Предложены ограничения evidence 128 MiB aggregate/16 MiB per document/20064 files
+в дополнение к прежним input caps; это design defaults, не проверенный resource
+manager/CPU/RAM quota. Raw maps/roots/free-form task texts не печатаются; автоматический
+универсальный secret detector не заявлен. Все release/export/activation gates false,
+freshness/global completeness/поведение/новая среда остаются not_checked.
+
+Следующий конкретный шаг — **I1, ENT9r2 capture worker/API**, с собственными и общими
+проверками до регистрации. ENT16r2 и будущий ENT18r1 coordinator ещё не реализованы;
+R2/M1 целиком не закрыт. R3–R8 и отложенные Schneegans/OEM/reinstall не выполнены
+этим проектом. Тестирование проекта — проверка source facts/traceability и regression
+старых механизмов, не исполнение T01–T30 или нового сквозного процесса.
+
+Проверки текущего documentation-only этапа: source/design checker PASS (89
+неизменённых refs, 18 D/30 planned T/4 I, две фактические сигнатуры); свежий
+`tests/run-all.py` в изолированном approved-lock окружении — **34/34 PASS**.
+`pip check` — no broken requirements; `git diff --check` — PASS. Публичное дерево:
+212 Markdown/86 README/33 research; 34 test modules. Это regression существующего
+кода, **не** выполнение T01–T30; implementation=false, acceptance not_performed.
+После записи результата пересчитан docs selfhash; repository checks повторены.

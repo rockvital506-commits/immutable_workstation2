@@ -125,3 +125,7 @@ not_evaluated, даже если известного запрета не най
 Это исследовательский отчёт вне переносимого нормативного состава, не новый
 registry/approval/release. Следующий шаг — проект сквозного operator trial и точки
 применения правил; не новая ENT ради номера. Все разрешающие переходы закрыты.
+
+[Проект M1 operator trial и byte-handoff](../research/32-agent-system-operator-trial-design.md)
+задаёт будущие ENT9r2/ENT16r2 и coordinator без изменения r1. Capture API и
+acceptance matrix пока не реализованы/не исполнены; следующий шаг — ENT9r2.
