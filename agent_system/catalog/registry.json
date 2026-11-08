@@ -1305,6 +1305,76 @@
           "provenance": {
             "summary": "Универсальная разработка по заданию B и условному делегированию после проверок. Proposal-only модель не создаёт owner grant, не расширяет старый ledger событий и не завершает positive permissions/exporter/activation. Частная архитектура и built-in инструкции не перенесены."
           }
+        },
+        {
+          "revision": "r0002",
+          "title": "Local owner authority recognition и native incomplete-candidate guard",
+          "kind": "protocol",
+          "scopes": [
+            "agent_system.permissions",
+            "agent_system.release",
+            "agent_system.transfer"
+          ],
+          "artifacts": [
+            {
+              "path": "permissions/ent-0014/r0002/authority.py",
+              "sha256": "02965181c4cee21ae022df069fdc08dfad4718e47fe2494e87e3a523859505d3",
+              "size_bytes": 15528,
+              "role": "normative"
+            },
+            {
+              "path": "permissions/ent-0014/r0002/permissions.schema.json",
+              "sha256": "fad42d9a79676dd2458a2412493328a55064dc66505d5696751a5643e6fa0941",
+              "size_bytes": 7335,
+              "role": "normative"
+            },
+            {
+              "path": "permissions/ent-0014/r0002/verify.py",
+              "sha256": "e00d39a00e29217aaf008842e644fbfac3b7e7e158617bb07e31fb86715b14ab",
+              "size_bytes": 18918,
+              "role": "normative"
+            },
+            {
+              "path": "permissions/ent-0014/r0002/usage.md",
+              "sha256": "d6d0df0887849a6ea51dc76beff3fddd650e5408b038c28eb8320c0383fac29b",
+              "size_bytes": 12562,
+              "role": "normative"
+            },
+            {
+              "path": "permissions/ent-0014/r0002/procedure.md",
+              "sha256": "f9fd0753480732468fd16373dd0237c0435ccedc523dff57a429e2b5096ef256",
+              "size_bytes": 4294,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0014",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0014",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/89660162-2b9a-4abe-83aa-df98e5561e4e.json",
+              "sha256": "baad7a863580b707c6818f0b28f4495b32a57d342a7603e306c582f4e305ef3d"
+            }
+          },
+          "provenance": {
+            "summary": "R4/I1 после выбора A и conditional delegation: recognition exact intent в declared local owner context, не authentication/readiness/stateful actuation. Старая r1 не переписана и consumers не переключены; реальных owner grants не создано."
+          }
         }
       ]
     },

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1",
+  "decision_id": "89660162-2b9a-4abe-83aa-df98e5561e4e",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0014",
+    "revision": "r0002"
+  },
+  "artifacts": [
+    {
+      "path": "permissions/ent-0014/r0002/authority.py",
+      "sha256": "02965181c4cee21ae022df069fdc08dfad4718e47fe2494e87e3a523859505d3",
+      "size_bytes": 15528
+    },
+    {
+      "path": "permissions/ent-0014/r0002/permissions.schema.json",
+      "sha256": "fad42d9a79676dd2458a2412493328a55064dc66505d5696751a5643e6fa0941",
+      "size_bytes": 7335
+    },
+    {
+      "path": "permissions/ent-0014/r0002/verify.py",
+      "sha256": "e00d39a00e29217aaf008842e644fbfac3b7e7e158617bb07e31fb86715b14ab",
+      "size_bytes": 18918
+    },
+    {
+      "path": "permissions/ent-0014/r0002/usage.md",
+      "sha256": "d6d0df0887849a6ea51dc76beff3fddd650e5408b038c28eb8320c0383fac29b",
+      "size_bytes": 12562
+    },
+    {
+      "path": "permissions/ent-0014/r0002/procedure.md",
+      "sha256": "f9fd0753480732468fd16373dd0237c0435ccedc523dff57a429e2b5096ef256",
+      "size_bytes": 4294
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-10-07",
+  "statement_form": "summary",
+  "statement": "Условное внедрение bounded R4/I1 local permission recognition по ранее данному делегированию после проверок и явного выбора A. Summary основания, не новая прямая цитата о bytes, не owner grant на выпуск/export/activation.",
+  "basis": "До регистрации44/44own methods и42/42repository modules PASS; native installed ENT14r1 guard без loader/child injection, release/export positive recognition только synthetic in-memory owner contexts; actual ENT13r1 остаётся blocked_incomplete_candidate. Scoped entity blocks не обходятся; ready re-label отвергается native guard. pip/repo/manifest/diff PASS; прежние116refs/records unchanged.5ownfiles, exact depends_on ENT14r1/supersedes без переключения old consumers. Эффективность узко подтверждается reuse native guard/одного closed слоя вместо нового framework; speed benchmark не заявлен. Trust context provenance, owner identity, importer/source storage/current-head/stateful single-use claims/readiness/actuator не реализованы и не выдаются за выполненные; coherent fabricated trusted claims могут пройти consistency. Все action/performed/activation flags false даже при recognition. Runtime permission events не добавлены в entity approval ledger/Git. R4 целиком/actual compatible-release end-to-end не закрыты; настоящие grants требуют отдельного owner решения. Новых packages/ключей/платформы нет."
+}

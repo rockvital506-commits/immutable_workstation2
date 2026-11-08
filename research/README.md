@@ -218,3 +218,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [35-agent-system-workshop-practice.md](35-agent-system-workshop-practice.md) — R3/D: frozen учебное условие, отказ A0/коррекция A1, проверенный выбор и ограничения; не покупка.
 
 [36-agent-system-positive-permissions-design.md](36-agent-system-positive-permissions-design.md) — R4: проект exact release/export decisions, trust boundary и P01–P20; выбор authority ещё впереди, не grant.
+
+[37-agent-system-local-permission-implementation.md](37-agent-system-local-permission-implementation.md) — R4/I1: выбран A, positive authority semantics и native incomplete guard; не actual выпуск.

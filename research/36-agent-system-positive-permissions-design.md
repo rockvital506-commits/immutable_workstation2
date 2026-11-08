@@ -2,7 +2,7 @@
 
 ## 1. Статус, основание, цель
 
-**Проект до реализации; ключевой выбор основания доверия ещё не сделан.**
+**Исходный проект до реализации. Затем выбран A; актуальный срез — §10.**
 Продолжение R4 подтверждено, но конкретный выпуск/экспорт/activation не разрешены.
 Ни одной positive decision этот документ не создаёт. Это локальный design report,
 не новая normative revision/индекс/активная связка. R4 пока не закрыт.
@@ -213,3 +213,15 @@ manifest/self-hash/diff checks PASS. Все116normative/approval refs/bytes и r
 529relative links/0broken. Полный41module suite на этом documentation-only
 checkpoint не перезапускался; последний полный PASS — R3, не positive R4.
 Реальные grants/trust store/crypto keys/новые нормативные версии не создавались.
+
+
+## 10. Выбран A, выполнен ограниченный I1
+
+[Реализация37](37-agent-system-local-permission-implementation.md): выбран
+owner-controlled local authority, ENT14r2. Positive intent recognition/deny/revoke
+и native incomplete guard реализованы,44own methods/42module prequalification
+PASS. Conditional summary registration не является реальным owner grant.
+Все action flags/performed остаются false; effective positive transitions не
+реализованы. P15 cross-view generalization, P18 stateful claims, источник/trusted
+importer/current-head и readiness/actuator integration не объявляются готовыми.
+R4 целиком не закрыт. Реальный неполный ENT13r1 не выпущен/не экспортирован.

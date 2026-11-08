@@ -619,7 +619,7 @@ class PermissionProtocolDeploymentTests(unittest.TestCase):
     def test_exact_permission_protocol_composition(self):
         registry=json.loads((BASE/'catalog/registry.json').read_bytes())
         entity=next(e for e in registry['entities'] if e['entity_id']=='ENT-0014')
-        self.assertEqual(len(entity['revisions']),1)
+        self.assertEqual([v['revision'] for v in entity['revisions']],['r0001','r0002'])
         revision=entity['revisions'][0]
         for key,value in self.EXPECTED.items():self.assertEqual(revision[key],value)
         for artifact in revision['artifacts']:artifact_bytes(artifact)
@@ -825,6 +825,35 @@ class WorkPracticeDeploymentTests(unittest.TestCase):
         profile,records=runner['_bootstrap'](runner['_load']())
         self.assertEqual((len(records),len(profile['artifacts'])),(20,70))
         self.assertIn(('ENT-0011','r0001'),records);self.assertNotIn(('ENT-0011','r0002'),records)
+
+
+
+class PermissionAuthorityDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0002', 'title': 'Local owner authority recognition и native incomplete-candidate guard', 'kind': 'protocol', 'scopes': ['agent_system.permissions', 'agent_system.release', 'agent_system.transfer'], 'artifacts': [{'path': 'permissions/ent-0014/r0002/authority.py', 'sha256': '02965181c4cee21ae022df069fdc08dfad4718e47fe2494e87e3a523859505d3', 'size_bytes': 15528, 'role': 'normative'}, {'path': 'permissions/ent-0014/r0002/permissions.schema.json', 'sha256': 'fad42d9a79676dd2458a2412493328a55064dc66505d5696751a5643e6fa0941', 'size_bytes': 7335, 'role': 'normative'}, {'path': 'permissions/ent-0014/r0002/verify.py', 'sha256': 'e00d39a00e29217aaf008842e644fbfac3b7e7e158617bb07e31fb86715b14ab', 'size_bytes': 18918, 'role': 'normative'}, {'path': 'permissions/ent-0014/r0002/usage.md', 'sha256': 'd6d0df0887849a6ea51dc76beff3fddd650e5408b038c28eb8320c0383fac29b', 'size_bytes': 12562, 'role': 'normative'}, {'path': 'permissions/ent-0014/r0002/procedure.md', 'sha256': 'f9fd0753480732468fd16373dd0237c0435ccedc523dff57a429e2b5096ef256', 'size_bytes': 4294, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0014', 'revision': 'r0001'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0014', 'revision': 'r0001'}}], 'approval': {'status': 'approved', 'reference': {'path': 'catalog/approvals/89660162-2b9a-4abe-83aa-df98e5561e4e.json', 'sha256': 'baad7a863580b707c6818f0b28f4495b32a57d342a7603e306c582f4e305ef3d'}}, 'provenance': {'summary': 'R4/I1 после выбора A и conditional delegation: recognition exact intent в declared local owner context, не authentication/readiness/stateful actuation. Старая r1 не переписана и consumers не переключены; реальных owner grants не создано.'}}
+
+    def test_exact_full_revision_and_partial_summary_basis(self):
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        actual=next(v for e in registry['entities'] if e['entity_id']=='ENT-0014' for v in e['revisions'] if v['revision']=='r0002')
+        self.assertEqual(actual,self.EXPECTED)
+        for a in actual['artifacts']:artifact_bytes(a)
+        d=json.loads(artifact_bytes(actual['approval']['reference']))
+        self.assertEqual(d['subject'],dict(catalog_id=CATALOG_ID,entity_id='ENT-0014',revision='r0002'))
+        self.assertEqual(d['decision_type'],'approve_revision');self.assertEqual(d['statement_form'],'summary')
+        self.assertEqual(d['artifacts'],[{k:a[k] for k in ['path','sha256','size_bytes']} for a in actual['artifacts']])
+
+    def test_runtime_pins_and_legacy_consumers_unchanged(self):
+        import runpy
+        registry=json.loads((BASE/'catalog/registry.json').read_bytes())
+        old=next(e for e in registry['entities'] if e['entity_id']=='ENT-0014')['revisions'][0]
+        a=runpy.run_path(str(BASE/'permissions/ent-0014/r0002/authority.py'))
+        expected={v['path']:{k:v[k] for k in ['sha256','size_bytes']} for v in old['artifacts']}
+        for p,v in expected.items():self.assertEqual(a['PINS'][p],v)
+        self.assertEqual(len(a['PINS']),5)
+        for p in a['PINS']:a['_installed'](p)
+        runner=runpy.run_path(str(BASE/'operator/ent-0018/r0001/run.py'))
+        profile,records=runner['_bootstrap'](runner['_load']())
+        self.assertEqual((len(records),len(profile['artifacts'])),(20,70))
+        self.assertNotIn(('ENT-0014','r0002'),records)
 
 
 if __name__ == '__main__':

@@ -185,3 +185,15 @@ activation; payload ENT13r1 остаётся incomplete12/34, все grants fals
 owner review pending. Model tests остаются model_review. ENT12/13/18
 сохраняют прежние exact pins; payload остаётся12versions/34artifacts, без
 release/export/activation или автоматической смены связок.
+
+
+### R4/I1 — local permission recognition, не actual transition
+
+[ENT14r2](permissions/ent-0014/r0002/usage.md) после выбора владельцем A:
+exact external context/request/subject/grant binding, release/export parent,
+cumulative deny/exact revoke и native guard ENT14r1.44own tests,42module
+prequalification. [Ограничения/трасса P01–P20](../research/37-agent-system-local-permission-implementation.md).
+Positive recognition — не готовность/аутентификация/actuation; все action flags
+false, current ENT13 incomplete12/34 остаётся blocked. Runtime importer/current
+head/claims/coverage/actuator ещё не реализованы; **R4 целиком не закрыт**.
+Старые consumers/разрешения/активные связки не переключены.

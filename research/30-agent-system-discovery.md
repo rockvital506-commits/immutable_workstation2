@@ -6507,3 +6507,20 @@ Hash/actor_role/flag из недоверенного input не аутентиф
 approval stream ENT7 не расширяется молча; permission events не подмешиваются
 в catalog/approvals старого ENT18. Никаких новых grants/выпуска/export/activation
 этим design не создано, R4 не закрыт.
+
+
+## 61. R4/I1 — выбран A и реализовано bounded recognition
+
+После выбора owner-controlled local authority разработана ENT14r2 (5files,
+depends_on ENT14r1, supersedes без переключения consumers). [Отчёт37](37-agent-system-local-permission-implementation.md):
+positive exact intent semantics и deny/revoke, full declared permission stream,
+external context/current expected pin, native actual incomplete/entity-scope guard.
+44own methods/42module prequalification PASS. Approval89660162-2b9a-4abe-83aa-df98e5561e4e
+— conditional implementation summary, не реальное разрешение выпуска/export.
+Old116refs/records unchanged; registry18entities28revisions94norm28approvals.
+
+Все effective action/performed/activation flags false. Owner context provenance,
+реальный importer/current-head/single-use claims/ready-subject verifier/actuator
+не сделаны; pure recognition не freshness/authentication. Current ENT13r1 blocked,
+payload12/34 unchanged. P15/P18 и remaining integrations сохранены, R4 целиком не
+закрыт. Следующий I2 — source/state/claim contract, не повторный выбор A/не grant.

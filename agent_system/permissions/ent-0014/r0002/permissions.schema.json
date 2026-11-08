@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-system:schema:local-permission:2",
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ]
+    },
+    "named": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ]
+    },
+    "eventref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "event_id",
+        "sha256",
+        "size_bytes"
+      ]
+    },
+    "export": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "export_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "maxItems": 10000
+        },
+        "destination": {
+          "$ref": "#/$defs/ref"
+        },
+        "procedure": {
+          "$ref": "#/$defs/ref"
+        },
+        "prompt": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "export_id",
+        "paths",
+        "destination",
+        "procedure",
+        "prompt"
+      ]
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1"
+        },
+        "kind": {
+          "const": "local_owner_context"
+        },
+        "profile": {
+          "const": "owner-controlled-local-r0001"
+        },
+        "context_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "known_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/named"
+          },
+          "maxItems": 10000
+        },
+        "approved_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/eventref"
+          },
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "schema_version",
+        "kind",
+        "profile",
+        "context_id",
+        "generation",
+        "known_events",
+        "approved_events"
+      ]
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1"
+        },
+        "kind": {
+          "const": "release_subject"
+        },
+        "candidate": {
+          "$ref": "#/$defs/ref"
+        },
+        "registry": {
+          "$ref": "#/$defs/ref"
+        },
+        "entity_decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/named"
+          },
+          "maxItems": 10000
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/named"
+          },
+          "maxItems": 10000,
+          "minItems": 1
+        },
+        "coverage_description": {
+          "$ref": "#/$defs/ref"
+        },
+        "procedure": {
+          "$ref": "#/$defs/ref"
+        },
+        "prompt": {
+          "$ref": "#/$defs/ref"
+        }
+      },
+      "required": [
+        "schema_version",
+        "kind",
+        "candidate",
+        "registry",
+        "entity_decisions",
+        "artifacts",
+        "coverage_description",
+        "procedure",
+        "prompt"
+      ]
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1"
+        },
+        "kind": {
+          "const": "permission_event"
+        },
+        "event_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "decision": {
+          "enum": [
+            "authorize_release",
+            "authorize_export",
+            "deny_permission",
+            "revoke_permission"
+          ]
+        },
+        "action": {
+          "enum": [
+            "release",
+            "export"
+          ]
+        },
+        "subject": {
+          "$ref": "#/$defs/ref"
+        },
+        "parent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/eventref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "export": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/export"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/eventref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "kind",
+        "event_id",
+        "decision",
+        "action",
+        "subject",
+        "parent",
+        "export",
+        "target"
+      ]
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1"
+        },
+        "kind": {
+          "const": "permission_check"
+        },
+        "request_id": {
+          "type": "string",
+          "format": "uuid",
+          "pattern": "^[0-9a-f-]{36}$"
+        },
+        "action": {
+          "enum": [
+            "release",
+            "export"
+          ]
+        },
+        "context": {
+          "$ref": "#/$defs/ref"
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "subject": {
+          "$ref": "#/$defs/ref"
+        },
+        "grant": {
+          "$ref": "#/$defs/eventref"
+        },
+        "export": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/export"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "kind",
+        "request_id",
+        "action",
+        "context",
+        "generation",
+        "subject",
+        "grant",
+        "export"
+      ]
+    }
+  }
+}
