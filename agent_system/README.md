@@ -134,3 +134,12 @@ registry/approval/release. Проект сквозного operator trial заф
 только при полном success. I2/ENT16r2 также зарегистрирован: первые manifest/objects
 bytes доступны после всех late guards и cleanup. Следующий шаг — I3/coordinator.
 Полная acceptance matrix ещё не исполнена; M1 целиком не закрыт.
+
+
+### I3 в работе: unregistered coordinator foundation
+
+[Рабочий кандидат основы](operator/ent-0018/r0001/usage.md): strict session/plans
+и private bounded evidence CAS/read-only structural verification. Это не
+зарегистрированная ENT18 и не run_operator_trial. Runner/state machine/own-profile
+bootstrap/семантический journal replay/procedure+prompt ещё не реализованы;
+I3/M1 целиком не закрыты. Registry и approvals этим подэтапом не меняются.

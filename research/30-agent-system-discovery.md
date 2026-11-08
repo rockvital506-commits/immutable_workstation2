@@ -6158,3 +6158,88 @@ capture tests и 51 catalog deployment case. Isolated pip check/diff check — P
 обновлён docs selfhash, repository checks повторены. Все 93 old refs и 24 old
 revision records сохранены, все 97 current refs валидны. Полная M1 acceptance
 matrix, behaviour/freshness/permission checks этим прогоном не подменяются.
+
+## 54. I3a — закрытые входы и private evidence foundation
+
+Продолжение подтверждённого I3 разделено на проверяемую основу и ещё не реализованную
+orchestration. Создан [рабочий кандидат](../agent_system/operator/ent-0018/r0001/usage.md):
+session.py/session.schema.json, evidence.py, verify.py, usage.md. **ENT18 не
+зарегистрирована**, approval/index не менялись. Это не внедрённый coordinator,
+не новый общий допуск и не выполнение полной матрицы M1.
+
+### 54.1. Что реализовано и чего нет
+
+Strict session/plans: обязательные external byte refs, closed JSON/LF, literal
+context, fixed lab purpose/criteria, task UUID, candidate pin, exact document set,
+B/query pairing и ограничения прежнего ENT9r2/ENT8r1. Native sizes проверяются
+отдельно, float не выдаётся за native int. Caller-supplied trusted composition
+profile — внутренний параметр, не неизвестная source-derived policy. Состав
+future own coordinator ещё не bootstrap'ится; production entry отсутствует.
+Нельзя использовать helper с произвольным profile как доказательство общей
+проверки installed системы. Dependency expectations — прежние 57 norm artifacts/
+19 revisions; новых libraries/извлечения platform built-ins нет.
+
+Private evidence: fixed local/operator-runs/new UUID/objects; directory FDs,
+NOFOLLOW/exclusive claim/file writes, private dirs0700/files0600, no overwrite/
+resume/auto-delete/rollback. Legacy local ancestor может быть0755 без group/other
+write; private subtree остаётся0700, unsafe ancestors не chmod'ятся автоматически.
+Limits16MiB/doc,128MiB aggregate unique objects+index,20064 files incl index.
+Dedup повторно сверяет сохранённые bytes, не расходует budget второй раз.
+Ошибки записи/лимитов/fsync/late readback/binding poison store; остаток сохраняется.
+Существующий index file сам по себе не completion proof. Финальный pinned receipt
+выдаётся только после readbacks/guards. Не обещается полная crash recovery/atomicity.
+
+verify_evidence readonly проверяет pinned index/точные objects/inventory/metadata/
+bindings; без mkdir/write/chmod/fsync. consistent_private_evidence — структурная
+согласованность CAS, **не** execution authenticity/journal semantics/child replay.
+Raw bytes не возвращаются/не печатаются этим checker. Semantic replay ENT10/17,
+runner/state machine/child journal/human summary/procedure+prompt ещё отсутствуют.
+Политика privacy/dopustимых данных остаётся у caller; secret detector не заявлен.
+
+Альтернатива framework отвергнута в пользу reuse bounded pinned helpers. Плюсы:
+маленькая поверхность, early input rejection, dedup/exclusive immutability граница.
+Минусы: in-memory bytes/JSON, hash/readback, raw privacy surface, новый storage path
+и необходимость отдельно проверить actual execution/handoff. Уменьшение повторного
+storage подтверждено dedup тестами, не benchmark coordinator/универсальная защита.
+
+### 54.2. Проверки и ограниченная native практика
+
+35/35 foundation test methods PASS без skips; варианты subTests не объявляются
+отдельными end-to-end cases. Session positive/no-B/B, same/different plan refs,
+wrong pins/missing/extra docs/closed schema/ambiguous JSON/native sizes/context/
+selection/artifacts/profile, copied mappings и отсутствие source/output syscalls
+во время validation. Storage: counters/dedup/quota incl index, collision/unsafe
+namespace/no chmod repair, disk-full/fsync/late binding/late permissions failures,
+poison/no reuse, corruption/extra/missing/mode/hardlink/symlink/FIFO, wrong external
+pin, no readonly mutation и FD cleanup. Runtime/source security проверки не
+ослаблялись. На первом own test run — 34/34 PASS, затем добавлена late directory
+permission проверка (35/35); это не исправление замаскированного FAIL.
+
+Native lab на trusted текущем checkout: сформирован closed session с внешними
+pins для текущего 19-revision/57-artifact lab composition (не hypothetical ENT18
+profile). Проверена session без acquisitions/stage/query; session и plan записаны
+в CAS, повторная запись session dedup'лицирована, final receipt отдельно
+проверен readonly. Это **не** T30, не обязательный /tmp workflow и не M1 end-to-end.
+Ни одного read_set/stage_trial/capture_trial/compare_views не вызвано (внешнее
+sys.setprofile наблюдение), trial не создан. Exact IDs/counts приведены ниже.
+
+Следующее действие: продолжить I3 runner/own-profile/state machine/handoff/journal/
+semantic replay и procedure/prompt, затем I4. До этого не регистрировать ENT18,
+не объявлять I3/R2/M1 закрытыми и не выдавать storage consistency за фактическую
+результативность workflow/поведение агента/permissions/freshness.
+
+Практический evidence run `2779ffde-f904-4e03-b7b6-d24a7abb2582`, index816 bytes
+SHA `d2c63f1f35ed7c51a68a3fee102ce4ae86dce379a264a7f05a5118e622796e8b`;
+session536 bytes SHA `d75f78437acd08ae982432014e23a0e6059bdd4cdc970e1c83947e4611ae8ab6`;
+plan16094 bytes SHA `bec216a4e6f0eddd767daa7cea77b7175e1f07dcb9e8dbf6472b6d407c21e337`.
+Два unique objects плюс index,17446 persisted bytes; consistent_private_evidence,
+overall_admission not_evaluated/transition false. Сохранение в ignored private
+local/operator-runs/UUID; доступность этих данных после restore не обещается.
+
+Свежий полный regression — **37/37 PASS**, в том числе35 foundation test methods;
+pip check и git diff check — PASS. Public215Markdown/86README/33research,
+37 test modules. Registry прежний59988 bytes SHA
+`7d433bbc7e8a1c069beabfbebe2c2d7a47b6cfe59a52b2b6732a7dffc26e80f3`,
+17entities/25revisions/72artifacts/25approvals; все97 ссылочных файлов неизменны.
+После записи результата обновлён docs selfhash и повторён repository check.
+Это **I3a foundation checkpoint**, не регистрация/закрытие I3 или M1.

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "kind": {
+      "const": "operator_trial_session"
+    },
+    "profile": {
+      "const": "operator-trial-linux-r0001"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$(?![\\s\\S])"
+    },
+    "purpose": {
+      "const": "local_core_trial"
+    },
+    "criteria_version": {
+      "const": "operator-trial-criteria-r0001"
+    },
+    "candidate": {
+      "$ref": "#/$defs/ref"
+    },
+    "plan_a": {
+      "$ref": "#/$defs/ref"
+    },
+    "plan_b": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/ref"
+        }
+      ]
+    },
+    "query": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_.-]{0,127}$(?![\\s\\S])"
+            },
+            "area": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_.-]{0,127}$(?![\\s\\S])"
+            }
+          },
+          "required": [
+            "operation",
+            "area"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$(?![\\s\\S])"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777216
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "profile",
+    "task_id",
+    "purpose",
+    "criteria_version",
+    "candidate",
+    "plan_a",
+    "plan_b",
+    "query"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "plan_b": {
+            "type": "null"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "query": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "operation": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{0,127}$(?![\\s\\S])"
+              },
+              "area": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{0,127}$(?![\\s\\S])"
+              }
+            },
+            "required": [
+              "operation",
+              "area"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ]
+}

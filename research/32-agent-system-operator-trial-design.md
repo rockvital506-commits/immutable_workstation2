@@ -1,6 +1,6 @@
 # M1: проект сквозного операторского trial и byte-handoff
 
-> §§1–10 сохраняют проектный срез до реализации. Результат I1 — §11, актуальный результат I2 — §12.
+> §§1–10 сохраняют проектный срез до реализации. Результат I1 — §11, результат I2 — §12; текущий I3a — §13.
 
 ## 1. Статус, основание и результат этого этапа
 
@@ -400,3 +400,29 @@ Evidence/точные counts/решение — исследование 30 §53
 Ручной harness не заменяет будущие session preflight/state machine/private
 journal/resource-manager/handoff checks; полная T01–T30 matrix не исполнена.
 M1/R2 целиком, R3–R8 и разрешения release/export/activation не закрыты.
+
+
+## 13. I3a — реализованная основа, не завершённый coordinator
+
+[Рабочий кандидат](../agent_system/operator/ent-0018/r0001/usage.md) содержит
+session/schema validator и private evidence CAS. Это implementation draft вне
+registry/approvals, не новая нормативная ENT18r1 и не общий run entry. Подэтап
+выделен, чтобы проверить input/persistence boundary до соединения всех actions.
+
+Closed session фиксирует purpose/criteria/task UUID, pins candidate/plans и
+optional literal query/B pairing. Exact profile — только trusted внутренний
+аргумент, не пользовательское поле; future installed own-profile bootstrap ещё
+не реализован. Pinned dependency closure 19 revisions/57 artifacts, stdlib плюс
+прежний isolated jsonschema. Source I/O и action pipeline validator не вызывает.
+
+Evidence CAS реализует exclusive private claim/no overwrite/resume/delete,
+16 MiB/document/128 MiB aggregate с final index/20064 files, dedup и poison на
+отказе. Readonly checker проверяет exact inventory/refs/metadata/bindings, **не**
+semantic journal/child replay или факт исполнения. Проверки/практика — исследование
+30 §54. Это частичная реализация D01–D04/D14 и storage части D18, не полный PASS
+этих требований или T01–T30. Registry/97 прежних refs не изменены.
+
+Следующая часть I3 — trusted own-profile bootstrap, runner/state machine,
+candidate/handoff binding, child journal, human report, procedure/versioned prompt
+и semantic replay. Затем интеграция I4 и только после относящихся PASS — решение
+о регистрации exact ENT18 состава по условному делегированию. I3/M1 не закрыты.
