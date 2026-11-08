@@ -145,3 +145,29 @@ registry и его прежние revision records побайтово совпа
 inventory219md/86README/35research/40modules,516relative links/0broken.
 Полный40module suite на этом documentation-only шаге не перезапускался;
 последний полный PASS относится к I4, не к ещё не выполненным S/D.
+
+## 7. Выбранная пара и baseline самоприменения S
+
+Владелец выбрал workshop. D: условия/criteria сохранены до исполнения в commit
+619a486, результаты — в отдельном отчёте35. Нового выбора того же предмета не нужно.
+
+До реализации S фиксируются следующие критерии:
+
+| ID | Критерий S | Проверка |
+|---|---|---|
+| S01 | ENT11r2 — полная revision с минимальной операционализацией W09 | work.md/scenarios.json/verify.py/practice.md; без нового evaluator/ядра |
+| S02 | W00–W08 и core неизменны; W09 сохраняет смысл | Сравнение разделов с r1, старые111refs/records |
+| S03 | Procedure требует заранее pinned task/criteria/scope, subject checks и видимый контролируемый defect | Integrity checks только формы; содержание проверяется в реальных S/D |
+| S04 | Отдельно уровень observation и независимость reviewer | Нет claim behavior_verified из model tests; owner_review pending до фактического review |
+| S05 | Model scenarios остаются model_review | Старые14vectors не стали behavior evidence от смены revision |
+| S06 | Ошибка/отложение/permissions не исчезают | A0 failure preserved; B delivery unknown; no release/export/activation |
+| S07 | Impact/сосуществование версий | ENT12/ENT13/ENT18 и frozen payload продолжают exact r1, без latest/auto switch |
+| S08 | Внедрение лишь после относящихся проверок/условий делегирования | Own checks/full suite/111refs; exact summary basis, не прямая цитата |
+
+Обоснование состава: исправляется именно пробел операционализации уже имеющегося
+W09. Один дополнительный текст процедуры внутри новой версии существующего
+protocol лучше отдельного ENT19 с повторением W. Плюс — явный evidence level и
+subject checks; минус — ещё один текст и необходимость операторского суждения.
+Риск формального checklist ограничен запретом считать integrity tests практикой.
+Действующие consumers остаются на r1: большее покрытие r2 не наследуется ими.
+Новые parties/packages/экспортные механизмы не требуются. Core не ослабляется.
