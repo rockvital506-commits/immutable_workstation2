@@ -222,3 +222,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [37-agent-system-local-permission-implementation.md](37-agent-system-local-permission-implementation.md) — R4/I1: выбран A, positive authority semantics и native incomplete guard; не actual выпуск.
 
 [38-agent-system-local-authority-state.md](38-agent-system-local-authority-state.md) — R4/I2a: private source journal/current-head/check-once; не single-use export и не новый grant.
+
+[39-agent-system-action-claim-model.md](39-agent-system-action-claim-model.md) — I2b: исполнимая модель reservation/terminal outcomes, не durable claim/readiness/actuator.

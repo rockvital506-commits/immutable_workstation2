@@ -211,3 +211,15 @@ depends_on14r2+15r1, без переключения старых consumers. Sou
 1negative check/reopen PASS. Source meaning/origin — trusted operator responsibility,
 не proof из текста/хэша. Readiness/actuator/recovery/global rollback resistance
 не реализованы, all action flags false; R4 целиком ещё не закрыт.
+
+
+### I2b — action claim model и readiness dependency
+
+[Checkpoint39](../research/39-agent-system-action-claim-model.md):19executable
+methods,512gate combinations, finite two-caller serial model и physical/native
+existing-boundary checks. Это не production manager/actual grants: не новый
+нормативный набор, registry/consumers unchanged. Model success не action success;
+ENT13r1 остаётся incomplete. Durable claim/current entity coordination/readiness/
+actual actuator ещё открыты. R5 inactive preparation и R6 coverage/verifier нужны
+для дальнейшей qualification positive actual path; ни export, ни activation
+не разрешаются порядком разработки.

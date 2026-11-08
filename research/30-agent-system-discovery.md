@@ -6544,3 +6544,19 @@ registry18entities29revisions99norm29approvals. Actual documented empty-store de
 flags false. External high-water/глобальная полнота/recovery/action claims/ready
 transitions остаются отдельно. R4/I2b/R5/R6/R7/R8 и actual release/export/
 activation не завершены этим контроллером. Выбор A повторно не запрашивался.
+
+
+## 63. I2b checkpoint — модель claims и точная граница positive path
+
+[39](39-agent-system-action-claim-model.md): критерии88e2838 до code,19methods
+(model512gate combinations/15states/803serial edges; physical r3 export checks и
+native r2 incomplete guard). Первоначальный ошибочный expected state count
+исправлен, не скрыт. Нет новой normative revision/approval/actual permission.
+
+I2b durable reservation требует future state revision/current entity coordination
+и trusted readiness verifier. Последний отсутствует: old ENT13/14 profile принимает
+только incomplete. Model verified/receipt booleans — аксиомы, не production API.
+R4 positive actual path остаётся открытым. Дальше подготовка R5 inactive transferable
+closure/versioned prompt и R6 Gap→check/readiness qualification; затем actual
+claim/actuator integration на qualified subject с отдельным exact owner grant.
+Это dependency ordering, не объявление R4 закрытым/автоматический экспорт/activation.
