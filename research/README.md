@@ -207,3 +207,4 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 | Документ | Назначение |
 |---|---|
 | [30-agent-system-discovery.md](30-agent-system-discovery.md) | Локальное задание и обследование универсальных сущностей агента; не активная конфигурация и не экспорт |
+| [31-agent-system-core-audit.md](31-agent-system-core-audit.md) | Сводный аудит ядра после ENT17: реальные механизмы, 16 способностей/9 условий, пробелы и очередь R1–R8/M1; не normative release coverage |
