@@ -19,7 +19,8 @@
 
 - [ENT-0007 r0001 — формат и вычисление событий](specification/ent-0007/r0001/usage.md).
 - [ENT-0008 r0001 — структурный протокол плана и отчёта](specification/ent-0008/r0001/usage.md).
-- [ENT-0009 r0001 — исполнитель закреплённого плана](validation/ent-0009/r0001/usage.md).
+- [ENT-0009 r0001 — исторический metadata исполнитель](validation/ent-0009/r0001/usage.md).
+- [ENT-0009 r0002 — shared worker и successful capture](validation/ent-0009/r0002/usage.md).
 - [ENT-0010 r0001 — offline-согласованность bundle и semantic replay](validation/ent-0010/r0001/usage.md).
 - [ENT-0011 r0001 — базовая методология работы](protocols/ent-0011/r0001/work.md).
 - [ENT-0012 r0001 — самоуправление двух жизненных циклов](protocols/ent-0012/r0001/governance.md).
@@ -123,9 +124,11 @@ not_evaluated, даже если известного запрета не най
 [Локальный сводный аудит и очередь R1–R8/M1](../research/31-agent-system-core-audit.md)
 различает 17-компонентную цепочку инструментов и исторический payload E13 (12/34).
 Это исследовательский отчёт вне переносимого нормативного состава, не новый
-registry/approval/release. Следующий шаг — проект сквозного operator trial и точки
-применения правил; не новая ENT ради номера. Все разрешающие переходы закрыты.
+registry/approval/release. Проект сквозного operator trial зафиксирован отдельно;
+не новая ENT ради номера. Все разрешающие переходы закрыты.
 
 [Проект M1 operator trial и byte-handoff](../research/32-agent-system-operator-trial-design.md)
-задаёт будущие ENT9r2/ENT16r2 и coordinator без изменения r1. Capture API и
-acceptance matrix пока не реализованы/не исполнены; следующий шаг — ENT9r2.
+задаёт ENT9r2/ENT16r2 и coordinator без изменения r1. I1/ENT9r2 реализован и
+зарегистрирован: capture_plan/metadata projection через один worker, raw maps
+только при полном success. Следующий шаг — I2/ENT16r2. Coordinator и полная
+acceptance matrix ещё не реализованы/не исполнены; M1 целиком не закрыт.

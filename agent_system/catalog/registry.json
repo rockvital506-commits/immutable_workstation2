@@ -873,6 +873,70 @@
           "provenance": {
             "summary": "Новая разработка по заданию и условному делегированию владельца, модель B. Реализация исполнения одного плана без аутентификации/общего допуска/автопереходов; отдельный verifier чужих bundles отсутствует."
           }
+        },
+        {
+          "revision": "r0002",
+          "title": "Исполнитель плана с контролируемой передачей исходных bytes",
+          "kind": "check",
+          "scopes": [
+            "agent_system.validation"
+          ],
+          "artifacts": [
+            {
+              "path": "validation/ent-0009/r0002/execute.py",
+              "sha256": "e28329880072ce4a13b4306bfa5c423860ad8e959147b9653f9ed13650be20ba",
+              "size_bytes": 14202,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0009/r0002/verify.py",
+              "sha256": "54a77f771b518a8af9a0d430b03c49e4f32182a180ee71981970ca550dd74296",
+              "size_bytes": 19812,
+              "role": "normative"
+            },
+            {
+              "path": "validation/ent-0009/r0002/usage.md",
+              "sha256": "9e8c100d8126c1cda232ddd169a90a95844e62f896bac9b415102c0deb0522c0",
+              "size_bytes": 7482,
+              "role": "normative"
+            }
+          ],
+          "relations": [
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0008",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "depends_on",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0009",
+                "revision": "r0001"
+              }
+            },
+            {
+              "type": "supersedes",
+              "target": {
+                "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+                "entity_id": "ENT-0009",
+                "revision": "r0001"
+              }
+            }
+          ],
+          "approval": {
+            "status": "approved",
+            "reference": {
+              "path": "catalog/approvals/31457a0e-2fe7-41ca-a6c4-dab12960fe57.json",
+              "sha256": "fc3809c03afc42e9abc5d412d4783f28c5ac730b20c564e7b944c51699171da2"
+            }
+          },
+          "provenance": {
+            "summary": "I1 проекта M1, D05–D07: новая immutable revision по заданию и условному делегированию. Общий worker без runtime r1 patch/reread; старый producer сохранён, source raw maps только при успешных final guards. Без нового допуска/выпуска/активации."
+          }
         }
       ]
     },

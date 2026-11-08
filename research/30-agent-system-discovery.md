@@ -5971,3 +5971,94 @@ R2/M1 целиком не закрыт. R3–R8 и отложенные Schneega
 212 Markdown/86 README/33 research; 34 test modules. Это regression существующего
 кода, **не** выполнение T01–T30; implementation=false, acceptance not_performed.
 После записи результата пересчитан docs selfhash; repository checks повторены.
+
+## 52. I1 — ENT9r2 successful capture и metadata projection
+
+После подтверждения владельца «подтверждаю, продолжай» выполнен первый
+implementation шаг проекта 32. Это продолжение условного делегирования с
+проверками, не самостоятельное прямое одобрение владельцем ещё не предъявленных
+bytes/release/export/activation. Новых сторонних dependencies нет.
+
+ENT9r2: execute.py/verify.py/usage.md, полный текст и ограничения —
+[usage](../agent_system/validation/ent-0009/r0002/usage.md). Две поверхности
+execute_plan/capture_plan используют один _worker; старые r1 не меняются.
+Runtime не вызывает r1/не перехватывает его callbacks. Capture — отдельная
+поверхность вне legacy report schema: registry bytes, artifacts/decisions maps
+с immutable byte values и собственными dict. Перед возвратом пройдены все
+_acquired/_bound/final Schema/serialization guards; failed/blocked/unsupported
+completed runs дают capture=None, preflight/late exceptions — без результата.
+Metadata проекция имеет ровно report_bytes/documents и прежние ограничения.
+
+Есть прямой depends_on ENT8r1 и ENT9r1 (последний только для verifier parity,
+не runtime вызова). Supersedes не отзывает r1/не перенаправляет pins. Profile
+linux-observed-set-5r3-6r3 описывает прежний reader/checker boundary, не producer
+version/authenticity. До handoff будущий coordinator всё ещё обязан сверять refs.
+
+### 52.1. Проверки и исправление
+
+74/74 own tests без skips: 30 metadata, те же 30 capture mirror с дополнительными
+assertions и 14 handoff cases. Не 74 уникальных сценария. Проверены одно source
+acquisition на поверхность, r1 report/doc semantics кроме нового run_id, owned
+maps, изменение source после binding без reread, финальная Schema/serialization
+ошибка без capture, unsupported/failed/blocked без maps, отсутствие stale reuse,
+no source writes и успешный offline semantic replay. Ресурсные limits прежние;
+глобальные quota/performance benchmark и новое поведение агента не проверены.
+
+Первый общий прогон: **34/35 PASS**, test_rules обнаружил другой, хотя переносимый,
+шаблон определения корня нового test wrapper. Исправлен wrapper под существующую
+конвенцию; тест/порог не ослаблялся, production code не менялся. Повторный полный
+pre-registration прогон — **35/35 PASS**. Регистрация не выполнена на FAIL.
+
+### 52.2. Практика — actual byte-handoff, не M1 coordinator
+
+До регистрации: registry 54876 bytes SHA
+`d404148bc236ae294d25e1d62106924fcacd0fec375185e0393f264fe4ec1919`.
+Выбран ENT17r1 closure: 17 revisions/51 normative artifacts, все 23 declared
+решения. Captured 75 inputs/754421 bytes; один read_set (наблюдение sys.setprofile,
+не production callback); passed_known_inputs. Все payload refs сверены, capture
+передан ENT10r1 verify_bundle без повторного чтения source —
+consistent_recorded_bundle, transition_allowed=false.
+Run `0636bcc3-e860-4350-81b5-e364d871156e`, private evidence
+`24a36f6d-a773-43ae-8fbd-dde20bec8ef7` (79 content-addressed objects).
+
+После регистрации добавлен producer ENT9r2 в selection: closure 18 revisions/
+54 artifacts, все 24 решения. Captured 79 inputs/800516 bytes; один read_set;
+тот же положительный known-inputs/offline semantic replay, не admission.
+Run `437bd379-3588-4124-8444-83e2dda9b57d`, private evidence
+`427b1561-bf7a-4e30-a9c0-9cc32d2565e4` (83 content-addressed objects).
+Plan SHA `7f0d62f83cbbeff12e2cfd171cad7a1b453a69f09fb45b4e1dd881e561370268`,
+report SHA `5eb43188d2d2e2a3db4500473fd14b739c6592591a00d537a635bfc7d9bfca43`.
+Evidence сохранён в ignored local/capture-runs/UUID, private leaf 0700/files0600,
+exclusive writes. Сохранение — harness этой практики, не новый persistence API.
+Не обещается доступность этих ignored данных после переноса/restore окружения.
+
+Практика на trusted собственном checkout, при явно доверенной installation.
+Она не доказывает hostile-source authenticity/atomicity, freshness/полноту,
+новую платформу или соблюдение правил агентом. Данные автоматически не публикуются.
+Эффективность подтверждена узко: вместо повторной acquisition используется тот
+же захваченный набор, сохраняются legacy consumers/схемы; benchmark не выполнялся.
+Цена — raw privacy surface/удержание bytes/новая revision и отдельный handoff check.
+
+### 52.3. Регистрация и граница результата
+
+Новое единственное approve_revision:
+`31457a0e-2fe7-41ca-a6c4-dab12960fe57`, statement_form=summary по ранее данному
+условному делегированию. До записи prospective registry/новый ledger/точный payload
+проверены ENT6r3, passed_known_inputs. Registry теперь 17 entities/24 revisions/
+69 normative artifacts/24 approvals, 57457 bytes SHA
+`ee258c447bfa4f2ad93fc1ff921c78281e335d1d9d9562fea5f6382e31a69cf4`.
+Все 89 прежних normative/approval файлов побайтно сохранены; старые revision
+records не заменены. Исторический payload ENT13r1 остаётся 12/34, без новых tools.
+49 deployment cases проверяют старые и новые exact records/pins; r1 проверка
+состава сохранена, новый coexistence учтён отдельно.
+
+**I1 завершён; следующий I2 — ENT16r2 capture_trial через общий безопасный worker.**
+ENT16r2/coordinator ещё отсутствуют; T01–T30 остаются планом полного M1, не
+исполненной матрицей. R2/M1, R3–R8, compatible release/positive grants/export/
+activation не закрыты этим шагом. Raw maps не печатаются автоматически; будущие
+coordinator evidence caps/полный journal/privacy controls не реализованы здесь.
+
+Итоговый post-registration regression: **35/35 PASS**; isolated `pip check` —
+no broken requirements; `git diff --check` — PASS. 213 public Markdown/86 README/
+33 research, 35 test modules. После записи итога обновлён docs selfhash и повторён
+repository check. Полная coordinator acceptance matrix этим прогоном не исполнена.

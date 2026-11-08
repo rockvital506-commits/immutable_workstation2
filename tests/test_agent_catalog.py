@@ -473,7 +473,7 @@ class PlanExecutorDeploymentTests(unittest.TestCase):
     def test_exact_executor_composition(self):
         registry = json.loads((BASE / 'catalog/registry.json').read_bytes())
         entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0009')
-        self.assertEqual(len(entity['revisions']), 1)
+        self.assertEqual([r['revision'] for r in entity['revisions']], ['r0001', 'r0002'])
         rev = entity['revisions'][0]
         for key, value in self.EXPECTED.items():
             self.assertEqual(rev[key], value)
@@ -713,6 +713,33 @@ class KnownViewDeploymentTests(unittest.TestCase):
         module=runpy.run_path(str(BASE/'validation/ent-0017/r0001/compare.py'))
         self.assertEqual(module['PINS'],expected)
         self.assertEqual(len(expected),3)
+
+
+class CaptureWorkerDeploymentTests(unittest.TestCase):
+    EXPECTED = {'revision': 'r0002', 'title': 'Исполнитель плана с контролируемой передачей исходных bytes', 'kind': 'check', 'scopes': ['agent_system.validation'], 'artifacts': [{'path': 'validation/ent-0009/r0002/execute.py', 'sha256': 'e28329880072ce4a13b4306bfa5c423860ad8e959147b9653f9ed13650be20ba', 'size_bytes': 14202, 'role': 'normative'}, {'path': 'validation/ent-0009/r0002/verify.py', 'sha256': '54a77f771b518a8af9a0d430b03c49e4f32182a180ee71981970ca550dd74296', 'size_bytes': 19812, 'role': 'normative'}, {'path': 'validation/ent-0009/r0002/usage.md', 'sha256': '9e8c100d8126c1cda232ddd169a90a95844e62f896bac9b415102c0deb0522c0', 'size_bytes': 7482, 'role': 'normative'}], 'relations': [{'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0008', 'revision': 'r0001'}}, {'type': 'depends_on', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0009', 'revision': 'r0001'}}, {'type': 'supersedes', 'target': {'catalog_id': '83bd5866-5e17-477f-9671-4e6a91481221', 'entity_id': 'ENT-0009', 'revision': 'r0001'}}], 'approval': {'status': 'approved', 'reference': {'path': 'catalog/approvals/31457a0e-2fe7-41ca-a6c4-dab12960fe57.json', 'sha256': 'fc3809c03afc42e9abc5d412d4783f28c5ac730b20c564e7b944c51699171da2'}}, 'provenance': {'summary': 'I1 проекта M1, D05–D07: новая immutable revision по заданию и условному делегированию. Общий worker без runtime r1 patch/reread; старый producer сохранён, source raw maps только при успешных final guards. Без нового допуска/выпуска/активации.'}}
+
+    def test_exact_capture_revision_and_approval(self):
+        registry = json.loads((BASE/'catalog/registry.json').read_bytes())
+        entity = next(e for e in registry['entities'] if e['entity_id'] == 'ENT-0009')
+        actual = next(r for r in entity['revisions'] if r['revision'] == 'r0002')
+        self.assertEqual(actual, self.EXPECTED)
+        for artifact in actual['artifacts']:
+            artifact_bytes(artifact)
+        decision = json.loads(artifact_bytes(actual['approval']['reference']))
+        self.assertEqual(decision['subject'], dict(catalog_id=CATALOG_ID, entity_id='ENT-0009', revision='r0002'))
+        self.assertEqual(decision['statement_form'], 'summary')
+        self.assertEqual(decision['artifacts'], [{k:a[k] for k in ['path','sha256','size_bytes']} for a in actual['artifacts']])
+
+    def test_shared_legacy_dependency_pins(self):
+        import ast
+        import runpy
+        old = runpy.run_path(str(BASE/'validation/ent-0009/r0001/execute.py'))
+        new = runpy.run_path(str(BASE/'validation/ent-0009/r0002/execute.py'))
+        self.assertEqual(new['PINS'], old['PINS'])
+        self.assertEqual(len(new['PINS']), 21)
+        tree = ast.parse((BASE/'validation/ent-0009/r0002/execute.py').read_text())
+        acquisitions = [n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Subscript) and isinstance(n.func.slice,ast.Constant) and n.func.slice.value == 'read_set']
+        self.assertEqual(len(acquisitions), 1)
 
 
 if __name__ == '__main__':

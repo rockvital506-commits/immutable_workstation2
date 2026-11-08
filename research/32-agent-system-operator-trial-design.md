@@ -1,5 +1,7 @@
 # M1: проект сквозного операторского trial и byte-handoff
 
+> §§1–10 сохраняют проектный срез до реализации. Актуальный результат I1 — §11.
+
 ## 1. Статус, основание и результат этого этапа
 
 Дата: 2026-11-08. Baseline commit `93bcf1d`; исходное задание — исследование 30 §2,
@@ -345,3 +347,31 @@ legacy report semantics остановить этот участок и верс
 Следующее действие — **I1: реализовать ENT9r2 с capture_plan и одним worker**.
 ENT16r2/coordinator пока не существуют; R2/M1 целиком не закрыт. Новый payload/
 compatible release/positive grants/R3 поведение/первая новая среда не предъявлены.
+
+
+## 11. Реализация I1 после подтверждения продолжения
+
+ENT9r2 реализован и зарегистрирован; полный текст/API/ограничения —
+[usage](../agent_system/validation/ent-0009/r0002/usage.md).
+Общий _worker, metadata projection и capture_plan не вызывают r1 и не читают
+source повторно. Capture maps выдаются только после binding/_bound и final
+Schema/serialization; late errors не возвращают пригодные partial maps.
+Legacy report profile/схемы сохранены, producer r2 фиксируется отдельно.
+
+74 own tests: 30 metadata сценариев, их 30 capture mirror и 14 handoff случаев.
+Есть r1 semantic parity кроме run_id, single read_set, независимость dict,
+source change после binding, final failure, unsupported/no stale reuse и
+successful offline ENT10 replay. Это не 74 различных сценария и не исполнение
+всей T01–T30 coordinator matrix. R1 нормативные bytes не изменены.
+
+Практика до регистрации: 17 revisions/51 artifacts/23 decisions, 75 captured
+inputs; после регистрации с producer в selection: 18 revisions/54 artifacts/
+24 decisions, 79 captured inputs, 800516 bytes. В обоих случаях один наблюдённый
+read_set, passed_known_inputs и consistent_recorded_bundle, admission не оценён.
+Это собственный каталог в trusted checkout, не чужая новая среда/поведение агента.
+Evidence/private run refs и checks — исследование 30 §52.
+
+Новая depends_on ENT9r1 нужна только verifier для compatibility parity; worker
+использует тот же ENT8r1/21-pin reader/checker closure. Старые pinned consumers
+не перенаправляются, payload ENT13r1 остаётся 12/34. Следующий шаг — I2/ENT16r2,
+затем I3 coordinator/I4 integration. M1/R2 и выпуск/экспорт/активация не закрыты.

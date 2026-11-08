@@ -1,0 +1,33 @@
+{
+  "schema_version": "1",
+  "decision_id": "31457a0e-2fe7-41ca-a6c4-dab12960fe57",
+  "decision_type": "approve_revision",
+  "subject": {
+    "catalog_id": "83bd5866-5e17-477f-9671-4e6a91481221",
+    "entity_id": "ENT-0009",
+    "revision": "r0002"
+  },
+  "artifacts": [
+    {
+      "path": "validation/ent-0009/r0002/execute.py",
+      "sha256": "e28329880072ce4a13b4306bfa5c423860ad8e959147b9653f9ed13650be20ba",
+      "size_bytes": 14202
+    },
+    {
+      "path": "validation/ent-0009/r0002/verify.py",
+      "sha256": "54a77f771b518a8af9a0d430b03c49e4f32182a180ee71981970ca550dd74296",
+      "size_bytes": 19812
+    },
+    {
+      "path": "validation/ent-0009/r0002/usage.md",
+      "sha256": "9e8c100d8126c1cda232ddd169a90a95844e62f896bac9b415102c0deb0522c0",
+      "size_bytes": 7482
+    }
+  ],
+  "actor_role": "owner",
+  "recorded_by": "agent",
+  "decision_date": "2026-11-08",
+  "statement_form": "summary",
+  "statement": "Условное внедрение ENT-0009 r0002 по ранее данному делегированию после проверок и подтверждённого продолжения I1. Summary основания, не отдельная прямая цитата одобрения exact bytes и не разрешение release/export/activation.",
+  "basis": "74/74 own tests (30 metadata + 30 capture mirror + 14 handoff); 35/35 repository sets после исправления wrapper convention. Практика на прежнем registry: один source read_set, 75 exact captured inputs/754421 bytes, ENT10 consistent_recorded_bundle. Shared worker/legacy projection, capture только после успешных late guards; r1 и 89 прежних refs неизменны. Эффективность ограниченно подтверждена устранением двойного acquisition и reuse стека, не benchmark. Нет новых libraries; coordinator/ENT16r2/behaviour/permission/freshness не подтверждены."
+}
