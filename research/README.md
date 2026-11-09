@@ -248,3 +248,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [51-agent-system-block-inventory.md](51-agent-system-block-inventory.md) —303абзаца26документов:200T/103L,исправлен пропуск48абзацев под заголовками. [Карта блоков](51-agent-system-block-map.md) —производная, не active.
 
 [52-agent-system-condition-loss-check.md](52-agent-system-condition-loss-check.md) —398пар «абзац–тип»,23типа,коридоры «позволяет/запрещает/не вправе требовать»,7переносов и2новых типа (F22/F23) с цитатами G07.
+
+[53-agent-system-rule-set-report.md](53-agent-system-rule-set-report.md) —свод23правил с двумя запретами и дословными основаниями; [текст](53-agent-system-condition-rules.md) —кандидат на решение, не ревизия.
