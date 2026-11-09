@@ -1,0 +1,695 @@
+{
+ "schema_version": 1,
+ "decision_id": "5998cbbd-4e41-4a78-b58d-f9af51c01488",
+ "kind": "owner_decision_q1_q2_and_redacted_text_v2",
+ "recorded_on": "2026-10-07",
+ "recorded_by": "agent_on_behalf_of_conversation_record",
+ "owner_statement": {
+  "verbatim": "Q1. - не регистрировать; Q2 - принять замену строки",
+  "language": "ru",
+  "context": "ответ на два вопроса раздела 9 отчёта 56 (Q1 — регистрация ревизии, Q2 — замена строки раздела границ)"
+ },
+ "decisions": [
+  {
+   "id": "Q1",
+   "question": "Регистрировать ли точную ревизию свода с собственным составом и полномочием?",
+   "answer": "не регистрировать",
+   "effect": "нормативная регистрация и approval не выполняются; предыдущее принятие остаётся принятием кандидатного текста, а не ревизии",
+   "grants": []
+  },
+  {
+   "id": "Q2",
+   "question": "Переносить раздел границ как есть или принять замену строки?",
+   "answer": "принять замену строки",
+   "effect": "создана версия текста v2: одна строка раздела границ заменена; остальные байты не тронуты. Принятие 54 относится к версии без замены и на v2 само по себе не переносится",
+   "scope": "только эта одна строка; любые дальнейшие правки требуют отдельного решения",
+   "grants": []
+  }
+ ],
+ "redaction": {
+  "applied": true,
+  "before": "- Не отменяет открытые пункты R4/R6/G05/G07 и не закрывает пробелы состава.",
+  "after": "- Не отменяет открытые вопросы сопровождения и не закрывает пробелы состава.",
+  "line_index": 243,
+  "proposed_in": {
+   "path": "research/56-agent-system-r5-transfer-closure.json",
+   "sha256": "e56c350479d557546fe5b21c3e78291f2120e9d9247f3f30482bb390814e2a5b",
+   "field": "redaction_proposal"
+  },
+  "applied_exactly_as_proposed": true,
+  "note": "Формулировка применена ровно в предложенном виде; агент не подменял её «улучшенной». Внутренняя traceability открытых пунктов остаётся в ledger 56, а не в переносимом тексте."
+ },
+ "acceptance_binding": {
+  "v1_acceptance": {
+   "path": "research/54-agent-system-owner-acceptance.json",
+   "sha256": "525dc3b2c415927b308debf3d665770dad99f7a13b72eac85f70124feee673e6",
+   "applies_to": "текст без замены",
+   "still_valid_for_v1": true,
+   "applies_to_v2": false
+  },
+  "v2_acceptance": {
+   "applies_to": "текст с заменой строки",
+   "basis": "ответ владельца «Q2 - принять замену строки» на точное предложение из 56",
+   "binding_kind": "owner_decision_recorded_by_agent_not_authenticated",
+   "what_is_accepted": "текст v2 как кандидат; не ревизия, не выпуск, не экспорт"
+  }
+ },
+ "portable_text_v2": {
+  "path": "research/57-agent-system-portable-rules-text-v2.md",
+  "sha256": "15338d93103875dff2dad53218a827d9c2f26f8aa6ac8bd7af338529ac99cd85",
+  "size_bytes": 24968,
+  "body_sha256": "2157e9c24386ec1a0f0b3354f77a68e15472dbb5dd6af6ade45f65e7f6b59544",
+  "body_size_bytes": 23784,
+  "supersedes_candidate": {
+   "path": "research/56-agent-system-portable-rules-text.md",
+   "sha256": "47f8a107fb8c92491342ab8c5913790ee95ce23889dc48075bd8feb8f535dda1",
+   "body_sha256": "ead6332de21d8e7017cd5b35c5cfb43a2650a3084c5bc979b49dea48b387177a"
+  },
+  "header_is_normative": false,
+  "markers": [
+   "<!-- BEGIN VERBATIM BODY -->",
+   "<!-- END VERBATIM BODY -->"
+  ]
+ },
+ "units": [
+  {
+   "unit_id": "C-purpose",
+   "section": "frame",
+   "heading": "## Назначение",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "frame_section",
+    "source_heading": "## Назначение"
+   },
+   "offset": 0,
+   "size": 275,
+   "sha256": "57d3fe39afb83de4afea8b64fd99aea514b9adaabd21397e201d0c4d153bb785",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "C-application",
+   "section": "frame",
+   "heading": "## Применение и взаимодействие",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "frame_section",
+    "source_heading": "## Применение и взаимодействие"
+   },
+   "offset": 277,
+   "size": 748,
+   "sha256": "52e7eba79079b16ba0bf3a5e66af565b2ae6ad58641d2777d65837fe4175130e",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "C-check",
+   "section": "frame",
+   "heading": "## Проверка соблюдения",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "frame_section",
+    "source_heading": "## Проверка соблюдения"
+   },
+   "offset": 1027,
+   "size": 733,
+   "sha256": "90e40185169031f4fe1b9866e5ef5a0847a4f639deb365355c360a1765023b39",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "C-uncertainty",
+   "section": "frame",
+   "heading": "## Действия при неопределённости",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "frame_section",
+    "source_heading": "## Действия при неопределённости"
+   },
+   "offset": 1762,
+   "size": 789,
+   "sha256": "5d6543476fa8a37f8fc828acf6a6b85f9fc2d7b44f2b9a0842beaf6de8c18883",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F01",
+   "section": "rule",
+   "heading": "### F01",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N1",
+    "source_pairs": 50
+   },
+   "offset": 2572,
+   "size": 984,
+   "sha256": "45d522afa2ec6615d2d3d90f6190490143742288ae921f25b8438703b7a9c91f",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F02",
+   "section": "rule",
+   "heading": "### F02",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W05",
+    "source_pairs": 28
+   },
+   "offset": 3558,
+   "size": 932,
+   "sha256": "2ff4d930d4e74552a6bbab8d2d18dd408a6603f1118ee39cf89dff61a02d22cc",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F03",
+   "section": "rule",
+   "heading": "### F03",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W06c",
+    "source_pairs": 18
+   },
+   "offset": 4492,
+   "size": 836,
+   "sha256": "164211898aedb51d808db2234e092545e4936f4b2ff981ad72d047b7aa434cae",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F04",
+   "section": "rule",
+   "heading": "### F04",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G05.01",
+    "source_pairs": 7
+   },
+   "offset": 5330,
+   "size": 833,
+   "sha256": "38b04112de1fd0b7fd436a5e738baaad24af8afe7afabe0791803236e2cf8661",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F05",
+   "section": "rule",
+   "heading": "### F05",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G05.02",
+    "source_pairs": 19
+   },
+   "offset": 6165,
+   "size": 897,
+   "sha256": "cd0dfdd02292333c9c2296c1047b5dd49b70c0c60d6e70f489f05a068af6ddec",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F06",
+   "section": "rule",
+   "heading": "### F06",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N5",
+    "source_pairs": 2
+   },
+   "offset": 7064,
+   "size": 1014,
+   "sha256": "d2ee14e761c0dc1daeb3ecda9261a649bc74c1775cdcc771bfc342464b3551db",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F07",
+   "section": "rule",
+   "heading": "### F07",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N2",
+    "source_pairs": 4
+   },
+   "offset": 8080,
+   "size": 946,
+   "sha256": "afbe209be22505b4cbd44580fb90a2bb2efeedd1e9f35a66a0f4ef01bc0f13ba",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F08",
+   "section": "rule",
+   "heading": "### F08",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N3",
+    "source_pairs": 14
+   },
+   "offset": 9028,
+   "size": 975,
+   "sha256": "c5a49cd5b81602ee759f69e32392d4063abda2712a15c9c37dc717a17df9c0a2",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F09",
+   "section": "rule",
+   "heading": "### F09",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "D09",
+    "source_pairs": 22
+   },
+   "offset": 10005,
+   "size": 847,
+   "sha256": "e62357f8f62e35036d4e012d10e8f52d7e158215443edc963044d2ab8ca195c5",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F10",
+   "section": "rule",
+   "heading": "### F10",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G07",
+    "source_pairs": 24
+   },
+   "offset": 10854,
+   "size": 836,
+   "sha256": "af34a63db3182aebcd72876c748ca50cc36b783e1541cbd4bb5cf921d726e6f1",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F11",
+   "section": "rule",
+   "heading": "### F11",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "D08",
+    "source_pairs": 18
+   },
+   "offset": 11692,
+   "size": 854,
+   "sha256": "0c2284ce9eeee80377c05f94243e3b52e3ec9ed91ffb006d63ad84f6d80d7c35",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F12",
+   "section": "rule",
+   "heading": "### F12",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "D09",
+    "source_pairs": 30
+   },
+   "offset": 12548,
+   "size": 920,
+   "sha256": "4bd7602242720bbe4b94a501124ba3503de32d380d4a79b49d2dea9f54e95c39",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F13",
+   "section": "rule",
+   "heading": "### F13",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "D07",
+    "source_pairs": 15
+   },
+   "offset": 13470,
+   "size": 774,
+   "sha256": "2418361ecbd328d88edd0f8a9707eec205068ad43119bd9f4f5edb6d85ed5e99",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F14",
+   "section": "rule",
+   "heading": "### F14",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N6",
+    "source_pairs": 29
+   },
+   "offset": 14246,
+   "size": 1023,
+   "sha256": "3f1fadf7f3769d5a7d6abf6e47e97c5759ed681f2006b0bd2d6bec63e6a1179c",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F15",
+   "section": "rule",
+   "heading": "### F15",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W05",
+    "source_pairs": 19
+   },
+   "offset": 15271,
+   "size": 882,
+   "sha256": "56fd1c34c715fbfae20509eca3c2c3e33cc3b0bd245e25cdb2476de20065eded",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F16",
+   "section": "rule",
+   "heading": "### F16",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "PR04.01",
+    "source_pairs": 5
+   },
+   "offset": 16155,
+   "size": 829,
+   "sha256": "1d38c4ea4656b3d1053ecfca58b4ade88f32b1a919b1892f4f47e2cfa06ad91d",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F17",
+   "section": "rule",
+   "heading": "### F17",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "C09",
+    "source_pairs": 55
+   },
+   "offset": 16986,
+   "size": 881,
+   "sha256": "fff4ae10ba5e0142277a99b8662de4fe9c18de755907a525a31630b9d4557699",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F18",
+   "section": "rule",
+   "heading": "### F18",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W02",
+    "source_pairs": 15
+   },
+   "offset": 17869,
+   "size": 782,
+   "sha256": "eaf1618b313d5da90680c0641c9c29862ed3d87970902194071eec5d733963b9",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F19",
+   "section": "rule",
+   "heading": "### F19",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W06c",
+    "source_pairs": 9
+   },
+   "offset": 18653,
+   "size": 799,
+   "sha256": "4b995dd8bd034c3950e9e822dbd528f42bda0f060cb184bb06be043d01ca5343",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F20",
+   "section": "rule",
+   "heading": "### F20",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W02",
+    "source_pairs": 6
+   },
+   "offset": 19454,
+   "size": 802,
+   "sha256": "a2c999376dd82ed61ddbe94f26063a16f8e1ae2e0f8e0e395cddc938cbd851c2",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F21",
+   "section": "rule",
+   "heading": "### F21",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N7",
+    "source_pairs": 5
+   },
+   "offset": 20258,
+   "size": 973,
+   "sha256": "f2693d143a74d9e16add14f42cda2ad873b63b921b80a7a45f9ee7881983c51e",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F22",
+   "section": "rule",
+   "heading": "### F22",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G07",
+    "source_pairs": 2
+   },
+   "offset": 21233,
+   "size": 1012,
+   "sha256": "18442232403df6930eb3fe6a6704750fd7737b190ace74cf6846b1f133bf5d6a",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "F23",
+   "section": "rule",
+   "heading": "### F23",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G07",
+    "source_pairs": 2
+   },
+   "offset": 22247,
+   "size": 928,
+   "sha256": "da52e323e2aae99944d4275c0ed40cce94e8eaa73f281378c872422ca60ff62b",
+   "changed_from_v1": false
+  },
+  {
+   "unit_id": "C-limits",
+   "section": "limits",
+   "heading": "## Чего этот текст не устанавливает",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "boundary_section",
+    "source_heading": "## Чего этот текст не устанавливает"
+   },
+   "offset": 23177,
+   "size": 606,
+   "sha256": "e7f5023080ae7eb7f7cd8efc33ad7c5dd00b4ef8dea00ba94c25c72da71147ba",
+   "changed_from_v1": true
+  }
+ ],
+ "unit_diff": {
+  "total": 28,
+  "unchanged": 27,
+  "changed": [
+   "C-limits"
+  ],
+  "changed_lines": 1,
+  "total_lines": 245
+ },
+ "scan": {
+  "body_private": {
+   "absolute_user_path": 0,
+   "windows_drive_path": 0,
+   "repository_path": 0,
+   "implementation_file": 0,
+   "private_staging_marker": 0,
+   "entity_identifier": 0,
+   "product_or_platform_name": 0
+  },
+  "file_private": {
+   "absolute_user_path": 0,
+   "windows_drive_path": 0,
+   "repository_path": 0,
+   "implementation_file": 0,
+   "private_staging_marker": 0,
+   "entity_identifier": 0,
+   "product_or_platform_name": 0
+  },
+  "forbidden_internal_identifiers": {
+   "count": 0,
+   "matches": []
+  },
+  "allowed_source_rule_references": {
+   "count": 5,
+   "matches": [
+    "G05",
+    "G07"
+   ],
+   "why": "ссылки на правила-основания внутри системы; traceability, не проектная задача"
+  },
+  "scan_kind": "лексическая эвристика по объявленным шаблонам"
+ },
+ "checks": [
+  {
+   "id": "M01",
+   "check": "Замена ровно одна и совпадает с предложением, которое принял владелец",
+   "method": "сравнение по строкам v1 и v2; строка == redaction_proposal.after из 56",
+   "result": "PASS",
+   "evidence": "изменена 1 строка из 245; индекс 243"
+  },
+  {
+   "id": "M02",
+   "check": "Ничего, кроме этой строки, не изменилось",
+   "method": "SHA256 всех 27 неизменных единиц v1 против v2",
+   "result": "PASS",
+   "evidence": "27/27 единиц побайтово равны; изменилась только C-limits"
+  },
+  {
+   "id": "M03",
+   "check": "23 правила не затронуты",
+   "method": "сравнение блоков F01–F23 с исходными хешами",
+   "result": "PASS",
+   "evidence": "23/23 хеша равны"
+  },
+  {
+   "id": "M04",
+   "check": "Внутренние метки рабочих пакетов удалены",
+   "method": "R[0-9]/G0[0-9] вне цитаты «правило `…`»",
+   "result": "PASS",
+   "evidence": "0 запрещённых совпадений; 5 разрешённых ссылок на правила-основания"
+  },
+  {
+   "id": "M05",
+   "check": "Нет приватных путей, реализаций и имён продуктов",
+   "method": "семь шаблонов по телу и по файлу целиком",
+   "result": "PASS",
+   "evidence": "0 совпадений в теле и в файле вместе с шапкой"
+  },
+  {
+   "id": "M06",
+   "check": "Версия 1 сохранена без изменений",
+   "method": "SHA256 файлов 56 против пинов, записанных при их создании",
+   "result": "PASS",
+   "evidence": "47f8a107fb8c…, ledger e56c350479d5…"
+  },
+  {
+   "id": "M07",
+   "check": "Принятие 54 осталось в истории, но к v2 не относится",
+   "method": "SHA256 54 не изменился; в ledger зафиксировано, что 54 привязано к байтам без замены",
+   "result": "PASS",
+   "evidence": "525dc3b2c415…; новое принятие относится только к v2"
+  },
+  {
+   "id": "M08",
+   "check": "Q1 исполнен: регистрации нет",
+   "method": "реестр: SHA256, счётчики, отсутствие approval-записи",
+   "result": "PASS",
+   "evidence": "19 сущностей / 31 ревизия / 142 ссылки; новых записей 0"
+  },
+  {
+   "id": "M09",
+   "check": "Полномочия по-прежнему не выданы",
+   "method": "флаги ledger и отсутствие материализованного комплекта",
+   "result": "PASS",
+   "evidence": "release/export/activation/compatible/environment = false"
+  },
+  {
+   "id": "M10",
+   "check": "Текст остаётся не-нормативным",
+   "method": "нормативный статус в ledger",
+   "result": "PASS",
+   "evidence": "not_a_registered_revision"
+  }
+ ],
+ "registry_snapshot": {
+  "entities": 19,
+  "revisions": 31,
+  "artifact_refs": 142,
+  "sha256": "fe8683b40e359d1074c166ef7cec0e18b770f8b4c3d4aa2673ab7d93bf148883",
+  "changed_by_this_run": false,
+  "approval_added": false,
+  "registration_performed": false
+ },
+ "status_after": {
+  "text": "owner_accepted_text_v2_not_registered",
+  "bundle": "prepared_inactive_closure_candidate_v2",
+  "normative_status": "not_a_registered_revision",
+  "registration": "declined_by_owner"
+ },
+ "remaining_blockers": [
+  {
+   "id": "B1",
+   "state": "закрыт частично: Q1 отклоняет регистрацию, поэтому фаза A5 остаётся незакрытой осознанно, а не по недоделке"
+  },
+  {
+   "id": "B2",
+   "state": "закрыт: строка заменена, запрещённых меток 0"
+  },
+  {
+   "id": "B3",
+   "state": "открыт: нет разрешения экспорта и проверяющего назначения"
+  },
+  {
+   "id": "B4",
+   "state": "открыт: независимая семантическая проверка не выполнялась"
+  },
+  {
+   "id": "B5",
+   "state": "открыт: среда получателя не обследована"
+  }
+ ],
+ "flags": {
+  "release_allowed": false,
+  "export_allowed": false,
+  "activation_allowed": false,
+  "compatible_release_allowed": false,
+  "environment_created": false,
+  "kit_materialized": false,
+  "registry_changed": false,
+  "approval_added": false,
+  "registration_performed": false,
+  "actual_transfer_performed": false,
+  "behavior_verified": false,
+  "independent_review_performed": false
+ },
+ "limits": {
+  "statement": "Решение записано агентом по сообщению владельца. Хэши подтверждают совпадение байтов, не авторство. Замена строки меняет переносимый текст; она не подтверждает сохранение смысла независимо и не проверяет поведение.",
+  "not_claimed": [
+   "готовность к выпуску",
+   "совместимость",
+   "семантическая эквивалентность источникам",
+   "полнота исключений",
+   "аутентичность авторства"
+  ]
+ },
+ "next_step": "R6 readiness qualification; при отказе от регистрации комплект остаётся кандидатом. R4 actual claim/экспортёр и R7/R8 отдельно."
+}

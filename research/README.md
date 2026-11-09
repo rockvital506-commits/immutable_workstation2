@@ -256,3 +256,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [55-agent-system-effectiveness-trial.md](55-agent-system-effectiveness-trial.md) —16авторских случаев,свод16/16 против0/16 у крайностей и~5/16 у «всегда A/B/C»; не поведение/не независимость.
 
 [56-agent-system-r5-transfer-closure.md](56-agent-system-r5-transfer-closure.md) —неактивное замыкание переносимого свода:28единиц дословно,13проверок PASS и1FAIL (внутренние метки R4/R6/G05/G07),5блокеров; [текст-кандидат](56-agent-system-portable-rules-text.md). Не выпуск/не экспорт/не активация.
+
+[57-agent-system-q1-q2-decision.md](57-agent-system-q1-q2-decision.md) —Q1 «не регистрировать» и Q2 «принять замену строки»: одна строка раздела границ заменена,27единиц и все23правила побайтово равны; [текст v2](57-agent-system-portable-rules-text-v2.md). Всё ещё кандидат, не ревизия/не выпуск/не экспорт.
