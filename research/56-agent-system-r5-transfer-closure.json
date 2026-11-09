@@ -1,0 +1,832 @@
+{
+ "schema_version": 1,
+ "bundle_id": "a5eba0c3-67c1-4953-b7a4-9c60dac901c7",
+ "kind": "prepared_inactive_transfer_closure",
+ "prepared_on": "2026-10-07",
+ "prepared_by": "agent_on_behalf_of_conversation_record",
+ "status": "prepared_inactive_closure_candidate",
+ "status_meaning": "Точный состав и происхождение зафиксированы; комплект не утверждён, не выпущен, не экспортирован и не активирован.",
+ "run_pins": {
+  "accepted_rule_text": {
+   "path": "research/53-agent-system-condition-rules.md",
+   "sha256": "ede459ee165575948d1710591ac8422d78570ac9f4f9b9f2eae34109f5bf15bb",
+   "size_bytes": 24930,
+   "role": "принятые владельцем байты; тело комплекта"
+  },
+  "rule_ledger": {
+   "path": "research/53-agent-system-condition-rules.json",
+   "sha256": "bc5dc93e58fdc9df7e49e24e870e7e8b00193f19fc2d057a54593ad6961f2c29",
+   "size_bytes": 28941,
+   "role": "источник состава и оснований"
+  },
+  "owner_acceptance": {
+   "path": "research/54-agent-system-owner-acceptance.json",
+   "sha256": "525dc3b2c415927b308debf3d665770dad99f7a13b72eac85f70124feee673e6",
+   "size_bytes": 3477,
+   "role": "решение владельца, к которому привязано принятие"
+  },
+  "effectiveness_trial": {
+   "path": "research/55-agent-system-effectiveness-trial.json",
+   "sha256": "0bd2be27b6c959cc4965afb068a29edfe045e542921368db4ee52b6813fa0418",
+   "size_bytes": 19092,
+   "role": "авторская проверка различительной способности; не поведение"
+  },
+  "loss_check": {
+   "path": "research/52-agent-system-condition-loss-check.json",
+   "sha256": "38c1e11d0c39aa64ac4765fd1e2ce25744cc686f49d496908a7e9f490a989360",
+   "size_bytes": 162468,
+   "role": "основание состава 23 правил"
+  },
+  "block_inventory": {
+   "path": "research/51-agent-system-block-condition-map.json",
+   "sha256": "d77e8ff352b3e011b2f637ea3d010a490adeaf935e3530a95b3179ab60c7fbe8",
+   "size_bytes": 118826,
+   "role": "источник счёта исключённых локальных блоков"
+  },
+  "coverage": {
+   "path": "research/50-agent-system-universal-condition-coverage.json",
+   "sha256": "a57ff87a3446c5364d2948fbd65c2e81686b172dde090a1a7396880f38446cc5",
+   "size_bytes": 29329,
+   "role": "карта условий"
+  },
+  "universality_method": {
+   "path": "research/43-agent-system-rule-universality.md",
+   "sha256": "b8a0e873225105e4a99ea7f6ae5358664a9e479e555a98bbc55cf8656b212fd7",
+   "size_bytes": 12066,
+   "role": "метод трёх маршрутов переноса"
+  },
+  "registry": {
+   "path": "agent_system/catalog/registry.json",
+   "sha256": "fe8683b40e359d1074c166ef7cec0e18b770f8b4c3d4aa2673ab7d93bf148883",
+   "size_bytes": 81383,
+   "role": "нормативный реестр; не менялся этим запуском"
+  }
+ },
+ "registry_snapshot": {
+  "entities": 19,
+  "revisions": 31,
+  "artifact_refs": 142,
+  "sha256": "fe8683b40e359d1074c166ef7cec0e18b770f8b4c3d4aa2673ab7d93bf148883",
+  "changed_by_this_run": false,
+  "approval_added": false
+ },
+ "portable_text": {
+  "path": "research/56-agent-system-portable-rules-text.md",
+  "sha256": "47f8a107fb8c92491342ab8c5913790ee95ce23889dc48075bd8feb8f535dda1",
+  "size_bytes": 25054,
+  "body_sha256": "ead6332de21d8e7017cd5b35c5cfb43a2650a3084c5bc979b49dea48b387177a",
+  "body_size_bytes": 23769,
+  "markers": [
+   "<!-- BEGIN VERBATIM BODY -->",
+   "<!-- END VERBATIM BODY -->"
+  ],
+  "composition": "seg1 (4 вводных раздела) + seg2 (## Правила, F01–F23) + seg3 (## Чего этот текст не устанавливает)",
+  "header_is_normative": false
+ },
+ "units": [
+  {
+   "unit_id": "C-purpose",
+   "section": "frame",
+   "heading": "## Назначение",
+   "offset": 0,
+   "size": 275,
+   "sha256": "57d3fe39afb83de4afea8b64fd99aea514b9adaabd21397e201d0c4d153bb785",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "frame_section",
+    "source_heading": "## Назначение"
+   }
+  },
+  {
+   "unit_id": "C-application",
+   "section": "frame",
+   "heading": "## Применение и взаимодействие",
+   "offset": 277,
+   "size": 748,
+   "sha256": "52e7eba79079b16ba0bf3a5e66af565b2ae6ad58641d2777d65837fe4175130e",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "frame_section",
+    "source_heading": "## Применение и взаимодействие"
+   }
+  },
+  {
+   "unit_id": "C-check",
+   "section": "frame",
+   "heading": "## Проверка соблюдения",
+   "offset": 1027,
+   "size": 733,
+   "sha256": "90e40185169031f4fe1b9866e5ef5a0847a4f639deb365355c360a1765023b39",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "frame_section",
+    "source_heading": "## Проверка соблюдения"
+   }
+  },
+  {
+   "unit_id": "C-uncertainty",
+   "section": "frame",
+   "heading": "## Действия при неопределённости",
+   "offset": 1762,
+   "size": 789,
+   "sha256": "5d6543476fa8a37f8fc828acf6a6b85f9fc2d7b44f2b9a0842beaf6de8c18883",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "frame_section",
+    "source_heading": "## Действия при неопределённости"
+   }
+  },
+  {
+   "unit_id": "F01",
+   "section": "rule",
+   "heading": "### F01",
+   "offset": 2572,
+   "size": 984,
+   "sha256": "45d522afa2ec6615d2d3d90f6190490143742288ae921f25b8438703b7a9c91f",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N1",
+    "source_pairs": 50
+   },
+   "note": "действует только в области указанного основания"
+  },
+  {
+   "unit_id": "F02",
+   "section": "rule",
+   "heading": "### F02",
+   "offset": 3558,
+   "size": 932,
+   "sha256": "2ff4d930d4e74552a6bbab8d2d18dd408a6603f1118ee39cf89dff61a02d22cc",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W05",
+    "source_pairs": 28
+   }
+  },
+  {
+   "unit_id": "F03",
+   "section": "rule",
+   "heading": "### F03",
+   "offset": 4492,
+   "size": 836,
+   "sha256": "164211898aedb51d808db2234e092545e4936f4b2ff981ad72d047b7aa434cae",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W06c",
+    "source_pairs": 18
+   }
+  },
+  {
+   "unit_id": "F04",
+   "section": "rule",
+   "heading": "### F04",
+   "offset": 5330,
+   "size": 833,
+   "sha256": "38b04112de1fd0b7fd436a5e738baaad24af8afe7afabe0791803236e2cf8661",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G05.01",
+    "source_pairs": 7
+   }
+  },
+  {
+   "unit_id": "F05",
+   "section": "rule",
+   "heading": "### F05",
+   "offset": 6165,
+   "size": 897,
+   "sha256": "cd0dfdd02292333c9c2296c1047b5dd49b70c0c60d6e70f489f05a068af6ddec",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G05.02",
+    "source_pairs": 19
+   }
+  },
+  {
+   "unit_id": "F06",
+   "section": "rule",
+   "heading": "### F06",
+   "offset": 7064,
+   "size": 1014,
+   "sha256": "d2ee14e761c0dc1daeb3ecda9261a649bc74c1775cdcc771bfc342464b3551db",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N5",
+    "source_pairs": 2
+   },
+   "note": "действует только в области указанного основания"
+  },
+  {
+   "unit_id": "F07",
+   "section": "rule",
+   "heading": "### F07",
+   "offset": 8080,
+   "size": 946,
+   "sha256": "afbe209be22505b4cbd44580fb90a2bb2efeedd1e9f35a66a0f4ef01bc0f13ba",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N2",
+    "source_pairs": 4
+   },
+   "note": "действует только в области указанного основания"
+  },
+  {
+   "unit_id": "F08",
+   "section": "rule",
+   "heading": "### F08",
+   "offset": 9028,
+   "size": 975,
+   "sha256": "c5a49cd5b81602ee759f69e32392d4063abda2712a15c9c37dc717a17df9c0a2",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N3",
+    "source_pairs": 14
+   },
+   "note": "действует только в области указанного основания"
+  },
+  {
+   "unit_id": "F09",
+   "section": "rule",
+   "heading": "### F09",
+   "offset": 10005,
+   "size": 847,
+   "sha256": "e62357f8f62e35036d4e012d10e8f52d7e158215443edc963044d2ab8ca195c5",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "D09",
+    "source_pairs": 22
+   }
+  },
+  {
+   "unit_id": "F10",
+   "section": "rule",
+   "heading": "### F10",
+   "offset": 10854,
+   "size": 836,
+   "sha256": "af34a63db3182aebcd72876c748ca50cc36b783e1541cbd4bb5cf921d726e6f1",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G07",
+    "source_pairs": 24
+   }
+  },
+  {
+   "unit_id": "F11",
+   "section": "rule",
+   "heading": "### F11",
+   "offset": 11692,
+   "size": 854,
+   "sha256": "0c2284ce9eeee80377c05f94243e3b52e3ec9ed91ffb006d63ad84f6d80d7c35",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "D08",
+    "source_pairs": 18
+   }
+  },
+  {
+   "unit_id": "F12",
+   "section": "rule",
+   "heading": "### F12",
+   "offset": 12548,
+   "size": 920,
+   "sha256": "4bd7602242720bbe4b94a501124ba3503de32d380d4a79b49d2dea9f54e95c39",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "D09",
+    "source_pairs": 30
+   }
+  },
+  {
+   "unit_id": "F13",
+   "section": "rule",
+   "heading": "### F13",
+   "offset": 13470,
+   "size": 774,
+   "sha256": "2418361ecbd328d88edd0f8a9707eec205068ad43119bd9f4f5edb6d85ed5e99",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "D07",
+    "source_pairs": 15
+   }
+  },
+  {
+   "unit_id": "F14",
+   "section": "rule",
+   "heading": "### F14",
+   "offset": 14246,
+   "size": 1023,
+   "sha256": "3f1fadf7f3769d5a7d6abf6e47e97c5759ed681f2006b0bd2d6bec63e6a1179c",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N6",
+    "source_pairs": 29
+   },
+   "note": "действует только в области указанного основания"
+  },
+  {
+   "unit_id": "F15",
+   "section": "rule",
+   "heading": "### F15",
+   "offset": 15271,
+   "size": 882,
+   "sha256": "56fd1c34c715fbfae20509eca3c2c3e33cc3b0bd245e25cdb2476de20065eded",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W05",
+    "source_pairs": 19
+   }
+  },
+  {
+   "unit_id": "F16",
+   "section": "rule",
+   "heading": "### F16",
+   "offset": 16155,
+   "size": 829,
+   "sha256": "1d38c4ea4656b3d1053ecfca58b4ade88f32b1a919b1892f4f47e2cfa06ad91d",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "PR04.01",
+    "source_pairs": 5
+   }
+  },
+  {
+   "unit_id": "F17",
+   "section": "rule",
+   "heading": "### F17",
+   "offset": 16986,
+   "size": 881,
+   "sha256": "fff4ae10ba5e0142277a99b8662de4fe9c18de755907a525a31630b9d4557699",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "C09",
+    "source_pairs": 55
+   }
+  },
+  {
+   "unit_id": "F18",
+   "section": "rule",
+   "heading": "### F18",
+   "offset": 17869,
+   "size": 782,
+   "sha256": "eaf1618b313d5da90680c0641c9c29862ed3d87970902194071eec5d733963b9",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W02",
+    "source_pairs": 15
+   }
+  },
+  {
+   "unit_id": "F19",
+   "section": "rule",
+   "heading": "### F19",
+   "offset": 18653,
+   "size": 799,
+   "sha256": "4b995dd8bd034c3950e9e822dbd528f42bda0f060cb184bb06be043d01ca5343",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W06c",
+    "source_pairs": 9
+   }
+  },
+  {
+   "unit_id": "F20",
+   "section": "rule",
+   "heading": "### F20",
+   "offset": 19454,
+   "size": 802,
+   "sha256": "a2c999376dd82ed61ddbe94f26063a16f8e1ae2e0f8e0e395cddc938cbd851c2",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "W02",
+    "source_pairs": 6
+   }
+  },
+  {
+   "unit_id": "F21",
+   "section": "rule",
+   "heading": "### F21",
+   "offset": 20258,
+   "size": 973,
+   "sha256": "f2693d143a74d9e16add14f42cda2ad873b63b921b80a7a45f9ee7881983c51e",
+   "universality": "limited",
+   "route": "preserve_within_declared_scope",
+   "basis": {
+    "kind": "conditional_note",
+    "note_id": "N7",
+    "source_pairs": 5
+   },
+   "note": "действует только в области указанного основания"
+  },
+  {
+   "unit_id": "F22",
+   "section": "rule",
+   "heading": "### F22",
+   "offset": 21233,
+   "size": 1012,
+   "sha256": "18442232403df6930eb3fe6a6704750fd7737b190ace74cf6846b1f133bf5d6a",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G07",
+    "source_pairs": 2
+   }
+  },
+  {
+   "unit_id": "F23",
+   "section": "rule",
+   "heading": "### F23",
+   "offset": 22247,
+   "size": 928,
+   "sha256": "da52e323e2aae99944d4275c0ed40cce94e8eaa73f281378c872422ca60ff62b",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "verbatim_rule_quote",
+    "source_rule": "G07",
+    "source_pairs": 2
+   }
+  },
+  {
+   "unit_id": "C-limits",
+   "section": "limits",
+   "heading": "## Чего этот текст не устанавливает",
+   "offset": 23177,
+   "size": 591,
+   "sha256": "348d6eb00f3d55c15782b057d40b600b64872c1b35463b1df7b5201a0201b6e7",
+   "universality": "high",
+   "route": "preserve",
+   "basis": {
+    "kind": "boundary_section",
+    "source_heading": "## Чего этот текст не устанавливает"
+   }
+  }
+ ],
+ "unit_stats": {
+  "total": 28,
+  "frame": 4,
+  "rules": 23,
+  "limits": 1,
+  "universality": {
+   "high": 22,
+   "limited": 6
+  },
+  "route": {
+   "preserve": 22,
+   "preserve_within_declared_scope": 6
+  }
+ },
+ "frame_heading_labels": {
+  "## Ограничения и действия при неопределённости": "## Действия при неопределённости"
+ },
+ "classification_method": {
+  "basis": "универсальность выведена из вида основания в 53: дословная цитата правила → high/preserve; условное примечание → limited/preserve_within_declared_scope",
+  "disclosed_as": "производная классификация этого запуска, не независимое решение и не переклассификация ядра",
+  "why_nothing_dropped": "все 23 правила уже прошли отбор 51–52; локальные блоки не входили в свод",
+  "unknown_units": 0
+ },
+ "exclusions": {
+  "local_implementation_blocks": {
+   "count": 103,
+   "of_total_blocks": 303,
+   "source": "research/51-agent-system-block-condition-map.json",
+   "content_exported": false,
+   "statement": "Частные механизмы, пути, сборки и проектная архитектура не переносились; исходники и история не удалены."
+  },
+  "narrower_and_misassigned": {
+   "count_narrower": 7,
+   "count_misassigned": 7,
+   "source": "research/52-agent-system-condition-loss-check.json",
+   "exported": false,
+   "statement": "Спорные и суженные пары остались в анализе 52 и в свод не включены."
+  },
+  "not_exported_classes": [
+   "частные сборки и ПО",
+   "локальные пути и имена",
+   "история проекта и связки",
+   "платформенные инструкции",
+   "секреты и ключи",
+   "приватная архитектура проекта"
+  ]
+ },
+ "identifier_scan": {
+  "patterns": {
+   "absolute_user_path": 0,
+   "windows_drive_path": 0,
+   "repository_path": 0,
+   "implementation_file": 0,
+   "private_staging_marker": 0,
+   "entity_identifier": 0,
+   "work_package_identifier": 9,
+   "product_or_platform_name": 0
+  },
+  "source_rule_references": {
+   "count": 5,
+   "matches": [
+    "G05",
+    "G07"
+   ],
+   "allowed": true,
+   "why": "ссылки на правила-основания внутри agent_system; это traceability, а не проектная задача"
+  },
+  "internal_work_package_references": {
+   "count": 4,
+   "matches": [
+    "G05",
+    "G07",
+    "R4",
+    "R6"
+   ],
+   "line": "- Не отменяет открытые пункты R4/R6/G05/G07 и не закрывает пробелы состава.",
+   "allowed": false,
+   "blocker": "B2"
+  },
+  "scan_kind": "лексическая эвристика по объявленным шаблонам"
+ },
+ "portable_file_scan": {
+  "scope": "весь файл, включая служебную шапку",
+  "counts": {
+   "absolute_user_path": 0,
+   "windows_drive_path": 0,
+   "repository_path": 0,
+   "implementation_file": 0,
+   "private_staging_marker": 0,
+   "entity_identifier": 0
+  },
+  "result": "PASS"
+ },
+ "closure_checks": [
+  {
+   "id": "K01",
+   "check": "Пины совпадают с байтами, принятыми владельцем",
+   "method": "SHA256 файлов 53 md/json против полей accepted в 54",
+   "result": "PASS",
+   "evidence": "doc ede459ee1655…, ledger bc5dc93e58fd…"
+  },
+  {
+   "id": "K02",
+   "check": "Состав правил полон и без дублей",
+   "method": "извлечение заголовков ### Fxx, сравнение с F01–F23 по порядку",
+   "result": "PASS",
+   "evidence": "23 правила, 0 пропусков, 0 повторов"
+  },
+  {
+   "id": "K03",
+   "check": "Каждый блок правила в переносимом тексте дословен",
+   "method": "поиск блока в теле и сравнение SHA256 с исходным блоком",
+   "result": "PASS",
+   "evidence": "23/23 блока побайтово равны"
+  },
+  {
+   "id": "K04",
+   "check": "Четыре вводных раздела дословны",
+   "method": "тело раздела против frame[*].text в 53 ledger (с учётом пустой строки после заголовка)",
+   "result": "PASS",
+   "evidence": "4/4 тела разделов равны; у C-uncertainty заголовок в ledger («Ограничения и действия при неопределённости») отличается от заголовка в принятом тексте («Действия при неопределённости») — метка, не нормативное содержание"
+  },
+  {
+   "id": "K05",
+   "check": "Раздел границ дословен",
+   "method": "сравнение с исходным разделом 53 md",
+   "result": "PASS",
+   "evidence": "1/1 раздел равен"
+  },
+  {
+   "id": "K06",
+   "check": "Нормативный текст не добавлен и не изъят",
+   "method": "тело между маркерами == seg1 + seg2 + seg3, собранным из принятого файла",
+   "result": "PASS",
+   "evidence": "тело 23769 байт, склейка трёх сегментов; шапка вне маркеров"
+  },
+  {
+   "id": "K07",
+   "check": "Нет приватных путей, сборок и реализаций",
+   "method": "регулярные выражения: /home, буква диска, research/, agent_system/, _TEMP, .py/.ps1/.sh/.json/.xml, ENT-, имена продуктов",
+   "result": "PASS",
+   "evidence": "0 совпадений во всех восьми классах в теле; 0 во всём файле, включая шапку"
+  },
+  {
+   "id": "K08",
+   "check": "Нет идентификаторов внутренних рабочих пакетов",
+   "method": "R[0-9]/G0[0-9] вне цитаты «правило `…`»",
+   "result": "FAIL",
+   "evidence": "R4/R6/G05/G07 в строке раздела границ — см. блокер B2"
+  },
+  {
+   "id": "K09",
+   "check": "Локальные блоки не экспортированы",
+   "method": "тело == принятые сегменты; 103 локальных блока в тело не переносились",
+   "result": "PASS",
+   "evidence": "0 из 103; содержимое не цитируется"
+  },
+  {
+   "id": "K10",
+   "check": "Нет дублирования ядра/метаслоя",
+   "method": "уникальность каждого блока в теле (count == 1) и уникальность unit_id",
+   "result": "PASS",
+   "evidence": "28/28 блоков встречаются по одному разу"
+  },
+  {
+   "id": "K11",
+   "check": "Все полномочия остаются невыданными",
+   "method": "поля flags и отсутствие каталога/архива/копии комплекта",
+   "result": "PASS",
+   "evidence": "release/export/activation/compatible_release/environment = false"
+  },
+  {
+   "id": "K12",
+   "check": "Нормативный реестр не изменён",
+   "method": "сравнение SHA256 и счётчиков с baseline 62f9d55 и с живым реестром",
+   "result": "PASS",
+   "evidence": "19 сущностей / 31 ревизии / 142 ссылки; SHA fe8683b40e35…"
+  },
+  {
+   "id": "K13",
+   "check": "Запись принятия владельца не изменена",
+   "method": "SHA256 54 json и повторная сверка accepted-пинов",
+   "result": "PASS",
+   "evidence": "525dc3b2c415…"
+  },
+  {
+   "id": "K14",
+   "check": "Фактический перенос не выполнялся",
+   "method": "в репозитории нет каталога/архива/копии комплекта; все файлы запуска — текст",
+   "result": "PASS",
+   "evidence": "3 новых файла: текст-кандидат, ledger, отчёт"
+  }
+ ],
+ "blockers": [
+  {
+   "id": "B1",
+   "title": "Нет нормативной регистрации и approval-записи",
+   "detail": "Комплект собран из принятых, но не зарегистрированных байтов: статус 53 — owner_accepted_candidate, нормативный статус — not_a_registered_revision. Регистрация и approval в реестре явно не выданы в 54.",
+   "effect": "Фаза A5 «только утверждённые версии» не может быть закрыта: комплект остаётся кандидатом, а не утверждённым переносимым набором.",
+   "resolution": "Отдельное решение владельца о регистрации точной ревизии с собственным составом, областью и полномочием."
+  },
+  {
+   "id": "B2",
+   "title": "В принятом тексте есть идентификаторы внутренних рабочих пакетов",
+   "detail": "Строка раздела границ: «Не отменяет открытые пункты R4/R6/G05/G07 и не закрывает пробелы состава.» В новой среде эти метки ничего не значат и раскрывают внутренний план работ.",
+   "effect": "Переносимый текст не полностью свободен от внутренних обозначений; исправление меняет принятые байты и аннулирует принятие 54.",
+   "resolution": "Решение владельца: либо переносить как есть, либо принять точечную замену одной строки и заново привязать принятие к новым байтам."
+  },
+  {
+   "id": "B3",
+   "title": "Нет разрешения экспорта и проверяющего назначения",
+   "detail": "R5 actual exporter, R4 positive claim path и verifier назначения отсутствуют; export_allowed=false во всех предшествующих записях.",
+   "effect": "Комплект не материализуется: нет архива, копии, каталога назначения, контрольной суммы доставки.",
+   "resolution": "Точное разрешение владельца на конкретное назначение и отдельная реализация экспортёра."
+  },
+  {
+   "id": "B4",
+   "title": "Нет независимой семантической проверки",
+   "detail": "Замыкание проверено точным совпадением строк и авторской классификацией; независимый review смысла не выполнялся.",
+   "effect": "Сохранение смысла подтверждено структурно, а не независимо; ослабление/усиление вне текста не исключено.",
+   "resolution": "Независимая проверка 23 правил по списку review из 53."
+  },
+  {
+   "id": "B5",
+   "title": "Среда получателя не обследована",
+   "detail": "B1/G06 не выполнялись: нет наблюдений о возможностях, ограничениях и конфликтах целевой среды; адаптеры не проверены.",
+   "effect": "Совместимость и применимость не установлены; R6 readiness и R7/R8 остаются открытыми.",
+   "resolution": "После B1 — inactive adapters/binding и проверки, затем отдельная активация."
+  }
+ ],
+ "receiver_prompt": {
+  "draft_version": "r5-draft-1",
+  "pinned_on": "2026-10-07",
+  "non_normative": true,
+  "not_a_permission": true,
+  "text": "# Versioned prompt — применение переносимого свода правил (черновик r5-draft-1)\n\nЭто prompt получателя, не скрытая системная инструкция и не полномочие.\nВерсия закреплена на запуск; изменение посередине запуска недопустимо.\n\n1. Сначала обследуй среду и ничего не активируй: возможности, ограничения,\n   действующие правила, конфликты и неизвестное. Неизвестное не считается\n   ни разрешением, ни совместимостью.\n2. Читай переданный свод дословно. Не переформулируй правило «по смыслу»,\n   не отбрасывай исключения и условия, не превращай частный механизм в общее\n   требование. Любая правка текста — отдельное решение владельца.\n3. Адаптация под среду не ослабляет и не усиливает правило. Если правило\n   невыполнимо — остановись и покажи причину, варианты и частичную поддержку.\n4. Соблюдение проверяется по фактам, а не по наличию документов и зелёных\n   структурных тестов. Уровень проверки называй точно: анализ, модель,\n   исполняемые тесты, изолированный перенос, реальное подключение.\n5. Активация — отдельное явное решение с точной областью и заменёнными\n   версиями. История и прежние связки сами ничего не активируют.\n6. При конфликте, пробеле или неясном полномочии останови затронутый переход\n   и спроси владельца. Молчание согласием не считается.\n7. Успешное чтение этого prompt, зелёные проверки и совпадение байтов не дают\n   разрешений на выпуск, экспорт, активацию или изменение среды.\n",
+  "scan": {
+   "absolute_user_path": 0,
+   "windows_drive_path": 0,
+   "repository_path": 0,
+   "implementation_file": 0,
+   "private_staging_marker": 0,
+   "entity_identifier": 0,
+   "work_package_identifier": 0,
+   "product_or_platform_name": 0
+  }
+ },
+ "redaction_proposal": {
+  "required": true,
+  "reason": "blocker B2",
+  "scope": "одна строка раздела границ",
+  "before": "- Не отменяет открытые пункты R4/R6/G05/G07 и не закрывает пробелы состава.",
+  "after": "- Не отменяет открытые вопросы сопровождения и не закрывает пробелы состава.",
+  "effect_on_acceptance": "изменение байтов аннулирует принятие 54 и требует нового решения владельца",
+  "applied": false
+ },
+ "decisions": [
+  {
+   "id": "D1",
+   "source": "research/54-agent-system-owner-acceptance.json",
+   "what": "владелец принял точные байты свода как кандидатный текст",
+   "grants": []
+  },
+  {
+   "id": "D2",
+   "source": "research/55-agent-system-effectiveness-trial.json",
+   "what": "авторская проверка различительной способности: свод 16/16, крайние стратегии 0/16",
+   "grants": [],
+   "limits": "не поведение и не независимая проверка"
+  },
+  {
+   "id": "D3",
+   "source": "текущий запуск",
+   "what": "подготовлено неактивное замыкание переносимого комплекта из принятых байтов",
+   "grants": [],
+   "not_granted": [
+    "регистрация",
+    "approval",
+    "выпуск",
+    "экспорт",
+    "активация",
+    "совместимый выпуск",
+    "новая среда",
+    "изменение реестра"
+   ]
+  }
+ ],
+ "owner_decisions_required": [
+  {
+   "id": "Q1",
+   "question": "Регистрировать ли точную ревизию свода с собственным составом и полномочием?",
+   "default_if_silent": "не регистрировать; комплект остаётся кандидатом"
+  },
+  {
+   "id": "Q2",
+   "question": "Переносить раздел границ как есть или принять точечную замену строки из redaction_proposal?",
+   "default_if_silent": "как есть; замена не применяется"
+  }
+ ],
+ "flags": {
+  "release_allowed": false,
+  "export_allowed": false,
+  "activation_allowed": false,
+  "compatible_release_allowed": false,
+  "environment_created": false,
+  "kit_materialized": false,
+  "registry_changed": false,
+  "approval_added": false,
+  "actual_transfer_performed": false,
+  "behavior_verified": false,
+  "independent_review_performed": false
+ },
+ "limits": {
+  "statement": "Замыкание проверяет точное совпадение строк и полноту состава. Оно не доказывает сохранение смысла независимо, не проверяет поведение агента и не подтверждает применимость в новой среде.",
+  "scan_kind": "лексическая эвристика по объявленным шаблонам, не полный классификатор приватного",
+  "not_claimed": [
+   "готовность к выпуску",
+   "совместимость",
+   "семантическая эквивалентность источникам",
+   "полнота исключений",
+   "аутентичность авторства"
+  ]
+ }
+}
