@@ -6714,3 +6714,14 @@ PASS. Unresolved D04reference закрыт связыванием с45, не н�
 refs/26component-doc semantic review queue. Все142refs и прежние source/registry/
 44–47versions сохранены. Предмет review — actual generated preview; полная
 semantic qualification/поведение/authority и actual release/export/activation открыты.
+
+
+## 72. Focused component semantic review
+
+После48 владелец подтвердил продолжение. [49](49-agent-system-component-semantic-review.md):
+по одному source anchor на каждый26component documents;7покрыты существующими
+правилами,19получили5условных обобщений (N1–N5) без замены оригинальных контрактов.
+24challenge cases проверяют ослабление и усиление, включая запрет выводить
+независимость/исполнение/свежесть/publication permission из hash/flag/UUID/схемы.
+Уточнённый preview — производный предмет review, не нормативное ядро/active profile.
+Полное clause-level отображение и независимый review не выполнены.

@@ -1,0 +1,1155 @@
+{
+  "version": 1,
+  "status": "focused_boundary_review_not_full_semantic_qualification",
+  "predecessor": {
+    "path": "research/48-agent-system-role-aware-composition.json",
+    "sha256": "938ef0fc277e82097ac8a446de8a171b4349924fa9ac4ed40d74a8afbae9216a"
+  },
+  "preview": {
+    "path": "research/48-agent-system-rule-preview.md",
+    "sha256": "0b271a1979062067809378ac78bbf41fb6e26b9861c6cccfac3c7f17466c811c"
+  },
+  "reviews": [
+    {
+      "id": "K01",
+      "reference": {
+        "path": "specification/ent-0003/r0002/usage.md",
+        "sha256": "a8e6c818ec4bda9eb4d38b3b9abb8ec9e3d694a42329771109931bbc8c5c6ceb",
+        "size_bytes": 9053,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/specification/ent-0003/r0002/usage.md",
+        "start": 307,
+        "end": 1008,
+        "needle": "URI $schema обозначает диалект"
+      },
+      "judgement": "Схема/URI не разрешают сеть и не доказывают фактическую безопасность пути.",
+      "existing_rules": [
+        "D02",
+        "D03",
+        "D08"
+      ],
+      "conditional_notes": [],
+      "focus_result": "covered_for_selected_boundary",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K02",
+      "reference": {
+        "path": "validation/ent-0004/r0002/usage.md",
+        "sha256": "78807c10e4ad843472a1413df661c27cdbbd92a889446a000fbc1e9566e1d369",
+        "size_bytes": 7567,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/validation/ent-0004/r0002/usage.md",
+        "start": 1386,
+        "end": 2011,
+        "needle": "отсутствие зависимости должно завершать"
+      },
+      "judgement": "Отсутствующая зависимость — ошибка, не skip/PASS; локальный lock не универсальная среда.",
+      "existing_rules": [
+        "D08",
+        "W04"
+      ],
+      "conditional_notes": [],
+      "focus_result": "covered_for_selected_boundary",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K03",
+      "reference": {
+        "path": "adapters/ent-0005/r0003/usage.md",
+        "sha256": "489b9247257472d69ec0266a031edcac09d38e00c117de627a3a38d837262f14",
+        "size_bytes": 12063,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+        "start": 682,
+        "end": 1386,
+        "needle": "заранее заданные независимые"
+      },
+      "judgement": "Ожидания задаются независимо до чтения; byte match не создаёт доверие к неизвестному source.",
+      "existing_rules": [
+        "D04/P04",
+        "D04/P12",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N1"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K04",
+      "reference": {
+        "path": "validation/ent-0006/r0003/usage.md",
+        "sha256": "89b80b152f5651bdf6ba1880b24f7175a0e7e2c9fa9915e2b306993204d9bff3",
+        "size_bytes": 13351,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/validation/ent-0006/r0003/usage.md",
+        "start": 1187,
+        "end": 1773,
+        "needle": "Ожидаемые хэши и доверенный корень"
+      },
+      "judgement": "Проверка переданного known set не устанавливает его происхождение/полноту; нельзя обосновать доверие тем же source.",
+      "existing_rules": [
+        "D06",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N1"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K05",
+      "reference": {
+        "path": "specification/ent-0007/r0001/usage.md",
+        "sha256": "ddaa2074aa5dfe6595f95b24f0e937871a2430be84f9a2c416f87d5d2974b4df",
+        "size_bytes": 10376,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/specification/ent-0007/r0001/usage.md",
+        "start": 79,
+        "end": 558,
+        "needle": "Само внедрение формата"
+      },
+      "judgement": "Формат событий не создаёт решения владельца; изменения/lift имеют точные предмет и область.",
+      "existing_rules": [
+        "D06",
+        "G07"
+      ],
+      "conditional_notes": [],
+      "focus_result": "covered_for_selected_boundary",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K06",
+      "reference": {
+        "path": "specification/ent-0008/r0001/usage.md",
+        "sha256": "f775530264c1fa0a76b368a264ce4b343405b6b7b6b0e1a39002e97ea3ea0c65",
+        "size_bytes": 14765,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/specification/ent-0008/r0001/usage.md",
+        "start": 2641,
+        "end": 3200,
+        "needle": "Нельзя прочитать неизвестное дерево"
+      },
+      "judgement": "Caller expectation не authenticated самим планом; отдельное основание до source acquisition.",
+      "existing_rules": [
+        "D01",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N1"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K07",
+      "reference": {
+        "path": "validation/ent-0009/r0001/usage.md",
+        "sha256": "6c9ed888e4d5538a53521fa4406ce6df50e287718d2c5cc4545882432173425f",
+        "size_bytes": 11256,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/validation/ent-0009/r0001/usage.md",
+        "start": 476,
+        "end": 788,
+        "needle": "не принимает готовые child reports"
+      },
+      "judgement": "Установленные инструменты не выбираются непроверенным source; входные callbacks/reports не управление.",
+      "existing_rules": [
+        "W01",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N1"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K08",
+      "reference": {
+        "path": "validation/ent-0009/r0002/usage.md",
+        "sha256": "9e8c100d8126c1cda232ddd169a90a95844e62f896bac9b415102c0deb0522c0",
+        "size_bytes": 7482,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/validation/ent-0009/r0002/usage.md",
+        "start": 1217,
+        "end": 1451,
+        "needle": "ровно один вызов read_set"
+      },
+      "judgement": "Проверенный capture передаётся без pathname reread; это не новая acquisition/новое основание.",
+      "existing_rules": [
+        "G05.02",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N5"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K09",
+      "reference": {
+        "path": "validation/ent-0010/r0001/usage.md",
+        "sha256": "8b9d39a9824ce41bb68e3aeecb2bffad2b272d556c95c2148ac8ded6cf19d6d1",
+        "size_bytes": 12047,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/validation/ent-0010/r0001/usage.md",
+        "start": 644,
+        "end": 1023,
+        "needle": "Даже полностью согласованная подделка может пройти"
+      },
+      "judgement": "Offline consistency/replay не authentication и не доказательство исполнения.",
+      "existing_rules": [
+        "W05",
+        "PR04.01"
+      ],
+      "conditional_notes": [],
+      "focus_result": "covered_for_selected_boundary",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K10",
+      "reference": {
+        "path": "transfer/ent-0012/r0001/prompt.md",
+        "sha256": "8ce3983ed99058bfa1d1c559142fd884c60bb92b27331b58d2759e47b6e5866a",
+        "size_bytes": 4825,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+        "start": 289,
+        "end": 2590,
+        "needle": "это запрос проверки ограничений, НЕ команда экспорта"
+      },
+      "judgement": "Preparation context не export instruction; r1 entry не переключается на r2.",
+      "existing_rules": [
+        "W06c",
+        "G06.01",
+        "G04.01"
+      ],
+      "conditional_notes": [],
+      "focus_result": "covered_for_selected_boundary",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K11",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/procedure.md",
+        "sha256": "566c5ba67ce471e881d131d5273718c49c9a1e35ba9c8bf122c565b4b3ed0f7b",
+        "size_bytes": 3879,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+        "start": 433,
+        "end": 3062,
+        "needle": "Нет exactly-once для preparation UUID"
+      },
+      "judgement": "Preparation receipt не physical kit/permission; UUID не exactly-once effect, partial не auto retry.",
+      "existing_rules": [
+        "W05",
+        "G05.02"
+      ],
+      "conditional_notes": [
+        "N2",
+        "N3"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K12",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/prompt.md",
+        "sha256": "1c5e7a9300e964812c755ecbd187984db0faa818371b19cd93ea67777dfc4917",
+        "size_bytes": 2706,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+        "start": 215,
+        "end": 2055,
+        "needle": "Не называть этот набор утверждённым export allowlist"
+      },
+      "judgement": "Observed materializable set не approved action allowlist; seed historical gaps не новые observed checks.",
+      "existing_rules": [
+        "C07",
+        "W02",
+        "W06c"
+      ],
+      "conditional_notes": [],
+      "focus_result": "covered_for_selected_boundary",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K13",
+      "reference": {
+        "path": "transfer/ent-0012/r0002/usage.md",
+        "sha256": "4773ba46e35c51559ace42590eff5de988c9abab67fe4421d4f4df134b6cca41",
+        "size_bytes": 4762,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+        "start": 1007,
+        "end": 1646,
+        "needle": "Это структурная граница, не secret/semantic-content detector"
+      },
+      "judgement": "Разрешённый namespace не доказывает допустимость actual content/публикации.",
+      "existing_rules": [
+        "D09",
+        "W08"
+      ],
+      "conditional_notes": [
+        "N4"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K14",
+      "reference": {
+        "path": "candidates/ent-0013/r0001/usage.md",
+        "sha256": "080abfa5143db3920ed9eec80380e21e31ac43f99fb8236dc678fd4c009cafca",
+        "size_bytes": 15101,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+        "start": 3355,
+        "end": 4180,
+        "needle": "`test` locator — имя определения функции"
+      },
+      "judgement": "Definition/AST/defined-only locator не исполнение и не полное смысловое покрытие.",
+      "existing_rules": [
+        "C03",
+        "C07",
+        "W02"
+      ],
+      "conditional_notes": [],
+      "focus_result": "covered_for_selected_boundary",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K15",
+      "reference": {
+        "path": "permissions/ent-0014/r0001/usage.md",
+        "sha256": "3ba366a47b00d576bfb1254dee15404b6e3c245437f3097be301907326eb2fd1",
+        "size_bytes": 15107,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+        "start": 4052,
+        "end": 4466,
+        "needle": "Повторное применение UUID"
+      },
+      "judgement": "Proposal/UUID/hash не actual grant и не stateful single-use действие.",
+      "existing_rules": [
+        "C09",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N2"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K16",
+      "reference": {
+        "path": "permissions/ent-0014/r0002/usage.md",
+        "sha256": "d6d0df0887849a6ea51dc76beff3fddd650e5408b038c28eb8320c0383fac29b",
+        "size_bytes": 12562,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+        "start": 670,
+        "end": 1236,
+        "needle": "Positive recognition означает только"
+      },
+      "judgement": "Recognized exact intent в объявленном context не effective transition/authority bootstrap.",
+      "existing_rules": [
+        "C09",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N1"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K17",
+      "reference": {
+        "path": "permissions/ent-0014/r0002/procedure.md",
+        "sha256": "f9fd0753480732468fd16373dd0237c0435ccedc523dff57a429e2b5096ef256",
+        "size_bytes": 4294,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+        "start": 45,
+        "end": 2602,
+        "needle": "Owner-controlled authority context"
+      },
+      "judgement": "Authority context устанавливается независимо от source; explicit flag только acknowledge premise.",
+      "existing_rules": [
+        "W06c",
+        "G07"
+      ],
+      "conditional_notes": [
+        "N1"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K18",
+      "reference": {
+        "path": "permissions/ent-0014/r0003/usage.md",
+        "sha256": "f522d990a43da8498546bd9a7b1adc1c068b5492735ea9d0b0514b7f5c6bbf96",
+        "size_bytes": 13239,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+        "start": 712,
+        "end": 1119,
+        "needle": "exactly-once **check recording**"
+      },
+      "judgement": "Exactly-once record проверки не action claim и не исполнение.",
+      "existing_rules": [
+        "W05",
+        "C09"
+      ],
+      "conditional_notes": [
+        "N2"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K19",
+      "reference": {
+        "path": "permissions/ent-0014/r0003/procedure.md",
+        "sha256": "f6cb7ca1916a1dd671583a6e8cfac81dcacc99db85cc945efc929dcf408a6949",
+        "size_bytes": 4972,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+        "start": 41,
+        "end": 2620,
+        "needle": "найденный новый head"
+      },
+      "judgement": "Найденный head не approved ожидание; partial/stale/busy требуют stop без auto adoption/recovery.",
+      "existing_rules": [
+        "W07",
+        "G07"
+      ],
+      "conditional_notes": [
+        "N2",
+        "N3"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K20",
+      "reference": {
+        "path": "staging/ent-0015/r0001/usage.md",
+        "sha256": "6e0bb1c173921c269d11da522e1ef290b6995e27cfc6857e16b849445151c14a",
+        "size_bytes": 14234,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/staging/ent-0015/r0001/usage.md",
+        "start": 6710,
+        "end": 7180,
+        "needle": "Нет completion marker"
+      },
+      "judgement": "Файл/manifest existence не завершение; нужен separately trusted receipt/readback, не authentication writer.",
+      "existing_rules": [
+        "C06",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N1",
+        "N3"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K21",
+      "reference": {
+        "path": "staging/ent-0016/r0001/usage.md",
+        "sha256": "3dccac0b1705a6a9723d8d72228733010c710a2e3a012ad84c1412b3e6210251",
+        "size_bytes": 12738,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/staging/ent-0016/r0001/usage.md",
+        "start": 986,
+        "end": 1375,
+        "needle": "**consistent_archived_trial — согласованность прочитанных архивных bytes**"
+      },
+      "judgement": "Архивный read-only результат не текущие права/исполнение; не подменять историческую область новой.",
+      "existing_rules": [
+        "W05",
+        "G07"
+      ],
+      "conditional_notes": [
+        "N1",
+        "N3",
+        "N5"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K22",
+      "reference": {
+        "path": "staging/ent-0016/r0002/usage.md",
+        "sha256": "6b189d32946b6fa33ac8fcf74546262cb703602e9244a5f8a461b6425e382d15",
+        "size_bytes": 7007,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/staging/ent-0016/r0002/usage.md",
+        "start": 1706,
+        "end": 2104,
+        "needle": "readback outputs не становятся новым"
+      },
+      "judgement": "Возвращаются первоначальные verified inputs; guard readback не переименовывается в fresh snapshot.",
+      "existing_rules": [
+        "W05",
+        "G05.02"
+      ],
+      "conditional_notes": [
+        "N1",
+        "N5"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K23",
+      "reference": {
+        "path": "validation/ent-0017/r0001/usage.md",
+        "sha256": "401ff21a4d3a449ccb81bc865701a4f84abcb8232527e10a230c83e5a9306ad9",
+        "size_bytes": 11698,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/validation/ent-0017/r0001/usage.md",
+        "start": 522,
+        "end": 904,
+        "needle": "Термин current в API"
+      },
+      "judgement": "Declared current view не глобальная свежесть; old/new bytes equality не отсутствие непредъявленных событий.",
+      "existing_rules": [
+        "D06",
+        "W05"
+      ],
+      "conditional_notes": [
+        "N3"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K24",
+      "reference": {
+        "path": "operator/ent-0018/r0001/procedure.md",
+        "sha256": "54f41439a8399f89e6d11dd7fd8ac95569e0bfce96667df5c3bb7bb4e2d0ccbd",
+        "size_bytes": 7077,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+        "start": 423,
+        "end": 3726,
+        "needle": "Даже одинаковые корни/plan bytes требуют отдельной acquisition"
+      },
+      "judgement": "Отдельная B acquisition обязательна выбранным контрактом; без B A не считается current.",
+      "existing_rules": [
+        "W05",
+        "W06c"
+      ],
+      "conditional_notes": [
+        "N1",
+        "N5"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K25",
+      "reference": {
+        "path": "operator/ent-0018/r0001/prompt.md",
+        "sha256": "87f5ca9e72f58442981602d7910178c13b49f80ab931333d373f4f20c58be378",
+        "size_bytes": 2307,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+        "start": 1194,
+        "end": 1667,
+        "needle": "Не печатай raw maps/absolute roots"
+      },
+      "judgement": "Safe публичный отчёт — согласованная проекция, не raw maps/private text и не proof их автоматической очистки.",
+      "existing_rules": [
+        "D09",
+        "G07"
+      ],
+      "conditional_notes": [
+        "N4"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    },
+    {
+      "id": "K26",
+      "reference": {
+        "path": "operator/ent-0018/r0001/usage.md",
+        "sha256": "13eeeab847fa30e15e6cce444a1b2cdd9982cf5147035aed8dfa25aadac12679",
+        "size_bytes": 12012,
+        "role": "normative"
+      },
+      "anchor": {
+        "path": "agent_system/operator/ent-0018/r0001/usage.md",
+        "start": 3646,
+        "end": 4030,
+        "needle": "Без B query=not_requested, A не считается current."
+      },
+      "judgement": "No B не проверенный current; отдельные stages/scope/readiness не сливаются по одному successful receipt.",
+      "existing_rules": [
+        "W02",
+        "C07"
+      ],
+      "conditional_notes": [
+        "N5"
+      ],
+      "focus_result": "additional_condition_proposed",
+      "review_level": "agent_source_text_self_review",
+      "remaining_scope": "full_clause_mapping_independent_review_and_actual_behavior_not_qualified"
+    }
+  ],
+  "application_notes": [
+    {
+      "id": "N1",
+      "sources": [
+        "K03",
+        "K04",
+        "K06",
+        "K07",
+        "K16",
+        "K17",
+        "K20",
+        "K21",
+        "K22",
+        "K24"
+      ],
+      "related_rules": [
+        "D01",
+        "D04/P12",
+        "W05",
+        "W06c"
+      ],
+      "text": "Если процедура требует доверенных ожиданий или authority context, их основание устанавливается независимо от проверяемого source и его самозаявлений, до относящегося чтения или разрешающей оценки. Самостоятельно вычисленный hash неизвестного входа, actor label, explicit trust flag или согласованный с самим собой отчёт не создают доверие, происхождение согласия или полномочие. Установленные инструменты выбираются из отдельно доверенной установки, не входными modules/callbacks/registry. Применяется согласованный профиль доверия и его пределы, без обещания криптографической аутентификации или защиты от противника вне этого профиля.",
+      "route": "source_backed_conditional_generalization",
+      "status": "proposed_application_note_not_new_authority",
+      "applicability": "only_where_the_selected_source_contract_requires_the_condition",
+      "must_not_be_read_as": "криптографическую аутентификацию, универсальную защиту от враждебной среды или снятие ответственности вызывающего за независимо доверенное основание"
+    },
+    {
+      "id": "N2",
+      "sources": [
+        "K11",
+        "K15",
+        "K18",
+        "K19"
+      ],
+      "related_rules": [
+        "C09",
+        "W05"
+      ],
+      "text": "Однократная запись проверки, потреблённый request ID или новый UUID сами по себе не подтверждают однократное исполнение действия и не создают разрешение. Если заявляется одноразовое действие, отдельно нужны предусмотренные согласованным контрактом проверки полномочия, актуального состояния, claim/резервирования и исполнителя; факт результата проверяется отдельно. Не выдавать check recording за action claim, положительное recognition за performed или журнал за гарантию exactly-once побочного эффекта.",
+      "route": "source_backed_conditional_generalization",
+      "status": "proposed_application_note_not_new_authority",
+      "applicability": "only_where_the_selected_source_contract_requires_the_condition",
+      "must_not_be_read_as": "гарантию однократности внешнего действия или замену отдельного контракта полномочия/исполнителя"
+    },
+    {
+      "id": "N3",
+      "sources": [
+        "K11",
+        "K19",
+        "K20",
+        "K21",
+        "K23"
+      ],
+      "related_rules": [
+        "W07",
+        "G07",
+        "W05"
+      ],
+      "text": "Когда переходу необходимо актуальное состояние журнала или authority, ожидаемый head либо эквивалентное основание задаётся предусмотренным контрактом внешним способом; найденный новый head, новая дата/UUID или согласованный старый snapshot не становятся автоматически одобренным текущим состоянием. При stale/busy/partial/неизвестном outcome остановить затронутый переход, сохранить диагностику и частичные данные; не выполнять слепой retry, adoption, удаление или rollback без отдельно применимой процедуры и основания. Это не запрещает согласованный recovery или read-only проверку исторического snapshot в его прежней области; такая проверка не доказывает текущие права/глобальную свежесть.",
+      "route": "source_backed_conditional_generalization",
+      "status": "proposed_application_note_not_new_authority",
+      "applicability": "only_where_the_selected_source_contract_requires_the_condition",
+      "must_not_be_read_as": "глобальную свежесть, защиту от rollback или разрешение на слепой retry/удаление/adoption"
+    },
+    {
+      "id": "N4",
+      "sources": [
+        "K13",
+        "K25"
+      ],
+      "related_rules": [
+        "D09",
+        "W08",
+        "W01"
+      ],
+      "text": "Проверенный namespace, path allowlist, схема или метка safe не доказывают допустимость публикации фактического содержимого. Вывод за private-границу формировать по согласованному составу разрешённых полей/пределам, не копируя raw maps, секреты, private roots или свободный private текст как диагностику по умолчанию. Не обещать автоматическое распознавание и очистку секретов по одному структурному профилю. При неизвестной допустимости удержать затронутое содержимое до разрешения или проверенной безопасной проекции, не публиковать его ради проверки.",
+      "route": "source_backed_conditional_generalization",
+      "status": "proposed_application_note_not_new_authority",
+      "applicability": "only_where_the_selected_source_contract_requires_the_condition",
+      "must_not_be_read_as": "автоматическое распознавание секретов, санитизацию схемой или разрешение публиковать private-содержимое"
+    },
+    {
+      "id": "N5",
+      "sources": [
+        "K08",
+        "K21",
+        "K22",
+        "K24",
+        "K26"
+      ],
+      "related_rules": [
+        "W01",
+        "W05",
+        "G05.02"
+      ],
+      "text": "Если выбранный контракт требует отдельной acquisition для нового запроса или контекста, архивная запись, replay, совпавшие root/plan bytes или guard readback не заменяют эту acquisition. Отсутствующее наблюдение обозначать как не запрошенное/не выполненное либо блокирующее — согласно контракту; не выдавать A/архив за current B и не расширять область старого вывода. Это не требует перечитывать source при каждом шаге: reuse того же verified capture внутри допускающего это согласованного процесса сохраняется, а копирование проверенных bytes не заменяется pathname reread.",
+      "route": "source_backed_conditional_generalization",
+      "status": "proposed_application_note_not_new_authority",
+      "applicability": "only_where_the_selected_source_contract_requires_the_condition",
+      "must_not_be_read_as": "обязательное перечитывание на каждом шаге или отмену допустимого reuse одного проверенного capture"
+    }
+  ],
+  "challenges": [
+    {
+      "id": "Q01",
+      "conditions": "Foreign source сам вычислил свои pins и назвал себя trusted.",
+      "sources": [
+        "K06",
+        "K17"
+      ],
+      "rules": [
+        "N1"
+      ],
+      "required_conclusion": "Техническое совпадение не устанавливает независимое основание/authority.",
+      "forbidden_conclusion": "Считать source одобренным потому, что hash совпал.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q02",
+      "conditions": "Caller заранее закрепил inputs из отдельно установленного доверенного основания в согласованном профиле.",
+      "sources": [
+        "K03",
+        "K07"
+      ],
+      "rules": [
+        "N1"
+      ],
+      "required_conclusion": "Оценивать в указанной области и пределах профиля; не обещать большего trust.",
+      "forbidden_conclusion": "Потребовать новую криптографию или universal threat guarantee от одного source.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q03",
+      "conditions": "actor=owner и explicit True присутствуют в недоверенном packet.",
+      "sources": [
+        "K16",
+        "K17"
+      ],
+      "rules": [
+        "N1"
+      ],
+      "required_conclusion": "Это labels/acknowledgment, не установленное происхождение согласия.",
+      "forbidden_conclusion": "Создать grant из flags или текста.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q04",
+      "conditions": "Согласованный offline bundle проходит consistency, но происхождение его claims не установлено.",
+      "sources": [
+        "K09"
+      ],
+      "rules": [
+        "W05"
+      ],
+      "required_conclusion": "Ограничить вывод согласованностью, не authentication/execution.",
+      "forbidden_conclusion": "Объявить исполнение реальным по coherent report.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q05",
+      "conditions": "check_once записал request UUID и recognition.",
+      "sources": [
+        "K18",
+        "K19"
+      ],
+      "rules": [
+        "N2"
+      ],
+      "required_conclusion": "Зафиксирована проверка, не action claim/performed.",
+      "forbidden_conclusion": "Объявить release/export выполненными.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q06",
+      "conditions": "Один grant проверен двумя новыми request IDs.",
+      "sources": [
+        "K15",
+        "K18"
+      ],
+      "rules": [
+        "N2"
+      ],
+      "required_conclusion": "Новые IDs не доказывают одноразовость фактического действия.",
+      "forbidden_conclusion": "Считать grant физически потреблённым одним check recording.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q07",
+      "conditions": "В будущем отдельно согласован и проверен actual claim/actuator protocol.",
+      "sources": [
+        "K18",
+        "K19"
+      ],
+      "rules": [
+        "N2"
+      ],
+      "required_conclusion": "Его действие оценивается по собственному контракту/полномочию/результату; нынешний текст не разрешает его.",
+      "forbidden_conclusion": "Превратить текущую границу r3 в вечный запрет любых будущих действий или grant из этой заметки.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q08",
+      "conditions": "Найден новый head после stale отказа; external receipt остался старым.",
+      "sources": [
+        "K19"
+      ],
+      "rules": [
+        "N3"
+      ],
+      "required_conclusion": "Не adopt найденный head автоматически; сохранить основание/отказ.",
+      "forbidden_conclusion": "Перезаписать ожидаемый head найденным и объявить успех.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q09",
+      "conditions": "Old store и старый внешний pin согласованы.",
+      "sources": [
+        "K19",
+        "K23"
+      ],
+      "rules": [
+        "N3"
+      ],
+      "required_conclusion": "Согласованность старого snapshot не global/current freshness.",
+      "forbidden_conclusion": "Обещать отсутствие более новых событий/rollback protection.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q10",
+      "conditions": "После write interruption неизвестно, завершён ли эффект.",
+      "sources": [
+        "K11",
+        "K19"
+      ],
+      "rules": [
+        "N3"
+      ],
+      "required_conclusion": "Сохранить partial/diagnostic и остановить затронутый переход без слепого повторения.",
+      "forbidden_conclusion": "Автоматически повторить/удалить/adopt и скрыть неизвестный outcome.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q11",
+      "conditions": "Имеется отдельная разрешённая процедура recovery с относящимися проверками.",
+      "sources": [
+        "K19"
+      ],
+      "rules": [
+        "N3"
+      ],
+      "required_conclusion": "Рассматривать recovery в её полномочиях; заметка не новый grant.",
+      "forbidden_conclusion": "Запретить любой recovery навсегда либо разрешить его без процедуры.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q12",
+      "conditions": "Запрошен только read-only replay явно исторического trial.",
+      "sources": [
+        "K21",
+        "K23"
+      ],
+      "rules": [
+        "N3"
+      ],
+      "required_conclusion": "Проверить архив в прежней области без claims текущих прав.",
+      "forbidden_conclusion": "Заставить архив стать live snapshot или запретить безопасный исторический review.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q13",
+      "conditions": "Owner поместил secret/private purpose в допустимый system prefix.",
+      "sources": [
+        "K13"
+      ],
+      "rules": [
+        "N4"
+      ],
+      "required_conclusion": "Prefix не разрешает публикацию actual content.",
+      "forbidden_conclusion": "Экспортировать содержимое потому, что path allowlisted.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q14",
+      "conditions": "Safe report содержит только согласованные проверенные публичные fields.",
+      "sources": [
+        "K25"
+      ],
+      "rules": [
+        "N4"
+      ],
+      "required_conclusion": "Передать ограниченную проекцию с её пределами, без автоматического secret-detection claim.",
+      "forbidden_conclusion": "Запретить любой безопасный report либо обещать, что секретов не может быть вообще.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q15",
+      "conditions": "Schema PASS и label safe есть, free-form task не просмотрен.",
+      "sources": [
+        "K13",
+        "K25"
+      ],
+      "rules": [
+        "N4"
+      ],
+      "required_conclusion": "Держать неизвестное private содержимое вне публикации.",
+      "forbidden_conclusion": "Считать schema sanitization/content permission.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q16",
+      "conditions": "B не был запрошен, но archive A есть.",
+      "sources": [
+        "K24",
+        "K26"
+      ],
+      "rules": [
+        "N5"
+      ],
+      "required_conclusion": "Отметить not_requested; A не current B.",
+      "forbidden_conclusion": "Заявить выполнение B/новую актуальность по A.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q17",
+      "conditions": "B запрошен выбранным operator contract; root и plan bytes совпадают с A.",
+      "sources": [
+        "K24",
+        "K26"
+      ],
+      "rules": [
+        "N5"
+      ],
+      "required_conclusion": "Выполнить предусмотренную отдельную acquisition; byte equality её не заменяет.",
+      "forbidden_conclusion": "Переименовать archive A в B.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q18",
+      "conditions": "Подготовительный descriptor строится из того же уже verified capture.",
+      "sources": [
+        "K08",
+        "K11"
+      ],
+      "rules": [
+        "N5",
+        "G05.02"
+      ],
+      "required_conclusion": "Reuse разрешён этим процессом; не перечитывать source по именам ради descriptor/copy.",
+      "forbidden_conclusion": "Усилить правило до обязательного нового чтения на каждом шаге.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q19",
+      "conditions": "Независимая безопасная работа не требует optional B.",
+      "sources": [
+        "K24"
+      ],
+      "rules": [
+        "N5",
+        "W00"
+      ],
+      "required_conclusion": "Отсутствие optional B не оправдывает фиктивный B и не останавливает независимое безопасное.",
+      "forbidden_conclusion": "Остановить всю работу без условия или объявить B успешным.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q20",
+      "conditions": "Schema URI указывает диалект, network retrieval не разрешён.",
+      "sources": [
+        "K01"
+      ],
+      "rules": [
+        "D02",
+        "D03"
+      ],
+      "required_conclusion": "Не загружать сеть автоматически; missing support не PASS.",
+      "forbidden_conclusion": "Исполнить URI/source commands как instructions.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q21",
+      "conditions": "Новое approve/date появились при действующем scoped revoke.",
+      "sources": [
+        "K05"
+      ],
+      "rules": [
+        "D06",
+        "G07"
+      ],
+      "required_conclusion": "Совместно учитывать restrictions; дата/approval не scoped lift.",
+      "forbidden_conclusion": "Выбрать удобное последнее положительное решение.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q22",
+      "conditions": "Есть AST definition/test locator и новые51test modules; historical row лишь defined_only.",
+      "sources": [
+        "K12",
+        "K14"
+      ],
+      "rules": [
+        "C07",
+        "W02"
+      ],
+      "required_conclusion": "Не повышать historical row до observed проверки всего её смысла.",
+      "forbidden_conclusion": "Закрыть gap количеством tests/наличием функции.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q23",
+      "conditions": "Local incomplete trial собран и manifest существует.",
+      "sources": [
+        "K20",
+        "K21"
+      ],
+      "rules": [
+        "C06",
+        "W05"
+      ],
+      "required_conclusion": "Это не совместимый release/permission/доказанное завершение writer.",
+      "forbidden_conclusion": "Активировать/публиковать по существованию manifest.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    },
+    {
+      "id": "Q24",
+      "conditions": "Владелец разрешил начать задачу, independent reviewer результата не участвовал.",
+      "sources": [
+        "K26"
+      ],
+      "rules": [
+        "PR04.01",
+        "W05"
+      ],
+      "required_conclusion": "Отдельно обозначить фактический reviewer/evidence level; start consent не independent result review.",
+      "forbidden_conclusion": "Назвать review independent/owner approved автоматически.",
+      "assessment": "agent_semantic_self_review_not_independent",
+      "result": "proposed_mapping_supports_required_conclusion"
+    }
+  ],
+  "judgement_origin": "agent_review_of_pinned_source_boundaries_and_actual_preview",
+  "full_clause_mapping_completed": false,
+  "independent_review_performed": false,
+  "original_contracts_retained": true
+}

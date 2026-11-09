@@ -240,3 +240,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [47-agent-system-mixed-governance-resolution.md](47-agent-system-mixed-governance-resolution.md) —6holds/9gaps и дополнительный G03/G06 audit: source facts вне rule text, retained limits, revised research draft и proposed обобщения.
 
 [48-agent-system-role-aware-composition.md](48-agent-system-role-aware-composition.md) —D04/core integration, роли90артефактов и26component-doc review queue. [Предъявляемый derived rule preview](48-agent-system-rule-preview.md) —не активный профиль/не release.
+
+[49-agent-system-component-semantic-review.md](49-agent-system-component-semantic-review.md) —focused boundary review26component documents,5conditional notes,24challenge cases. [Уточнённый preview](49-agent-system-rule-preview.md) —предмет review, не active/release.
