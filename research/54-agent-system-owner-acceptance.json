@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "acceptance_id": "8104abbe-94ef-4ce0-959c-780941356785",
+  "kind": "owner_acceptance_of_derived_candidate_text",
+  "recorded_on": "2026-10-07",
+  "recorded_by": "agent_on_behalf_of_conversation_record",
+  "owner_statement": {
+    "verbatim": "принять",
+    "language": "ru",
+    "context": "ответ на вопрос «С чего продолжаем?» / выбор варианта «Принять» из раздела 3 документа53"
+  },
+  "accepted": [
+    {
+      "path": "research/53-agent-system-condition-rules.md",
+      "sha256": "ede459ee165575948d1710591ac8422d78570ac9f4f9b9f2eae34109f5bf15bb",
+      "size_bytes": 24930
+    },
+    {
+      "path": "research/53-agent-system-condition-rules.json",
+      "sha256": "bc5dc93e58fdc9df7e49e24e870e7e8b00193f19fc2d057a54593ad6961f2c29",
+      "size_bytes": 28941
+    }
+  ],
+  "decision": {
+    "outcome": "accepted",
+    "what": "Производный свод из23правил (F01–F23), четыре вводных раздела и раздел границ принят как кандидатный текст переносимой системы универсальных правил работы агента.",
+    "scope": "только текст; принятие относится к точным байтам, закреплённым выше",
+    "effect_on_status": "proposed_candidate -> owner_accepted_candidate (нормативный статус не меняется)",
+    "normative_status_after": "not_a_registered_revision"
+  },
+  "explicitly_not_granted": [
+    "registration as normative revision",
+    "approval record in agent_system/catalog/approvals",
+    "release",
+    "export",
+    "activation",
+    "compatible release",
+    "new environment",
+    "change of the normative registry",
+    "any claim that agent behavior was verified"
+  ],
+  "conditions": [
+    "Принятие действует только для указанных байтов; любое изменение текста аннулирует его и требует нового решения.",
+    "Принятие текста не является подтверждением его эффективности, результативности или соблюдения агентом.",
+    "Регистрация нормативной ревизии — отдельное решение с собственным точным составом, областью и полномочием.",
+    "Открытые пункты R4 positive path, R6 readiness, G05 full semantics, G07, R7 и R8 остаются открытыми."
+  ],
+  "open_items": [
+    "R4 actual positive path",
+    "R6 negative coverage/readiness",
+    "G05 full semantics",
+    "G07 history/bindings",
+    "R7 new environment",
+    "R8 activation"
+  ],
+  "verification": {
+    "independent_review_performed": false,
+    "actual_behavior_verified": false,
+    "full_semantic_equivalence": false,
+    "owner_identity_authenticated": false
+  },
+  "limits": {
+    "statement": "Запись составлена агентом по сообщению владельца. Она не аутентифицирует личность, не является approval-событием реестра и не даёт полномочий. Хэш подтверждает совпадение байтов, не авторство.",
+    "not_a_catalog_approval": true
+  }
+}

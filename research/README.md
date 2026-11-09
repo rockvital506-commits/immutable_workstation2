@@ -250,3 +250,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [52-agent-system-condition-loss-check.md](52-agent-system-condition-loss-check.md) —398пар «абзац–тип»,23типа,коридоры «позволяет/запрещает/не вправе требовать»,7переносов и2новых типа (F22/F23) с цитатами G07.
 
 [53-agent-system-rule-set-report.md](53-agent-system-rule-set-report.md) —свод23правил с двумя запретами и дословными основаниями; [текст](53-agent-system-condition-rules.md) —кандидат на решение, не ревизия.
+
+[54-agent-system-owner-acceptance.md](54-agent-system-owner-acceptance.md) —принятие53владельцем, привязано к точным байтам; не регистрация/не разрешение.
