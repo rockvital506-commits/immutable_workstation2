@@ -252,3 +252,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [53-agent-system-rule-set-report.md](53-agent-system-rule-set-report.md) —свод23правил с двумя запретами и дословными основаниями; [текст](53-agent-system-condition-rules.md) —кандидат на решение, не ревизия.
 
 [54-agent-system-owner-acceptance.md](54-agent-system-owner-acceptance.md) —принятие53владельцем, привязано к точным байтам; не регистрация/не разрешение.
+
+[55-agent-system-effectiveness-trial.md](55-agent-system-effectiveness-trial.md) —16авторских случаев,свод16/16 против0/16 у крайностей и~5/16 у «всегда A/B/C»; не поведение/не независимость.

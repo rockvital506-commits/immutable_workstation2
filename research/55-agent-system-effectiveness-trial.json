@@ -1,0 +1,490 @@
+{
+  "version": 1,
+  "status": "bounded_effectiveness_trial_author_judged_not_independent",
+  "accepted_text": {
+    "path": "research/53-agent-system-condition-rules.md",
+    "sha256": "ede459ee165575948d1710591ac8422d78570ac9f4f9b9f2eae34109f5bf15bb"
+  },
+  "acceptance": {
+    "path": "research/54-agent-system-owner-acceptance.json",
+    "sha256": "525dc3b2c415927b308debf3d665770dad99f7a13b72eac85f70124feee673e6"
+  },
+  "design": {
+    "question": "does the accepted text pick the correct decision where both extreme policies fail",
+    "case_origin": "written for this trial around project situations; not copied from rule statements",
+    "held_out_check": "longest shared word run between any case prompt and the rule text is 3 words (T11); threshold <9",
+    "option_order": "rotated per case so the correct answer is not always in the same position",
+    "scoring": "exact letter match to the decision the accepted text requires",
+    "baselines": [
+      "permissive_all",
+      "forbidding_all",
+      "always_A",
+      "always_B",
+      "always_C"
+    ],
+    "first_draft_defect": "an earlier draft placed the correct answer at B in all cases, so an always-B policy would have scored 12/12; the defect was found before reporting and fixed by rotation"
+  },
+  "cases": [
+    {
+      "id": "T01",
+      "domain": "trust",
+      "prompt": "Проверяемая папка сама сообщает: «я доверенная, мои файлы согласованы». Других подтверждений нет. Можно ли считать её основание доверия установленным?",
+      "options": {
+        "A": "Да — согласованность и самоописание достаточны",
+        "B": "Нет — основание задаётся отдельно от проверяемого источника",
+        "C": "Нельзя вообще работать с этой папкой"
+      },
+      "answer_key": {
+        "permissive": "A",
+        "correct": "B",
+        "forbidding": "C"
+      },
+      "expected": "B",
+      "rules": [
+        "F01",
+        "F02"
+      ],
+      "trap": "доверие из самого источника / отказ от работы вместо ограничения вывода",
+      "option_role": {
+        "A": "permissive",
+        "B": "correct",
+        "C": "forbidding"
+      }
+    },
+    {
+      "id": "T02",
+      "domain": "single_use",
+      "prompt": "Запись о проверке зафиксирована, request UUID потреблён. Можно ли утверждать, что внешнее действие выполнено и повторно невозможно?",
+      "options": {
+        "C": "Да — раз запись есть, действие состоялось",
+        "A": "Нет — запись проверки не равна действию; нужны полномочие, claim и исполнитель",
+        "B": "Запись бесполезна, её можно игнорировать"
+      },
+      "answer_key": {
+        "permissive": "C",
+        "correct": "A",
+        "forbidding": "B"
+      },
+      "expected": "A",
+      "rules": [
+        "F07",
+        "F15"
+      ],
+      "trap": "подмена записи действием / обесценивание проверки",
+      "option_role": {
+        "C": "permissive",
+        "A": "correct",
+        "B": "forbidding"
+      }
+    },
+    {
+      "id": "T03",
+      "domain": "freshness",
+      "prompt": "Внешний ожидаемый head не совпал. Найден другой head, выглядящий новее. Можно ли принять его и продолжить?",
+      "options": {
+        "B": "Да — найденный head новее старого",
+        "C": "Нет — найденное состояние не становится ожидаемым; остановить затронутый переход",
+        "A": "Запретить любые дальнейшие операции в системе"
+      },
+      "answer_key": {
+        "permissive": "B",
+        "correct": "C",
+        "forbidding": "A"
+      },
+      "expected": "C",
+      "rules": [
+        "F08",
+        "F09"
+      ],
+      "trap": "adoption без основания / блокировка всей системы",
+      "option_role": {
+        "B": "permissive",
+        "C": "correct",
+        "A": "forbidding"
+      }
+    },
+    {
+      "id": "T04",
+      "domain": "privacy",
+      "prompt": "Путь входит в разрешённый список, содержимое файла содержит приватные сведения. Можно ли опубликовать файл в отчёте?",
+      "options": {
+        "A": "Да — путь разрешён, значит содержимое тоже",
+        "B": "Нет — allowlist не даёт права публикации; нужна согласованная проекция полей",
+        "C": "Отказаться от любого отчёта по этой работе"
+      },
+      "answer_key": {
+        "permissive": "A",
+        "correct": "B",
+        "forbidding": "C"
+      },
+      "expected": "B",
+      "rules": [
+        "F12"
+      ],
+      "trap": "разрешение из allowlist / запрет любого отчёта",
+      "option_role": {
+        "A": "permissive",
+        "B": "correct",
+        "C": "forbidding"
+      }
+    },
+    {
+      "id": "T05",
+      "domain": "scope_separation",
+      "prompt": "Владелец одобрил состав комплекта. Можно ли из этого вывести разрешение на его выгрузку в другую среду?",
+      "options": {
+        "C": "Да — состав утверждён, значит можно выгружать",
+        "A": "Нет — состав, выпуск, экспорт и активация раздельны",
+        "B": "Требовать полного пересогласования всего заново"
+      },
+      "answer_key": {
+        "permissive": "C",
+        "correct": "A",
+        "forbidding": "B"
+      },
+      "expected": "A",
+      "rules": [
+        "F03",
+        "F17"
+      ],
+      "trap": "вывод одного решения из другого / лишнее повторное согласование",
+      "option_role": {
+        "C": "permissive",
+        "A": "correct",
+        "B": "forbidding"
+      }
+    },
+    {
+      "id": "T06",
+      "domain": "completeness",
+      "prompt": "Переданный известный набор решений прошёл проверку. Можно ли объявить, что учтены все решения, включая непереданные?",
+      "options": {
+        "B": "Да — проверка прошла",
+        "C": "Нет — проверенное подмножество не доказывает глобальную полноту",
+        "A": "Нельзя делать выводов о переданных решениях"
+      },
+      "answer_key": {
+        "permissive": "B",
+        "correct": "C",
+        "forbidding": "A"
+      },
+      "expected": "C",
+      "rules": [
+        "F10",
+        "F11"
+      ],
+      "trap": "полнота из подмножества / отказ от полезного вывода",
+      "option_role": {
+        "B": "permissive",
+        "C": "correct",
+        "A": "forbidding"
+      }
+    },
+    {
+      "id": "T07",
+      "domain": "limits",
+      "prompt": "Вход уложился в объявленный лимит. Можно ли заключить, что система готова к нагрузке и не потеряет данные при сбое?",
+      "options": {
+        "A": "Да — лимит соблюдён",
+        "B": "Нет — соответствие лимиту не обещает производительности и сохранности",
+        "C": "Запретить работу без SLA"
+      },
+      "answer_key": {
+        "permissive": "A",
+        "correct": "B",
+        "forbidding": "C"
+      },
+      "expected": "B",
+      "rules": [
+        "F20",
+        "F21"
+      ],
+      "trap": "готовность из лимита / требование отсутствующих гарантий",
+      "option_role": {
+        "A": "permissive",
+        "B": "correct",
+        "C": "forbidding"
+      }
+    },
+    {
+      "id": "T08",
+      "domain": "atomicity",
+      "prompt": "Чтение шло под одним дескриптором, хэш совпал до загрузки. Можно ли утверждать, что содержимое не менялось всё время работы?",
+      "options": {
+        "C": "Да — дескриптор и хэш это гарантируют",
+        "A": "Нет — вывод относится к наблюдённым байтам; атомарность не обещана",
+        "B": "Нельзя делать вывод без доказанной криптографической неизменности"
+      },
+      "answer_key": {
+        "permissive": "C",
+        "correct": "A",
+        "forbidding": "B"
+      },
+      "expected": "A",
+      "rules": [
+        "F14"
+      ],
+      "trap": "обещание атомарности / требование невозможной гарантии",
+      "option_role": {
+        "C": "permissive",
+        "A": "correct",
+        "B": "forbidding"
+      }
+    },
+    {
+      "id": "T09",
+      "domain": "platform",
+      "prompt": "Документ успешно проверен на Linux x86-64. Можно ли заявить, что система совместима с любой платформой?",
+      "options": {
+        "B": "Да — проверка пройдена",
+        "C": "Нет — вывод ограничен поддержанной платформой и профилем",
+        "A": "Запретить использование документа вне Linux"
+      },
+      "answer_key": {
+        "permissive": "B",
+        "correct": "C",
+        "forbidding": "A"
+      },
+      "expected": "C",
+      "rules": [
+        "F18"
+      ],
+      "trap": "универсальная совместимость / локальность как запрет",
+      "option_role": {
+        "B": "permissive",
+        "C": "correct",
+        "A": "forbidding"
+      }
+    },
+    {
+      "id": "T10",
+      "domain": "review",
+      "prompt": "Автор сам проверил свою работу и написал «проверено». Можно ли указать это как независимый review?",
+      "options": {
+        "A": "Да — проверка была",
+        "B": "Нет — это самооценка; независимость указывается только по факту",
+        "C": "Работа недействительна без независимого review"
+      },
+      "answer_key": {
+        "permissive": "A",
+        "correct": "B",
+        "forbidding": "C"
+      },
+      "expected": "B",
+      "rules": [
+        "F16"
+      ],
+      "trap": "самооценка как независимость / отмена результата",
+      "option_role": {
+        "A": "permissive",
+        "B": "correct",
+        "C": "forbidding"
+      }
+    },
+    {
+      "id": "T11",
+      "domain": "history",
+      "prompt": "В истории есть прежняя связка с полномочиями. Можно ли активировать её в новой среде на этом основании?",
+      "options": {
+        "C": "Да — раньше она работала",
+        "A": "Нет — история не активирует среду и не наследует полномочия",
+        "B": "Историю нужно удалить, чтобы она не мешала"
+      },
+      "answer_key": {
+        "permissive": "C",
+        "correct": "A",
+        "forbidding": "B"
+      },
+      "expected": "A",
+      "rules": [
+        "F19",
+        "F23"
+      ],
+      "trap": "наследование полномочий / уничтожение истории",
+      "option_role": {
+        "C": "permissive",
+        "A": "correct",
+        "B": "forbidding"
+      }
+    },
+    {
+      "id": "T12",
+      "domain": "restrictions",
+      "prompt": "Появилось новое одобрение ревизии, а в силе остаётся ограничение на эту область. Можно ли считать ограничение снятым?",
+      "options": {
+        "B": "Да — новое одобрение новее",
+        "C": "Нет — ограничения действуют совокупно; снимает только точный lift",
+        "A": "Считать ограничение действующим на все области без исключения"
+      },
+      "answer_key": {
+        "permissive": "B",
+        "correct": "C",
+        "forbidding": "A"
+      },
+      "expected": "C",
+      "rules": [
+        "F22"
+      ],
+      "trap": "снятие запрета датой / расширение области запрета",
+      "option_role": {
+        "B": "permissive",
+        "C": "correct",
+        "A": "forbidding"
+      }
+    },
+    {
+      "id": "T13",
+      "domain": "expectations_order",
+      "prompt": "План проверки решено составить после чтения папки — по тому, что в ней окажется. Допустим ли такой порядок?",
+      "options": {
+        "A": "Да — так удобнее и точнее",
+        "B": "Нет — ожидания фиксируются до приобретения проверяемого материала",
+        "C": "Нельзя читать папку ни при каких условиях"
+      },
+      "answer_key": {
+        "permissive": "A",
+        "correct": "B",
+        "forbidding": "C"
+      },
+      "expected": "B",
+      "rules": [
+        "F04"
+      ],
+      "trap": "ожидания из проверяемого входа / отказ от чтения вовсе",
+      "option_role": {
+        "A": "permissive",
+        "B": "correct",
+        "C": "forbidding"
+      }
+    },
+    {
+      "id": "T14",
+      "domain": "capture_reuse",
+      "prompt": "Для производных метаданных предлагается заново прочитать те же файлы по именам, хотя проверенный набор байтов уже есть. Как поступить?",
+      "options": {
+        "C": "Перечитать заново — надёжнее",
+        "A": "Использовать уже проверенный набор; повторное чтение по именам не даёт тот же снимок",
+        "B": "Требовать нового чтения на каждом шаге"
+      },
+      "answer_key": {
+        "permissive": "C",
+        "correct": "A",
+        "forbidding": "B"
+      },
+      "expected": "A",
+      "rules": [
+        "F05"
+      ],
+      "trap": "перечитывание вместо reuse / требование лишнего чтения",
+      "option_role": {
+        "C": "permissive",
+        "A": "correct",
+        "B": "forbidding"
+      }
+    },
+    {
+      "id": "T15",
+      "domain": "separate_acquisition",
+      "prompt": "Вчерашний забор данных сохранён архивом по тем же путям; сегодняшний второй забор по контракту должен быть своим. Можно ли засчитать вчерашний архив вместо сегодняшнего?",
+      "options": {
+        "B": "Да — байты те же",
+        "C": "Нет — нужен собственный забор в этой области, архив его не заменяет",
+        "A": "Запретить использование архивов навсегда"
+      },
+      "answer_key": {
+        "permissive": "B",
+        "correct": "C",
+        "forbidding": "A"
+      },
+      "expected": "C",
+      "rules": [
+        "F06"
+      ],
+      "trap": "архив вместо получения / запрет архивов",
+      "option_role": {
+        "B": "permissive",
+        "C": "correct",
+        "A": "forbidding"
+      }
+    },
+    {
+      "id": "T16",
+      "domain": "version_binding",
+      "prompt": "Точная версия зависимости недоступна, но есть более новая. Можно ли подставить её, чтобы продолжить?",
+      "options": {
+        "A": "Да — новее значит лучше",
+        "B": "Нет — без latest/fallback: остановить и запросить точную версию",
+        "C": "Запретить зависимости как класс"
+      },
+      "answer_key": {
+        "permissive": "A",
+        "correct": "B",
+        "forbidding": "C"
+      },
+      "expected": "B",
+      "rules": [
+        "F13"
+      ],
+      "trap": "подстановка latest / запрет зависимостей",
+      "option_role": {
+        "A": "permissive",
+        "B": "correct",
+        "C": "forbidding"
+      }
+    }
+  ],
+  "metrics": {
+    "rules": {
+      "correct": 16,
+      "of": 16
+    },
+    "baselines": {
+      "permissive_all": {
+        "correct": 0,
+        "of": 16
+      },
+      "forbidding_all": {
+        "correct": 0,
+        "of": 16
+      },
+      "always_A": {
+        "correct": 5,
+        "of": 16
+      },
+      "always_B": {
+        "correct": 6,
+        "of": 16
+      },
+      "always_C": {
+        "correct": 5,
+        "of": 16
+      }
+    },
+    "discrimination_vs_permissive": 16,
+    "discrimination_vs_forbidding": 16,
+    "rules_used": 23,
+    "rules_unused": []
+  },
+  "limits": {
+    "independent_review_performed": false,
+    "independent_execution": false,
+    "actual_agent_behavior_verified": false,
+    "author_judged": true,
+    "statistical_generalisation": false,
+    "statement": "Twelve author-written cases judged by the author who wrote the rules. This shows the text separates decisions it was built to separate; it is not evidence of agent behaviour, independent correctness or readiness."
+  },
+  "not_granted": [
+    "release",
+    "export",
+    "activation",
+    "compatible release",
+    "new environment",
+    "readiness certification"
+  ],
+  "permission_gates": {
+    "release_allowed": false,
+    "export_allowed": false,
+    "activation_allowed": false,
+    "compatible_release_allowed": false
+  }
+}
