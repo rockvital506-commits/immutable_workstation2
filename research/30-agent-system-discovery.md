@@ -6725,3 +6725,13 @@ semantic qualification/поведение/authority и actual release/export/act
 независимость/исполнение/свежесть/publication permission из hash/flag/UUID/схемы.
 Уточнённый preview — производный предмет review, не нормативное ядро/active profile.
 Полное clause-level отображение и независимый review не выполнены.
+
+
+## 73. Покрытие универсальных условий
+
+[50](50-agent-system-universal-condition-coverage.md):21переносимый тип условий,
+53дословных anchor в26component documents;15покрыты существующим правилом,
+6примечанием. Найдены2пробела — граница наблюдения/атомарность (N6) и пределы как
+границы, не гарантии (N7); оба proposed, действуют только по условию контракта.
+Размечено40из255prose blocks: полная clause-level карта не выполнена, независимый
+review/поведение/полномочия не проверены. Preview — производный предмет review.

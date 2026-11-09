@@ -242,3 +242,5 @@ cd - && rm -rf /tmp/rd                 # копия удаляется, ориг
 [48-agent-system-role-aware-composition.md](48-agent-system-role-aware-composition.md) —D04/core integration, роли90артефактов и26component-doc review queue. [Предъявляемый derived rule preview](48-agent-system-rule-preview.md) —не активный профиль/не release.
 
 [49-agent-system-component-semantic-review.md](49-agent-system-component-semantic-review.md) —focused boundary review26component documents,5conditional notes,24challenge cases. [Уточнённый preview](49-agent-system-rule-preview.md) —предмет review, не active/release.
+
+[50-agent-system-universal-condition-coverage.md](50-agent-system-universal-condition-coverage.md) —21тип условий/53якоря/26документов,2proposed-примечания. [Preview с условиями](50-agent-system-universal-condition-coverage-preview.md) —предмет review, не active/release.

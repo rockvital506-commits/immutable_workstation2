@@ -1,0 +1,593 @@
+{
+  "version": 1,
+  "status": "universal_condition_coverage_review_not_full_semantic_qualification",
+  "predecessor": {
+    "fixture": {
+      "path": "research/49-agent-system-component-semantic-review.json",
+      "sha256": "2a403f29961bf6e12aba707b21b2cda6c3c0b4f2936943c590202ab8110bdc7e"
+    },
+    "preview": {
+      "path": "research/49-agent-system-rule-preview.md",
+      "sha256": "8950c0d91e70f11e551fff46ec2252218030f490b9caab9e45a8a0099071eb80"
+    },
+    "predecessor_challenges": "Q01-Q24 in research/49-agent-system-component-semantic-review.json"
+  },
+  "families": [
+    {
+      "id": "F01",
+      "statement": "Основание доверия и ожиданий устанавливается независимо от проверяемого источника/его самозаявлений и до относящейся оценки.",
+      "anchor_count": 6,
+      "anchors": [
+        {
+          "path": "agent_system/specification/ent-0008/r0001/usage.md",
+          "needle": "Нельзя прочитать неизвестное дерево"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+          "needle": "Positive recognition означает только"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+          "needle": "Код не аутентифицирует owner identity/сообщение"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+          "needle": "не механизм её доказательства"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+          "needle": "bootstrap trust остаётся у явно доверенного local operator"
+        },
+        {
+          "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+          "needle": "аутентификация произвольной новой директории/permission"
+        }
+      ],
+      "coverage_kind": "note",
+      "coverage_summary": "proposed_conditional_note",
+      "note_id": "N1"
+    },
+    {
+      "id": "F02",
+      "statement": "Хэш, метка роли, явный флаг и согласованность технических полей не аутентифицируют личность, источник, наблюдение или право действия.",
+      "anchor_count": 4,
+      "anchors": [
+        {
+          "path": "agent_system/specification/ent-0008/r0001/usage.md",
+          "needle": "expectation_authority=caller_supplied_not_authenticated"
+        },
+        {
+          "path": "agent_system/validation/ent-0009/r0001/usage.md",
+          "needle": "НЕ аутентификация плана"
+        },
+        {
+          "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+          "needle": "Не принимай actor label/hash"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+          "needle": "Hashes не доказывают авторство"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "W05",
+      "quote": "Хэш подтверждает совпадение bytes, не личность владельца"
+    },
+    {
+      "id": "F03",
+      "statement": "Выпуск, состав, экспорт и активация — разные полномочия в разных областях; одно не выводится из другого.",
+      "anchor_count": 4,
+      "anchors": [
+        {
+          "path": "agent_system/specification/ent-0003/r0002/usage.md",
+          "needle": "approval.status approved отражает положительную запись"
+        },
+        {
+          "path": "agent_system/specification/ent-0007/r0001/usage.md",
+          "needle": "Даты и порядок файлов не задают приоритет"
+        },
+        {
+          "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+          "needle": "не export instruction/permission"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+          "needle": "не выпускает содержащий его комплект"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "W06c",
+      "quote": "Выпуск, согласование состава и активация остаются отдельными полномочиями."
+    },
+    {
+      "id": "F04",
+      "statement": "Ожидания и рамки проверки фиксируются до приобретения/копирования проверяемого материала.",
+      "anchor_count": 2,
+      "anchors": [
+        {
+          "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+          "needle": "Ожидание копируется до чтения"
+        },
+        {
+          "path": "agent_system/validation/ent-0009/r0002/usage.md",
+          "needle": "Expected_plan — обязательные внешние"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "G05.01",
+      "quote": "После подготовки, но до копирования безопасно получить именно объявленные байты"
+    },
+    {
+      "id": "F05",
+      "statement": "Проверенные байты одного согласованного получения используются повторно; метаданные строятся из них, а не из повторного чтения по именам.",
+      "anchor_count": 1,
+      "anchors": [
+        {
+          "path": "agent_system/staging/ent-0016/r0002/usage.md",
+          "needle": "не перечитывает paths после завершённой проверки"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "G05.02",
+      "quote": "а не повторно читать меняющееся дерево по именам"
+    },
+    {
+      "id": "F06",
+      "statement": "Когда выбранный контракт требует отдельного получения для нового запроса/контекста, архив, replay или совпавшие байты его не заменяют; отсутствующее отмечается как невыполненное.",
+      "anchor_count": 2,
+      "anchors": [
+        {
+          "path": "agent_system/operator/ent-0018/r0001/usage.md",
+          "needle": "Без B query=not_requested"
+        },
+        {
+          "path": "agent_system/operator/ent-0018/r0001/usage.md",
+          "needle": "Нельзя переиспользовать E12"
+        }
+      ],
+      "coverage_kind": "note",
+      "coverage_summary": "proposed_conditional_note",
+      "note_id": "N5"
+    },
+    {
+      "id": "F07",
+      "statement": "Запись проверки, новый идентификатор или журнал не доказывают однократность внешнего действия и не заменяют полномочие и исполнителя.",
+      "anchor_count": 1,
+      "anchors": [
+        {
+          "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+          "needle": "check_id_consumed=true означает лишь однократную запись"
+        }
+      ],
+      "coverage_kind": "note",
+      "coverage_summary": "proposed_conditional_note",
+      "note_id": "N2"
+    },
+    {
+      "id": "F08",
+      "statement": "Согласованный старый снимок или найденное новое состояние не становятся автоматически ожидаемым текущим; при неизвестном исходе — остановка без слепого повторения.",
+      "anchor_count": 3,
+      "anchors": [
+        {
+          "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+          "needle": "unsafe/partial stop; не удалять lock"
+        },
+        {
+          "path": "agent_system/validation/ent-0017/r0001/usage.md",
+          "needle": "не доказанная свежесть"
+        },
+        {
+          "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+          "needle": "не удалять и не перезаписывать автоматически"
+        }
+      ],
+      "coverage_kind": "note",
+      "coverage_summary": "proposed_conditional_note",
+      "note_id": "N3"
+    },
+    {
+      "id": "F09",
+      "statement": "Ошибка, недоступность, прерывание и частичный результат не превращаются в успех; неподдержанная проверка блокирует затронутый переход.",
+      "anchor_count": 2,
+      "anchors": [
+        {
+          "path": "agent_system/validation/ent-0004/r0002/usage.md",
+          "needle": "отсутствие зависимости должно завершать запуск ошибкой, не skip/PASS"
+        },
+        {
+          "path": "agent_system/staging/ent-0015/r0001/usage.md",
+          "needle": "не удаляются и не продолжаются"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "D09",
+      "quote": "Необработанная ошибка, прерванный запуск или недоступный файл не превращаются в успех."
+    },
+    {
+      "id": "F10",
+      "statement": "Проверенный известный набор не доказывает глобальную полноту; отсутствующее наблюдение не считается отсутствием ограничений.",
+      "anchor_count": 3,
+      "anchors": [
+        {
+          "path": "agent_system/validation/ent-0004/r0002/usage.md",
+          "needle": "Нельзя выдавать этот код за полную процедуру"
+        },
+        {
+          "path": "agent_system/validation/ent-0006/r0003/usage.md",
+          "needle": "нельзя объявлять историю полной только потому"
+        },
+        {
+          "path": "agent_system/staging/ent-0015/r0001/usage.md",
+          "needle": "Нет completion marker"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "G07",
+      "quote": "не подменять отсутствие глобальной полноты разрешением"
+    },
+    {
+      "id": "F11",
+      "statement": "Неизвестный тип, событие или обработчик не объявляется отсутствием ограничения и не отбрасывается как посторонний.",
+      "anchor_count": 1,
+      "anchors": [
+        {
+          "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+          "needle": "молчаливой фильтрации скрытых/неизвестных имён"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "D08",
+      "quote": "Неизвестное событие или отсутствующий обработчик нельзя объявить отсутствием ограничений."
+    },
+    {
+      "id": "F12",
+      "statement": "Проверенный namespace и схема не разрешают публикацию фактического private-содержимого; вынос идёт по согласованной проекции без raw-данных по умолчанию.",
+      "anchor_count": 3,
+      "anchors": [
+        {
+          "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+          "needle": "не являются предметом экспорта"
+        },
+        {
+          "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+          "needle": "не secret/semantic-content detector"
+        },
+        {
+          "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+          "needle": "Не печатай raw maps/absolute roots"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "D09",
+      "quote": "Секреты и содержимое частных файлов в диагностику не копируются."
+    },
+    {
+      "id": "F13",
+      "statement": "Версии и зависимости разрешаются точно, без выбора latest, fallback или подстановки удобной ревизии.",
+      "anchor_count": 1,
+      "anchors": [
+        {
+          "path": "agent_system/validation/ent-0006/r0003/usage.md",
+          "needle": "не подстановки latest"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "D07",
+      "quote": "Точные ссылки на версии разрешаются без выбора latest."
+    },
+    {
+      "id": "F14",
+      "statement": "Результат относится к наблюдённым байтам/состояниям: одновременное изменение входов не исключается, атомарность не обещается, хэш перед загрузкой не есть атомарная загрузка.",
+      "anchor_count": 5,
+      "anchors": [
+        {
+          "path": "agent_system/specification/ent-0003/r0002/usage.md",
+          "needle": "Структурный PASS не означает атомарный снимок"
+        },
+        {
+          "path": "agent_system/validation/ent-0009/r0001/usage.md",
+          "needle": "не должны изменяться противником в процессе выполнения"
+        },
+        {
+          "path": "agent_system/validation/ent-0009/r0002/usage.md",
+          "needle": "Наблюдения mutable B не атомарны"
+        },
+        {
+          "path": "agent_system/validation/ent-0010/r0001/usage.md",
+          "needle": "общей атомарности внешних объектов не обещаем"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+          "needle": "Caller не должен менять internal attributes"
+        }
+      ],
+      "coverage_kind": "note",
+      "coverage_summary": "proposed_conditional_note",
+      "note_id": "N6"
+    },
+    {
+      "id": "F15",
+      "statement": "Исполнение команды, согласованный отчёт или пройденный тест не равны успеху, истинности наблюдения или реальному поведению.",
+      "anchor_count": 2,
+      "anchors": [
+        {
+          "path": "agent_system/validation/ent-0010/r0001/usage.md",
+          "needle": "Даже полностью согласованная подделка может пройти"
+        },
+        {
+          "path": "agent_system/staging/ent-0016/r0001/usage.md",
+          "needle": "не доказательство исполнения"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "W05",
+      "quote": "Исполнение команды не равно успеху."
+    },
+    {
+      "id": "F16",
+      "statement": "Самооценка, structural locator и review владельца не выдаются за независимую проверку смысла; отсутствие review фиксируется явно.",
+      "anchor_count": 1,
+      "anchors": [
+        {
+          "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+          "needle": "Структурная ссылка на AST не доказывает"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "PR04.01",
+      "quote": "Самооценку, review владельца и независимую проверку указывать только по факту такого review"
+    },
+    {
+      "id": "F17",
+      "statement": "Готовность, выпуск, экспорт, активация и допуск — отдельные состояния; зелёный слой не даёт общего допуска.",
+      "anchor_count": 5,
+      "anchors": [
+        {
+          "path": "agent_system/specification/ent-0007/r0001/usage.md",
+          "needle": "Нет известных блокировок — НЕ"
+        },
+        {
+          "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+          "needle": "ни успешная preparation не разрешают release"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+          "needle": "Ни один вызов этой revision не возвращает"
+        },
+        {
+          "path": "agent_system/staging/ent-0016/r0001/usage.md",
+          "needle": "current_permissions=not_evaluated"
+        },
+        {
+          "path": "agent_system/validation/ent-0017/r0001/usage.md",
+          "needle": "Отсутствие известного запрета не поддерживает положительное разрешение"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "C09",
+      "quote": "Смена состава, новая дата или новый агент не создают их молча."
+    },
+    {
+      "id": "F18",
+      "statement": "Поддержанная локальная платформа/профиль не доказывают универсальной совместимости или переносимости.",
+      "anchor_count": 1,
+      "anchors": [
+        {
+          "path": "agent_system/staging/ent-0016/r0002/usage.md",
+          "needle": "Same-uid/privileged attacker"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "W02",
+      "quote": "Не объявлять универсальную полноту или совместимость."
+    },
+    {
+      "id": "F19",
+      "statement": "История и прежние связки не являются активной конфигурацией и не наследуют полномочия в новой среде.",
+      "anchor_count": 1,
+      "anchors": [
+        {
+          "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+          "needle": "Не считай старую"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "W06c",
+      "quote": "Новая среда не наследует полномочие автоматически от старой."
+    },
+    {
+      "id": "F20",
+      "statement": "Количество файлов, тестов и артефактов не доказывает покрытие, завершение или готовность.",
+      "anchor_count": 3,
+      "anchors": [
+        {
+          "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+          "needle": "Все25historical rows сохранить open"
+        },
+        {
+          "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+          "needle": "locator — имя определения функции в AST, не запуск"
+        },
+        {
+          "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+          "needle": "Не утверждай freshness/authenticity"
+        }
+      ],
+      "coverage_kind": "rule",
+      "coverage_summary": "existing_rule_text",
+      "body_id": "W02",
+      "quote": "количество файлов/тестов/источников не доказывают покрытие"
+    },
+    {
+      "id": "F21",
+      "statement": "Объявленные числовые/объёмные пределы ограничивают вход и блокируют превышение, но не обещают производительность, атомарность, сохранность при сбое или поддержку моделей.",
+      "anchor_count": 2,
+      "anchors": [
+        {
+          "path": "agent_system/validation/ent-0006/r0003/usage.md",
+          "needle": "Лимиты: 10000 переданных файлов"
+        },
+        {
+          "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+          "needle": "Предельные values — bounds"
+        }
+      ],
+      "coverage_kind": "note",
+      "coverage_summary": "proposed_conditional_note",
+      "note_id": "N7"
+    }
+  ],
+  "new_notes": [
+    {
+      "id": "N6",
+      "sources": [
+        "F14"
+      ],
+      "related": [
+        "W05",
+        "D09",
+        "N3"
+      ],
+      "text": "Результат проверки относится к наблюдённым в её ходе байтам и состояниям. Одновременное изменение входов, конкурентная запись в установку или иное вмешательство вне согласованного профиля не исключаются и не закрываются обещанием атомарности; проверка хэша перед загрузкой или одно согласованное чтение не доказывают неизменность на всём интервале. Если такие изменения возможны и влияют на вывод, обозначать это как границу результата или неопределённость, а не как гарантированный снимок. При этом не требовать невозможной универсальной атомарности и не отказываться от допустимого полезного вывода в наблюдённой области.",
+      "must_not_be_read_as": "универсальную атомарность, гарантию отсутствия конкурентных изменений или запрет любого вывода при меняющейся среде",
+      "route": "source_backed_conditional_generalization",
+      "status": "proposed_application_note_not_new_authority",
+      "applicability": "only_where_the_selected_source_contract_requires_the_condition"
+    },
+    {
+      "id": "N7",
+      "sources": [
+        "F21"
+      ],
+      "related": [
+        "W02",
+        "C07",
+        "D09"
+      ],
+      "text": "Объявленные числовые и объёмные пределы — границы допустимого входа и основание отвергнуть превышение. Они не обещают производительность, атомарность, сохранность при сбое, отсутствие иных ограничений или поддержку непроверенных моделей и платформ. Не выводить из того, что вход уложился в лимит, готовность, безопасность или полноту; превышение не обрезать и не превращать в частичный успех.",
+      "must_not_be_read_as": "обещание производительности/долговечности или запрет работать при отсутствии SLA",
+      "route": "source_backed_conditional_generalization",
+      "status": "proposed_application_note_not_new_authority",
+      "applicability": "only_where_the_selected_source_contract_requires_the_condition"
+    }
+  ],
+  "coverage_stats": {
+    "families": 21,
+    "families_by_rule": 15,
+    "families_by_note": 6,
+    "anchors": 53,
+    "documents": 26,
+    "families_without_anchor": 0,
+    "prose_blocks_total": 255,
+    "prose_blocks_anchored": 40,
+    "full_clause_mapping": false
+  },
+  "residual": {
+    "statement": "Не все261prose blocks размечены: 50 проверяет21тип условий и53якоря, остальной текст остаётся вне полной clause-level карты.",
+    "non_transferred_categories": [
+      "конкретные API-имена, сигнатуры и структуры вызовов",
+      "числовые лимиты и профили платформы конкретной реализации",
+      "частные пути, команды запуска и lock-файлы",
+      "внутренние коды статусов и имена полей схем",
+      "частная архитектура и история локальных запусков"
+    ],
+    "retained_in_originals": true
+  },
+  "new_challenges": [
+    {
+      "id": "Q25",
+      "conditions": "Хэш проверен перед загрузкой, но установка доступна для записи посторонним.",
+      "sources": [
+        "F14"
+      ],
+      "rules": [
+        "N6"
+      ],
+      "required_conclusion": "Нельзя утверждать атомарную загрузку или неизменность на интервале; указывается граница/риск.",
+      "forbidden_conclusion": "Объявить атомарную защиту от конкурентной подмены."
+    },
+    {
+      "id": "Q26",
+      "conditions": "Файловая система заведомо меняется третьей стороной во время проверки.",
+      "sources": [
+        "F14"
+      ],
+      "rules": [
+        "N6"
+      ],
+      "required_conclusion": "Вывод ограничен наблюдённым; при влиянии на критерий — неопределённость.",
+      "forbidden_conclusion": "Обещать снимок или отбросить допустимый вывод в наблюдённой области."
+    },
+    {
+      "id": "Q27",
+      "conditions": "Наблюдение выполнено под одним дескриптором в согласованном доверенном профиле без конкурентной записи.",
+      "sources": [
+        "F14"
+      ],
+      "rules": [
+        "N6"
+      ],
+      "required_conclusion": "Допустим полезный вывод в этой области с указанием уровня.",
+      "forbidden_conclusion": "Требовать криптографической атомарности или запрещать любой вывод."
+    },
+    {
+      "id": "Q28",
+      "conditions": "Вход10МиБ при объявленном пределе16МиБ.",
+      "sources": [
+        "F21"
+      ],
+      "rules": [
+        "N7"
+      ],
+      "required_conclusion": "Предел не нарушен; полнота/безопасность/готовность из этого не следует.",
+      "forbidden_conclusion": "Вывести готовность или отсутствие иных ограничений из соответствия лимиту."
+    },
+    {
+      "id": "Q29",
+      "conditions": "Вход превышает объявленный предел.",
+      "sources": [
+        "F21"
+      ],
+      "rules": [
+        "N7"
+      ],
+      "required_conclusion": "Превышение блокирует затронутую операцию; не обрезать и не выдавать частичный успех.",
+      "forbidden_conclusion": "Обрезать вход молча или объявить частичную обработку успехом."
+    },
+    {
+      "id": "Q30",
+      "conditions": "Лимиты объявлены, гарантий производительности/долговечности нет.",
+      "sources": [
+        "F21"
+      ],
+      "rules": [
+        "N7"
+      ],
+      "required_conclusion": "Работать в пределах лимитов, не обещая SLA/durability.",
+      "forbidden_conclusion": "Запретить работу только из-за отсутствия SLA или вывести SLA из лимитов."
+    }
+  ],
+  "judgement_origin": "agent_review_of_pinned_source_conditions_and_derived_rule_text",
+  "full_clause_mapping_completed": false,
+  "independent_review_performed": false,
+  "actual_behavior_verified": false,
+  "release_allowed": false,
+  "export_allowed": false,
+  "activation_allowed": false,
+  "compatible_release_allowed": false,
+  "original_contracts_retained": true
+}
