@@ -1,0 +1,4032 @@
+{
+  "version": 1,
+  "status": "loss_check_review_of_condition_families_not_independent_semantics",
+  "predecessor": {
+    "blocks": {
+      "path": "research/51-agent-system-block-condition-map.json",
+      "sha256": "d77e8ff352b3e011b2f637ea3d010a490adeaf935e3530a95b3179ab60c7fbe8"
+    },
+    "block_map": {
+      "path": "research/51-agent-system-block-map.md",
+      "sha256": "ddce65c679e45e847ebd7d1bb3453d8970ca5d97a0e97ec396ce3c15cb2b1d87"
+    },
+    "coverage": {
+      "path": "research/50-agent-system-universal-condition-coverage.json",
+      "sha256": "a57ff87a3446c5364d2948fbd65c2e81686b172dde090a1a7396880f38446cc5"
+    }
+  },
+  "method": {
+    "question": "for every condition family, what may be concluded, what must not be concluded, and does every assigned block stay inside that envelope",
+    "coverage": "all 398 block-family pairs of the 200 transferable blocks, not a sample",
+    "screening": "mechanical keyword screen flagged 119 pairs with weak lexical support; all 119 were read",
+    "adjudication": "author verdict per flagged pair; unflagged pairs were checked against the family envelope by the same reader in earlier passes and are recorded as supports",
+    "verdicts": [
+      "supports",
+      "narrower",
+      "misassigned"
+    ],
+    "overstrengthening_test": "each family carries an explicit forbidden-overstrengthening clause; blocks were read against it"
+  },
+  "families": [
+    {
+      "id": "F01",
+      "statement": "Основание доверия и ожиданий устанавливается независимо от проверяемого источника/его самозаявлений и до относящейся оценки.",
+      "coverage_kind": "note",
+      "base_evidence": "N1",
+      "permits": "ставить ожидания по отдельно установленному доверенному основанию",
+      "forbids_overreach": "считать основание установленным от того же проверяемого источника, его метки или согласия с самим собой",
+      "forbids_overstrengthening": "требовать криптографии или защиты от враждебной среды там, где профиль этого не обещает",
+      "pair_count": 50
+    },
+    {
+      "id": "F02",
+      "statement": "Хэш, метка роли, явный флаг и согласованность технических полей не аутентифицируют личность, источник, наблюдение или право действия.",
+      "coverage_kind": "rule",
+      "base_evidence": "W05",
+      "permits": "опираться на совпадение байтов как на факт совпадения байтов",
+      "forbids_overreach": "выводить из хэша/метки/флага личность, авторство, право или истинность наблюдения",
+      "forbids_overstrengthening": "объявлять любой неаутентифицированный вход бесполезным или запрещать работу с ним",
+      "pair_count": 28
+    },
+    {
+      "id": "F03",
+      "statement": "Выпуск, состав, экспорт и активация — разные полномочия в разных областях; одно не выводится из другого.",
+      "coverage_kind": "rule",
+      "base_evidence": "W06c",
+      "permits": "вести три решения раздельно: состав, выпуск/экспорт, активация",
+      "forbids_overreach": "выводить одно решение из другого или из даты/молчания/количества артефактов",
+      "forbids_overstrengthening": "требовать отдельного решения там, где владелец уже дал применимое согласие",
+      "pair_count": 18
+    },
+    {
+      "id": "F04",
+      "statement": "Ожидания и рамки проверки фиксируются до приобретения/копирования проверяемого материала.",
+      "coverage_kind": "rule",
+      "base_evidence": "G05.01",
+      "permits": "фиксировать ожидания до приобретения проверяемого материала",
+      "forbids_overreach": "формировать ожидания из непроверенного входа и затем объявлять его одобренным",
+      "forbids_overstrengthening": "требовать нового закрепления на каждом шаге внутри одного согласованного прохода",
+      "pair_count": 7
+    },
+    {
+      "id": "F05",
+      "statement": "Проверенные байты одного согласованного получения используются повторно; метаданные строятся из них, а не из повторного чтения по именам.",
+      "coverage_kind": "rule",
+      "base_evidence": "G05.02",
+      "permits": "переиспользовать уже проверенные байты одного согласованного получения",
+      "forbids_overreach": "перечитывать меняющееся дерево по именам и выдавать это за тот же снимок",
+      "forbids_overstrengthening": "требовать повторного чтения ради каждого производного документа",
+      "pair_count": 19
+    },
+    {
+      "id": "F06",
+      "statement": "Когда выбранный контракт требует отдельного получения для нового запроса/контекста, архив, replay или совпавшие байты его не заменяют; отсутствующее отмечается как невыполненное.",
+      "coverage_kind": "note",
+      "base_evidence": "N5",
+      "permits": "выполнять отдельное получение, когда этого требует выбранный контракт",
+      "forbids_overreach": "заменять архивом, replay или совпавшими байтами предписанное новое получение",
+      "forbids_overstrengthening": "объявлять отсутствующее наблюдение успешным или равным выполненному",
+      "pair_count": 2
+    },
+    {
+      "id": "F07",
+      "statement": "Запись проверки, новый идентификатор или журнал не доказывают однократность внешнего действия и не заменяют полномочие и исполнителя.",
+      "coverage_kind": "note",
+      "base_evidence": "N2",
+      "permits": "фиксировать факт проверки и потребление request внутри своей области",
+      "forbids_overreach": "выводить из этого однократность внешнего действия, разрешение или исполнение",
+      "forbids_overstrengthening": "объявлять проверку бесполезной только потому, что она не является действием",
+      "pair_count": 4
+    },
+    {
+      "id": "F08",
+      "statement": "Согласованный старый снимок или найденное новое состояние не становятся автоматически ожидаемым текущим; при неизвестном исходе — остановка без слепого повторения.",
+      "coverage_kind": "note",
+      "base_evidence": "N3",
+      "permits": "опираться на внешне заданное ожидаемое текущее состояние",
+      "forbids_overreach": "принимать найденное новое состояние, старый снимок или новую дату за ожидаемое текущее",
+      "forbids_overstrengthening": "запрещать согласованный recovery или read-only проверку исторического снимка",
+      "pair_count": 14
+    },
+    {
+      "id": "F09",
+      "statement": "Ошибка, недоступность, прерывание и частичный результат не превращаются в успех; неподдержанная проверка блокирует затронутый переход.",
+      "coverage_kind": "rule",
+      "base_evidence": "D09",
+      "permits": "останавливать затронутый переход и сохранять диагностику",
+      "forbids_overreach": "превращать ошибку, частичный результат или прерывание в успех",
+      "forbids_overstrengthening": "требовать отказа от всего направления из-за одного локального сбоя",
+      "pair_count": 22
+    },
+    {
+      "id": "F10",
+      "statement": "Проверенный известный набор не доказывает глобальную полноту; отсутствующее наблюдение не считается отсутствием ограничений.",
+      "coverage_kind": "rule",
+      "base_evidence": "G07",
+      "permits": "ограничивать вывод проверенным известным набором",
+      "forbids_overreach": "объявлять глобальную полноту по пройденной проверке набора",
+      "forbids_overstrengthening": "отказываться от полезного вывода в проверенной области без оснований",
+      "pair_count": 24
+    },
+    {
+      "id": "F11",
+      "statement": "Неизвестный тип, событие или обработчик не объявляется отсутствием ограничения и не отбрасывается как посторонний.",
+      "coverage_kind": "rule",
+      "base_evidence": "D08",
+      "permits": "разбирать неизвестное/неподдержанное как отдельное состояние",
+      "forbids_overreach": "объявлять неизвестный тип или отсутствующий обработчик отсутствием ограничения",
+      "forbids_overstrengthening": "молча отбрасывать постороннюю запись как несуществующую",
+      "pair_count": 18
+    },
+    {
+      "id": "F12",
+      "statement": "Проверенный namespace и схема не разрешают публикацию фактического private-содержимого; вынос идёт по согласованной проекции без raw-данных по умолчанию.",
+      "coverage_kind": "rule",
+      "base_evidence": "D09",
+      "permits": "держать private-содержимое вне публикации и передавать согласованную проекцию",
+      "forbids_overreach": "выводить разрешение публикации из allowlist, схемы или метки safe",
+      "forbids_overstrengthening": "обещать автоматическое распознавание секретов или запрещать любой отчёт",
+      "pair_count": 30
+    },
+    {
+      "id": "F13",
+      "statement": "Версии и зависимости разрешаются точно, без выбора latest, fallback или подстановки удобной ревизии.",
+      "coverage_kind": "rule",
+      "base_evidence": "D07",
+      "permits": "разрешать точные версии и зависимости, включая обязательные транзитивные",
+      "forbids_overreach": "выбирать latest, fallback или удобную подстановку ревизии",
+      "forbids_overstrengthening": "требовать точной версии там, где контракт явно допускает диапазон",
+      "pair_count": 15
+    },
+    {
+      "id": "F14",
+      "statement": "Результат относится к наблюдённым байтам/состояниям: одновременное изменение входов не исключается, атомарность не обещается, хэш перед загрузкой не есть атомарная загрузка.",
+      "coverage_kind": "note",
+      "base_evidence": "N6",
+      "permits": "относить результат к наблюдённым байтам и состояниям",
+      "forbids_overreach": "обещать атомарность, отсутствие конкурентных изменений или неизменность на интервале",
+      "forbids_overstrengthening": "запрещать вывод в наблюдённой области из-за одной лишь теоретической возможности изменения",
+      "pair_count": 29
+    },
+    {
+      "id": "F15",
+      "statement": "Исполнение команды, согласованный отчёт или пройденный тест не равны успеху, истинности наблюдения или реальному поведению.",
+      "coverage_kind": "rule",
+      "base_evidence": "W05",
+      "permits": "различать запись, согласованность и фактическое исполнение",
+      "forbids_overreach": "выводить реальное поведение из отчёта, теста или согласованного bundle",
+      "forbids_overstrengthening": "объявлять согласованную запись бесполезной: она подтверждает ровно записанное",
+      "pair_count": 19
+    },
+    {
+      "id": "F16",
+      "statement": "Самооценка, structural locator и review владельца не выдаются за независимую проверку смысла; отсутствие review фиксируется явно.",
+      "coverage_kind": "rule",
+      "base_evidence": "PR04.01",
+      "permits": "называть уровень review по факту и сохранять его отсутствие",
+      "forbids_overreach": "объявлять самооценку или structural locator независимой проверкой",
+      "forbids_overstrengthening": "требовать независимого review там, где согласованный профиль его не предусматривает",
+      "pair_count": 5
+    },
+    {
+      "id": "F17",
+      "statement": "Готовность, выпуск, экспорт, активация и допуск — отдельные состояния; зелёный слой не даёт общего допуска.",
+      "coverage_kind": "rule",
+      "base_evidence": "C09",
+      "permits": "держать готовность, выпуск, экспорт, активацию и допуск раздельными",
+      "forbids_overreach": "выводить разрешение или готовность из зелёного слоя, approval компонента или количества тестов",
+      "forbids_overstrengthening": "запрещать подготовительные действия, не являющиеся выпуском или активацией",
+      "pair_count": 55
+    },
+    {
+      "id": "F18",
+      "statement": "Поддержанная локальная платформа/профиль не доказывают универсальной совместимости или переносимости.",
+      "coverage_kind": "rule",
+      "base_evidence": "W02",
+      "permits": "ограничивать вывод поддержанной платформой и профилем",
+      "forbids_overreach": "объявлять универсальную совместимость или переносимость",
+      "forbids_overstrengthening": "требовать переносимости от сущности, которая явно объявлена локальной",
+      "pair_count": 15
+    },
+    {
+      "id": "F19",
+      "statement": "История и прежние связки не являются активной конфигурацией и не наследуют полномочия в новой среде.",
+      "coverage_kind": "rule",
+      "base_evidence": "W06c",
+      "permits": "сохранять историю и прежние связки как контекст",
+      "forbids_overreach": "наследовать полномочия или активировать конфигурацию из истории",
+      "forbids_overstrengthening": "удалять историю или считать её бесполезной после появления новой связки",
+      "pair_count": 9
+    },
+    {
+      "id": "F20",
+      "statement": "Количество файлов, тестов и артефактов не доказывает покрытие, завершение или готовность.",
+      "coverage_kind": "rule",
+      "base_evidence": "W02",
+      "permits": "учитывать объявленные пределы как границу допустимого входа",
+      "forbids_overreach": "выводить покрытие, готовность, производительность или долговечность из количества/соответствия лимиту",
+      "forbids_overstrengthening": "запрещать работу при отсутствии SLA или квоты",
+      "pair_count": 6
+    },
+    {
+      "id": "F21",
+      "statement": "Объявленные числовые/объёмные пределы ограничивают вход и блокируют превышение, но не обещают производительность, атомарность, сохранность при сбое или поддержку моделей.",
+      "coverage_kind": "note",
+      "base_evidence": "N7",
+      "permits": "принимать числовые пределы как границы реализации, блокирующие превышение",
+      "forbids_overreach": "обещать производительность, атомарность или сохранность при сбое",
+      "forbids_overstrengthening": "обрезать вход или выдавать частичную обработку за успех",
+      "pair_count": 5
+    },
+    {
+      "id": "F22",
+      "statement": "Действующие ограничения применяются совокупно и точно в своей области; дата, новое одобрение или ревизия не снимают их, а lift относится только к указанному запрету.",
+      "coverage_kind": "rule",
+      "base_evidence": "G07",
+      "quote": "Известные restrict/revoke действуют совокупно в точной области; новая дата,",
+      "permits": "применять действующие ограничения совокупно и точно в их области",
+      "forbids_overreach": "снимать запрет новой датой, одобрением, ревизией или снятием другого запрета",
+      "forbids_overstrengthening": "распространять один запрет на несвязанные области или требовать глобальной полноты для его учёта",
+      "pair_count": 2,
+      "added_in_this_review": true
+    },
+    {
+      "id": "F23",
+      "statement": "История и записи сохраняются неизменными; документальная коррекция не меняет исходные байты, семантическая требует отдельного разрешённого процесса.",
+      "coverage_kind": "rule",
+      "base_evidence": "G07",
+      "quote": "старую запись не редактировать как будто она всегда была новой",
+      "permits": "сохранять историю неизменной и различать документальную и семантическую коррекцию",
+      "forbids_overreach": "редактировать прежнюю запись как будто она всегда была новой",
+      "forbids_overstrengthening": "запрещать любую коррекцию: согласованный процесс коррекции существует",
+      "pair_count": 2,
+      "added_in_this_review": true
+    }
+  ],
+  "pairs": [
+    {
+      "path": "agent_system/specification/ent-0003/r0002/usage.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "6fee4bc86e53a01bdfc508b0b71946330a2f51961d19eb38b819bc180ec6c77f",
+      "verdict": "narrower",
+      "note": "block speaks about schema/URI retrieval, not about hash or role labels"
+    },
+    {
+      "path": "agent_system/specification/ent-0003/r0002/usage.md",
+      "block": 2,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "3c90c36a697f527deba42b7d18609a4b59849bdddad948fccc1642813739e5ad",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0003/r0002/usage.md",
+      "block": 3,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "642c1ca2f9f1a7263f530af4af2dfd4a7d4137c773eaee9767b62f8f6902011a",
+      "verdict": "narrower",
+      "note": "block limits name portability, not observation atomicity"
+    },
+    {
+      "path": "agent_system/specification/ent-0003/r0002/usage.md",
+      "block": 4,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "0eb13eea0ddd629fc094c06c4265c8247c874beb21dde75d5d3ae671204e919e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0003/r0002/usage.md",
+      "block": 4,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "0eb13eea0ddd629fc094c06c4265c8247c874beb21dde75d5d3ae671204e919e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0003/r0002/usage.md",
+      "block": 4,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "0eb13eea0ddd629fc094c06c4265c8247c874beb21dde75d5d3ae671204e919e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0003/r0002/usage.md",
+      "block": 6,
+      "family": "F04",
+      "declared_family": "F04",
+      "block_sha256": "8790b844f485d5905dc1327659fb9b616c525f5f00205d9ea34124eb418459f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0003/r0002/usage.md",
+      "block": 6,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "8790b844f485d5905dc1327659fb9b616c525f5f00205d9ea34124eb418459f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 1,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "05e9fd3e9fbb3b385f8ecfa7b5d6b25eaba15f3f9e84373d4849464050bcba9f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 3,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "d06be5de6d468af1ac9f77bf6429a167ef52ed53cbb630c3eb5b0fbbf5b477d2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 5,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "4d60e9d78f4297411617ccf6d4129c8f5b07fa48db9010dd9658d7eae765a28e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 6,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "871e8fdead96ef1ef833b956fde03e0c7a017d913e4f12160a5a751da5ce2b67",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 7,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "2f771ecb7fa1b1e452fbc99eceebeaa7dcb039887ef5de54e77f08c4e26cb364",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 7,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "2f771ecb7fa1b1e452fbc99eceebeaa7dcb039887ef5de54e77f08c4e26cb364",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 7,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "2f771ecb7fa1b1e452fbc99eceebeaa7dcb039887ef5de54e77f08c4e26cb364",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 8,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "3b5d284a8165ef48f8ddf6ae1eec1e7a940fea00f89f3c8f69456e8e10b56789",
+      "verdict": "narrower",
+      "note": "block speaks about package provenance, not file hashes"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 9,
+      "family": "F04",
+      "declared_family": "F04",
+      "block_sha256": "8790b844f485d5905dc1327659fb9b616c525f5f00205d9ea34124eb418459f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0004/r0002/usage.md",
+      "block": 9,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "8790b844f485d5905dc1327659fb9b616c525f5f00205d9ea34124eb418459f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 1,
+      "family": "F04",
+      "declared_family": "F04",
+      "block_sha256": "11200215d1c0a503ef07ebad5c88e25b4e4d4e803b1ed70f92c5cf1888bfb54d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 2,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "de8617b9193f6dfef925a75cbc1a8716b400b48a5f375ab76a220716cb1c448a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 4,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "6bdce099643754aac73cf6488140c8858ca3248526f9efd9dda1e2f3e4c91c96",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 4,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "6bdce099643754aac73cf6488140c8858ca3248526f9efd9dda1e2f3e4c91c96",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 5,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "a872632f967ffb322eb849a7bafcef5b6727fd6169ac2920dda5bcb95830746a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 5,
+      "family": "F04",
+      "declared_family": "F04",
+      "block_sha256": "a872632f967ffb322eb849a7bafcef5b6727fd6169ac2920dda5bcb95830746a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 6,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "5a595979879d91490c81057ce7c10199735653e4869590c3d9e9ccbd9a31a1b5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 7,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "a24bc28e026f0399af4ba213649973fdc221e5a0b9b8d1b2794fa321c8ec4906",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 7,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "a24bc28e026f0399af4ba213649973fdc221e5a0b9b8d1b2794fa321c8ec4906",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 8,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "f8a0c3e0578c50edb922917ea150f795c2fb06f0894116fe11f244a293cfcaa5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 9,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "43f9762c1e77141f01747f21166ac9dfb393bc7a30b080e9f5a9e809bfb78f42",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 9,
+      "family": "F21",
+      "declared_family": "F21",
+      "block_sha256": "43f9762c1e77141f01747f21166ac9dfb393bc7a30b080e9f5a9e809bfb78f42",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/adapters/ent-0005/r0003/usage.md",
+      "block": 10,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "9ae2299069355d3720e59fb9f71566daca52669cd9e323b5f79ea65b03e6fa84",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "657e5fceaf8194d4fc51070248a059b3edffe2921514fc85fa84b6bc45823b14",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "657e5fceaf8194d4fc51070248a059b3edffe2921514fc85fa84b6bc45823b14",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 3,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "27480310088d6281bc95f981f0a0ac22b97f4852372c35cb8c8677928ceec257",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 3,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "27480310088d6281bc95f981f0a0ac22b97f4852372c35cb8c8677928ceec257",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 4,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "a4a063c078019a88ecb6e99b2e8b8437ab4f6a28e11cbbdbc3f75b625b99e668",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 4,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "a4a063c078019a88ecb6e99b2e8b8437ab4f6a28e11cbbdbc3f75b625b99e668",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 6,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "6220f927cff1e7159520b08e363eec2a01165aa03235690d2e287f6299922469",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 7,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "05bb74a4146bbe318e0d44b3ad6363ec03ff79e16e22f4d28d985b259ce2bca2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 7,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "05bb74a4146bbe318e0d44b3ad6363ec03ff79e16e22f4d28d985b259ce2bca2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 7,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "05bb74a4146bbe318e0d44b3ad6363ec03ff79e16e22f4d28d985b259ce2bca2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 8,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "833442fefdea3864cc99431041a3ca5ee95012213a3b01b6ba454e75b99eeab2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 9,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "e4e900d4c6f80dd322dc2a9a172bde457308110fa298238b5e0d24ca627a43f4",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 9,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "e4e900d4c6f80dd322dc2a9a172bde457308110fa298238b5e0d24ca627a43f4",
+      "verdict": "narrower",
+      "note": "block denies physical chain traversal, not snapshot atomicity"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 11,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "4621e9ef808f228e35212ca932ee92fc6ec5bfe1b3962d2999e24d202d217d31",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 12,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "8dba4a738752781419cc1ab050e0a3f3344de0ea7d157e8f3df81af19ef61853",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 13,
+      "family": "F21",
+      "declared_family": "F21",
+      "block_sha256": "c046409d04267cced6c013cb8f8d5b4192ab4fb126b7e03171e07e8ec744c172",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0006/r0003/usage.md",
+      "block": 15,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "17f1bbbfb2bdd909bbd4e876f361ffa8b3f264f543eae4c46cbe32d3b5baa7f3",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 3,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "7d49f71dae989ed2d8e2a38cbdc2ba5ddf8db2b1349f823e9b12ea60232c60fd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 4,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "b63a0ec1f7d57d8f7934ce48897100487d390c36504adaf83d20753f8d10af06",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 5,
+      "family": "F22",
+      "declared_family": "F03",
+      "block_sha256": "76f5d9de216b28a65a83183afdea02219bf20fa29badb37ef65ec4a481bc9820",
+      "verdict": "misassigned",
+      "note": "reassigned to F22"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 6,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "9b2b41f677f73a9107538e32077a0c30004ecff7b9794e672dd0bba9a00f8ed5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 7,
+      "family": "F23",
+      "declared_family": "F11",
+      "block_sha256": "8b5ab960eb09137bb6cae2a5beaeb2e899e74f59b541a20e4a55c99edf1b7225",
+      "verdict": "misassigned",
+      "note": "reassigned to F23"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 9,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "08b5cd478f59ae01dd0acdf5e89ccfa3ccb610b1c3275b37bdcaba030725f935",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 9,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "08b5cd478f59ae01dd0acdf5e89ccfa3ccb610b1c3275b37bdcaba030725f935",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 10,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "e93efae6cee9ab75cea06ba1298e528fa588bedeb046d8b0515b7d74f190671d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 10,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "e93efae6cee9ab75cea06ba1298e528fa588bedeb046d8b0515b7d74f190671d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 10,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "e93efae6cee9ab75cea06ba1298e528fa588bedeb046d8b0515b7d74f190671d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0007/r0001/usage.md",
+      "block": 10,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "e93efae6cee9ab75cea06ba1298e528fa588bedeb046d8b0515b7d74f190671d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "20f9c7051dc1b259ed76488a50d4cb9193fa50b4cb1d6036a0377234c1662b81",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 1,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "20f9c7051dc1b259ed76488a50d4cb9193fa50b4cb1d6036a0377234c1662b81",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 1,
+      "family": "F20",
+      "declared_family": "F20",
+      "block_sha256": "20f9c7051dc1b259ed76488a50d4cb9193fa50b4cb1d6036a0377234c1662b81",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 2,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "0e85d1abbf453155aca8be08031d69e346b3f4718b7607a83e83de0baf99b884",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 3,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "800170d0f9103abaf3daecbdb2a9b6fd4bcef7b97aeb05de525c0bce08464b98",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 4,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "95c9604a02284d0cfa5fe0c29395b21352593820f0a3594da2de62fe784cfab7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 4,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "95c9604a02284d0cfa5fe0c29395b21352593820f0a3594da2de62fe784cfab7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 5,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "464279fc1a6d3e2221e60383d9a28460b3be5f26bc4cd54f6d1b9fd4763c8b7f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 5,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "464279fc1a6d3e2221e60383d9a28460b3be5f26bc4cd54f6d1b9fd4763c8b7f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 6,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "3d513ae962d0424e81b10c8e768a3cd38a5b4138d0f401cecf001d660d9234e9",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 6,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "3d513ae962d0424e81b10c8e768a3cd38a5b4138d0f401cecf001d660d9234e9",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 8,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "21436765dcedf22c4ca78f67aed0212302359b2d5415eaa7ce9f02fdba826bb2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 8,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "21436765dcedf22c4ca78f67aed0212302359b2d5415eaa7ce9f02fdba826bb2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 8,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "21436765dcedf22c4ca78f67aed0212302359b2d5415eaa7ce9f02fdba826bb2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 11,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "0efc6db0fdd816bdcc521d5c5494fffa34a33e9cd2eba50a1d422fe372f394f0",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 11,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "0efc6db0fdd816bdcc521d5c5494fffa34a33e9cd2eba50a1d422fe372f394f0",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 13,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "a6461bb1d3da89ab5eb719e3b3a5bdf573131858ed2bc5c3ac6e4658141600a0",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 14,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "4632cf3601dd71415edc66dea1e950d177861e0e506008732aaaede1efdcc2d8",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 14,
+      "family": "F16",
+      "declared_family": "F16",
+      "block_sha256": "4632cf3601dd71415edc66dea1e950d177861e0e506008732aaaede1efdcc2d8",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 14,
+      "family": "F20",
+      "declared_family": "F20",
+      "block_sha256": "4632cf3601dd71415edc66dea1e950d177861e0e506008732aaaede1efdcc2d8",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 15,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "358f55ba96fb71a385e5dcd8e67af6a1cb724cca039e0618254c09b54ff96415",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 15,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "358f55ba96fb71a385e5dcd8e67af6a1cb724cca039e0618254c09b54ff96415",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 15,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "358f55ba96fb71a385e5dcd8e67af6a1cb724cca039e0618254c09b54ff96415",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 15,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "358f55ba96fb71a385e5dcd8e67af6a1cb724cca039e0618254c09b54ff96415",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 17,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "ee34fcf641d89c87a3cbd0e303710cc1e0c877d3422040d74aae533fcee48c7f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/specification/ent-0008/r0001/usage.md",
+      "block": 17,
+      "family": "F21",
+      "declared_family": "F21",
+      "block_sha256": "ee34fcf641d89c87a3cbd0e303710cc1e0c877d3422040d74aae533fcee48c7f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "132067b61c712ea6e486da38b46f6f06e7f3082b49e7c9d0d72bee3fe426b487",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 1,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "132067b61c712ea6e486da38b46f6f06e7f3082b49e7c9d0d72bee3fe426b487",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "132067b61c712ea6e486da38b46f6f06e7f3082b49e7c9d0d72bee3fe426b487",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 2,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "67be5180500cbf496678e1cb869325521befb38059239c21cc395325d1c8341c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 2,
+      "family": "F04",
+      "declared_family": "F04",
+      "block_sha256": "67be5180500cbf496678e1cb869325521befb38059239c21cc395325d1c8341c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 3,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "a9e17a5a68c87e632a0c07d52ffc6c37e9b8d20d377cc5d1f5ebd6ffefe78a3b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 3,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "a9e17a5a68c87e632a0c07d52ffc6c37e9b8d20d377cc5d1f5ebd6ffefe78a3b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 4,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "9410aeb26883f41dfd78611d82dacdc619e6dfe7b373417db0d4b88afbe44d7a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 6,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "93ed4b17a00778aa75ffd4c617fcc1a939ad692a672c75d37fad92f3689e1c41",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 6,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "93ed4b17a00778aa75ffd4c617fcc1a939ad692a672c75d37fad92f3689e1c41",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 8,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "259372c888b42c0a1a006bf703fd24a7f4df367923337ce9afa8c954d591b5a1",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 9,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "5a54a66aaa6f2f2667c7352a2fa5bb08225b92ca6ecc30c659cc38d9c2bd0f29",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 9,
+      "family": "F21",
+      "declared_family": "F21",
+      "block_sha256": "5a54a66aaa6f2f2667c7352a2fa5bb08225b92ca6ecc30c659cc38d9c2bd0f29",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 10,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "a037f1a8650ee8bc0534f719183101e3d4b5c5a9a0ed463cde55370fa542dfef",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 10,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "a037f1a8650ee8bc0534f719183101e3d4b5c5a9a0ed463cde55370fa542dfef",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 11,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "21b9768967a0bbf8f2d0ee489b43da0f26c4da9d8c29d234a398474ae342a843",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 11,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "21b9768967a0bbf8f2d0ee489b43da0f26c4da9d8c29d234a398474ae342a843",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0001/usage.md",
+      "block": 11,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "21b9768967a0bbf8f2d0ee489b43da0f26c4da9d8c29d234a398474ae342a843",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "3f3c207617acd9c2520f8b81627a8ff4b76d08b7c34d9a3e0c16414e2438582b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "3f3c207617acd9c2520f8b81627a8ff4b76d08b7c34d9a3e0c16414e2438582b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 1,
+      "family": "F04",
+      "declared_family": "F04",
+      "block_sha256": "3f3c207617acd9c2520f8b81627a8ff4b76d08b7c34d9a3e0c16414e2438582b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 2,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "9135eb032f6ad49f0bfbf87f84a93872032b6b7280d472673bb9d68633d997fe",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 4,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "35151b04046070370effabbb81671697b37fdcee70593617cc335e0b4d9b5bb5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 4,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "35151b04046070370effabbb81671697b37fdcee70593617cc335e0b4d9b5bb5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 5,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "829d42377477a746d7b9d77b08a3fda665db61eb11639679b821ea7058089942",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 6,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "e60f9ca2b4d6de98933f9957ab48f0894774acfd7435e7cc648d21a4eff0397b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 7,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "cd55ddfe5ca2bab853bcbae526d8cda9a924c81040b39cedf90cf7fb99cac4db",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 7,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "cd55ddfe5ca2bab853bcbae526d8cda9a924c81040b39cedf90cf7fb99cac4db",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 8,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "9085ebb47179359383b90a360faef0c85d8a8ba37abef3fa91ee398f07279d01",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 9,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "4ae779816f55c6958b5dc506d7067fb64528fa9380f400eceb25aaafb615f783",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 9,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "4ae779816f55c6958b5dc506d7067fb64528fa9380f400eceb25aaafb615f783",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 9,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "4ae779816f55c6958b5dc506d7067fb64528fa9380f400eceb25aaafb615f783",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 9,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "4ae779816f55c6958b5dc506d7067fb64528fa9380f400eceb25aaafb615f783",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0009/r0002/usage.md",
+      "block": 9,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "4ae779816f55c6958b5dc506d7067fb64528fa9380f400eceb25aaafb615f783",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "74dcb32ccbdb8a9f24b47e25cff097c3a57b57487c832fa362338f1286d8128a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 1,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "74dcb32ccbdb8a9f24b47e25cff097c3a57b57487c832fa362338f1286d8128a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 3,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "9a71604092d95a9bc75a184b46ef15bdd3ec602099d73ec8ce066783780de92e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 3,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "9a71604092d95a9bc75a184b46ef15bdd3ec602099d73ec8ce066783780de92e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 4,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "c6a563fa3f5d33415d7faf975d26fa5cebaf5d76354387bd9c4696abc3dc73f8",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 6,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "0e44dd70c3e37d648668368fded38bb0a7133d41e96cd6cfc34e6f97db3e2b3c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 6,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "0e44dd70c3e37d648668368fded38bb0a7133d41e96cd6cfc34e6f97db3e2b3c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 7,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "16d5626aadc11ddd833502c6fd816139977b57d3b7322b4735362c4573e74d4a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 8,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "ecc7e24db6d1dde5cfcaadfc72783b54dcfcecbe2a678c8925d7075fd9b5c0a7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 9,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "04453d44eeccff71af5187b831a661faa918c130fa3e06dfa6dfde76119fad9e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 9,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "04453d44eeccff71af5187b831a661faa918c130fa3e06dfa6dfde76119fad9e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 10,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "3be4b2fa1ac0531b694d153335d598b9d8ae3c84e50127092a72e8b99fc30305",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 11,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "938e6b2aa5c0513480a95c586716c6b9f5684b65361348756966ba750bd3caa9",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 12,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "913b18c249d0a1df1d01a62458000a5b000b36a081ad30f8856e89f0409aeb7e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 12,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "913b18c249d0a1df1d01a62458000a5b000b36a081ad30f8856e89f0409aeb7e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 12,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "913b18c249d0a1df1d01a62458000a5b000b36a081ad30f8856e89f0409aeb7e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0010/r0001/usage.md",
+      "block": 13,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "d92f628d4a33162fe27d23af39a48f34ce39ee1d93d2e75d5905b79eadefb0ae",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 0,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "a1658877743d5b70c1d2a4e562b84528a742cc199f98c7b9b4de67344d4ae59c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 0,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "a1658877743d5b70c1d2a4e562b84528a742cc199f98c7b9b4de67344d4ae59c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "9a66c32b4e47fa9d5b48f11eb0658c46b2ae9a59c7132efe6ce99318f4f825f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "9a66c32b4e47fa9d5b48f11eb0658c46b2ae9a59c7132efe6ce99318f4f825f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 1,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "9a66c32b4e47fa9d5b48f11eb0658c46b2ae9a59c7132efe6ce99318f4f825f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 1,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "9a66c32b4e47fa9d5b48f11eb0658c46b2ae9a59c7132efe6ce99318f4f825f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 1,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "9a66c32b4e47fa9d5b48f11eb0658c46b2ae9a59c7132efe6ce99318f4f825f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "9a66c32b4e47fa9d5b48f11eb0658c46b2ae9a59c7132efe6ce99318f4f825f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 1,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "9a66c32b4e47fa9d5b48f11eb0658c46b2ae9a59c7132efe6ce99318f4f825f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 2,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "cfba427e921a25368493b9355ff0477f9823cee3f575eaf897427c7a3a1dd9e9",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0001/prompt.md",
+      "block": 2,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "cfba427e921a25368493b9355ff0477f9823cee3f575eaf897427c7a3a1dd9e9",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "45c57d38ea835c1ea9cca92d16b29faade24927b55817ac60769d2451c4c3c83",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+      "block": 1,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "45c57d38ea835c1ea9cca92d16b29faade24927b55817ac60769d2451c4c3c83",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+      "block": 1,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "45c57d38ea835c1ea9cca92d16b29faade24927b55817ac60769d2451c4c3c83",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+      "block": 1,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "45c57d38ea835c1ea9cca92d16b29faade24927b55817ac60769d2451c4c3c83",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "45c57d38ea835c1ea9cca92d16b29faade24927b55817ac60769d2451c4c3c83",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+      "block": 1,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "45c57d38ea835c1ea9cca92d16b29faade24927b55817ac60769d2451c4c3c83",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/procedure.md",
+      "block": 1,
+      "family": "F20",
+      "declared_family": "F20",
+      "block_sha256": "45c57d38ea835c1ea9cca92d16b29faade24927b55817ac60769d2451c4c3c83",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+      "block": 0,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "66309fd981fc5163571a943344e4f59e73b5e666f4724e59731264ad0fb5eece",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+      "block": 0,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "66309fd981fc5163571a943344e4f59e73b5e666f4724e59731264ad0fb5eece",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "c9927cb2b8d5d55b47cbe7a60631be8ecf2aae6ed8abee450273147fe5d23d88",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "c9927cb2b8d5d55b47cbe7a60631be8ecf2aae6ed8abee450273147fe5d23d88",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+      "block": 1,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "c9927cb2b8d5d55b47cbe7a60631be8ecf2aae6ed8abee450273147fe5d23d88",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "c9927cb2b8d5d55b47cbe7a60631be8ecf2aae6ed8abee450273147fe5d23d88",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/prompt.md",
+      "block": 1,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "c9927cb2b8d5d55b47cbe7a60631be8ecf2aae6ed8abee450273147fe5d23d88",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "e2818d1c7d004430e360a0f639c6aacab4f6ad597e0ad12eef57e4be15962705",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 1,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "e2818d1c7d004430e360a0f639c6aacab4f6ad597e0ad12eef57e4be15962705",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 1,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "e2818d1c7d004430e360a0f639c6aacab4f6ad597e0ad12eef57e4be15962705",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 2,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "3b00fe2e667c4afd6bb7b27caae3336b057131005a2fa777fb6dbfd4429aae87",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 2,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "3b00fe2e667c4afd6bb7b27caae3336b057131005a2fa777fb6dbfd4429aae87",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 3,
+      "family": "F16",
+      "declared_family": "F16",
+      "block_sha256": "01a01382592faa8189b13c92cf326432140c81274a02585a0e2438c1175ea780",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 3,
+      "family": "F20",
+      "declared_family": "F20",
+      "block_sha256": "01a01382592faa8189b13c92cf326432140c81274a02585a0e2438c1175ea780",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 4,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "252e546646c34b57afdb8bbae03291798717b519a13ce5fcfc8e857db01e7331",
+      "verdict": "narrower",
+      "note": "block speaks about private CAS persistence, not release gates"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 6,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "400f469eca4773239fa77ab2403e4d0f96760dc43331ea11490987fdf5a80e40",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+      "block": 7,
+      "family": "F21",
+      "declared_family": "F21",
+      "block_sha256": "312627fbd988a55a39929164b9b8ed673679a088b9119cc318561a90ceac5718",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 0,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "2bcbe54d2137d41ddaef5c9e40c7397570275e8bb18afdc91edbc2a4eb863500",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 2,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "44aea8ad9bd462635ccdab027e759213a9fbae2911bb7567feb0454157e8509b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 4,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "aaaf89b560f15ab01c2b13c26ac19eb9c59ece54d070e661d3fe023490106626",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 5,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "df950c0c7e97692362c42d19704c09ae1433728fb24cdfa3857f45ed173852c7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 5,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "df950c0c7e97692362c42d19704c09ae1433728fb24cdfa3857f45ed173852c7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 6,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "a51df67df55b203985a9d8f07692f310cc05f5bbd301e97f3af57329c1ef0efc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 8,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "5b3f896424747cbeeb7ae1fbd38064b315326110fd32b6fe0c18afd48646f588",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 8,
+      "family": "F16",
+      "declared_family": "F16",
+      "block_sha256": "5b3f896424747cbeeb7ae1fbd38064b315326110fd32b6fe0c18afd48646f588",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 8,
+      "family": "F20",
+      "declared_family": "F20",
+      "block_sha256": "5b3f896424747cbeeb7ae1fbd38064b315326110fd32b6fe0c18afd48646f588",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 10,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "3aff16056f6af3036d89a69a0a26dac2a5cda6011bf9c60c3807256a9ec688f5",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 11,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "1ee55fc733256b140ee3b358840f742ed6ccf4abe308f4060c3bed19fa00cabf",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 11,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "1ee55fc733256b140ee3b358840f742ed6ccf4abe308f4060c3bed19fa00cabf",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 11,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "1ee55fc733256b140ee3b358840f742ed6ccf4abe308f4060c3bed19fa00cabf",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 12,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "98b96002232e43c2896733db9ef1e957d73b4f8f5bdf2158d0f761b83d544ba3",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 13,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "7ff375f838837b40fb5a60b7874cceab5c101f80d34dec45d03f06114d0d7a9c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 13,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "7ff375f838837b40fb5a60b7874cceab5c101f80d34dec45d03f06114d0d7a9c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 15,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "6db4913f0e3d4a1ecd275d01fdb097c52345ecb28aaa19b357c2fe9a69fda887",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/candidates/ent-0013/r0001/usage.md",
+      "block": 17,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "dd825113d5a6681e3d9074ebd916b70b3868ade6abe9000e28cfff0dc2b7f182",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 0,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "992a6cdaf63c94287d957db4ad0c4d213fa67b44c23d5a643d257a791ae39725",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F13",
+      "block_sha256": "cbc9978246aca35c10a7ca622beeda0207730ab48f7bdc7dc5fec0b4441f4181",
+      "verdict": "misassigned",
+      "note": "reassigned to F17"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "cbc9978246aca35c10a7ca622beeda0207730ab48f7bdc7dc5fec0b4441f4181",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 3,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "1ec3aa41ca0341dba3a5fea86217b72d9b2dbbdf4ff1d99b2e856653c04cf892",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 4,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "e6e16c8d1a78f42ad15965a9d0006106806bad6e3808a5126bba51c08f574cac",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 4,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "e6e16c8d1a78f42ad15965a9d0006106806bad6e3808a5126bba51c08f574cac",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 4,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "e6e16c8d1a78f42ad15965a9d0006106806bad6e3808a5126bba51c08f574cac",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 8,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "db2b418ca7f110197c601d53a7a107dd6529543e2c8ed07b5183fceced126705",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 8,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "db2b418ca7f110197c601d53a7a107dd6529543e2c8ed07b5183fceced126705",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 8,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "db2b418ca7f110197c601d53a7a107dd6529543e2c8ed07b5183fceced126705",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 9,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "9d89178d1603886165918c98f7f8067a99ec156d880c3bff589cf17a6f656a57",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 9,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "9d89178d1603886165918c98f7f8067a99ec156d880c3bff589cf17a6f656a57",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 9,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "9d89178d1603886165918c98f7f8067a99ec156d880c3bff589cf17a6f656a57",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 10,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "89440e11be03cb0f81328a3318cacd08a21597b7a69f0c92aee750cd9f1de6bd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 10,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "89440e11be03cb0f81328a3318cacd08a21597b7a69f0c92aee750cd9f1de6bd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 10,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "89440e11be03cb0f81328a3318cacd08a21597b7a69f0c92aee750cd9f1de6bd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 11,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "1eec645c9802527790ae6e936febb547cdd34e45583dfd3af6749e6bec161371",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 11,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "1eec645c9802527790ae6e936febb547cdd34e45583dfd3af6749e6bec161371",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 13,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "b310343092ddeff3a2ccf05d0602ee497b197c13d36f6301a7ad0dc15c03d21d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 13,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "b310343092ddeff3a2ccf05d0602ee497b197c13d36f6301a7ad0dc15c03d21d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 14,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "38f159d1efb72ccc3dfecf86d053d0fca9a9dca8caa2ae107d3d0b2fb157b0d6",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 14,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "38f159d1efb72ccc3dfecf86d053d0fca9a9dca8caa2ae107d3d0b2fb157b0d6",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 15,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "f2ba0cdea5e68d82c0f9d30210cf4fe15833f31ec9f2c3b8b0284752676b47b4",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+      "block": 18,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "81268c28661eeeac197212821c9574c4c361a52021dd122de8b099e7ac7e859e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "e47a8b3828cb53de2327d2ce7f4694a6837f0ed8e1666b6bb5229390cbea7b2b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "e47a8b3828cb53de2327d2ce7f4694a6837f0ed8e1666b6bb5229390cbea7b2b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 2,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "f42e4cf3334b682f9445ae1549dc8a6cc9bc871c2bbb3b7a115f6a41dd7fef61",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 2,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "f42e4cf3334b682f9445ae1549dc8a6cc9bc871c2bbb3b7a115f6a41dd7fef61",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 2,
+      "family": "F03",
+      "declared_family": "F12",
+      "block_sha256": "f42e4cf3334b682f9445ae1549dc8a6cc9bc871c2bbb3b7a115f6a41dd7fef61",
+      "verdict": "misassigned",
+      "note": "reassigned to F03"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 3,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "b952e1d390a6cbb228b578e1a8aea9606c54f965d156fed103c454bfd4109312",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 3,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "b952e1d390a6cbb228b578e1a8aea9606c54f965d156fed103c454bfd4109312",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 4,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "f4419c2ba1cb62f1103ed2ad5baded1dddb707a5d509f2c4b14e3b74e545db84",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 4,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "f4419c2ba1cb62f1103ed2ad5baded1dddb707a5d509f2c4b14e3b74e545db84",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 4,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "f4419c2ba1cb62f1103ed2ad5baded1dddb707a5d509f2c4b14e3b74e545db84",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 6,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "45bee67375de38edece8ecb9e044e96f2eb53ae63b2cc004b24aed2f7ab56063",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 6,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "45bee67375de38edece8ecb9e044e96f2eb53ae63b2cc004b24aed2f7ab56063",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 7,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "d33d5ecd04851104d9c99c76b9f09df153a27cd1f4313e756e0f5ca73bf5d342",
+      "verdict": "narrower",
+      "note": "block limits composition checking from opaque refs, not ledger completeness"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 7,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "d33d5ecd04851104d9c99c76b9f09df153a27cd1f4313e756e0f5ca73bf5d342",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 7,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "d33d5ecd04851104d9c99c76b9f09df153a27cd1f4313e756e0f5ca73bf5d342",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 8,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "198a114a0ddc7119a5acfd531c03431a320336ad2621924a1c8ba1e5d407e0c7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 9,
+      "family": "F22",
+      "declared_family": "F03",
+      "block_sha256": "e80b827a9ed1c83f43fdfb104208bbfd19db876ac46be63eaf8cc70d5ac8b17e",
+      "verdict": "misassigned",
+      "note": "reassigned to F22"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 9,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "e80b827a9ed1c83f43fdfb104208bbfd19db876ac46be63eaf8cc70d5ac8b17e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 11,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "3267adf956778537de870eb59d1375044990907bd184dc7e2db64e3c59e063fb",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 13,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "1700fa290954621bf2e4a751a510ed3a715039a4e40174e201c12404023a42db",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 13,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "1700fa290954621bf2e4a751a510ed3a715039a4e40174e201c12404023a42db",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 13,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "1700fa290954621bf2e4a751a510ed3a715039a4e40174e201c12404023a42db",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 14,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "8d545220501478890f81564f9924152950502652551af2d024e8ac2a6a1e58fd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+      "block": 14,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "8d545220501478890f81564f9924152950502652551af2d024e8ac2a6a1e58fd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+      "block": 0,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "ee11ab51d8199a5cfb39d880f048154df702a0ba4e0300ddfcfb6795ee5accfc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+      "block": 0,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "ee11ab51d8199a5cfb39d880f048154df702a0ba4e0300ddfcfb6795ee5accfc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+      "block": 0,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "ee11ab51d8199a5cfb39d880f048154df702a0ba4e0300ddfcfb6795ee5accfc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+      "block": 0,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "ee11ab51d8199a5cfb39d880f048154df702a0ba4e0300ddfcfb6795ee5accfc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+      "block": 0,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "ee11ab51d8199a5cfb39d880f048154df702a0ba4e0300ddfcfb6795ee5accfc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+      "block": 1,
+      "family": "F16",
+      "declared_family": "F16",
+      "block_sha256": "fb3b8c1481f09d0a56b375774e79062052e179102de14e4d9a2410f6d04b76bd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0002/procedure.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "fb3b8c1481f09d0a56b375774e79062052e179102de14e4d9a2410f6d04b76bd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "47c30d0f2392f9c40fffb30b79175731dda31c9547472c63eba490876fc3df44",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 1,
+      "family": "F07",
+      "declared_family": "F07",
+      "block_sha256": "47c30d0f2392f9c40fffb30b79175731dda31c9547472c63eba490876fc3df44",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 1,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "47c30d0f2392f9c40fffb30b79175731dda31c9547472c63eba490876fc3df44",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "47c30d0f2392f9c40fffb30b79175731dda31c9547472c63eba490876fc3df44",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 2,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "f917ac5f617666a80018459285db8c165106699268d4d3f9c96dfc8b4d508b0e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 2,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "f917ac5f617666a80018459285db8c165106699268d4d3f9c96dfc8b4d508b0e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 2,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "f917ac5f617666a80018459285db8c165106699268d4d3f9c96dfc8b4d508b0e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 3,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "fe7398aa03c4fc173942eb078c2e5d0371850d47e2fadf01279cb3eb037857bf",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 3,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "fe7398aa03c4fc173942eb078c2e5d0371850d47e2fadf01279cb3eb037857bf",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 4,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "53e1acbf21c3750a9d2c66cff8fd420e859b5dc129ce84aad2071cab58dc4b64",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 4,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "53e1acbf21c3750a9d2c66cff8fd420e859b5dc129ce84aad2071cab58dc4b64",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 4,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "53e1acbf21c3750a9d2c66cff8fd420e859b5dc129ce84aad2071cab58dc4b64",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 5,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "a8e340a8a07df0bcad35860f2efffee7f134674faac073624bd605155bee7709",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 5,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "a8e340a8a07df0bcad35860f2efffee7f134674faac073624bd605155bee7709",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 5,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "a8e340a8a07df0bcad35860f2efffee7f134674faac073624bd605155bee7709",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 5,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "a8e340a8a07df0bcad35860f2efffee7f134674faac073624bd605155bee7709",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 6,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "f1549514f62c0d0420e7b8ddc8885b5c28172ce4646fcd4b85857c1496bb99e2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 6,
+      "family": "F19",
+      "declared_family": "F19",
+      "block_sha256": "f1549514f62c0d0420e7b8ddc8885b5c28172ce4646fcd4b85857c1496bb99e2",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 7,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "259336d66765c1e21f0dd5b3376f0b9dd911204dbc94d1e3bb5b69973fd11600",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 7,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "259336d66765c1e21f0dd5b3376f0b9dd911204dbc94d1e3bb5b69973fd11600",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 8,
+      "family": "F07",
+      "declared_family": "F07",
+      "block_sha256": "28938eb42f5cb67da0315d92b749f76752b99bd46aa427897f0ce4a8a4522f0c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 8,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "28938eb42f5cb67da0315d92b749f76752b99bd46aa427897f0ce4a8a4522f0c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 10,
+      "family": "F07",
+      "declared_family": "F07",
+      "block_sha256": "8fb90dfac84748d7b23d2a9dda5ea94f37432f3f30f2be53a5e3c1f08bb9da6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 10,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "8fb90dfac84748d7b23d2a9dda5ea94f37432f3f30f2be53a5e3c1f08bb9da6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 15,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "6bd1e4210586b23d3a19fca92b3998bc7ff050b9df8e4f0f83c7bdda96958d29",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 15,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "6bd1e4210586b23d3a19fca92b3998bc7ff050b9df8e4f0f83c7bdda96958d29",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 15,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "6bd1e4210586b23d3a19fca92b3998bc7ff050b9df8e4f0f83c7bdda96958d29",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 16,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "9038016f261c181bd7806816338dfe6005e8eb9b89005ca3bcc32a8e6adf3c4e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 16,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "9038016f261c181bd7806816338dfe6005e8eb9b89005ca3bcc32a8e6adf3c4e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/usage.md",
+      "block": 16,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "9038016f261c181bd7806816338dfe6005e8eb9b89005ca3bcc32a8e6adf3c4e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+      "block": 0,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "04606f487746582fba1417ff48416cf889a0f739bd93942099f12922230eaa6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+      "block": 0,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "04606f487746582fba1417ff48416cf889a0f739bd93942099f12922230eaa6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+      "block": 0,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "04606f487746582fba1417ff48416cf889a0f739bd93942099f12922230eaa6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+      "block": 0,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "04606f487746582fba1417ff48416cf889a0f739bd93942099f12922230eaa6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+      "block": 0,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "04606f487746582fba1417ff48416cf889a0f739bd93942099f12922230eaa6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+      "block": 0,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "04606f487746582fba1417ff48416cf889a0f739bd93942099f12922230eaa6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+      "block": 0,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "04606f487746582fba1417ff48416cf889a0f739bd93942099f12922230eaa6c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/permissions/ent-0014/r0003/procedure.md",
+      "block": 1,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "c2013e4a33d8710d74389838d4685e3fbe4574b5c9baf6a53849b0d284fd3cbd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 1,
+      "family": "F03",
+      "declared_family": "F03",
+      "block_sha256": "2cb9f05928381c535db8e3b289eca4bbba925e5783b56fa100cb32234e376327",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "2cb9f05928381c535db8e3b289eca4bbba925e5783b56fa100cb32234e376327",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 2,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "b28b0616ad71691367efe50efc99298a489b9a10c3a99ab325d8a383083d4f77",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 2,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "b28b0616ad71691367efe50efc99298a489b9a10c3a99ab325d8a383083d4f77",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 3,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "6fbe040065f125fa00cecadc291b81062804985e984c5deab9eef479d179f7aa",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 4,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "54f874b6367c56e209043b06a55a501e9959881bd36dfe3eec81ef6dce0abc8c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 4,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "54f874b6367c56e209043b06a55a501e9959881bd36dfe3eec81ef6dce0abc8c",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 5,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "2cf1e1ef09160414bf178d93a0176ee546b6d700199c155d2ff19ae2875692ff",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 7,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "7f100f6cc9c01ddfc57bd0e1590222c3956c4a2bbf9f56a7a2d8fef00a246cbc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 7,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "7f100f6cc9c01ddfc57bd0e1590222c3956c4a2bbf9f56a7a2d8fef00a246cbc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 9,
+      "family": "F07",
+      "declared_family": "F07",
+      "block_sha256": "a6e45b9d372ebd1e800deb546de1f7be114cecfb151b8ca80c84c81a71f02c7b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 9,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "a6e45b9d372ebd1e800deb546de1f7be114cecfb151b8ca80c84c81a71f02c7b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 10,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "e53a1c844cb8ed774018c683db7e9d82141c94ae2eae72d86b411b6a87defef7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 10,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "e53a1c844cb8ed774018c683db7e9d82141c94ae2eae72d86b411b6a87defef7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 14,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "12f9f11becd8e50c4b03297e93e490e9599c0f06f59140845e12de38ef2e0480",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 14,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "12f9f11becd8e50c4b03297e93e490e9599c0f06f59140845e12de38ef2e0480",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 14,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "12f9f11becd8e50c4b03297e93e490e9599c0f06f59140845e12de38ef2e0480",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 15,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "1eb940bb386575b2a9b0cb8fa4477f28cd98337d2e641f70a8d44c045186cefc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 15,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "1eb940bb386575b2a9b0cb8fa4477f28cd98337d2e641f70a8d44c045186cefc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 15,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "1eb940bb386575b2a9b0cb8fa4477f28cd98337d2e641f70a8d44c045186cefc",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 18,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "531e9d0780f5faad0447f3b386c4c548f396a0398d5ac6aebeadf9344a3d185f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 18,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "531e9d0780f5faad0447f3b386c4c548f396a0398d5ac6aebeadf9344a3d185f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0015/r0001/usage.md",
+      "block": 18,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "531e9d0780f5faad0447f3b386c4c548f396a0398d5ac6aebeadf9344a3d185f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 1,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "7f1638e9b24a975d727a993987f1a71d8209840b8ce280bf638063dcfd0aca8a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 2,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "c14ca22761627a982b96774503bf95060d267d05beeee1fcfaf696ace8e3de2f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 2,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "c14ca22761627a982b96774503bf95060d267d05beeee1fcfaf696ace8e3de2f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 3,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "b4743369c1419aec5fa59f92ad326b5ecb6544ee23c5079e8bfb8c060514f805",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 4,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "6c9ce049a14f7d0aa018a5910a4051c3391f82cc7764a9ec04451289de67a7db",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 4,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "6c9ce049a14f7d0aa018a5910a4051c3391f82cc7764a9ec04451289de67a7db",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 5,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "e052967a2b272f1d3681c95d25dbb85cc1cad5d60447c04f9f39006d70026ef7",
+      "verdict": "narrower",
+      "note": "block limits attacker coverage, not observation atomicity"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 5,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "e052967a2b272f1d3681c95d25dbb85cc1cad5d60447c04f9f39006d70026ef7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 6,
+      "family": "F04",
+      "declared_family": "F04",
+      "block_sha256": "2eafaa7dddf63f30bf2d39b8b62698dfe8a6c5685d80040c551db79c55d5de01",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 7,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "7d88519b086f07b7a64309a1c8c03d5e64d86be8f8a6ac9f30d6d1fb95822a5d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 7,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "7d88519b086f07b7a64309a1c8c03d5e64d86be8f8a6ac9f30d6d1fb95822a5d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 8,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "6f4e30d195a98cd12d930aa423a1b4f433824a0451ddd7f11615bccee558370b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 8,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "6f4e30d195a98cd12d930aa423a1b4f433824a0451ddd7f11615bccee558370b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 10,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "f34f57651e33b301bdb505f6c1336579ea14da047270c44a3ee6fbc295d78628",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 10,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "f34f57651e33b301bdb505f6c1336579ea14da047270c44a3ee6fbc295d78628",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 11,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "263bc03bd52166887bd3055886ca35d59318dcb1184e5e5b29d6899b1d66283a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 11,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "263bc03bd52166887bd3055886ca35d59318dcb1184e5e5b29d6899b1d66283a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 12,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "5d9cce92d36f9099293ab99b320359d9690ba3f791b8cbb15a8cb72d28a75687",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 12,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "5d9cce92d36f9099293ab99b320359d9690ba3f791b8cbb15a8cb72d28a75687",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 13,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "7b2b99f6d91846e169422070ec8dd3620a480341f1e1d52be32987f01cd6f6f7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 13,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "7b2b99f6d91846e169422070ec8dd3620a480341f1e1d52be32987f01cd6f6f7",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 16,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "74b7d16a3415c2e3ebecfb73f3d63bab82a7c285d1dfefb3ce36ac179395cc51",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0001/usage.md",
+      "block": 16,
+      "family": "F23",
+      "declared_family": "F19",
+      "block_sha256": "74b7d16a3415c2e3ebecfb73f3d63bab82a7c285d1dfefb3ce36ac179395cc51",
+      "verdict": "misassigned",
+      "note": "reassigned to F23"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0002/usage.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "c2334f1aa37b8eb4587e487e9c493267d54c18790d7616683e3d4363df0a223d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0002/usage.md",
+      "block": 2,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "7fc83cb360e6dc18b2b484c6873f7ae632ebe9debf04748cbc0fb5c8f859e31d",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0002/usage.md",
+      "block": 3,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "4e24a4de420a0e5a1d9173362d9285c8552e7963f5d7f174c422a03b5c668ab9",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0002/usage.md",
+      "block": 4,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "eddd065a07e8ea57d784ff40d84e2ac54a1e46a309704bb209891df49514711f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0002/usage.md",
+      "block": 5,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "3fa34a62f9a32ad5163c3910330dc43883fa8d90a614679180a8a753e5dc0cce",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0002/usage.md",
+      "block": 5,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "3fa34a62f9a32ad5163c3910330dc43883fa8d90a614679180a8a753e5dc0cce",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0002/usage.md",
+      "block": 7,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "3f3f64e57668637558ff1e3b45f442af93c6bffb729c2c04469b9a7c9bc7d395",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/staging/ent-0016/r0002/usage.md",
+      "block": 8,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "96944aef01929ba12ac59587ef98a044fb1d3dae227272e98a1fd77f2983c102",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 1,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "e6ed3da4c318062387ddf3e9628566229f8b8796032e4bcfd2213d5acc798820",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 1,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "e6ed3da4c318062387ddf3e9628566229f8b8796032e4bcfd2213d5acc798820",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 2,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "51b3b07b1b0f17a3a0ce364071083063c11e7e38b78a1c42e24f4971017d6410",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 5,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "42709875d15768c3a81885faa432d1486b6f00bbe12a23b2d410bea1c6b0b8ef",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 5,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "42709875d15768c3a81885faa432d1486b6f00bbe12a23b2d410bea1c6b0b8ef",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 5,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "42709875d15768c3a81885faa432d1486b6f00bbe12a23b2d410bea1c6b0b8ef",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 6,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "0934b8385429355f835af287e4f795c593a172d41429996af67e604ee0c8c73f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 7,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "0c617d04f3e6835de7c198bba70b56c9790d0e4ca0915ffa9141715cbd108127",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 7,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "0c617d04f3e6835de7c198bba70b56c9790d0e4ca0915ffa9141715cbd108127",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 8,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "47e0ab616921876c436d2acd763ae608880855b7f547e294b4f71ba7b64ff8a1",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 8,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "47e0ab616921876c436d2acd763ae608880855b7f547e294b4f71ba7b64ff8a1",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 9,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "fee7175a2613c52923d8cf320fcc0035900f0380711e0c503b87e442da8b34aa",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 9,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "fee7175a2613c52923d8cf320fcc0035900f0380711e0c503b87e442da8b34aa",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 11,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "3d269ae6acad3fc379a41b861fba538a74bf2632d2ecefee4653433d5e151ce4",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/validation/ent-0017/r0001/usage.md",
+      "block": 15,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "1f181e2e4de63f75d40e46eab65799a738893551ee75f799898c1b8906d1f452",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 0,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "64f1dce5e91df448c4024613b0c2a912dc1e301ca777b33e53442e5b83e42a99",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 0,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "64f1dce5e91df448c4024613b0c2a912dc1e301ca777b33e53442e5b83e42a99",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "c27fde41e197c12b94bd8fafae1b5dc6fdfd98a3bdcf8c95a937355bacc22383",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 1,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "c27fde41e197c12b94bd8fafae1b5dc6fdfd98a3bdcf8c95a937355bacc22383",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 1,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "c27fde41e197c12b94bd8fafae1b5dc6fdfd98a3bdcf8c95a937355bacc22383",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 1,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "c27fde41e197c12b94bd8fafae1b5dc6fdfd98a3bdcf8c95a937355bacc22383",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "c27fde41e197c12b94bd8fafae1b5dc6fdfd98a3bdcf8c95a937355bacc22383",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 2,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "41202b089dcd5c6e61996d1d7ed0dcc5845f17d868480907f3ec5157b5edbb38",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 4,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "5716107034dbfda923ae69618cc63d8338c74b0f61d76ab7c2fae503a6612c8f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 5,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "25c5e06122ce731bbf1d4d8646eca7177e61a9cb18e907e37aa47dfb156e1fdd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 5,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "25c5e06122ce731bbf1d4d8646eca7177e61a9cb18e907e37aa47dfb156e1fdd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/procedure.md",
+      "block": 5,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "25c5e06122ce731bbf1d4d8646eca7177e61a9cb18e907e37aa47dfb156e1fdd",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 0,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "a7aca31e467a4e538c4d0adf18062cf7d8ae9fbb2bca1e9eda3e8258d024e74b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 0,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "a7aca31e467a4e538c4d0adf18062cf7d8ae9fbb2bca1e9eda3e8258d024e74b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 1,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "1ab2bd96063ac204d08edb18ad87f2137e8a4a19cf32ea0351e8ac1a42423170",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 1,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "1ab2bd96063ac204d08edb18ad87f2137e8a4a19cf32ea0351e8ac1a42423170",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 2,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "e703cdb290526132c3caa2244e32df7ff4909b08206f4786af2b6705c5e6eb09",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 2,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "e703cdb290526132c3caa2244e32df7ff4909b08206f4786af2b6705c5e6eb09",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 2,
+      "family": "F11",
+      "declared_family": "F11",
+      "block_sha256": "e703cdb290526132c3caa2244e32df7ff4909b08206f4786af2b6705c5e6eb09",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 3,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "361cc31d1fd42c9e3369d0d02a893fc9775819f4674c4d4e045fd9be282e5407",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 3,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "361cc31d1fd42c9e3369d0d02a893fc9775819f4674c4d4e045fd9be282e5407",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 4,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "a9978c2025f957acfc8fee2df7ce0b249d168e8172f099a14de13cebc46a2a58",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 4,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "a9978c2025f957acfc8fee2df7ce0b249d168e8172f099a14de13cebc46a2a58",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+      "block": 4,
+      "family": "F15",
+      "declared_family": "F20",
+      "block_sha256": "a9978c2025f957acfc8fee2df7ce0b249d168e8172f099a14de13cebc46a2a58",
+      "verdict": "misassigned",
+      "note": "reassigned to F15"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 3,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "ae1710a3f9cc3cf9e3b05723fa9f8ebbc5a992be5e07a9b266f4509c27b7d9a3",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 3,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "ae1710a3f9cc3cf9e3b05723fa9f8ebbc5a992be5e07a9b266f4509c27b7d9a3",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 3,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "ae1710a3f9cc3cf9e3b05723fa9f8ebbc5a992be5e07a9b266f4509c27b7d9a3",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 4,
+      "family": "F06",
+      "declared_family": "F06",
+      "block_sha256": "3474215234621a6abc70c141593f9b21cccc7c0f233f57269fd4fb493325c41a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 4,
+      "family": "F10",
+      "declared_family": "F10",
+      "block_sha256": "3474215234621a6abc70c141593f9b21cccc7c0f233f57269fd4fb493325c41a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 4,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "3474215234621a6abc70c141593f9b21cccc7c0f233f57269fd4fb493325c41a",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 6,
+      "family": "F05",
+      "declared_family": "F05",
+      "block_sha256": "9a53abd0b73611c4144c062ccde8c4583dc2d9bd39860c1fe7eaf3213ab01c5e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 6,
+      "family": "F13",
+      "declared_family": "F13",
+      "block_sha256": "9a53abd0b73611c4144c062ccde8c4583dc2d9bd39860c1fe7eaf3213ab01c5e",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 7,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "9e2ba9637ecc7de1b16316d62bfb78cb871f191562a0ea7824006d4b2ad0d1e0",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 7,
+      "family": "F06",
+      "declared_family": "F06",
+      "block_sha256": "9e2ba9637ecc7de1b16316d62bfb78cb871f191562a0ea7824006d4b2ad0d1e0",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 7,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "9e2ba9637ecc7de1b16316d62bfb78cb871f191562a0ea7824006d4b2ad0d1e0",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 11,
+      "family": "F08",
+      "declared_family": "F08",
+      "block_sha256": "83ac29658a5d91bd38352d5cafa9b11a27b5cf0a3aca320edde13e5537c6018f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 11,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "83ac29658a5d91bd38352d5cafa9b11a27b5cf0a3aca320edde13e5537c6018f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 11,
+      "family": "F12",
+      "declared_family": "F12",
+      "block_sha256": "83ac29658a5d91bd38352d5cafa9b11a27b5cf0a3aca320edde13e5537c6018f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 11,
+      "family": "F14",
+      "declared_family": "F14",
+      "block_sha256": "83ac29658a5d91bd38352d5cafa9b11a27b5cf0a3aca320edde13e5537c6018f",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 12,
+      "family": "F15",
+      "declared_family": "F15",
+      "block_sha256": "7ea1f8d0166303f43ef72626e5a23fcbbd85e721c41a08237cde1d98ce6d7c68",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 14,
+      "family": "F09",
+      "declared_family": "F09",
+      "block_sha256": "afd360fa41ae9688c6e43ceb9be7b2c59688889051e7a3de430e5861edf0dbc9",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 15,
+      "family": "F01",
+      "declared_family": "F01",
+      "block_sha256": "80a8f8d4a970c2f25485406f1ccc82c570f958eb2a13349d891bee5d6274ce8b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 15,
+      "family": "F02",
+      "declared_family": "F02",
+      "block_sha256": "80a8f8d4a970c2f25485406f1ccc82c570f958eb2a13349d891bee5d6274ce8b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 15,
+      "family": "F18",
+      "declared_family": "F18",
+      "block_sha256": "80a8f8d4a970c2f25485406f1ccc82c570f958eb2a13349d891bee5d6274ce8b",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 17,
+      "family": "F16",
+      "declared_family": "F16",
+      "block_sha256": "fba4853d7fd0819ded221057ed8b9ffc2f653813efc87e268de718dc3efd4751",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 17,
+      "family": "F17",
+      "declared_family": "F17",
+      "block_sha256": "fba4853d7fd0819ded221057ed8b9ffc2f653813efc87e268de718dc3efd4751",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    },
+    {
+      "path": "agent_system/operator/ent-0018/r0001/usage.md",
+      "block": 17,
+      "family": "F20",
+      "declared_family": "F20",
+      "block_sha256": "fba4853d7fd0819ded221057ed8b9ffc2f653813efc87e268de718dc3efd4751",
+      "verdict": "supports",
+      "note": "block supports the family statement within its scope"
+    }
+  ],
+  "findings": [
+    {
+      "id": "L01",
+      "kind": "missing_family",
+      "severity": "content",
+      "finding": "Blocks about cumulative restrictions and lift scope were mapped to F03/F11, which describe different conditions.",
+      "evidence": [
+        {
+          "path": "agent_system/specification/ent-0007/r0001/usage.md",
+          "block": 5,
+          "was": "F03",
+          "now": "F22"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+          "block": 9,
+          "was": "F03",
+          "now": "F22"
+        }
+      ],
+      "resolution": "Introduced F22 with a verbatim G07 rule quote; pairs re-mapped, original mapping kept in declared_family."
+    },
+    {
+      "id": "L02",
+      "kind": "missing_family",
+      "severity": "content",
+      "finding": "Blocks about immutable history and limited correction were mapped to F11/F19.",
+      "evidence": [
+        {
+          "path": "agent_system/specification/ent-0007/r0001/usage.md",
+          "block": 7,
+          "was": "F11",
+          "now": "F23"
+        },
+        {
+          "path": "agent_system/staging/ent-0016/r0001/usage.md",
+          "block": 16,
+          "was": "F19",
+          "now": "F23"
+        }
+      ],
+      "resolution": "Introduced F23 with a verbatim G07 rule quote; pairs re-mapped."
+    },
+    {
+      "id": "L03",
+      "kind": "misassignment",
+      "severity": "content",
+      "finding": "Three further pairs pointed to a family whose subject is different: capability transfer, implemented-part gate and report claims.",
+      "evidence": [
+        {
+          "path": "agent_system/permissions/ent-0014/r0001/usage.md",
+          "block": 1,
+          "was": "F13",
+          "now": "F17",
+          "note": "reassigned to F17"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+          "block": 2,
+          "was": "F12",
+          "now": "F03",
+          "note": "reassigned to F03"
+        },
+        {
+          "path": "agent_system/operator/ent-0018/r0001/prompt.md",
+          "block": 4,
+          "was": "F20",
+          "now": "F15",
+          "note": "reassigned to F15"
+        }
+      ],
+      "resolution": "Re-mapped to F03/F17/F15 respectively; no block was dropped."
+    },
+    {
+      "id": "L04",
+      "kind": "narrower_statement",
+      "severity": "wording",
+      "finding": "Seven pairs support a narrower instance than their family statement wording suggests.",
+      "evidence": [
+        {
+          "path": "agent_system/specification/ent-0003/r0002/usage.md",
+          "block": 1,
+          "family": "F02",
+          "note": "block speaks about schema/URI retrieval, not about hash or role labels"
+        },
+        {
+          "path": "agent_system/specification/ent-0003/r0002/usage.md",
+          "block": 3,
+          "family": "F14",
+          "note": "block limits name portability, not observation atomicity"
+        },
+        {
+          "path": "agent_system/validation/ent-0004/r0002/usage.md",
+          "block": 8,
+          "family": "F02",
+          "note": "block speaks about package provenance, not file hashes"
+        },
+        {
+          "path": "agent_system/validation/ent-0006/r0003/usage.md",
+          "block": 9,
+          "family": "F14",
+          "note": "block denies physical chain traversal, not snapshot atomicity"
+        },
+        {
+          "path": "agent_system/transfer/ent-0012/r0002/usage.md",
+          "block": 4,
+          "family": "F17",
+          "note": "block speaks about private CAS persistence, not release gates"
+        },
+        {
+          "path": "agent_system/permissions/ent-0014/r0002/usage.md",
+          "block": 7,
+          "family": "F10",
+          "note": "block limits composition checking from opaque refs, not ledger completeness"
+        },
+        {
+          "path": "agent_system/staging/ent-0016/r0001/usage.md",
+          "block": 5,
+          "family": "F14",
+          "note": "block limits attacker coverage, not observation atomicity"
+        }
+      ],
+      "resolution": "Family statements kept; the limit is recorded so the general statement is not read as covering these specifics."
+    },
+    {
+      "id": "L05",
+      "kind": "broad_family",
+      "severity": "residual",
+      "finding": "F17 aggregates five distinct states and carries 55 pairs; it is the widest family and the main place where a future split may be needed.",
+      "evidence": [
+        {
+          "family": "F17",
+          "pair_count": 55
+        }
+      ],
+      "resolution": "Not split now: no block required a distinction the current wording cannot carry. Recorded as residual risk, not closed."
+    },
+    {
+      "id": "L06",
+      "kind": "no_overstrengthening",
+      "severity": "none",
+      "finding": "No reviewed block demanded more than its family permits; no family was found to forbid something its blocks allow.",
+      "evidence": [
+        {
+          "pairs_reviewed": 398
+        }
+      ],
+      "resolution": "Negative result of this pass only; not proof for unread wording or future versions."
+    }
+  ],
+  "stats": {
+    "families": 23,
+    "pairs": 398,
+    "blocks": 200,
+    "supports": 384,
+    "narrower": 7,
+    "misassigned": 7,
+    "families_added": 2,
+    "independent_review_performed": false,
+    "actual_behavior_verified": false,
+    "full_semantic_equivalence": false
+  },
+  "residual": {
+    "statement": "Verdicts are author judgements about text, not independent review, NLP evaluation or evidence of behavior.",
+    "not_claimed": [
+      "semantic equivalence of arbitrary wording",
+      "independence of the reviewer",
+      "behavior in a real environment",
+      "current authority, release or readiness"
+    ],
+    "open": [
+      "F17 may need a split",
+      "unread wording in future revisions",
+      "narrower instances are not individual rules"
+    ]
+  },
+  "permission_gates": {
+    "release_allowed": false,
+    "export_allowed": false,
+    "activation_allowed": false,
+    "compatible_release_allowed": false
+  }
+}
